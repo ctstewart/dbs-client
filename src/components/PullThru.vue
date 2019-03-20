@@ -1,47 +1,28 @@
 <template>
-<div class="all" id="app">
-    <Sidebar/>
-    <div class="mainContent">
-        <div class="titleBar">
-            <div class="copyButton">
-                <i class="far fa-copy fa-2x"></i>
-            </div>
-            <p>Option 1</p>
-            <div class="clearButton">
-                <span></span><i class="far fa-trash-alt fa-2x" v-on:click="restoreDefaultValues"></i>
-            </div>
+<div class="main pullthru">
+    <div class="pullthruColumn">
+        <div v-for="i in mainObject.lineAccess.slice(0,4)">
+            <p id="textAlignRight">{{i.name}}:</p>
+            <i class="fa fa-plus-circle fa-lg" aria-hidden="true" v-on:click="i.value++"></i>
+            <p>{{i.value}}</p>
+            <i class="fa fa-minus-circle fa-lg" aria-hidden="true" v-on:click="i.value--"></i>
         </div>
-        <div class="navBar">
-            <button
-                v-for="tab in tabs"
-                v-bind:key="tab"
-                v-bind:class="{ activetab: currentTab === tab }"
-                v-on:click="currentTab = tab"
-                ><p>{{ tab }}</p></button>
-            <div>{{ textBeforeTotal }}{{ total }}</div>
+    </div>
+    <div class="pullthruColumn">
+        <div v-for="i in mainObject.lineAccess.slice(4,8)">
+            <p id="textAlignRight">{{i.name}}:</p>
+            <i class="fa fa-plus-circle fa-lg" aria-hidden="true" v-on:click="i.value++"></i>
+            <p>{{i.value}}</p>
+            <i class="fa fa-minus-circle fa-lg" aria-hidden="true" v-on:click="i.value--"></i>
         </div>
-        <component
-            v-bind:is="currentTab"
-        ></component>
     </div>
 </div>
 </template>
 
 <script>
-import Sidebar from './components/Sidebar.vue'
-import Plan from './components/Plan.vue'
-import PullThru from './components/PullThru.vue'
-import DPP from './components/DPP.vue'
-
 export default {
-  name: 'app',
-  components: {
-    Sidebar, Plan, PullThru, DPP
-  },
   data: function () {
     return {
-      currentTab: 'Plan',
-      tabs: ['Plan', 'PullThru', 'DPP'],
       mainObject: {
 
         activetab: 1,
@@ -422,124 +403,41 @@ export default {
 }
 </script>
 
-<style lang="less">
-.display-none {
-    display: none;
-}
-
-.display-grid {
-    display: grid;
-}
-
-.all {
-    height: 100%;
-    display: grid;
-    grid-template-columns: 1fr 4fr;
-}
-
-.mainContent {
-    display: grid;
-    margin: 5% 3%;
-    background-color: rgba(255,255,255,.9);
-    grid-template-rows: 10% 10% 80%;
-    border-radius: 5px;
-}
-
-.titleBar {
-    background-color: rgba(31,89,110,.75);
-    color: #F6F6F6;
-    font-weight: bold;
-    text-align: center;
-    display: grid;
-    border-bottom: 2px solid rgba(0,0,0,.5);
-    border-radius: 5px 5px 0 0;
-    grid-template-columns: 1fr 1fr 1fr;
-}
-
-.titleBar p {
-    width: 0 auto;
-    margin: 0;
-    align-self: center;
-    font-size: 24px;
-    grid-area: 1 / 2 / 2 / 3;
-}
-
-.copyButton, .clearButton {
-    align-items: center;
-    display: grid;
-    margin-right: 3%;
-    margin-left: 3%;
-}
-
-.titleBar i {
-    cursor: pointer;
-}
-
-.copyButton {
-    grid-template-columns: 30% 70%;
-}
-
-.clearButton {
-    grid-template-columns: 70% 30%;
-}
-
-.navBar {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 5fr;
-    margin-left: 1%;
-    color: #387A77;
-}
-
-.navBar button {
-    margin: 0;
-    padding: 0;
-    background-color: #D3DFE1;
-    height: 70%;
-    align-self: end;
-    border: 1px solid rgba(0,0,0,.2);
-    font-size: 16px;
-    font-weight: bold;
-    /* font-style: italic; */
-    display: grid;
-    align-items: center;
-    cursor: pointer;
-    outline: 0;
-    color: #387A77;
-}
-
-.navBar button p {
-    margin: 0;
-    padding: 0;
-}
-
-.navBar button:first-child {
-    border-top-left-radius: 10px;
-}
-
-.navBar button:nth-child(3) {
-    border-top-right-radius: 10px;
-}
-
-.navBar button.activetab {
+<style scoped>
+.main {
     background-color: #387A77;
-    color: white;
-    border: none;
-}
-
-div.active {
-    display: grid;
-}
-
-.navBar div {
-    align-self: end;
-    justify-self: end;
-    font-size: 24px;
-    font-weight: bold;
-    margin-right: 1%;
-    margin-bottom: 1%;
-    width: 40%;
+    margin: 0 1% 1% 1%;
+    border-radius: 0 5px 5px 5px;
     text-align: center;
+    color: white;
+    padding: 3%;
 }
 
+.pullthru {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
 
+.pullthruColumn {
+    display: grid;
+    border: 1px solid white;
+    margin: 0px 10px;
+    padding: 10px;
+    border-radius: 5%;
+}
+
+.pullthruColumn {
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    align-items: center;
+}
+
+.pullthruColumn div {
+    display: grid;
+    grid-template-columns: 40% 20% 20% 20%;
+    place-items: center;
+}
+
+.pullthruColumn i:hover {
+    cursor: pointer;
+}
 </style>

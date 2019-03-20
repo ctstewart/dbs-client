@@ -1,47 +1,71 @@
 <template>
-<div class="all" id="app">
-    <Sidebar/>
-    <div class="mainContent">
-        <div class="titleBar">
-            <div class="copyButton">
-                <i class="far fa-copy fa-2x"></i>
-            </div>
-            <p>Option 1</p>
-            <div class="clearButton">
-                <span></span><i class="far fa-trash-alt fa-2x" v-on:click="restoreDefaultValues"></i>
-            </div>
+<div class="main plan">
+    <div class="dropdownAndButtons">
+        <select id="planDropdown" v-model="mainObject.chosenPlan">
+            <option>Unlimited</option>
+            <option v-for="i in oldUnlimitedPlansArrayReversed">{{i.name}}</option>
+            <option v-for="i in tieredPlansArrayReversed">{{i.name}}</option>
+        </select>
+    </div>
+    <span>Number of Phones (exclude $30 basic phones)</span>
+    <div class="input threeColumns">
+        <div v-bind:class="[ mainObject.chosenPlan === 'Unlimited' ? 'hidden' : 'twoColumns middle' ]">
+            <div>Number of Phones</div>
+            <select v-model="mainObject.numberOfPhones">
+                <option v-for="i in 11">{{i - 1}}</option>
+            </select>
         </div>
-        <div class="navBar">
-            <button
-                v-for="tab in tabs"
-                v-bind:key="tab"
-                v-bind:class="{ activetab: currentTab === tab }"
-                v-on:click="currentTab = tab"
-                ><p>{{ tab }}</p></button>
-            <div>{{ textBeforeTotal }}{{ total }}</div>
+        <div v-bind:class="[ mainObject.chosenPlan === 'Unlimited' ? 'twoColumns' : 'hidden' ]" v-for="i in mainObject.mixAndMatchPlansArray">
+            <div>{{i.name}}</div>
+            <select v-model.number="i.numberOfPhones">
+                <option v-for="i in 11">{{i - 1}}</option>
+            </select>
         </div>
-        <component
-            v-bind:is="currentTab"
-        ></component>
+    </div>
+    <span>Discounts</span>
+    <div class="input eightColumns">
+        <div>Autopay?</div>
+        <label class="switch">
+            <input type="checkbox" v-model="mainObject.autopay">
+            <span class="slider"></span>
+        </label>
+        <div>Military Discount</div>
+        <label class="switch">
+            <input type="checkbox" v-model="mainObject.military">
+            <span class="slider"></span>
+        </label>
+        <div>First Responder Discount</div>
+        <label class="switch">
+            <input type="checkbox"v-model="mainObject.responder">
+            <span class="slider"></span>
+        </label>
+        <div>Other Discount</div>
+        <select v-model="mainObject.discount">
+            <option v-for="i in 31">{{i - 1}}%</option>
+        </select>
+    </div>
+    <span>TMP and Misc.</span>
+    <div class="input">
+        <div>TMP</div>
+        <select v-model="mainObject.tmp">
+            <option v-for="i in 51">${{i - 1}}</option>
+        </select>
+        <div>Phones in 2 year Contracts</div>
+        <select v-model="mainObject.twoyear.value">
+            <option v-for="i in 11">{{i - 1}}</option>
+        </select>
+        <div>$30 Basic Phones</div>
+        <select v-model="mainObject.basic.value">
+            <option v-for="i in 11">{{i - 1}}</option>
+        </select>
     </div>
 </div>
 </template>
 
 <script>
-import Sidebar from './components/Sidebar.vue'
-import Plan from './components/Plan.vue'
-import PullThru from './components/PullThru.vue'
-import DPP from './components/DPP.vue'
-
 export default {
-  name: 'app',
-  components: {
-    Sidebar, Plan, PullThru, DPP
-  },
   data: function () {
     return {
-      currentTab: 'Plan',
-      tabs: ['Plan', 'PullThru', 'DPP'],
       mainObject: {
 
         activetab: 1,
@@ -422,124 +446,154 @@ export default {
 }
 </script>
 
-<style lang="less">
-.display-none {
+<style>
+.plan {
+    display: grid;
+}
+
+.main {
+    background-color: #387A77;
+    margin: 0 1% 1% 1%;
+    border-radius: 0 5px 5px 5px;
+    text-align: center;
+    color: white;
+    padding: 3%;
+}
+
+#textAlignRight {
+    justify-self: end;
+    margin-right: 20%;
+}
+
+.input {
+    /*align-self: center;*/
+    border: 1px solid white;
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    align-items: center;
+    justify-items: end;
+}
+
+.hidden {
     display: none;
 }
 
-.display-grid {
-    display: grid;
-}
-
-.all {
-    height: 100%;
-    display: grid;
-    grid-template-columns: 1fr 4fr;
-}
-
-.mainContent {
-    display: grid;
-    margin: 5% 3%;
-    background-color: rgba(255,255,255,.9);
-    grid-template-rows: 10% 10% 80%;
-    border-radius: 5px;
-}
-
-.titleBar {
-    background-color: rgba(31,89,110,.75);
-    color: #F6F6F6;
-    font-weight: bold;
-    text-align: center;
-    display: grid;
-    border-bottom: 2px solid rgba(0,0,0,.5);
-    border-radius: 5px 5px 0 0;
-    grid-template-columns: 1fr 1fr 1fr;
-}
-
-.titleBar p {
-    width: 0 auto;
-    margin: 0;
-    align-self: center;
-    font-size: 24px;
+.middle {
     grid-area: 1 / 2 / 2 / 3;
 }
 
-.copyButton, .clearButton {
+.twoColumns {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     align-items: center;
-    display: grid;
-    margin-right: 3%;
-    margin-left: 3%;
+    justify-items: end;
 }
 
-.titleBar i {
-    cursor: pointer;
+.threeColumns {
+    grid-template-columns: repeat(3, 1fr);
 }
 
-.copyButton {
-    grid-template-columns: 30% 70%;
+.eightColumns {
+    grid-template-columns: repeat(8, 1fr);
 }
 
-.clearButton {
-    grid-template-columns: 70% 30%;
+.input div {
+    font-size: 14px;
+    width: 100%;
+    text-align: right;
 }
 
-.navBar {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 5fr;
-    margin-left: 1%;
-    color: #387A77;
-}
-
-.navBar button {
-    margin: 0;
-    padding: 0;
-    background-color: #D3DFE1;
-    height: 70%;
+.main span {
+    text-align: left;
     align-self: end;
-    border: 1px solid rgba(0,0,0,.2);
-    font-size: 16px;
-    font-weight: bold;
-    /* font-style: italic; */
-    display: grid;
-    align-items: center;
-    cursor: pointer;
-    outline: 0;
-    color: #387A77;
 }
 
-.navBar button p {
-    margin: 0;
+.main select, .switch {
+    -webkit-appearance: none;  /* for webkit (safari, chrome) compatibility */
+    -moz-appearance: none; /* for firefox compatibility */
+    appearance: none;
+    background-color: rgba(255,255,255,0.8);
+    width: 64px;
+    height: 48px;
+    border-radius: 5px;
     padding: 0;
-}
-
-.navBar button:first-child {
-    border-top-left-radius: 10px;
-}
-
-.navBar button:nth-child(3) {
-    border-top-right-radius: 10px;
-}
-
-.navBar button.activetab {
-    background-color: #387A77;
-    color: white;
-    border: none;
-}
-
-div.active {
-    display: grid;
-}
-
-.navBar div {
-    align-self: end;
-    justify-self: end;
-    font-size: 24px;
-    font-weight: bold;
-    margin-right: 1%;
-    margin-bottom: 1%;
-    width: 40%;
+    display: block;
+    margin: 0 auto;
     text-align: center;
+    text-align-last: center;
+    font-size: 16px;
 }
 
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
 
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: #2196F3;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+.dropdownAndButtons {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+#planDropdown {
+    width: 128px;
+    place-self: center;
+    grid-area: 1 / 2 / 2 / 3;
+}
+
+@media only screen
+and (min-device-width : 768px)
+and (max-device-width : 1024px)
+and (orientation : landscape)
+{
+    .main select {
+        text-indent: 10%;
+    }
+}
 </style>
