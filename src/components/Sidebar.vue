@@ -5,11 +5,14 @@
         <button onclick="location.href='option1.html'" type="button">Option 1</button>
         <button onclick="" type="button">Option 2</button>
         <button onclick="location.href='login.html'" type="button">Logout</button>
-        <a class="version" href="changelog.html">Version:</a>
+        <a class="version" href="changelog.html">Version: {{version}}</a>
     </div>
 </template>
 
 <script>
+export default {
+  props: ['version']
+}
 </script>
 
 <style scoped>

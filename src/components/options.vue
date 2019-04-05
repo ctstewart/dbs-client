@@ -1,6 +1,6 @@
 <template>
 <div class="all" id="app">
-    <Sidebar/>
+    <Sidebar v-bind:version="version"></Sidebar>
     <div class="mainContent">
         <div class="titleBar">
             <div class="copyButton">
@@ -20,21 +20,25 @@
                 ><p>{{ tab }}</p></button>
             <div>{{ textBeforeTotal }}{{ total }}</div>
         </div>
-        <component
-            v-bind:is="currentTab"
-        ></component>
+        <keep-alive>
+          <component
+              :is="currentTab"
+              v-model="mainObject"
+          ></component>
+        </keep-alive>
     </div>
 </div>
 </template>
 
 <script>
-import Sidebar from './components/Sidebar.vue'
-import Plan from './components/Plan.vue'
-import PullThru from './components/PullThru.vue'
-import DPP from './components/DPP.vue'
+import Sidebar from './Sidebar.vue'
+import Plan from './Plan.vue'
+import PullThru from './PullThru.vue'
+import DPP from './DPP.vue'
 
 export default {
-  name: 'app',
+  name: 'options',
+  props: ['version', 'whichOptionObject'],
   components: {
     Sidebar, Plan, PullThru, DPP
   },
@@ -42,11 +46,11 @@ export default {
     return {
       currentTab: 'Plan',
       tabs: ['Plan', 'PullThru', 'DPP'],
+      isLoaded: false,
       mainObject: {
 
-        activetab: 1,
         numberOfPhones: 0,
-        chosenPlan: 'Unlimited',
+        chosenPlan: '2GB',
         tmp: '$0',
         tmpConvertedFromString: 0,
         military: false,
@@ -165,11 +169,11 @@ export default {
     const parsed = JSON.stringify(this.mainObject)
     localStorage.setItem('defaultMainObject', parsed)
 
-    if (localStorage.getItem('mainObject')) {
+    if (localStorage.getItem(this.whichOptionObject)) {
       try {
-        this.mainObject = JSON.parse(localStorage.getItem('mainObject'))
+        this.mainObject = JSON.parse(localStorage.getItem(this.whichOptionObject))
       } catch (e) {
-        localStorage.removeItem('mainObject')
+        localStorage.removeItem(this.whichOptionObject)
       }
     }
 
@@ -179,8 +183,7 @@ export default {
   methods: {
 
     navbarClick: function (button) {
-      var i
-      for (i = 0; i < mainObject.tabsArray.length; i++) {
+      for (var i = 0; i < mainObject.tabsArray.length; i++) {
         mainObject.tabsArray[i].value = false
         if (button === mainObject.tabsArray[i].name) {
           mainObject.tabsArray[i].value = true
@@ -200,7 +203,7 @@ export default {
         localNumberOfPhones = 4
       }
 
-      for (i = 0; i < this.mainObject.mixAndMatchPlansArray.length; i++) {
+      for (var i = 0; i < this.mainObject.mixAndMatchPlansArray.length; i++) {
         if (this.mainObject.autopay === true) {
           localTotal = localTotal + (this.mainObject.mixAndMatchPlansArray[i].numberOfPhones * this.mainObject.mixAndMatchPlansArray[i][localNumberOfPhones].autopay)
         } else if (this.mainObject.autopay === false) {
@@ -228,7 +231,7 @@ export default {
 
       var localTotal = 0
 
-      for (i = 0; i < this.mainObject.oldUnlimitedPlansArray.length; i++) {
+      for (var i = 0; i < this.mainObject.oldUnlimitedPlansArray.length; i++) {
         if (this.mainObject.chosenPlan === this.mainObject.oldUnlimitedPlansArray[i].name) {
           if (this.mainObject.autopay === true) {
             localTotal = localTotal + this.mainObject.oldUnlimitedPlansArray[i].autopay
@@ -242,7 +245,7 @@ export default {
         }
       }
 
-      for (i = 0; i < this.mainObject.tieredPlansArray.length; i++) {
+      for (var i = 0; i < this.mainObject.tieredPlansArray.length; i++) {
         if (this.mainObject.chosenPlan === this.mainObject.tieredPlansArray[i].name) {
           if (this.mainObject.autopay === true) {
             localTotal = localTotal + this.mainObject.tieredPlansArray[i].autopay
@@ -267,7 +270,7 @@ export default {
 
     saveToLocalStorage: function () {
       const parsed = JSON.stringify(this.mainObject)
-      localStorage.setItem('mainObject', parsed)
+      localStorage.setItem(this.whichOptionObject, parsed)
     },
 
     restoreDefaultValues: function () {
@@ -283,14 +286,6 @@ export default {
   },
 
   computed: {
-
-    tieredPlansArrayReversed: function () {
-      return this.mainObject.tieredPlansArray.slice().reverse()
-    },
-
-    oldUnlimitedPlansArrayReversed: function () {
-      return this.mainObject.oldUnlimitedPlansArray.slice().reverse()
-    },
 
     total: function () {
       if (this.isLoaded === false) {
@@ -334,7 +329,7 @@ export default {
       var localTotal = 0
 
       if (this.mainObject.chosenPlan === 'Unlimited') {
-        for (i = 0; i < this.mainObject.lineAccess.length; i++) {
+        for (var i = 0; i < this.mainObject.lineAccess.length; i++) {
           localTotal = localTotal + (this.mainObject.lineAccess[i].unlimited * this.mainObject.lineAccess[i].value)
         }
 
@@ -343,18 +338,18 @@ export default {
         }
       }
 
-      for (i = 0; i < this.mainObject.oldUnlimitedPlansArray.length; i++) {
+      for (var i = 0; i < this.mainObject.oldUnlimitedPlansArray.length; i++) {
         if (this.mainObject.chosenPlan === this.mainObject.oldUnlimitedPlansArray[i].name) {
-          for (i = 0; i < this.mainObject.lineAccess.length; i++) {
+          for (var i = 0; i < this.mainObject.lineAccess.length; i++) {
             localTotal = localTotal + (this.mainObject.lineAccess[i].unlimited * this.mainObject.lineAccess[i].value)
           }
           localTotal = localTotal + (this.computedNumberOfPhones * 20)
         }
       }
 
-      for (i = 0; i < this.mainObject.tieredPlansArray.length; i++) {
+      for (var i = 0; i < this.mainObject.tieredPlansArray.length; i++) {
         if (this.mainObject.chosenPlan === this.mainObject.tieredPlansArray[i].name) {
-          for (i = 0; i < this.mainObject.lineAccess.length; i++) {
+          for (var i = 0; i < this.mainObject.lineAccess.length; i++) {
             localTotal = localTotal + (this.mainObject.lineAccess[i].tiered * this.mainObject.lineAccess[i].value)
           }
           localTotal = localTotal + (this.computedNumberOfPhones * 20)
@@ -376,14 +371,14 @@ export default {
     dppTotal: function () {
       var localTotal = 0
 
-      for (i = 0; i < this.mainObject.existingDPPValues.length; i++) {
+      for (var i = 0; i < this.mainObject.existingDPPValues.length; i++) {
         if (isNaN(parseInt(this.mainObject.existingDPPValues[i].value))) {
         } else {
           localTotal = localTotal + this.mainObject.existingDPPValues[i].value
         }
       }
 
-      for (i = 0; i < this.mainObject.existingCreditValues.length; i++) {
+      for (var i = 0; i < this.mainObject.existingCreditValues.length; i++) {
         if (isNaN(parseInt(this.mainObject.existingCreditValues[i].value))) {
         } else {
           localTotal = localTotal - this.mainObject.existingCreditValues[i].value
@@ -397,13 +392,13 @@ export default {
       var localTotal = 0
 
       if (this.mainObject.chosenPlan === 'Unlimited') {
-        for (i = 0; i < this.mainObject.mixAndMatchPlansArray.length; i++) {
+        for (var i = 0; i < this.mainObject.mixAndMatchPlansArray.length; i++) {
           localTotal = localTotal + this.mainObject.mixAndMatchPlansArray[i].numberOfPhones
         }
 
         this.mainObject.numberOfPhones = 0
       } else if (this.mainObject.chosenPlan !== 'Unlimited') {
-        for (i = 0; i < this.mainObject.mixAndMatchPlansArray.length; i++) {
+        for (var i = 0; i < this.mainObject.mixAndMatchPlansArray.length; i++) {
           this.mainObject.mixAndMatchPlansArray[i].numberOfPhones = 0
         }
 
@@ -418,7 +413,6 @@ export default {
     }
 
   }
-
 }
 </script>
 
