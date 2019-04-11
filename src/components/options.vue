@@ -4,9 +4,9 @@
     <div class="mainContent">
         <div class="titleBar">
             <div class="copyButton">
-                <i class="far fa-copy fa-2x"></i>
+                <i v-if="whichOption === 'Option 1'" class="far fa-copy fa-2x" v-on:click="copyToOption2"></i>
             </div>
-            <p>Option 1</p>
+            <p>{{whichOption}}</p>
             <div class="clearButton">
                 <span></span><i class="far fa-trash-alt fa-2x" v-on:click="restoreDefaultValues"></i>
             </div>
@@ -31,14 +31,14 @@
 </template>
 
 <script>
-import Sidebar from './Sidebar.vue'
-import Plan from './Plan.vue'
-import PullThru from './PullThru.vue'
-import DPP from './DPP.vue'
+import Sidebar from '@/components/Sidebar.vue'
+import Plan from '@/components/Plan.vue'
+import PullThru from '@/components/PullThru.vue'
+import DPP from '@/components/DPP.vue'
 
 export default {
   name: 'options',
-  props: ['version', 'whichOptionObject'],
+  props: ['version', 'whichOption', 'whichOptionObject', 'whichOptionComputed'],
   components: {
     Sidebar, Plan, PullThru, DPP
   },
@@ -50,7 +50,7 @@ export default {
       mainObject: {
 
         numberOfPhones: 0,
-        chosenPlan: '2GB',
+        chosenPlan: 'Unlimited',
         tmp: '$0',
         tmpConvertedFromString: 0,
         military: false,
@@ -90,6 +90,14 @@ export default {
             2: { lines: 2, autopay: 90, noAutopay: 95 },
             3: { lines: 3, autopay: 70, noAutopay: 75 },
             4: { lines: 4, autopay: 60, noAutopay: 65 }
+          },
+          {
+            name: 'Just Kids',
+            numberOfPhones: 0,
+            1: { lines: 1, autopay: 0, noAutopay: 0 },
+            2: { lines: 2, autopay: 55, noAutopay: 60 },
+            3: { lines: 3, autopay: 45, noAutopay: 50 },
+            4: { lines: 4, autopay: 35, noAutopay: 40 }
           }
         ],
 
@@ -273,6 +281,14 @@ export default {
       localStorage.setItem(this.whichOptionObject, parsed)
     },
 
+    saveTotalsToLocalStorage: function () {
+      var localTotal = 0
+      localTotal = this.planTotal + this.lineAccessTotal + this.tmpTotal + this.dppTotal
+      var computedTotals = {"planName": this.mainObject.chosenPlan,"planTotal": this.planTotal, "lineAccessTotal": this.lineAccessTotal, "tmpTotal": this.tmpTotal, "dppTotal": this.dppTotal, "total": localTotal}
+      const parsed = JSON.stringify(computedTotals)
+      localStorage.setItem(this.whichOptionComputed, parsed)
+    },
+
     restoreDefaultValues: function () {
       if (localStorage.getItem('defaultMainObject')) {
         try {
@@ -281,6 +297,12 @@ export default {
           localStorage.removeItem('defaultMainObject')
         }
       }
+    },
+
+    copyToOption2: function () {
+      const parsed = JSON.stringify(this.mainObject)
+      localStorage.setItem('option2Object', parsed)
+      alert('Copied!')
     }
 
   },
@@ -294,12 +316,14 @@ export default {
       } else if (this.isLoaded === true) {
         console.log('Loaded')
         this.saveToLocalStorage()
+        this.saveTotalsToLocalStorage()
 
         if (this.computedNumberOfPhones <= 0) {
           return 'Add Phones'
         }
 
         return (this.planTotal + this.lineAccessTotal + this.tmpTotal + this.dppTotal).toFixed(2)
+
       }
     },
 
