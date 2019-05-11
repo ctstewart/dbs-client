@@ -483,4 +483,233 @@ and (orientation : landscape)
     text-indent: 10%;
   }
 }
+
+
+
+
+@media print {
+  body, html {
+    background: white !important;
+  }
+
+  .container {
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    display: none !important;
+  }
+
+  .mainContent {
+    display: grid;
+    /*justify-self: center;*/
+    margin: 2%;
+    grid-template-rows: 35% 10% 40% 15%;
+    border: 1px solid gray;
+    border-radius: 5px;
+    /*width: 768px;*/
+  }
+
+  .titleBar {
+    display: none !important;
+  }
+
+  .benefits {
+    margin: 1%;
+    border-radius: 5px;
+    padding: 1%;
+    background-color: lightgray;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 2fr 2fr 2fr;
+  }
+
+  .benefitsTitle {
+    margin: 0;
+    font-size: 16px;
+    grid-column: 1 / 3;
+    align-self: start;
+    text-align: center;
+    color: red;
+  }
+
+  .benefits > div {
+    display: grid;
+    justify-items: center;
+    align-items: center;
+  }
+
+  .positionRelative {
+    position: relative;
+  }
+
+  .benefits input {
+    width: 80%;
+    font-size: 18px;
+    -webkit-appearance: none;
+    border-radius: 0;
+    border: none;
+    border-bottom: 1px solid black;
+    background-color: lightgray;
+    font-size: 16px;
+    text-align: center;
+    font-weight: bold;
+    color: black;
+  }
+
+  .autocompleteResults {
+    position: absolute;
+    top: 100%;
+    left: 10%;
+    background-color: white;
+    width: 80%;
+    align-self: start;
+    padding: 0;
+    margin: 0;
+    border: 1px solid #eeeeee;
+    height: 120px;
+    overflow: auto;
+  }
+
+  .autocompleteResult {
+    list-style: none;
+    text-align: left;
+    padding: 4px 2px;
+    cursor: pointer;
+  }
+
+  .autocompleteResult:hover,
+  .autocompleteResult.is-active {
+    background-color: #4AAE9B;
+    color: white;
+  }
+
+  .oldBills {
+    display: grid;
+    grid-template-columns: 2fr 1fr 2fr 1fr 2fr;
+    place-items: center;
+  }
+
+  .oldBills > input {
+    margin: 1% 5%;
+    font-size: 16px;
+    -webkit-appearance: none;
+    border: none;
+    border: 1px solid grey;
+    background-color: white;
+    width: 128px;
+    height: 32px;
+    border-radius: 5px;
+    font-size: 16px;
+    text-align: center;
+    font-weight: bold;
+  }
+
+  .oldBills > p:last-child {
+    font-weight: bold;
+  }
+
+  .billBreakdown {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin: 1%;
+  }
+
+  .billBreakdown p {
+    margin: 0;
+    padding: 0;
+  }
+
+  .option {
+    display: grid;
+    grid-template-rows: 10% 90%;
+  }
+
+  .option > div {
+    align-items: center;
+  }
+
+  .chosenPlanLabel {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    margin: 0 1%;
+  }
+
+  .chosenPlanLabel > p {
+    font-size: 12px;
+    color: red;
+  }
+
+  .breakdown {
+    display: grid;
+    grid-template-rows: repeat(5, 1fr);
+    border: 1px solid grey;
+  }
+
+  .breakdown p {
+    font-size: 14px;
+  }
+
+  .option1 > .breakdown {
+    border-radius: 5px 0 0 5px;
+  }
+
+  .option2 > .breakdown {
+    border-left: 0;
+    border-radius: 0 5px 5px 0;
+  }
+
+  .breakdown > div {
+    display: grid;
+    justify-items: center;
+    grid-template-columns: 1fr 3fr;
+    margin: 0 1%;
+  }
+
+  .breakdown > div > p {
+    justify-self: end;
+  }
+
+  .breakdown > div > div {
+    margin: 0 5%;
+    width: 60%;
+    text-align: center;
+    border-bottom: 1px solid black;
+    font-weight: bold;
+  }
+
+  .breakdown > div:nth-child(4) > div {
+  }
+
+  .costs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin: 0 1% 1% 1%;
+  }
+
+  .costs > div {
+    display: grid;
+    grid-template-columns: 2fr 1fr 2fr;
+    place-items: center;
+    font-weight: bold;
+  }
+
+  .costs > div > input {
+    margin: 1% 5%;
+    font-size: 16px;
+    -webkit-appearance: none;
+    border: none;
+    border: 1px solid grey;
+    background-color: white;
+    width: 96px;
+    height: 32px;
+    border-radius: 5px;
+    font-size: 16px;
+    text-align: center;
+    color: black;
+    font-weight: bold;
+  }
+}
 </style>

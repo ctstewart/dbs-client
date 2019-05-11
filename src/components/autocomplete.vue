@@ -2,7 +2,7 @@
 <div :class="{ 'positionRelative': focus === true }">
   <input type="text" v-model="search" @input="onChange" @keydown.down="onArrowDown" @keydown.up="onArrowUp" @keydown.enter="onEnter" @keydown.esc="onEsc" @focus="focus = true" @blur="focus = false, isOpen = false"/>
   <ul class="autocompleteResults" v-show="isOpen">
-    <li class="autocompleteResult" v-for="(result, i) in results" :key="i" v-on:click="setResult(result)" :class="{ 'is-active': i === arrowCounter }" @mouseover="handleMouseOver">
+    <li class="autocompleteResult" v-for="(result, i) in results" :key="i" v-on:click.native="setResult(result)" :class="{ 'is-active': i === arrowCounter }" @mouseover="handleMouseOver">
       {{result}}
     </li>
   </ul>
