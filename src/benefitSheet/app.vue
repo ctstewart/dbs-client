@@ -3,7 +3,9 @@
   <Sidebar v-bind:version="version"></Sidebar>
   <div class="mainContent" id="app">
     <div class="titleBar">
-      <div class="copyButton"></div>
+      <div class="copyButton">
+        <i class="fas fa-align-justify" @click="hamburgerStyle = !hamburgerStyle"></i>
+      </div>
       <p>Benefit Sheet<p>
       <div class="clearButton">
         <i class="far fa-trash-alt fa-2x" v-on:click=""></i>
@@ -11,16 +13,16 @@
     </div>
     <div class="benefits">
       <p class="benefitsTitle">New Plan Benefits</p>
-      <Autocomplete v-for="i in benefits" v-bind:benefit="i" v-bind:key="i.id"></Autocomplete>
+      <Autocomplete v-for="(i, index) in benefitSheet.benefits" :benefit="i" v-on:changeBenefit="updateBenefit(index, $event)"></Autocomplete>
     </div>
     <div class="oldBills">
-      <input placeholder="Phone Bill" type="tel" pattern="[0-9]*" step="0.01" v-model="currentPhoneBill">
+      <input placeholder="$0.00" type="tel" pattern="[0-9]*" step="0.01" v-model="benefitSheet.currentPhoneBill">
       <p>+</p>
-      <input placeholder="Home Solution" type="tel" pattern="[0-9]*" step="0.01" v-model="currentHomeSolution">
+      <input placeholder="$0.00" type="tel" pattern="[0-9]*" step="0.01" v-model="benefitSheet.currentHomeSolution">
       <p>=</p>
       <p>${{ currentTotal.toFixed(2) }}</p>
     </div>
-    <div class="billBreakdown">
+    <div class="billBreakdown" v-bind:class="[ hamburgerStyle === true ? 'displayNone' : '' ]">
       <div class="option1 option">
         <div class="chosenPlanLabel">
           <p>Option 1:</p>
@@ -80,14 +82,14 @@
     </div>
     <div class="costs">
       <div>
-        <input placeholder="Cost Today">
+        <input placeholder="$0.00">
         <p>$0.00</p>
-        <input placeholder="Fees">
+        <input placeholder="$0.00">
       </div>
       <div>
-        <input placeholder="Cost Today">
+        <input placeholder="$0.00">
         <p>$0.00</p>
-        <input placeholder="Fees">
+        <input placeholder="$0.00">
       </div>
     </div>
   </div>
@@ -108,9 +110,12 @@ export default {
 
   data: function () {
     return {
-      benefits: ['TEST', '', '', '', '', ''],
-      currentPhoneBill: 0,
-      currentHomeSolution: 0,
+      benefitSheet: {
+        benefits: ['', '', '', '', '', ''],
+        currentPhoneBill: '',
+        currentHomeSolution: ''
+      },
+      hamburgerStyle: false,
       version: externalData.version,
       option1ComputedTotals: {
         "planName": '',
@@ -146,14 +151,33 @@ export default {
         localStorage.removeItem('option2Computed')
       }
     }
+    this.$nextTick(() => {
+      if (localStorage.getItem('benefitSheet')) {
+        try {
+            this.benefitSheet = JSON.parse(localStorage.getItem('benefitSheet'))
+        } catch (e) {
+          localStorage.removeItem('benefitSheet')
+        }
+        console.log(this.benefitSheet.benefits)
+      }
+    })
   },
 
   methods: {
+    updateBenefit: function (parentBenefitIndex, childBenefit) {
+      console.log(this.benefitSheet.benefits)
+      this.benefitSheet.benefits[parentBenefitIndex] = childBenefit
+      this.saveBenefitSheetToLocalStorage()
+      console.log(this.benefitSheet.benefits)
+    },
+    saveBenefitSheetToLocalStorage: function () {
+      const parsed = JSON.stringify(this.benefitSheet)
+      localStorage.setItem('benefitSheet', parsed)
+    }
   },
 
   computed: {
     currentTotal: function () {
-      console.log(this.currentPhoneBill)
       var localTotal = parseInt(this.currentPhoneBill) + parseInt(this.currentHomeSolution)
       return localTotal
     }
@@ -272,6 +296,10 @@ img {
   /* grid-area: 1 / 3 / 2 / 4; */
 }
 
+.displayNone {
+  display: none !important;
+}
+
 .benefits {
   margin: 1%;
   border-radius: 5px;
@@ -296,10 +324,6 @@ img {
   align-items: center;
 }
 
-.positionRelative {
-  position: relative;
-}
-
 .benefits input {
   width: 80%;
   font-size: 18px;
@@ -312,33 +336,6 @@ img {
   text-align: center;
   font-weight: bold;
   color: black;
-}
-
-.autocompleteResults {
-  position: absolute;
-  top: 100%;
-  left: 10%;
-  background-color: white;
-  width: 80%;
-  align-self: start;
-  padding: 0;
-  margin: 0;
-  border: 1px solid #eeeeee;
-  height: 120px;
-  overflow: auto;
-}
-
-.autocompleteResult {
-  list-style: none;
-  text-align: left;
-  padding: 4px 2px;
-  cursor: pointer;
-}
-
-.autocompleteResult:hover,
-.autocompleteResult.is-active {
-  background-color: #4AAE9B;
-  color: white;
 }
 
 .oldBills {

@@ -58,8 +58,6 @@ export default {
         discount: '0%',
         autopay: false,
 
-        benefits: ['TEST', '', '', '', '', ''],
-
         tabsArray: [
           { name: 'planTabActive', value: true },
           { name: 'pullthruTabActive', value: false },
