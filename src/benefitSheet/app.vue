@@ -4,7 +4,7 @@
   <div class="mainContent" id="app">
     <div class="titleBar">
       <div class="copyButton">
-        <i class="fas fa-align-justify" @click="hamburgerStyle = !hamburgerStyle"></i>
+        <!-- <i class="fas fa-align-justify" @click="hamburgerStyle = !hamburgerStyle"></i> -->
       </div>
       <p>Benefit Sheet<p>
       <div class="clearButton">
@@ -84,12 +84,12 @@
       <div>
         <input placeholder="$0.00">
         <p>$0.00</p>
-        <input placeholder="$0.00">
+        <p>${{ option1ComputedTotals.fees.toFixed(2) }}</p>
       </div>
       <div>
         <input placeholder="$0.00">
         <p>$0.00</p>
-        <input placeholder="$0.00">
+        <p>${{ option2ComputedTotals.fees.toFixed(2) }}</p>
       </div>
     </div>
   </div>
@@ -123,7 +123,8 @@ export default {
         "lineAccessTotal": 0,
         "tmpTotal": 0,
         "dppTotal": 0,
-        "total": 0
+        "total": 0,
+        "fees": 0
       },
       option2ComputedTotals: {
         "planName": '',
@@ -131,7 +132,8 @@ export default {
         "lineAccessTotal": 0,
         "tmpTotal": 0,
         "dppTotal": 0,
-        "total": 0
+        "total": 0,
+        "fees": 0
       }
     }
   },

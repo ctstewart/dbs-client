@@ -57,6 +57,7 @@ export default {
         responder: false,
         discount: '0%',
         autopay: false,
+        numberOfNewDevices: 0,
 
         tabsArray: [
           { name: 'planTabActive', value: true },
@@ -282,7 +283,7 @@ export default {
     saveTotalsToLocalStorage: function () {
       var localTotal = 0
       localTotal = this.planTotal + this.lineAccessTotal + this.tmpTotal + this.dppTotal
-      var computedTotals = {"planName": this.mainObject.chosenPlan,"planTotal": this.planTotal, "lineAccessTotal": this.lineAccessTotal, "tmpTotal": this.tmpTotal, "dppTotal": this.dppTotal, "total": localTotal}
+      var computedTotals = {"planName": this.mainObject.chosenPlan,"planTotal": this.planTotal, "lineAccessTotal": this.lineAccessTotal, "tmpTotal": this.tmpTotal, "dppTotal": this.dppTotal, "total": localTotal, "fees": this.mainObject.numberOfNewDevices * 40}
       const parsed = JSON.stringify(computedTotals)
       localStorage.setItem(this.whichOptionComputed, parsed)
     },

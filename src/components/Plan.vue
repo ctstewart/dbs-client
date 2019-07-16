@@ -45,7 +45,7 @@
         </select>
     </div>
     <span>TMP and Misc.</span>
-    <div class="input">
+    <div class="input eightColumns">
         <div>TMP</div>
         <select v-model="value.tmp">
             <option v-for="i in 51">${{i - 1}}</option>
@@ -56,6 +56,10 @@
         </select>
         <div>$30 Basic Phones</div>
         <select v-model="value.basic.value">
+            <option v-for="i in 11">{{i - 1}}</option>
+        </select>
+        <div>Number Of New Devices</div>
+        <select v-model="value.numberOfNewDevices">
             <option v-for="i in 11">{{i - 1}}</option>
         </select>
     </div>
