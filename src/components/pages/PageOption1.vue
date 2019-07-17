@@ -1,16 +1,16 @@
 <template>
-    <Options v-bind="props"></Options>
+    <layout-option v-on:change-page="$emit('change-page', $event)" v-bind="props"></layout-option>
 </template>
 
 <script>
-import Options from '@/components/options.vue'
+import LayoutOption from '@/components/layout/LayoutOption'
 import externalData from '@/myJSON.json'
 
 export default {
 
-  name: 'option1',
+  name: 'PageOption1',
   components: {
-    Options
+    LayoutOption
   },
   data: function () {
     return {

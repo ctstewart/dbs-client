@@ -1,26 +1,26 @@
 <template>
-  <div class="container">
+  <div class="loginContainer">
     <div>
       <h2>DIGITAL BENEFIT SHEET</h2>
       <h5>Making math easy,<br>so you can focus on what's<br>important.</h5>
-      <button onclick="location.href='benefitSheet.html'" type="button">LOGIN</button>
+      <button type="button" @click="$emit('change-page', 'PageBenefitSheet')">LOGIN</button>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'index'
+  name: 'PageLogin'
 }
 </script>
 
-<style>
-.container {
+<style scoped>
+.loginContainer {
   height: 100%;
   display: grid;
 }
 
-.container div {
+.loginContainer div {
   display: grid;
   background-color: rgba(255,255,255,.8);
   width: 50%;

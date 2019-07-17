@@ -1,16 +1,17 @@
 <template>
 <div class="sidebar">
   <div class="username"><img src="@/assets/tempUserIcon.png"><br>cstewart@wirelessworldus.com</div>
-  <button onclick="location.href='benefitSheet.html'" type="button">Benefit Sheet</button>
-  <button onclick="location.href='option1.html'" type="button">Option 1</button>
-  <button onclick="location.href='option2.html'" type="button">Option 2</button>
-  <button onclick="location.href='index.html'" type="button">Logout</button>
+  <button @click="$emit('change-page', 'PageBenefitSheet')" type="button">Benefit Sheet</button>
+  <button @click="$emit('change-page', 'PageOption1')" type="button">Option 1</button>
+  <button @click="$emit('change-page', 'PageOption2')" type="button">Option 2</button>
+  <button @click="$emit('change-page', 'PageLogin')" type="button">Logout</button>
   <a class="version" href="changelog.html">Version: {{version}}</a>
 </div>
 </template>
 
 <script>
 export default {
+  name: 'Layoutsidebar',
   props: ['version']
 }
 </script>

@@ -1,7 +1,7 @@
 <template>
-<div class="container" id="app">
-  <Sidebar v-bind:version="version"></Sidebar>
-  <div class="mainContent" id="app">
+<div class="BSContainer">
+  <layout-sidebar v-on:change-page="$emit('change-page', $event)" v-bind:version="version"></layout-sidebar>
+  <div class="mainContent">
     <div class="titleBar">
       <div class="copyButton">
         <!-- <i class="fas fa-align-justify" @click="hamburgerStyle = !hamburgerStyle"></i> -->
@@ -13,7 +13,7 @@
     </div>
     <div class="benefits">
       <p class="benefitsTitle">New Plan Benefits</p>
-      <Autocomplete v-for="(i, index) in benefitSheet.benefits" :benefit="i" v-on:changeBenefit="updateBenefit(index, $event)"></Autocomplete>
+      <ui-autocomplete v-for="(i, index) in benefitSheet.benefits" :benefit="i" v-on:changeBenefit="updateBenefit(index, $event)"></ui-autocomplete>
     </div>
     <div class="oldBills">
       <input placeholder="$0.00" type="tel" pattern="[0-9]*" step="0.01" v-model="benefitSheet.currentPhoneBill">
@@ -97,15 +97,15 @@
 </template>
 
 <script>
-import Sidebar from '@/components/Sidebar.vue'
-import Autocomplete from '@/components/autocomplete.vue'
+import LayoutSidebar from '@/components/layout/LayoutSidebar'
+import UiAutocomplete from '@/components/ui/UiAutocomplete'
 import externalData from '@/myJSON.json'
 
 export default {
-  name: 'benefitSheet',
+  name: 'PageBenefitSheet',
 
   components: {
-    Sidebar, Autocomplete
+    LayoutSidebar, UiAutocomplete
   },
 
   data: function () {
@@ -188,7 +188,7 @@ export default {
 </script>
 
 <style>
-.container {
+.BSContainer {
   height: 100%;
   display: grid;
   grid-template-columns: 1fr 4fr;
@@ -491,7 +491,7 @@ and (orientation : landscape)
     background: white !important;
   }
 
-  .container {
+  .BSContainer {
     height: 100%;
     display: grid;
     grid-template-columns: 1fr;

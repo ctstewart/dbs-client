@@ -1,6 +1,6 @@
 <template>
-<div class="all" id="app">
-    <Sidebar v-bind:version="version"></Sidebar>
+<div class="all">
+    <layout-sidebar v-on:change-page="$emit('change-page', $event)" v-bind:version="version"></layout-sidebar>
     <div class="mainContent">
         <div class="titleBar">
             <div class="copyButton">
@@ -14,10 +14,10 @@
         <div class="navBar">
             <button
                 v-for="tab in tabs"
-                v-bind:key="tab"
-                v-bind:class="{ activetab: currentTab === tab }"
-                v-on:click="currentTab = tab"
-                ><p>{{ tab }}</p></button>
+                v-bind:key="tab.name"
+                v-bind:class="{ activetab: currentTab === tab.name }"
+                v-on:click="currentTab = tab.name"
+                ><p>{{ tab.label }}</p></button>
             <div>{{ textBeforeTotal }}{{ total }}</div>
         </div>
         <keep-alive>
@@ -31,21 +31,25 @@
 </template>
 
 <script>
-import Sidebar from '@/components/Sidebar.vue'
-import Plan from '@/components/Plan.vue'
-import PullThru from '@/components/PullThru.vue'
-import DPP from '@/components/DPP.vue'
+import LayoutSidebar from '@/components/layout/LayoutSidebar'
+import SectionPlan from './SectionPlan'
+import SectionPullthru from './SectionPullthru'
+import SectionDpp from './SectionDpp'
 
 export default {
-  name: 'options',
+  name: 'LayoutOption',
   props: ['version', 'whichOption', 'whichOptionObject', 'whichOptionComputed'],
   components: {
-    Sidebar, Plan, PullThru, DPP
+    LayoutSidebar, SectionPlan, SectionPullthru, SectionDpp
   },
   data: function () {
     return {
-      currentTab: 'Plan',
-      tabs: ['Plan', 'PullThru', 'DPP'],
+      currentTab: 'SectionPlan',
+      tabs: [
+        { name: 'SectionPlan', label: 'Plan' },
+        { name: 'SectionPullthru', label: 'Pull Thru' },
+        { name: 'SectionDpp', label: 'DPP' }
+      ],
       isLoaded: false,
       mainObject: {
 
@@ -439,7 +443,7 @@ export default {
 }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 .display-none {
     display: none;
 }
