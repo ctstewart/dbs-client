@@ -21,16 +21,26 @@ export default {
         }
     },
 
+    created () {
+        if (localStorage.getItem('benefits')) {
+            try {
+                this.benefits = JSON.parse(localStorage.getItem('benefits'))
+            } catch (e) {
+                localStorage.removeItem('benefits')
+            }
+        }
+    },
+
     methods: {
         updateBenefit: function (parentBenefitIndex, childBenefit) {
-            console.log(this.benefitSheet.benefits)
-            this.benefitSheet.benefits[parentBenefitIndex] = childBenefit
-            this.saveBenefitSheetToLocalStorage()
-            console.log(this.benefitSheet.benefits)
+            console.log(this.benefits)
+            this.benefits[parentBenefitIndex] = childBenefit
+            this.saveBenefitsToLocalStorage()
+            console.log(this.benefits)
         },
-        saveBenefitSheetToLocalStorage: function () {
-            const parsed = JSON.stringify(this.benefitSheet)
-            localStorage.setItem('benefitSheet', parsed)
+        saveBenefitsToLocalStorage: function () {
+            const parsed = JSON.stringify(this.benefits)
+            localStorage.setItem('benefits', parsed)
         }
     }
 

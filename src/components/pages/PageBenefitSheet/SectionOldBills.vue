@@ -1,8 +1,8 @@
 <template>
 <div class="oldBills">
-    <input placeholder="$0.00" type="tel" pattern="[0-9]*" step="0.01" v-model="oldPhoneBill">
+    <input placeholder="$0.00" type="tel" pattern="[0-9]*" step="0.01" v-model="oldPhoneBill" @change="saveOldBillsToLocalStorage">
     <p>+</p>
-    <input placeholder="$0.00" type="tel" pattern="[0-9]*" step="0.01" v-model="oldHomeSolution">
+    <input placeholder="$0.00" type="tel" pattern="[0-9]*" step="0.01" v-model="oldHomeSolution" @change="saveOldBillsToLocalStorage">
     <p>=</p>
     <p>${{ oldTotal.toFixed(2) }}</p>
     <p>Old phone bill</p>
@@ -18,6 +18,27 @@ export default {
         return {
             oldPhoneBill: null,
             oldHomeSolution: null
+        }
+    },
+
+    created () {
+        if (localStorage.getItem('oldBills')) {
+            try {
+                var localArray = []
+                localArray = JSON.parse(localStorage.getItem('oldBills'))
+                this.oldPhoneBill = localArray[0]
+                this.oldHomeSolution = localArray[1]
+            } catch (e) {
+                localStorage.removeItem('oldBills')
+            }
+        }
+    },
+
+    methods: {
+        saveOldBillsToLocalStorage: function () {
+            var localArray = [this.oldPhoneBill, this.oldHomeSolution]
+            const parsed = JSON.stringify(localArray)
+            localStorage.setItem('oldBills', parsed)
         }
     },
 

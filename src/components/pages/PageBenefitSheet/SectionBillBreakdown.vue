@@ -24,7 +24,7 @@
             </div>
             <div>
                 <p>Total:</p>
-                <div>${{ i.total.toFixed(2) }}</div>
+                <div>${{ i.total.toFixed(2) }} plus tax</div>
             </div>
         </div>
     </div>

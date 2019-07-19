@@ -1,7 +1,7 @@
 <template>
 <div class="costs">
     <div v-for="(i, index) in optionsComputed">
-        <input placeholder="$0.00">
+        <input placeholder="$0.00" v-model="todayCost[index].amount" @change="saveTodayCostToLocalStorage">
         <p>${{ differenceMonthly[index].toFixed(2) }}</p>
         <p>${{ i.fees.toFixed(2) }}</p>
         <p>Cost today</p>
@@ -28,6 +28,27 @@ export default {
 
     data: function () {
         return {
+            todayCost: [
+                {name: 'Option 1', amount: null},
+                {name: 'Option 2', amount: null}
+            ]
+        }
+    },
+
+    created () {
+        if (localStorage.getItem('todayCost')) {
+            try {
+                this.todayCost = JSON.parse(localStorage.getItem('todayCost'))
+            } catch (e) {
+                localStorage.removeItem('todayCost')
+            }
+        }
+    },
+
+    methods: {
+        saveTodayCostToLocalStorage: function () {
+            const parsed = JSON.stringify(this.todayCost)
+            localStorage.setItem('todayCost', parsed)
         }
     }
 }

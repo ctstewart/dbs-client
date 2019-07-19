@@ -39,10 +39,13 @@ export default {
       hamburgerStyle: false,
       version: externalData.version,
       oldTotal: 0,
+      localStorageNames: [
+        'option1Computed',
+        'option2Computed'
+      ],
       optionsComputed: [
         {
           "name": 'Option 1',
-          "localStorageLabel": 'option1Computed',
           "planName": '',
           "planTotal": 0,
           "lineAccessTotal": 0,
@@ -53,7 +56,6 @@ export default {
         },
         {
           "name": 'Option 2',
-          "localStorageLabel": 'option2Computed',
           "planName": '',
           "planTotal": 0,
           "lineAccessTotal": 0,
@@ -67,12 +69,12 @@ export default {
   },
 
   created () {
-    for (var i=0; i < this.optionsComputed.length; i++) {
-      if (localStorage.getItem(this.optionsComputed[i].localStorageLabel)) {
+    for (var i=0; i < this.localStorageNames.length; i++) {
+      if (localStorage.getItem(this.localStorageNames[i])) {
         try {
-          this.optionsComputed[i] = JSON.parse(localStorage.getItem(this.optionsComputed[i].localStorageLabel))
+          this.optionsComputed[i] = JSON.parse(localStorage.getItem(this.localStorageNames[i]))
         } catch (e) {
-          localStorage.removeItem(this.optionsComputed[i].localStorageLabel)
+          localStorage.removeItem(this.localStorageNames[i])
         }
       }
     }
@@ -344,31 +346,6 @@ and (orientation : landscape)
   .autocompleteResult.is-active {
     background-color: #4AAE9B;
     color: white;
-  }
-
-  .oldBills {
-    display: grid;
-    grid-template-columns: 2fr 1fr 2fr 1fr 2fr;
-    place-items: center;
-  }
-
-  .oldBills > input {
-    margin: 1% 5%;
-    font-size: 16px;
-    -webkit-appearance: none;
-    border: none;
-    border: 1px solid grey;
-    background-color: white;
-    width: 128px;
-    height: 32px;
-    border-radius: 5px;
-    font-size: 16px;
-    text-align: center;
-    font-weight: bold;
-  }
-
-  .oldBills > p:last-child {
-    font-weight: bold;
   }
 
   .billBreakdown {
