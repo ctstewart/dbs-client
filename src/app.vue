@@ -3,10 +3,10 @@
 </template>
 
 <script>
-import PageLogin from './components/pages/PageLogin'
-import PageBenefitSheet from './components/pages/PageBenefitSheet'
-import PageOption1 from './components/pages/PageOption1'
-import PageOption2 from './components/pages/PageOption2'
+import PageLogin from '@/components/pages/PageLogin'
+import PageBenefitSheet from '@/components/pages/PageBenefitSheet'
+import PageOption1 from '@/components/pages/PageOption1'
+import PageOption2 from '@/components/pages/PageOption2'
 import JSON from './myJSON.json'
 
 export default {

@@ -5,7 +5,7 @@
   <button @click="$emit('change-page', 'PageOption1')" type="button">Option 1</button>
   <button @click="$emit('change-page', 'PageOption2')" type="button">Option 2</button>
   <button @click="$emit('change-page', 'PageLogin')" type="button">Logout</button>
-  <a class="version" href="changelog.html">Version: {{version}}</a>
+  <a class="version">Version: {{version}}</a>
 </div>
 </template>
 

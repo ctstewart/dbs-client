@@ -103,7 +103,7 @@ export default {
   padding: 0;
   margin: 0;
   border: 1px solid #eeeeee;
-  height: 120px;
+  height: 80%;
   overflow: auto;
   z-index: 1;
 }
