@@ -4,6 +4,9 @@
         <input placeholder="$0.00">
         <p>${{ differenceMonthly[index].toFixed(2) }}</p>
         <p>${{ i.fees.toFixed(2) }}</p>
+        <p>Cost today</p>
+        <p>Diff. monthly</p>
+        <p>One-time fees</p>
     </div>
 </div>
 </template>
@@ -40,8 +43,16 @@ export default {
 .costs > div {
     display: grid;
     grid-template-columns: 2fr 1fr 2fr;
+    grid-template-rows: 60% 40%;
     place-items: center;
     font-weight: bold;
+}
+
+.costs > div > p:nth-child(n+4) {
+    font-size: .7em;
+    align-self: start;
+    margin: .2em;
+    font-weight: normal;
 }
 
 .costs > div > input {

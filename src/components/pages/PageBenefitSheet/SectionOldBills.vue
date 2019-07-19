@@ -5,6 +5,9 @@
     <input placeholder="$0.00" type="tel" pattern="[0-9]*" step="0.01" v-model="oldHomeSolution">
     <p>=</p>
     <p>${{ oldTotal.toFixed(2) }}</p>
+    <p>Old phone bill</p>
+    <p></p>
+    <p>Old home solutions</p>
 </div>
 </template>
 
@@ -38,6 +41,7 @@ export default {
 .oldBills {
   display: grid;
   grid-template-columns: 2fr 1fr 2fr 1fr 2fr;
+  grid-template-rows: 60% 40%;
   place-items: center;
 }
 
@@ -62,7 +66,14 @@ export default {
     border-radius: 5px;
 }
 
-.oldBills > p:last-child {
+.oldBills > p:nth-child(5) {
   font-weight: bold;
+}
+
+.oldBills > p:nth-child(n+6) {
+    font-size: .7em;
+    align-self: start;
+    margin: .2em;
+    font-weight: normal;
 }
 </style>
