@@ -2,30 +2,55 @@
 <div class="main dpp">
     <div class="dppColumn">
         <div>
-            <input v-for="i in localValue.existingDPPValues" type='tel' pattern="[0-9]*" step='0.01' placeholder="Existing DPP" v-model.number="i.value">
+            <input v-for="(i, index) in localValue.existingDPPValues" type='tel' pattern="[0-9]*" step='0.01' placeholder="Existing DPP" v-model.number="i.value">
         </div>
         <div>
-            <input v-for="i in localValue.existingCreditValues" type='tel' pattern="[0-9]*" step='0.01' placeholder="Existing Credits" v-model.number="i.value">
+            <input v-for="(i, index) in localValue.existingCreditValues" type='tel' pattern="[0-9]*" step='0.01' placeholder="Existing Credits" v-model.number="i.value">
         </div>
     </div>
     <div class="dppColumn">
+        <div>
+            <select v-for="(i, index) in localValue.newDPPValues" v-model="localValue.newDPPValues">
+                <option>New DPP</option>
+                <option v-for="(phone, index) in temporaryTestingInaccuratePhonePriceArray" v-bind:value="phone.fullRetail">{{phone.phoneName}}</option>
+            </select>
+        </div>
+        <div>
+            <input v-for="(i, index) in localValue.newCreditValues" type='tel' pattern="[0-9]*" step='0.01' placeholder="New Credits" v-model.number="i.value">
+        </div>
     </div>
 </div>
 </template>
 
 <script>
 export default {
-  props: ['value'],
-  computed: {
-    localValue: {
-      get () {
-        return this.value
-      },
-      set (value) {
-        this.$emit('input', value)
-      }
+    name: 'SectionDpp',
+
+    props: ['value'],
+
+    data: function () {
+        return {
+            temporaryTestingInaccuratePhonePriceArray: [
+                { phoneName: 'iPhone 8.5', fullRetail: 700 },
+                { phoneName: 'iPhone 9', fullRetail: 800 },
+                { phoneName: 'iPhone 9 & 3/4', fullRetail: 934 },
+                { phoneName: 'One phone to rule them all', fullRetail: 1000 },
+                { phoneName: 'A fake phone', fullRetail: 24 },
+                { phoneName: 'Not a grand', fullRetail: 500 }
+            ]
+        }
+    },
+
+    computed: {
+        localValue: {
+            get () {
+                return this.value
+            },
+            set (value) {
+                this.$emit('input', value)
+            }
+        }
     }
-  }
 }
 </script>
 
@@ -63,7 +88,7 @@ export default {
     place-items: center;
 }
 
-.dpp input {
+.dpp input, select {
     -webkit-appearance: none;  /* for webkit (safari, chrome) compatibility */
     -moz-appearance: none; /* for firefox compatibility */
     appearance: none;

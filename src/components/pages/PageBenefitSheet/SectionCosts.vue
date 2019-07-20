@@ -58,26 +58,30 @@ export default {
 .costs {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    margin: 0 1% 1% 1%;
+    margin: 0 1%;
+    overflow: hidden;
 }
 
 .costs > div {
     display: grid;
     grid-template-columns: 2fr 1fr 2fr;
-    grid-template-rows: 60% 40%;
+    grid-template-rows: 1fr 1fr;
     place-items: center;
     font-weight: bold;
+    margin: 0;
 }
 
 .costs > div > p:nth-child(n+4) {
-    font-size: .7em;
+    font-size: .7rem;
     align-self: start;
-    margin: .2em;
+    margin: 0;
+    margin-top: .1rem;
     font-weight: normal;
+    text-align: center;
 }
 
 .costs > div > input {
-    margin: 1% 5%;
+    margin: 0;
     font-size: 16px;
     -webkit-appearance: none;
     border: none;

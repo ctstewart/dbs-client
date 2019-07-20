@@ -171,6 +171,32 @@ export default {
           { value: '' },
           { value: '' },
           { value: '' }
+        ],
+
+        newDPPValues: [
+          { value: '' },
+          { value: '' },
+          { value: '' },
+          { value: '' },
+          { value: '' },
+          { value: '' },
+          { value: '' },
+          { value: '' },
+          { value: '' },
+          { value: '' }
+        ],
+
+        newCreditValues: [
+          { value: '' },
+          { value: '' },
+          { value: '' },
+          { value: '' },
+          { value: '' },
+          { value: '' },
+          { value: '' },
+          { value: '' },
+          { value: '' },
+          { value: '' }
         ]
       }
     }

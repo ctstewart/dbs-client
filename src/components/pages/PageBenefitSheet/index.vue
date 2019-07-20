@@ -157,9 +157,9 @@ img {
 .mainContent {
   display: grid;
   /*justify-self: center;*/
-  margin: 2%;
+  margin: 1%;
   background-color: rgba(255,255,255,.9);
-  grid-template-rows: 10% 30% 10% 40% 10%;
+  grid-template-rows: 8% 30% 10% 40% 12%;
   border-radius: 5px;
   /*width: 768px;*/
 }
@@ -169,8 +169,9 @@ img {
 }
 
 .hamburgerStyle {
-  grid-template-rows: 15% 45% 20% 20%;
-  margin: 10%;
+  grid-template-rows: 10% 45% 20% 25%;
+  margin-top: 5%;
+  margin-bottom: 5%;
   transition: all 1s;
 }
 
@@ -250,6 +251,17 @@ and (orientation : landscape)
 
 
 @media print {
+
+  @media only screen 
+  and (max-device-width : 1024px) 
+  {
+    /* size: A4 landscape; */
+    
+    body {
+      transform: rotate(-90deg);
+    }
+  }
+
   body, html {
     background: white !important;
   }

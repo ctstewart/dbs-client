@@ -62,7 +62,7 @@ export default {
 .oldBills {
   display: grid;
   grid-template-columns: 2fr 1fr 2fr 1fr 2fr;
-  grid-template-rows: 60% 40%;
+  grid-template-rows: 1fr 1fr;
   place-items: center;
 }
 
@@ -92,9 +92,9 @@ export default {
 }
 
 .oldBills > p:nth-child(n+6) {
-    font-size: .7em;
+    font-size: .7rem;
     align-self: start;
-    margin: .2em;
+    margin-top: .1rem;
     font-weight: normal;
 }
 </style>
