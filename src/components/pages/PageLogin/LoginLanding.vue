@@ -1,26 +1,19 @@
 <template>
-  <div class="loginContainer">
-    <div>
-      <h2>DIGITAL BENEFIT SHEET</h2>
-      <h5>Making math easy,<br>so you can focus on what's<br>important.</h5>
-      <button type="button" @click="$emit('change-page', 'PageBenefitSheet')">LOGIN</button>
-    </div>
-  </div>
+<div class="loginLandingDiv">
+    <h2>DIGITAL BENEFIT SHEET</h2>
+    <h5>Making math easy,<br>so you can focus on what's<br>important.</h5>
+    <button type="button" @click="$emit('change-to-form')">LOGIN</button>
+</div>
 </template>
 
 <script>
 export default {
-  name: 'PageLogin'
+    name: 'LoginLanding'
 }
 </script>
 
-<style scoped>
-.loginContainer {
-  height: 100%;
-  display: grid;
-}
-
-.loginContainer div {
+<style>
+.loginLandingDiv {
   display: grid;
   background-color: rgba(255,255,255,.8);
   width: 50%;
@@ -32,22 +25,24 @@ export default {
   text-align: center;
 }
 
-h2, h5, button {
+.loginLandingDiv h2,
+.loginLandingDiv h5,
+.loginLandingDiv button {
   width: 80%;
   margin: 0 auto;
   padding: 1%;
 }
 
-h2 {
+.loginLandingDiv h2 {
   align-self: end;
 }
 
-h5 {
+.loginLandingDiv h5 {
   align-self: start;
   padding: 1%;
 }
 
-button {
+.loginLandingDiv button {
   align-self: center;
   color: white;
   background-color: #1F596E;
@@ -59,15 +54,5 @@ button {
   font-size: 20px;
   outline: none;
   cursor: pointer;
-}
-
-
-
-@media only screen 
-and (min-device-width : 768px) 
-and (max-device-width : 1024px) 
-and (orientation : landscape)
-{
-	
 }
 </style>
