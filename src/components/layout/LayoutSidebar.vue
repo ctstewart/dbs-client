@@ -1,10 +1,10 @@
 <template>
 <div class="sidebar">
   <div class="username"><img src="@/assets/tempUserIcon.png"><br>cstewart@wirelessworldus.com</div>
-  <button @click="$emit('change-page', 'PageBenefitSheet')" type="button">Benefit Sheet</button>
-  <button @click="$emit('change-page', 'PageOption1')" type="button">Option 1</button>
-  <button @click="$emit('change-page', 'PageOption2')" type="button">Option 2</button>
-  <button @click="$emit('change-page', 'PageLogin')" type="button">Logout</button>
+  <button @click="$emit('change-page', 'PageBenefitSheet')" :class="[ currentPage === 'PageBenefitSheet' ? 'activeButton' : '' ]" type="button">Benefit Sheet</button>
+  <button @click="$emit('change-page', 'PageOption1')" :class="[ currentPage === 'PageOption1' ? 'activeButton' : '' ]" type="button">Option 1</button>
+  <button @click="$emit('change-page', 'PageOption2')" :class="[ currentPage === 'PageOption2' ? 'activeButton' : '' ]" type="button">Option 2</button>
+  <button @click="logout" type="button">Logout</button>
   <a class="version">Version: {{version}}</a>
 </div>
 </template>
@@ -12,11 +12,18 @@
 <script>
 export default {
   name: 'Layoutsidebar',
-  props: ['version']
+  props: ['version', 'currentPage'],
+
+  methods: {
+    logout: function () {
+      localStorage.removeItem('jwtoken')
+      this.$emit('change-page', 'PageLogin')
+    }
+  }
 }
 </script>
 
-<style scoped>
+<style>
 .sidebar {
   background-color: rgba(0,0,0,.4);
   height: 100%;
@@ -33,6 +40,12 @@ export default {
   font-weight: bold;
   cursor: pointer;
   outline: none;
+}
+
+.activeButton {
+  background-color: rgba(31,89,110,.75) !important;
+  color: rgba(255,255,255,.8) !important;
+  border: 1px solid rgba(255,255,255,.8) !important;
 }
 
 .username, .version {

@@ -1,5 +1,5 @@
 <template>
-    <layout-option v-on:change-page="$emit('change-page', $event)" v-bind="props"></layout-option>
+    <layout-option v-on:change-page="$emit('change-page', $event)" v-bind:currentPage="currentPage" v-bind="props"></layout-option>
 </template>
 
 <script>
@@ -9,6 +9,7 @@ import externalData from '@/myJSON.json'
 export default {
 
   name: 'PageOption1',
+  props: ['currentPage'],
   components: {
     LayoutOption
   },

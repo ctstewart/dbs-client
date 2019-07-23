@@ -1,13 +1,14 @@
 <template>
-  <component v-bind:is="currentPage" v-on:change-page="currentPage = $event"></component>
+  <component v-bind:is="currentPage" v-bind:currentPage="currentPage" v-on:change-page="currentPage = $event"></component>
 </template>
 
 <script>
+import axios from 'axios'
+
 import PageLogin from '@/components/pages/PageLogin'
 import PageBenefitSheet from '@/components/pages/PageBenefitSheet'
 import PageOption1 from '@/components/pages/PageOption1'
 import PageOption2 from '@/components/pages/PageOption2'
-import JSON from './myJSON.json'
 
 export default {
   name: 'app',
@@ -16,7 +17,51 @@ export default {
   },
   data: function () {
     return {
-      currentPage: 'PageLogin'
+      currentPage: '',
+      jwtoken: ''
+    }
+  },
+
+  created () {
+    if (localStorage.getItem('jwtoken')) {
+      try {
+        this.jwtoken = JSON.parse(localStorage.getItem('jwtoken'))
+        axios({
+          method: 'get',
+          url: '/api/users/checkAuth',
+          headers: {
+            authorization: 'Bearer ' + this.jwtoken
+          }
+        })
+        .then((response) => {
+          this.currentPage = 'PageBenefitSheet'
+          setInterval(() => {
+            axios({
+              method: 'get',
+              url: '/api/users/checkAuth',
+              headers: {
+                authorization: 'Bearer ' + this.jwtoken
+              }
+            })
+            .then((response) => {
+              console.log('token checked')
+            })
+            .catch((error) => {
+              localStorage.removeItem('jwtoken')
+              this.currentPage = 'PageLogin'
+            })
+          }, 300000)
+        })
+        .catch((error) => {
+          localStorage.removeItem('jwtoken')
+          this.currentPage = 'PageLogin'
+        })
+      } catch (e) {
+        localStorage.removeItem('jwtoken')
+        this.currentPage = 'PageLogin'
+      }
+    } else {
+      this.currentPage = 'PageLogin'
     }
   }
 }

@@ -1,6 +1,6 @@
 <template>
 <div class="BSContainer">
-  <layout-sidebar v-on:change-page="$emit('change-page', $event)" v-bind:version="version"></layout-sidebar>
+  <layout-sidebar v-on:change-page="$emit('change-page', $event)" v-bind:version="version" v-bind:currentPage="currentPage"></layout-sidebar>
   <div class="mainContent" :class="[ hamburgerStyle ? 'hamburgerStyle' : 'fullStyle' ]">
     <div class="titleBar">
       <div class="copyButton">
@@ -29,6 +29,8 @@ import externalData from '@/myJSON.json'
 
 export default {
   name: 'PageBenefitSheet',
+  
+  props: ['currentPage'],
 
   components: {
     LayoutSidebar, SectionBenefits, SectionOldBills, SectionBillBreakdown, SectionCosts
@@ -107,24 +109,6 @@ export default {
   height: 100%;
   display: grid;
   grid-template-columns: 1fr 4fr;
-}
-
-.sidebar {
-  background-color: rgba(0,0,0,.4);
-  height: 100%;
-  display: grid;
-  grid-template-rows: 25% 15% 15% 15% 15% 15%;
-}
-
-.sidebar button {
-  background-color: rgba(255,255,255,.8);
-  border-radius: 10px;
-  border: none;
-  margin: 4% 5%;
-  font-size: 24px;
-  font-weight: bold;
-  cursor: pointer;
-  outline: none;
 }
 
 .username, .version {

@@ -1,6 +1,6 @@
 <template>
 <div class="all">
-    <layout-sidebar v-on:change-page="$emit('change-page', $event)" v-bind:version="version"></layout-sidebar>
+    <layout-sidebar v-on:change-page="$emit('change-page', $event)" v-bind:version="version" v-bind:currentPage="currentPage"></layout-sidebar>
     <div class="mainContent">
         <div class="titleBar">
             <div class="copyButton">
@@ -38,7 +38,7 @@ import SectionDpp from './SectionDpp'
 
 export default {
   name: 'LayoutOption',
-  props: ['version', 'whichOption', 'whichOptionObject', 'whichOptionComputed'],
+  props: ['version', 'whichOption', 'whichOptionObject', 'whichOptionComputed', 'currentPage'],
   components: {
     LayoutSidebar, SectionPlan, SectionPullthru, SectionDpp
   },

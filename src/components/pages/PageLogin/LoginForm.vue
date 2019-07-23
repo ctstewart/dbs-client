@@ -30,27 +30,19 @@ export default {
                 "password": this.password
             })
             .then((response) => {
-                this.backendResponseText = response.data.msg
                 this.saveTokenToLocalStorage(response.data.token)
                 this.$emit('change-page', 'PageBenefitSheet')
             })
             .catch((error) => {
                 this.errorText = 'Incorrect username or password'
                 setTimeout(() => {
-                    console.log('Success')
                     this.errorText = ''
-                    console.log(this.errorText)
                 }, 2000)
-                // if (error.response) {
-                    // this.errorText = error.response.data.msg
-                // } else {
-                    // console.log(error)
-                // }
             })
         },
         saveTokenToLocalStorage: function (value) {
             const parsed = JSON.stringify(value)
-            localStorage.setItem('token', parsed)
+            localStorage.setItem('jwtoken', parsed)
         }
     }
 }
@@ -87,6 +79,7 @@ export default {
 .loginFormDiv input {
     margin: 0;
     padding: 0;
+    text-indent: .5rem;
     align-self: end;
     height: 2rem;
 }
