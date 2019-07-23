@@ -4,8 +4,11 @@
   <button @click="$emit('change-page', 'PageBenefitSheet')" :class="[ currentPage === 'PageBenefitSheet' ? 'activeButton' : '' ]" type="button">Benefit Sheet</button>
   <button @click="$emit('change-page', 'PageOption1')" :class="[ currentPage === 'PageOption1' ? 'activeButton' : '' ]" type="button">Option 1</button>
   <button @click="$emit('change-page', 'PageOption2')" :class="[ currentPage === 'PageOption2' ? 'activeButton' : '' ]" type="button">Option 2</button>
-  <button @click="logout" type="button">Logout</button>
-  <a class="version">Version: {{version}}</a>
+  <!-- <button @click="logout" type="button">Logout</button> -->
+  <div class="versionAndLogout">
+    <a @click="logout">Logout</a>
+    <a class="logout">Version: {{version}}</a>
+  </div>
 </div>
 </template>
 
@@ -28,7 +31,7 @@ export default {
   background-color: rgba(0,0,0,.4);
   height: 100%;
   display: grid;
-  grid-template-rows: 25% 15% 15% 15% 15% 15%;
+  grid-template-rows: 25% 15% 15% 15% 30%;
 }
 
 .sidebar button {
@@ -48,23 +51,30 @@ export default {
   border: 1px solid rgba(255,255,255,.8) !important;
 }
 
-.username, .version {
+.username, .versionAndLogout {
   align-self: end;
-  text-align: center;
   color: rgba(255,255,255,.8);
   font-size: 14px;
   /*visibility: hidden;*/
 }
 
 .username {
+  text-align: center;
   align-self: center;
   /*border-bottom: 1px solid rgba(255,255,255,.8);*/
   padding-bottom: 3%;
 }
 
-.version {
-  font-size: 20px;
-  margin-bottom: 3%;
+.versionAndLogout {
+  text-decoration: underline;
+  display: grid;
+  grid-template-columns: 30% 70%;
+  font-size: 1.1rem;
+  margin: 0 3% 3%;
+}
+
+.logout {
+  text-align: right;
 }
 
 img {

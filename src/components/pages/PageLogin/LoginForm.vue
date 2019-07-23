@@ -3,7 +3,7 @@
     <p>Email</p>
     <input type="email" placeholder="johndoe@gmail.com" v-model="email">
     <p>Password</p>
-    <input type="password" placeholder="password" v-model="password">
+    <input type="password" placeholder="password" v-model="password" @keyup.enter="loginUser">
     <span v-if="errorText !== ''">{{ errorText }}</span>
     <button v-else @click="loginUser">LOGIN</button>
 </div>
