@@ -340,10 +340,10 @@ export default {
 
     total: function () {
       if (this.isLoaded === false) {
-        console.log('Loading')
+        // console.log('Loading')
         return 'Loading'
       } else if (this.isLoaded === true) {
-        console.log('Loaded')
+        // console.log('Loaded')
         this.saveToLocalStorage()
         this.saveTotalsToLocalStorage()
 

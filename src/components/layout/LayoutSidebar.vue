@@ -6,8 +6,8 @@
   <button @click="$emit('change-page', 'PageOption2')" :class="[ currentPage === 'PageOption2' ? 'activeButton' : '' ]" type="button">Option 2</button>
   <!-- <button @click="logout" type="button">Logout</button> -->
   <div class="versionAndLogout">
-    <a @click="logout">Logout</a>
-    <a class="logout">Version: {{version}}</a>
+    <a class="logout" @click="logout">Logout</a>
+    <a class="versionFormatting">Version: {{version}}</a>
   </div>
 </div>
 </template>
@@ -46,7 +46,7 @@ export default {
 }
 
 .activeButton {
-  background-color: rgba(31,89,110,.75) !important;
+  background-color: transparent !important;
   color: rgba(255,255,255,.8) !important;
   border: 1px solid rgba(255,255,255,.8) !important;
 }
@@ -66,14 +66,18 @@ export default {
 }
 
 .versionAndLogout {
-  text-decoration: underline;
   display: grid;
-  grid-template-columns: 30% 70%;
+  grid-template-columns: 40% 60%;
   font-size: 1.1rem;
   margin: 0 3% 3%;
+  cursor: pointer;
 }
 
 .logout {
+  text-decoration: underline;
+}
+
+.versionFormatting {
   text-align: right;
 }
 

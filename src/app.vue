@@ -36,6 +36,7 @@ export default {
         .then((response) => {
           this.currentPage = 'PageBenefitSheet'
           setInterval(() => {
+            console.log('Interval Running')
             axios({
               method: 'get',
               url: '/api/users/checkAuth',
@@ -47,6 +48,7 @@ export default {
               console.log('token checked')
             })
             .catch((error) => {
+              console.log('check token failed')
               localStorage.removeItem('jwtoken')
               this.currentPage = 'PageLogin'
             })
