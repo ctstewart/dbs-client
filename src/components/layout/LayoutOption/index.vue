@@ -470,6 +470,9 @@ export default {
 </script>
 
 <style lang="less" scoped>
+@titleBarBlue: rgba(31,89,110,.75);
+@oldSectionGreen: #387A77;
+
 .display-none {
     display: none;
 }
@@ -493,7 +496,7 @@ export default {
 }
 
 .titleBar {
-    background-color: rgba(31,89,110,.75);
+    background-color: @oldSectionGreen;
     color: #F6F6F6;
     font-weight: bold;
     text-align: center;
@@ -534,7 +537,7 @@ export default {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 5fr;
     margin-left: 1%;
-    color: #387A77;
+    color: @oldSectionGreen;
 }
 
 .navBar button {
@@ -551,7 +554,7 @@ export default {
     align-items: center;
     cursor: pointer;
     outline: 0;
-    color: #387A77;
+    color: @oldSectionGreen;
 }
 
 .navBar button p {
@@ -568,7 +571,7 @@ export default {
 }
 
 .navBar button.activetab {
-    background-color: #387A77;
+    background-color: @oldSectionGreen;
     color: white;
     border: none;
 }
@@ -587,6 +590,4 @@ div.active {
     width: 40%;
     text-align: center;
 }
-
-
 </style>
