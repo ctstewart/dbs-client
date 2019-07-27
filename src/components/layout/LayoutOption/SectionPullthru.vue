@@ -3,17 +3,17 @@
     <div class="pullthruColumn">
         <div v-for="i in localValue.lineAccess.slice(0,4)">
             <p id="textAlignRight">{{i.name}}:</p>
-            <i class="fa fa-plus-circle fa-lg" aria-hidden="true" v-on:click="i.value++"></i>
-            <p>{{i.value}}</p>
             <i class="fa fa-minus-circle fa-lg" aria-hidden="true" v-on:click="i.value--"></i>
+            <p>{{i.value}}</p>
+            <i class="fa fa-plus-circle fa-lg" aria-hidden="true" v-on:click="i.value++"></i>
         </div>
     </div>
     <div class="pullthruColumn">
         <div v-for="i in localValue.lineAccess.slice(4,8)">
             <p id="textAlignRight">{{i.name}}:</p>
-            <i class="fa fa-plus-circle fa-lg" aria-hidden="true" v-on:click="i.value++"></i>
-            <p>{{i.value}}</p>
             <i class="fa fa-minus-circle fa-lg" aria-hidden="true" v-on:click="i.value--"></i>
+            <p>{{i.value}}</p>
+            <i class="fa fa-plus-circle fa-lg" aria-hidden="true" v-on:click="i.value++"></i>
         </div>
     </div>
 </div>
