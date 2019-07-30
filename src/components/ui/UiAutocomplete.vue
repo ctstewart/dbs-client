@@ -1,6 +1,6 @@
 <template>
 <div :class="{ 'positionRelative': focus === true }">
-  <input type="text" v-model="search" @input="onChange($event)" @keydown.down="onArrowDown" @keydown.up="onArrowUp" @keydown.enter="onEnter" @keydown.esc="onEsc" @focus="focus = true"/>
+  <input type="text" v-model="search" @input="onChange($event)" @keydown.down="onArrowDown" @keydown.up="onArrowUp" @keydown.enter="onEnter" @keydown.esc="onEsc" @focus="focus = true; onChange($event)"/>
   <ul class="autocompleteResults" v-show="isOpen">
     <li class="autocompleteResult" v-for="(result, i) in results" :key="i" @click="setresult($event, result)" :class="{ 'is-active': i === arrowCounter }" @mouseover="handleMouseOver">
       {{result}}
@@ -103,7 +103,7 @@ export default {
   padding: 0;
   margin: 0;
   border: 1px solid #eeeeee;
-  height: 80%;
+  height: 15rem;
   overflow: auto;
   z-index: 1;
 }
