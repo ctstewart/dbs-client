@@ -331,7 +331,7 @@ export default {
     copyToOption2: function () {
       const parsed = JSON.stringify(this.mainObject)
       localStorage.setItem('option2Object', parsed)
-      alert('Copied!')
+      alert('Copied to Option 2!')
     }
 
   },
