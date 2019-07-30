@@ -48,7 +48,7 @@
     <div class="input eightColumns">
         <div>TMP</div>
         <select v-model="value.tmp">
-            <option v-for="i in 51">${{i - 1}}</option>
+            <option v-for="i in 201">${{i - 1}}</option>
         </select>
         <div>Phones in 2 year Contracts</div>
         <select v-model="value.twoyear.value">
