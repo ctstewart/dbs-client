@@ -59,6 +59,8 @@ export default {
           this.currentPage = 'PageLogin'
         })
       } catch (e) {
+        // SHOULD I BE USING LOCALSTORAGE.CLEAR() INSTEAD?
+        // SHOULD I REFRESH THE TOKEN SILENTLY UNLESS THE BROWSER IS CLOSED?
         localStorage.removeItem('jwtoken')
         this.currentPage = 'PageLogin'
       }
