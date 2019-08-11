@@ -36,6 +36,8 @@ import SectionPlan from './SectionPlan'
 import SectionPullthru from './SectionPullthru'
 import SectionDpp from './SectionDpp'
 
+import { mixAndMatch, oldUnlimitedPlans, tieredPlans, lineAccess } from '@/externalData/plans'
+
 export default {
   name: 'LayoutOption',
   props: ['version', 'whichOption', 'whichOptionObject', 'whichOptionComputed', 'currentPage'],
@@ -57,8 +59,10 @@ export default {
         chosenPlan: 'Unlimited',
         tmp: '$0',
         tmpConvertedFromString: 0,
-        military: false,
-        responder: false,
+        militaryNew: false,
+        militaryOld: false,
+        responderNew: false,
+        responderOld: false,
         discount: '0%',
         autopay: false,
         numberOfNewDevices: 0,
@@ -69,62 +73,15 @@ export default {
           { name: 'dppTabActive', value: false }
         ],
 
-        mixAndMatchPlansArray: [
-          {
-            name: 'Go',
-            numberOfPhones: 0,
-            1: { lines: 1, autopay: 75, noAutopay: 80 },
-            2: { lines: 2, autopay: 65, noAutopay: 70 },
-            3: { lines: 3, autopay: 50, noAutopay: 55 },
-            4: { lines: 4, autopay: 40, noAutopay: 45 }
-          },
-          {
-            name: 'Beyond',
-            numberOfPhones: 0,
-            1: { lines: 1, autopay: 85, noAutopay: 90 },
-            2: { lines: 2, autopay: 80, noAutopay: 85 },
-            3: { lines: 3, autopay: 60, noAutopay: 65 },
-            4: { lines: 4, autopay: 50, noAutopay: 55 }
-          },
-          {
-            name: 'Above',
-            numberOfPhones: 0,
-            1: { lines: 1, autopay: 95, noAutopay: 100 },
-            2: { lines: 2, autopay: 90, noAutopay: 95 },
-            3: { lines: 3, autopay: 70, noAutopay: 75 },
-            4: { lines: 4, autopay: 60, noAutopay: 65 }
-          },
-          {
-            name: 'Just Kids',
-            numberOfPhones: 0,
-            1: { lines: 1, autopay: 0, noAutopay: 0 },
-            2: { lines: 2, autopay: 55, noAutopay: 60 },
-            3: { lines: 3, autopay: 45, noAutopay: 50 },
-            4: { lines: 4, autopay: 35, noAutopay: 40 }
-          }
-        ],
+        mixAndMatchPlansArray: mixAndMatch.plans,
 
-        militaryDiscountAmount: {
-          1: 15,
-          2: 35,
-          3: 40,
-          4: 40
-        },
+        militaryResponderDiscountAmountOld: mixAndMatch.militaryResponderDiscountOld,
 
-        oldUnlimitedPlansArray: [
-          { name: '$65 Unlimited', autopay: 60, noAutopay: 65 },
-          { name: '$110 Unlimited', autopay: 100, noAutopay: 110 }
-        ],
+        militaryResponderDiscountAmountNew: mixAndMatch.militaryResponderDiscountNew,
 
-        tieredPlansArray: [
-          { name: '2GB', autopay: 35, noAutopay: 35 },
-          { name: '4GB', autopay: 50, noAutopay: 50 },
-          { name: '5GB', autopay: 35, noAutopay: 40 },
-          { name: '8GB', autopay: 70, noAutopay: 70 },
-          { name: '12GB', autopay: 80, noAutopay: 80 },
-          { name: '16GB', autopay: 90, noAutopay: 90 },
-          { name: '24GB', autopay: 110, noAutopay: 110 }
-        ],
+        oldUnlimitedPlansArray: oldUnlimitedPlans,
+
+        tieredPlansArray: tieredPlans,
 
         twoyear: {
           value: 0,
@@ -136,68 +93,13 @@ export default {
           cost: 30
         },
 
-        lineAccess: [
-          { name: 'Tablet', tiered: 10, unlimited: 20, value: 0 },
-          { name: 'Jetpack', tiered: 10, unlimited: 20, value: 0 },
-          { name: 'Hum+', tiered: 10, unlimited: 10, value: 0 },
-          { name: 'HumX', tiered: 15, unlimited: 20, value: 0 },
-          { name: 'Homephone', tiered: 20, unlimited: 20, value: 0 },
-          { name: 'Gizmo', tiered: 5, unlimited: 5, value: 0 },
-          { name: 'Smartwatch', tiered: 10, unlimited: 10, value: 0 },
-          { name: 'Arlo', tiered: 10, unlimited: 20, value: 0 }
-        ],
+        lineAccess,
 
-        existingDPPValues: [
-          { value: '' },
-          { value: '' },
-          { value: '' },
-          { value: '' },
-          { value: '' },
-          { value: '' },
-          { value: '' },
-          { value: '' },
-          { value: '' },
-          { value: '' }
-        ],
+        existingDPPValues: Array(10).fill({ value: '' }),
+        existingCreditValues: Array(10).fill({ value: '' }),
+        newDPPValues: Array(10).fill({ value: '' }),
+        newCreditValues: Array(10).fill({ value: '' })
 
-        existingCreditValues: [
-          { value: '' },
-          { value: '' },
-          { value: '' },
-          { value: '' },
-          { value: '' },
-          { value: '' },
-          { value: '' },
-          { value: '' },
-          { value: '' },
-          { value: '' }
-        ],
-
-        newDPPValues: [
-          { value: '' },
-          { value: '' },
-          { value: '' },
-          { value: '' },
-          { value: '' },
-          { value: '' },
-          { value: '' },
-          { value: '' },
-          { value: '' },
-          { value: '' }
-        ],
-
-        newCreditValues: [
-          { value: '' },
-          { value: '' },
-          { value: '' },
-          { value: '' },
-          { value: '' },
-          { value: '' },
-          { value: '' },
-          { value: '' },
-          { value: '' },
-          { value: '' }
-        ]
       }
     }
   },
@@ -230,33 +132,34 @@ export default {
       }
     },
 
-    mixAndMatchPlanMath: function () {
+    mixAndMatchPlanMath: function ({numberOfPhones, plansArray, autopay, militaryNew, militaryOld, responderNew, responderOld, militaryResponderDiscountAmountNew, militaryResponderDiscountAmountOld, twoYearNumber, twoYearCost, basicPhoneNumber, basicPhoneCost}) {
       var localTotal = 0
-      var localNumberOfPhones = this.computedNumberOfPhones
 
-      if (localNumberOfPhones < 1) {
+      if (numberOfPhones < 1) {
         return 0
-      } else if (localNumberOfPhones > 4) {
-        localNumberOfPhones = 4
+      } else if (numberOfPhones > 5) {
+        numberOfPhones = 5
       }
 
-      for (var i = 0; i < this.mainObject.mixAndMatchPlansArray.length; i++) {
-        if (this.mainObject.autopay === true) {
-          localTotal = localTotal + (this.mainObject.mixAndMatchPlansArray[i].numberOfPhones * this.mainObject.mixAndMatchPlansArray[i][localNumberOfPhones].autopay)
-        } else if (this.mainObject.autopay === false) {
-          localTotal = localTotal + (this.mainObject.mixAndMatchPlansArray[i].numberOfPhones * this.mainObject.mixAndMatchPlansArray[i][localNumberOfPhones].noAutopay)
+      plansArray.forEach((i) => {
+        if (autopay) {
+          localTotal = localTotal + (i.numberOfPhones * i[numberOfPhones].autopay)
+        } else if (!autopay) {
+          localTotal = localTotal + (i.numberOfPhones * i[numberOfPhones].noAutopay)
         }
+      })
+
+      if (militaryNew || responderNew) {
+        localTotal = localTotal - militaryResponderDiscountAmountNew[numberOfPhones]
+      } else if (militaryOld || responderOld) {
+        localTotal = localTotal - militaryResponderDiscountAmountOld[numberOfPhones]
       }
 
-      if (this.mainObject.military === true || this.mainObject.responder === true) {
-        localTotal = localTotal - this.mainObject.militaryDiscountAmount[localNumberOfPhones]
-      }
+      localTotal = localTotal + (twoYearNumber * twoYearCost)
 
-      localTotal = localTotal + (this.mainObject.twoyear.value * this.mainObject.twoyear.cost)
+      localTotal = localTotal + (basicPhoneNumber * basicPhoneCost)
 
-      localTotal = localTotal + (this.mainObject.basic.value * this.mainObject.basic.cost)
-
-      localNumberOfPhones = 0
+      numberOfPhones = 0
 
       return localTotal
     },
@@ -268,35 +171,35 @@ export default {
 
       var localTotal = 0
 
-      for (var i = 0; i < this.mainObject.oldUnlimitedPlansArray.length; i++) {
-        if (this.mainObject.chosenPlan === this.mainObject.oldUnlimitedPlansArray[i].name) {
-          if (this.mainObject.autopay === true) {
-            localTotal = localTotal + this.mainObject.oldUnlimitedPlansArray[i].autopay
-          } else if (this.mainObject.autopay === false) {
-            localTotal = localTotal + this.mainObject.oldUnlimitedPlansArray[i].noAutopay
+      this.mainObject.oldUnlimitedPlansArray.forEach((oldUnlimitedPlan) => {
+        if (this.mainObject.chosenPlan === oldUnlimitedPlan.name) {
+          if (this.mainObject.autopay) {
+            localTotal += oldUnlimitedPlan.autopay
+          } else if (!this.mainObject.autopay) {
+            localTotal += oldUnlimitedPlan.noAutopay
           }
 
-          if (this.mainObject.military === true || this.mainObject.responder === true) {
+          if (this.mainObject.militaryNew || this.mainObject.responderNew) {
             localTotal = localTotal * 0.85
           }
         }
-      }
+      })
 
-      for (var i = 0; i < this.mainObject.tieredPlansArray.length; i++) {
-        if (this.mainObject.chosenPlan === this.mainObject.tieredPlansArray[i].name) {
+      this.mainObject.tieredPlansArray.forEach((tieredPlan) => {
+        if (this.mainObject.chosenPlan === tieredPlan.name) {
           if (this.mainObject.autopay === true) {
-            localTotal = localTotal + this.mainObject.tieredPlansArray[i].autopay
+            localTotal = localTotal + tieredPlan.autopay
           } else if (this.mainObject.autopay === false) {
-            localTotal = localTotal + this.mainObject.tieredPlansArray[i].noAutopay
+            localTotal = localTotal + tieredPlan.noAutopay
           }
 
-          if (this.mainObject.military === true || this.mainObject.responder === true) {
+          if (this.mainObject.militaryNew || this.mainObject.responderNew) {
             localTotal = localTotal * 0.85
           } else if (parseInt(this.mainObject.discount) > 0) {
             localTotal = localTotal * (0.01 * (100 - parseInt(this.mainObject.discount)))
           }
         }
-      }
+      })
 
       localTotal = localTotal + (this.mainObject.twoyear.value * this.mainObject.twoyear.cost)
 
@@ -372,7 +275,22 @@ export default {
 
     planTotal: function () {
       if (this.mainObject.chosenPlan === 'Unlimited') {
-        return this.mixAndMatchPlanMath()
+        var objectForMethod = {
+          'numberOfPhones': this.computedNumberOfPhones,
+          'plansArray': this.mainObject.mixAndMatchPlansArray,
+          'autopay': this.mainObject.autopay,
+          'militaryNew': this.mainObject.militaryNew,
+          'militaryOld': this.mainObject.militaryOld,
+          'responderNew': this.mainObject.responderNew,
+          'responderOld': this.mainObject.responderOld,
+          'militaryResponderDiscountAmountNew': this.mainObject.militaryResponderDiscountAmountNew,
+          'militaryResponderDiscountAmountOld': this.mainObject.militaryResponderDiscountAmountOld,
+          'twoYearNumber': this.mainObject.twoyear.value,
+          'twoYearCost': this.mainObject.twoyear.cost,
+          'basicPhoneNumber': this.mainObject.basic.value,
+          'basicPhoneCost': this.mainObject.basic.cost
+        }
+        return this.mixAndMatchPlanMath(objectForMethod)
       } else {
         return this.oldUnlimitedAndNewVerizonPlans()
       }
@@ -381,33 +299,51 @@ export default {
     lineAccessTotal: function () {
       var localTotal = 0
 
+      // Checks if the current plan is unlimited
       if (this.mainObject.chosenPlan === 'Unlimited') {
-        for (var i = 0; i < this.mainObject.lineAccess.length; i++) {
-          localTotal = localTotal + (this.mainObject.lineAccess[i].unlimited * this.mainObject.lineAccess[i].value)
-        }
+        // Finds out how many phones there are for the Do More and Get More plans
+        var numberOfDoMoreAndGetMorePhones = 0;
+        this.mainObject.mixAndMatchPlansArray.forEach((mixAndMatchPlan) => {
+          if (mixAndMatchPlan.name === 'Do More' || mixAndMatchPlan.name === 'Get More') {
+            numberOfDoMoreAndGetMorePhones += mixAndMatchPlan.numberOfPhones
+          }
+        })
+        // Finds out how many tablets and jetpacks there are
+        var numberOfTabletsAndJetpacks = 0;
+        this.mainObject.lineAccess.forEach((connectedDevice) => {
+          if (connectedDevice.name === 'Tablet' || connectedDevice.name === 'Jetpack') {
+            numberOfTabletsAndJetpacks += connectedDevice.value
+          }
+        })
+        // Subtracts the smaller amount between tablets + jetpacks and do more + get more multiplied it by 10 from the localTotal for the half-off line access cost
+        localTotal -= Math.min(numberOfDoMoreAndGetMorePhones, numberOfTabletsAndJetpacks) * 10
+        // Multiplies the number of connected devices by the plan cost and adds it to the localTotal variable
+        this.mainObject.lineAccess.forEach((connectedDevice) => {
+          localTotal = localTotal + (connectedDevice.unlimited * connectedDevice.value)
+        })
 
-        if (this.mainObject.military === true) {
+        if (this.mainObject.militaryNew || this.mainObject.militaryOld) {
           localTotal = localTotal * 0.85
         }
       }
 
-      for (var i = 0; i < this.mainObject.oldUnlimitedPlansArray.length; i++) {
-        if (this.mainObject.chosenPlan === this.mainObject.oldUnlimitedPlansArray[i].name) {
-          for (var i = 0; i < this.mainObject.lineAccess.length; i++) {
-            localTotal = localTotal + (this.mainObject.lineAccess[i].unlimited * this.mainObject.lineAccess[i].value)
-          }
+      this.mainObject.oldUnlimitedPlansArray.forEach((plan) => {
+        if (this.mainObject.chosenPlan === plan.name) {
+          this.mainObject.lineAccess.forEach((connectedDevice) => {
+            localTotal = localTotal + (connectedDevice.unlimited * connectedDevice.value)
+          })
           localTotal = localTotal + (this.computedNumberOfPhones * 20)
         }
-      }
+      })
 
-      for (var i = 0; i < this.mainObject.tieredPlansArray.length; i++) {
-        if (this.mainObject.chosenPlan === this.mainObject.tieredPlansArray[i].name) {
-          for (var i = 0; i < this.mainObject.lineAccess.length; i++) {
-            localTotal = localTotal + (this.mainObject.lineAccess[i].tiered * this.mainObject.lineAccess[i].value)
-          }
+      this.mainObject.tieredPlansArray.forEach((plan) => {
+        if (this.mainObject.chosenPlan === plan.name) {
+          this.mainObject.lineAccess.forEach((connectedDevice) => {
+            localTotal = localTotal + (connectedDevice.tiered * connectedDevice.value)
+          })
           localTotal = localTotal + (this.computedNumberOfPhones * 20)
         }
-      }
+      })
 
       return localTotal
     },
@@ -424,19 +360,19 @@ export default {
     dppTotal: function () {
       var localTotal = 0
 
-      for (var i = 0; i < this.mainObject.existingDPPValues.length; i++) {
-        if (isNaN(parseInt(this.mainObject.existingDPPValues[i].value))) {
+      this.mainObject.existingDPPValues.forEach((existingDPP) => {
+        if (isNaN(parseInt(existingDPP.value))) {
         } else {
-          localTotal = localTotal + this.mainObject.existingDPPValues[i].value
+          localTotal = localTotal + existingDPP.value
         }
-      }
+      })
 
-      for (var i = 0; i < this.mainObject.existingCreditValues.length; i++) {
-        if (isNaN(parseInt(this.mainObject.existingCreditValues[i].value))) {
+      this.mainObject.existingCreditValues.forEach((existingCredit) => {
+        if (isNaN(parseInt(existingCredit.value))) {
         } else {
-          localTotal = localTotal - this.mainObject.existingCreditValues[i].value
+          localTotal = localTotal - existingCredit.value
         }
-      }
+      })
 
       return localTotal
     },
@@ -445,17 +381,17 @@ export default {
       var localTotal = 0
 
       if (this.mainObject.chosenPlan === 'Unlimited') {
-        for (var i = 0; i < this.mainObject.mixAndMatchPlansArray.length; i++) {
-          localTotal = localTotal + this.mainObject.mixAndMatchPlansArray[i].numberOfPhones
-        }
-
+        this.mainObject.mixAndMatchPlansArray.forEach((mixAndMatchPlan) => {
+          localTotal = localTotal + mixAndMatchPlan.numberOfPhones
+        })
         this.mainObject.numberOfPhones = 0
-      } else if (this.mainObject.chosenPlan !== 'Unlimited') {
-        for (var i = 0; i < this.mainObject.mixAndMatchPlansArray.length; i++) {
-          this.mainObject.mixAndMatchPlansArray[i].numberOfPhones = 0
-        }
 
+      } else if (this.mainObject.chosenPlan !== 'Unlimited') {
+        this.mainObject.mixAndMatchPlansArray.forEach((mixAndMatchPlan) => {
+          mixAndMatchPlan.numberOfPhones = 0
+        })
         localTotal = this.mainObject.numberOfPhones
+
       }
 
       if (localTotal == null) {
@@ -471,6 +407,7 @@ export default {
 
 <style lang="less" scoped>
 @titleBarBlue: rgba(31,89,110,.75);
+@newBlue: rgba(31,89,110);
 @oldSectionGreen: #387A77;
 
 .display-none {
@@ -489,7 +426,7 @@ export default {
 
 .mainContent {
     display: grid;
-    margin: 5% 3%;
+    margin: 2%;
     background-color: rgba(255,255,255,.9);
     grid-template-rows: 10% 10% 80%;
     border-radius: 5px;

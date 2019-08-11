@@ -8,14 +8,14 @@
         </select>
     </div>
     <span>Number of Phones (exclude $30 basic phones)</span>
-    <div class="input" v-bind:class="[ value.chosenPlan === 'Unlimited' ? 'fourColumns' : 'threeColumns' ]">
-        <div v-bind:class="[ value.chosenPlan === 'Unlimited' ? 'hidden' : 'twoColumns middle' ]">
+    <div class="input" :class="[ isUnlimited ? 'fiveColumns' : 'threeColumns' ]">
+        <div v-if="!isUnlimited" class='twoColumns middle'>
             <div>Number of Phones</div>
             <select v-model="value.numberOfPhones">
                 <option v-for="i in 11">{{i - 1}}</option>
             </select>
         </div>
-        <div v-bind:class="[ value.chosenPlan === 'Unlimited' ? 'twoColumns' : 'hidden' ]" v-for="i in value.mixAndMatchPlansArray">
+        <div v-if="isUnlimited" class='twoColumns' v-for="i in value.mixAndMatchPlansArray">
             <div>{{i.name}}</div>
             <select v-model.number="i.numberOfPhones">
                 <option v-for="i in 11">{{i - 1}}</option>
@@ -24,23 +24,43 @@
     </div>
     <span>Discounts</span>
     <div class="input eightColumns">
-        <div>Autopay?</div>
-        <label class="switch">
+        <div :class="{'twoRows': isUnlimited}">Autopay?</div>
+        <label class="switch" :class="{'twoRows': isUnlimited}">
             <input type="checkbox" v-model="value.autopay">
             <span class="slider"></span>
         </label>
-        <div>Military Discount</div>
-        <label class="switch">
-            <input type="checkbox" v-model="value.military">
+        <div v-if="isUnlimited">Military Discount (after 8/5/19)</div>
+        <label v-if="isUnlimited" class="switch">
+            <input type="checkbox" v-model="value.militaryNew" @change="value.militaryOld = false, value.responderNew = false, value.responderOld = false">
             <span class="slider"></span>
         </label>
-        <div>First Responder Discount</div>
-        <label class="switch">
-            <input type="checkbox"v-model="value.responder">
+        <div v-if="isUnlimited">First Responder Discount (after 8/5/19)</div>
+        <label v-if="isUnlimited" class="switch">
+            <input type="checkbox" v-model="value.responderNew" @change="value.responderOld = false, value.militaryNew = false, value.militaryOld = false">
             <span class="slider"></span>
         </label>
-        <div>Other Discount</div>
-        <select v-model="value.discount">
+        <div v-if="isUnlimited">Military Discount (before 8/5/19)</div>
+        <label v-if="isUnlimited" class="switch">
+            <input type="checkbox" v-model="value.militaryOld" @change="value.militaryNew = false, value.responderNew = false, value.responderOld = false">
+            <span class="slider"></span>
+        </label>
+        <div v-if="isUnlimited">First Responder Discount (before 8/5/19)</div>
+        <label v-if="isUnlimited" class="switch">
+            <input type="checkbox" v-model="value.responderOld" @change="value.responderNew = false, value.militaryNew = false, value.militaryOld = false">
+            <span class="slider"></span>
+        </label>
+        <div v-if="!isUnlimited">Military Discount</div>
+        <label v-if="!isUnlimited" class="switch">
+            <input type="checkbox" v-model="value.militaryNew" @change="value.responderNew = false">
+            <span class="slider"></span>
+        </label>
+        <div v-if="!isUnlimited">First Responder Discount</div>
+        <label v-if="!isUnlimited" class="switch">
+            <input type="checkbox" v-model="value.responderNew" @change="value.militaryNew = false">
+            <span class="slider"></span>
+        </label>
+        <div :class="{'otherDiscountLabel': isUnlimited}">Other Discount</div>
+        <select :class="{'otherDiscountDropdown': isUnlimited}" v-model="value.discount">
             <option v-for="i in 31">{{i - 1}}%</option>
         </select>
     </div>
@@ -85,6 +105,14 @@ export default {
 
     oldUnlimitedPlansArrayReversed: function() {
         return this.value.oldUnlimitedPlansArray.slice().reverse();
+    },
+
+    isUnlimited: function() {
+      if (this.value.chosenPlan === 'Unlimited') {
+        return true
+      } else {
+        return false
+      }
     }
   }
 }
@@ -127,6 +155,18 @@ export default {
   grid-area: 1 / 2 / 2 / 3;
 }
 
+.twoRows {
+  grid-row: 1 / 3; 
+}
+
+.otherDiscountLabel {
+  grid-area: 1 / 7 / 3 / 8; 
+}
+
+.otherDiscountDropdown {
+  grid-area: 1 / 8 / 3 / 9; 
+}
+
 .twoColumns {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -140,6 +180,14 @@ export default {
 
 .fourColumns {
   grid-template-columns: repeat(4, 1fr);
+}
+
+.fiveColumns {
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.fiveColumns :nth-child(5) {
+  grid-area: 1 / 5 / 3 / 6;
 }
 
 .eightColumns {
