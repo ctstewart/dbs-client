@@ -95,10 +95,10 @@ export default {
 
         lineAccess,
 
-        existingDPPValues: Array.from({ length:10 }, () => ({ value: '' })),
-        existingCreditValues: Array.from({ length:10 }, () => ({ value: '' })),
-        newDPPValues: Array.from({ length:10 }, () => ({ value: '' })),
-        newCreditValues: Array.from({ length:10 }, () => ({ value: '' }))
+        existingDPPValues: Array.from({ length: 10 }, () => ({ value: '' })),
+        existingCreditValues: Array.from({ length: 10 }, () => ({ value: '' })),
+        newDPPValues: Array.from({ length: 10 }, () => ({ value: '' })),
+        newCreditValues: Array.from({ length: 10 }, () => ({ value: '' }))
 
       }
     }
