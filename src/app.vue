@@ -49,22 +49,23 @@ export default {
             })
             .catch((error) => {
               console.log('check token failed')
-              localStorage.removeItem('jwtoken')
+              localStorage.clear()
               this.currentPage = 'PageLogin'
             })
           }, 300000)
         })
         .catch((error) => {
-          localStorage.removeItem('jwtoken')
+          localStorage.clear()
           this.currentPage = 'PageLogin'
         })
       } catch (e) {
         // SHOULD I BE USING LOCALSTORAGE.CLEAR() INSTEAD?
         // SHOULD I REFRESH THE TOKEN SILENTLY UNLESS THE BROWSER IS CLOSED?
-        localStorage.removeItem('jwtoken')
+        localStorage.clear()
         this.currentPage = 'PageLogin'
       }
     } else {
+      localStorage.clear()
       this.currentPage = 'PageLogin'
     }
   }
