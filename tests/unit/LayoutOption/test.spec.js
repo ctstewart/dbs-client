@@ -1,7 +1,7 @@
 import { expect } from 'chai'
 import { mount } from '@vue/test-utils'
 import LayoutOption from '@/components/layout/LayoutOption'
-import LocalStorageMock from './LocalStorageMock'
+import LocalStorageMock from '../LocalStorageMock'
 global.localStorage = new LocalStorageMock()
 
 describe('LayoutOption', () => {
