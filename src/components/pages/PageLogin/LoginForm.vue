@@ -31,6 +31,8 @@ export default {
             })
             .then((response) => {
                 this.saveTokenToLocalStorage(response.data.token)
+                const parsed = JSON.stringify(this.email)
+                localStorage.setItem('email', parsed)
                 this.$emit('change-page', 'PageBenefitSheet')
             })
             .catch((error) => {
