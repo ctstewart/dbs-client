@@ -1,6 +1,6 @@
 <template>
 <div class="sidebar">
-  <div class="username"><img src="@/assets/tempUserIcon.png"><br>cstewart@wirelessworldus.com</div>
+  <div class="username"><img src="@/assets/tempUserIcon.png"><br>{{email}}</div>
   <button @click="$emit('change-page', 'PageBenefitSheet')" :class="[ currentPage === 'PageBenefitSheet' ? 'activeButton' : '' ]" type="button">Benefit Sheet</button>
   <button @click="$emit('change-page', 'PageOption1')" :class="[ currentPage === 'PageOption1' ? 'activeButton' : '' ]" type="button">Option 1</button>
   <button @click="$emit('change-page', 'PageOption2')" :class="[ currentPage === 'PageOption2' ? 'activeButton' : '' ]" type="button">Option 2</button>
@@ -17,9 +17,25 @@ export default {
   name: 'Layoutsidebar',
   props: ['version', 'currentPage'],
 
+  data() {
+    return {
+      email: ''
+    }
+  },
+
+  created() {
+    if (localStorage.getItem('email')) {
+      try {
+        this.email = JSON.parse(localStorage.getItem('email'))
+      } catch (e) {
+        localStorage.removeItem('email')
+      }
+    }
+  },
+
   methods: {
     logout: function () {
-      localStorage.removeItem('jwtoken')
+      localStorage.clear()
       this.$emit('change-page', 'PageLogin')
     }
   }
