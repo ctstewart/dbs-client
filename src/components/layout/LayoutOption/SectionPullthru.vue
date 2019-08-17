@@ -64,9 +64,14 @@ export default {
 }
 
 .pullthruColumn div {
+    display: -ms-grid;
     display: grid;
     grid-template-columns: 40% 20% 20% 20%;
+    -ms-grid-row-align: center;
+    -ms-grid-column-align: center;
     place-items: center;
+    align-items: center;
+    justify-items: center;
 }
 
 .pullthruColumn i:hover {

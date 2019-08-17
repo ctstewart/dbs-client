@@ -52,12 +52,17 @@ export default {
 
 <style>
 .loginFormDiv {
+    display: -ms-grid;
     display: grid;
     background-color: rgba(255,255,255,.8);
     width: 50%;
     height: 50%;
     margin: 0 auto;
+    -ms-grid-row-align: center;
+    -ms-grid-column-align: center;
     place-self: center;
+    align-self: center;
+    justify-self: center;
     border-radius: 5px;
     grid-template-rows: 15% 15% 15% 15% 40%;
     justify-items: center;

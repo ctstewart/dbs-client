@@ -8,7 +8,7 @@
       </div>
       <p>Benefit Sheet<p>
       <div class="clearButton">
-        <i class="far fa-trash-alt fa-2x" v-on:click=""></i>
+        <i class="far fa-trash-alt fa-2x"></i>
       </div>
     </div>
     <section-benefits></section-benefits>
@@ -197,10 +197,6 @@ img {
 
 .clearButton {
   grid-template-columns: 70% 30%;
-}
-
-.fa-copy {
-  /* grid-area: 1 / 2 / 2 / 3; */
 }
 
 .fa-trash-alt {
@@ -411,9 +407,6 @@ and (orientation : landscape)
     text-align: center;
     border-bottom: 1px solid black;
     font-weight: bold;
-  }
-
-  .breakdown > div:nth-child(4) > div {
   }
 
   .costs {

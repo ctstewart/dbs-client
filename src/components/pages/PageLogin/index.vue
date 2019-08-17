@@ -26,6 +26,7 @@ export default {
 <style>
 .loginContainer {
   height: 100%;
+  display: -ms-grid;
   display: grid;
 }
 </style>

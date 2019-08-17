@@ -9,7 +9,8 @@
         </div>
     </div>
     <div class="dppColumn">
-        <div>
+        Coming Soon: Pricing and Ordering Sheet
+<!--         <div>
             <select v-for="(i, index) in localValue.newDPPValues" v-model="localValue.newDPPValues">
                 <option>New DPP</option>
                 <option v-for="(phone, index) in temporaryTestingInaccuratePhonePriceArray" v-bind:value="phone.fullRetail">{{phone.phoneName}}</option>
@@ -18,7 +19,7 @@
         <div>
             <input v-for="(i, index) in localValue.newCreditValues" type='tel' pattern="[0-9]*" step='0.01' placeholder="New Credits" v-model.number="i.value">
         </div>
-    </div>
+ -->    </div>
 </div>
 </template>
 
@@ -83,9 +84,14 @@ export default {
 
 .dppColumn div {
     margin: 0 5px;
+    display: -ms-grid;
     display: grid;
     grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    -ms-grid-row-align: center;
+    -ms-grid-column-align: center;
     place-items: center;
+    align-items: center;
+    justify-items: center;
 }
 
 .dpp input, select {

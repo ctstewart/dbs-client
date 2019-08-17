@@ -63,10 +63,15 @@ export default {
 }
 
 .costs > div {
+    display: -ms-grid;
     display: grid;
     grid-template-columns: 2fr 1fr 2fr;
     grid-template-rows: 1fr 1fr;
+    -ms-grid-row-align: center;
+    -ms-grid-column-align: center;
     place-items: center;
+    align-items: center;
+    justify-items: center;
     font-weight: bold;
     margin: 0;
 }
