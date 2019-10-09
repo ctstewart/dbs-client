@@ -17,13 +17,13 @@ export default {
   },
   data: function () {
     return {
-      currentPage: '',
+      currentPage: 'PageOption1',
       jwtoken: ''
     }
   },
 
   created () {
-    if (localStorage.getItem('jwtoken')) {
+    /* if (localStorage.getItem('jwtoken')) {
       try {
         this.jwtoken = JSON.parse(localStorage.getItem('jwtoken'))
         axios({
@@ -67,7 +67,7 @@ export default {
     } else {
       localStorage.clear()
       this.currentPage = 'PageLogin'
-    }
+    } */
   }
 }
 </script>
