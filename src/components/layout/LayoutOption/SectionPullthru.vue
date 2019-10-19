@@ -1,37 +1,40 @@
 <template>
 <div class="main pullthru">
     <div class="pullthruColumn">
-        <div v-for="i in localValue.lineAccess.slice(0,4)">
-            <p id="textAlignRight">{{i.name}}:</p>
-            <i class="fa fa-minus-circle fa-lg" aria-hidden="true" v-on:click="i.value--"></i>
+        <div v-for="i in connectedDevices.slice(0,4)" :key="i.id">
+            <p id="textAlignRight">{{i.id}}:</p>
+            <i class="fa fa-minus-circle fa-lg" aria-hidden="true" @click="decrementConnectedDevice(i.id)"></i>
             <p>{{i.value}}</p>
-            <i class="fa fa-plus-circle fa-lg" aria-hidden="true" v-on:click="i.value++"></i>
+            <i class="fa fa-plus-circle fa-lg" aria-hidden="true" @click="incrementConnectedDevice(i.id)"></i>
         </div>
     </div>
     <div class="pullthruColumn">
-        <div v-for="i in localValue.lineAccess.slice(4,8)">
-            <p id="textAlignRight">{{i.name}}:</p>
-            <i class="fa fa-minus-circle fa-lg" aria-hidden="true" v-on:click="i.value--"></i>
+        <div v-for="i in connectedDevices.slice(4,8)" :key="i.id">
+            <p id="textAlignRight">{{i.id}}:</p>
+            <i class="fa fa-minus-circle fa-lg" aria-hidden="true" @click="decrementConnectedDevice(i.id)"></i>
             <p>{{i.value}}</p>
-            <i class="fa fa-plus-circle fa-lg" aria-hidden="true" v-on:click="i.value++"></i>
+            <i class="fa fa-plus-circle fa-lg" aria-hidden="true" @click="decrementConnectedDevice(i.id)"></i>
         </div>
     </div>
 </div>
 </template>
 
 <script>
+import { mapState, mapMutations } from 'vuex'
+
 export default {
-  props: ['value'],
-  computed: {
-    localValue: {
-      get () {
-        return this.value
-      },
-      set (value) {
-        this.$emit('input', value)
-      }
+    name: 'SectionPullthru',
+    computed: {
+        ...mapState([
+            'connectedDevices'
+        ])
+    },
+    methods: {
+        ...mapMutations([
+            'incrementConnectedDevice',
+            'decrementConnectedDevice'
+        ])
     }
-  }
 }
 </script>
 

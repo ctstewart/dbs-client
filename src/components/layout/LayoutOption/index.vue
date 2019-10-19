@@ -33,7 +33,7 @@
 <script>
 import LayoutSidebar from '@/components/layout/LayoutSidebar'
 import SectionPlan from './SectionPlan'
-// import SectionPullthru from './SectionPullthru'
+import SectionPullthru from './SectionPullthru'
 // import SectionDpp from './SectionDpp'
 
 // import { mixAndMatch, oldUnlimitedPlans, tieredPlans, lineAccess } from '@/externalData/plans'
@@ -42,7 +42,7 @@ export default {
   name: 'LayoutOption',
   props: ['version', 'whichOption', 'whichOptionObject', 'whichOptionComputed', 'currentPage'],
   components: {
-    LayoutSidebar, SectionPlan//, SectionPullthru, SectionDpp
+    LayoutSidebar, SectionPlan, SectionPullthru//, SectionDpp
   },
   data() {
     return {

@@ -7,7 +7,7 @@ const state = {
     tieredPlans: plans.tieredPlans,
     twoyear: 0,
     basic: 0,
-    lineAccess: plans.lineAccess,
+    connectedDevices: plans.connectedDevices,
     autopay: false,
     militaryNew: false,
     militaryOld: false,
