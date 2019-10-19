@@ -1,6 +1,6 @@
 <template>
 <div class="main plan">
-    <plan-dropdown />
+    <plan-dropdown/>
 <!--     <div class="dropdownAndButtons">
         <select id="planDropdown" @change="setChosenPlan($event.target.value)">
             <option>Unlimited</option>
@@ -9,7 +9,7 @@
         </select>
     </div> -->
     <span>Number of Phones (exclude $30 basic phones)</span>
-    <div v-if="!isUnlimited" class="input threeColumns">
+<!--     <div v-if="!isUnlimited" class="input threeColumns">
         <div class='twoColumns middle'>
             <div>Number of Phones</div>
             <select>
@@ -24,7 +24,8 @@
                 <option v-for="i in 11" :key="i">{{i - 1}}</option>
             </select>
         </div>
-    </div>
+    </div> -->
+    <number-of-phones/>
     <span>Discounts</span>
     <div class="input eightColumns">
 <!--         <div :class="{'twoRows': isUnlimited}">Autopay?</div>
@@ -91,11 +92,12 @@
 
 <script>
 import PlanDropdown from './PlanDropdown'
+import NumberOfPhones from './NumberOfPhones'
 import { mapState, mapGetters, mapMutations } from 'vuex'
 
 export default {
     name: 'SectionPage',
-    components: { PlanDropdown },
+    components: { PlanDropdown, NumberOfPhones },
     computed: {
         ...mapState([
             'chosenPlan',
@@ -126,7 +128,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 .plan {
   display: grid;
 }

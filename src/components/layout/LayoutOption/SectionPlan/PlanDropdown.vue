@@ -1,6 +1,6 @@
 <template>
 <div class="dropdownAndButtons">
-    <select id="planDropdown" @change="setChosenPlan($event.target.value)">
+    <select id="planDropdown" @change="mutate({property: 'chosenPlan', with: $event.target.value})">
         <option>Unlimited</option>
         <option v-for="i in oldUnlimitedPlans" :key="i.id">{{i.id}}</option>
         <option v-for="i in tieredPlans" :key="i.id">{{i.id}}</option>
@@ -22,7 +22,8 @@ export default {
     },
     methods: {
         ...mapMutations([
-            'setChosenPlan'
+            'setChosenPlan',
+            'mutate'
         ])
     },
 }
