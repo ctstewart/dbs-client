@@ -17,7 +17,6 @@ const state = {
     numberOfPhonesTieredAndOldUnlimited: 0,
     numberOfNewDevices: 0,
     tmp: '$0',
-    tmpConvertedFromString: 0,
     existingDPPValues: Array.from({ length: 10 }, () => ({ value: '' })),
     existingCreditValues: Array.from({ length: 10 }, () => ({ value: '' })),
     newDPPValues: Array.from({ length: 10 }, () => ({ value: '' })),

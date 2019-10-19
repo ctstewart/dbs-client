@@ -2,55 +2,32 @@
 <div class="main dpp">
     <div class="dppColumn">
         <div>
-            <input v-for="(i, index) in localValue.existingDPPValues" type='tel' pattern="[0-9]*" step='0.01' placeholder="Existing DPP" v-model.number="i.value">
+            <input v-for="(i, index) in existingDPPValues" :key="index" type='tel' pattern="[0-9]*" step='0.01' placeholder="Existing DPP" :value="i.value" @change="mutateExistingDpp({index, value: $event.target.value})">
         </div>
         <div>
-            <input v-for="(i, index) in localValue.existingCreditValues" type='tel' pattern="[0-9]*" step='0.01' placeholder="Existing Credits" v-model.number="i.value">
+            <input v-for="(i, index) in existingCreditValues" :key="index" type='tel' pattern="[0-9]*" step='0.01' placeholder="Existing Credits" :value="i.value" @change="mutateExistingCredits({index, value: $event.target.value})">
         </div>
     </div>
-    <div class="dppColumn">
-        Coming Soon: Pricing and Ordering Sheet
-<!--         <div>
-            <select v-for="(i, index) in localValue.newDPPValues" v-model="localValue.newDPPValues">
-                <option>New DPP</option>
-                <option v-for="(phone, index) in temporaryTestingInaccuratePhonePriceArray" v-bind:value="phone.fullRetail">{{phone.phoneName}}</option>
-            </select>
-        </div>
-        <div>
-            <input v-for="(i, index) in localValue.newCreditValues" type='tel' pattern="[0-9]*" step='0.01' placeholder="New Credits" v-model.number="i.value">
-        </div>
- -->    </div>
+    <div class="dppColumn">Coming Soon: Pricing and Ordering Sheet</div>
 </div>
 </template>
 
 <script>
+import { mapState, mapMutations } from 'vuex'
+
 export default {
     name: 'SectionDpp',
-
-    props: ['value'],
-
-    data: function () {
-        return {
-            temporaryTestingInaccuratePhonePriceArray: [
-                { phoneName: 'iPhone 8.5', fullRetail: 700 },
-                { phoneName: 'iPhone 9', fullRetail: 800 },
-                { phoneName: 'iPhone 9 & 3/4', fullRetail: 934 },
-                { phoneName: 'One phone to rule them all', fullRetail: 1000 },
-                { phoneName: 'A fake phone', fullRetail: 24 },
-                { phoneName: 'Not a grand', fullRetail: 500 }
-            ]
-        }
-    },
-
     computed: {
-        localValue: {
-            get () {
-                return this.value
-            },
-            set (value) {
-                this.$emit('input', value)
-            }
-        }
+        ...mapState([
+            'existingDPPValues',
+            'existingCreditValues'
+        ])
+    },
+    methods: {
+        ...mapMutations([
+            'mutateExistingDpp',
+            'mutateExistingCredits'
+        ])
     }
 }
 </script>

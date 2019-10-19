@@ -7,22 +7,27 @@ const toggle = ((state, property) => {
 })
 
 const setMixAndMatchPlans = ((state, payload) => {
-    const foundIndex = state.mixAndMatchPlans.plans.map((plan) => { return plan.id }).indexOf(payload.id)
-    state.mixAndMatchPlans.plans[foundIndex].numberOfPhones = payload.value
+    state.mixAndMatchPlans.plans[payload.index].numberOfPhones = payload.value
 })
 
-const incrementConnectedDevice = ((state, id) => {
-    const foundIndex = state.connectedDevices.map((connectedDevice) => {return connectedDevice.id}).indexOf(id)
-    if (state.connectedDevices[foundIndex].value < 25) {
-        state.connectedDevices[foundIndex].value++
+const incrementConnectedDevice = ((state, index) => {
+    if (state.connectedDevices[index].value < 25) {
+        state.connectedDevices[index].value++
     }
 })
 
-const decrementConnectedDevice = ((state, id) => {
-    const foundIndex = state.connectedDevices.map((connectedDevice) => {return connectedDevice.id}).indexOf(id)
-    if (state.connectedDevices[foundIndex].value > 0) {
-        state.connectedDevices[foundIndex].value--
+const decrementConnectedDevice = ((state, index) => {
+    if (state.connectedDevices[index].value > 0) {
+        state.connectedDevices[index].value--
     }
+})
+
+const mutateExistingDpp = ((state, payload) => {
+    state.existingDPPValues[payload.index].value = payload.value
+})
+
+const mutateExistingCredits = ((state, payload) => {
+    state.existingCreditValues[payload.index].value = payload.value
 })
 
 export {
@@ -30,5 +35,7 @@ export {
     toggle,
     setMixAndMatchPlans,
     incrementConnectedDevice,
-    decrementConnectedDevice
+    decrementConnectedDevice,
+    mutateExistingDpp,
+    mutateExistingCredits
 }

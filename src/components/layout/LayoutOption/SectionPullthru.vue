@@ -1,19 +1,19 @@
 <template>
 <div class="main pullthru">
     <div class="pullthruColumn">
-        <div v-for="i in connectedDevices.slice(0,4)" :key="i.id">
+        <div v-for="(i, index) in connectedDevices.slice(0,4)" :key="i.id">
             <p id="textAlignRight">{{i.id}}:</p>
-            <i class="fa fa-minus-circle fa-lg" aria-hidden="true" @click="decrementConnectedDevice(i.id)"></i>
+            <i class="fa fa-minus-circle fa-lg" aria-hidden="true" @click="decrementConnectedDevice(index)"></i>
             <p>{{i.value}}</p>
-            <i class="fa fa-plus-circle fa-lg" aria-hidden="true" @click="incrementConnectedDevice(i.id)"></i>
+            <i class="fa fa-plus-circle fa-lg" aria-hidden="true" @click="incrementConnectedDevice(index)"></i>
         </div>
     </div>
     <div class="pullthruColumn">
-        <div v-for="i in connectedDevices.slice(4,8)" :key="i.id">
+        <div v-for="(i, index) in connectedDevices.slice(4,8)" :key="i.id">
             <p id="textAlignRight">{{i.id}}:</p>
-            <i class="fa fa-minus-circle fa-lg" aria-hidden="true" @click="decrementConnectedDevice(i.id)"></i>
+            <i class="fa fa-minus-circle fa-lg" aria-hidden="true" @click="decrementConnectedDevice(index + 4)"></i>
             <p>{{i.value}}</p>
-            <i class="fa fa-plus-circle fa-lg" aria-hidden="true" @click="decrementConnectedDevice(i.id)"></i>
+            <i class="fa fa-plus-circle fa-lg" aria-hidden="true" @click="incrementConnectedDevice(index + 4)"></i>
         </div>
     </div>
 </div>
