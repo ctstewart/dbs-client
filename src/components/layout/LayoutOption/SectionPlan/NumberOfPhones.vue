@@ -2,7 +2,7 @@
 <div v-if="!isUnlimited" class="input threeColumns">
     <div class='twoColumns middle'>
         <div>Number of Phones</div>
-        <select>
+        <select :value="numberOfPhonesTieredAndOldUnlimited" @change="mutate({property: 'numberOfPhonesTieredAndOldUnlimited', with: $event.target.value})">
             <option v-for="i in 11" :key="i">{{i - 1}}</option>
         </select>
     </div>
@@ -24,9 +24,7 @@ export default {
     name: 'NumberOfPhones',
     computed: {
         ...mapState([
-            'chosenPlan',
-            'oldUnlimitedPlans',
-            'tieredPlans'
+            'numberOfPhonesTieredAndOldUnlimited'
         ]),
         ...mapGetters([
             'isUnlimited',
@@ -35,12 +33,9 @@ export default {
     },
     methods: {
         ...mapMutations([
+            'mutate',
             'setMixAndMatchPlans'
         ])
     }
 }
 </script>
-
-<style>
-
-</style>

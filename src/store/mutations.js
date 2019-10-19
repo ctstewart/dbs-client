@@ -1,13 +1,9 @@
-const set = key => (state, val) => {
-    state[key] = val
-}
-
-const setChosenPlan = ((state, payload) => {
-    state.chosenPlan = payload
-})
-
 const mutate = ((state, payload) => {
     state[payload.property] = payload.with
+})
+
+const toggle = ((state, payload) => {
+    state[payload] = !state[payload]
 })
 
 const setMixAndMatchPlans = ((state, payload) => {
@@ -16,7 +12,7 @@ const setMixAndMatchPlans = ((state, payload) => {
 })
 
 export {
-    setChosenPlan,
     mutate,
+    toggle,
     setMixAndMatchPlans
 }

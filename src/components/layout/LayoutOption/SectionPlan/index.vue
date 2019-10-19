@@ -1,130 +1,26 @@
 <template>
 <div class="main plan">
     <plan-dropdown/>
-<!--     <div class="dropdownAndButtons">
-        <select id="planDropdown" @change="setChosenPlan($event.target.value)">
-            <option>Unlimited</option>
-            <option v-for="i in oldUnlimitedPlans" :key="i.id">{{i.id}}</option>
-            <option v-for="i in tieredPlans" :key="i.id">{{i.id}}</option>
-        </select>
-    </div> -->
     <span>Number of Phones (exclude $30 basic phones)</span>
-<!--     <div v-if="!isUnlimited" class="input threeColumns">
-        <div class='twoColumns middle'>
-            <div>Number of Phones</div>
-            <select>
-                <option v-for="i in 11" :key="i">{{i - 1}}</option>
-            </select>
-        </div>
-    </div>
-    <div v-if="isUnlimited" class="input fiveColumns">
-        <div class='twoColumns' v-for="plan in mixAndMatchNumberOfPhonesAndId" :key="plan.id">
-            <div>{{plan.id}}</div>
-            <select :value="plan.numberOfPhones" @change="setMixAndMatchPlans({id: plan.id, value: $event.target.value})">
-                <option v-for="i in 11" :key="i">{{i - 1}}</option>
-            </select>
-        </div>
-    </div> -->
     <number-of-phones/>
     <span>Discounts</span>
-    <div class="input eightColumns">
-<!--         <div :class="{'twoRows': isUnlimited}">Autopay?</div>
-        <label class="switch" :class="{'twoRows': isUnlimited}">
-            <input type="checkbox" v-model="autopay">
-            <span class="slider"></span>
-        </label>
-        <div v-if="isUnlimited">Military Discount (after 8/5/19)</div>
-        <label v-if="isUnlimited" class="switch">
-            <input type="checkbox" v-model="militaryNew" @change="militaryOld = false, responderNew = false, responderOld = false">
-            <span class="slider"></span>
-        </label>
-        <div v-if="isUnlimited">First Responder Discount (after 8/5/19)</div>
-        <label v-if="isUnlimited" class="switch">
-            <input type="checkbox" v-model="responderNew" @change="responderOld = false, militaryNew = false, militaryOld = false">
-            <span class="slider"></span>
-        </label>
-        <div v-if="isUnlimited">Military Discount (before 8/5/19)</div>
-        <label v-if="isUnlimited" class="switch">
-            <input type="checkbox" v-model="militaryOld" @change="militaryNew = false, responderNew = false, responderOld = false">
-            <span class="slider"></span>
-        </label>
-        <div v-if="isUnlimited">First Responder Discount (before 8/5/19)</div>
-        <label v-if="isUnlimited" class="switch">
-            <input type="checkbox" v-model="responderOld" @change="responderNew = false, militaryNew = false, militaryOld = false">
-            <span class="slider"></span>
-        </label>
-        <div v-if="!isUnlimited">Military Discount</div>
-        <label v-if="!isUnlimited" class="switch">
-            <input type="checkbox" v-model="militaryNew" @change="responderNew = false">
-            <span class="slider"></span>
-        </label>
-        <div v-if="!isUnlimited">First Responder Discount</div>
-        <label v-if="!isUnlimited" class="switch">
-            <input type="checkbox" v-model="responderNew" @change="militaryNew = false">
-            <span class="slider"></span>
-        </label>
-        <div :class="{'otherDiscountLabel': isUnlimited}">Other Discount</div>
-        <select :class="{'otherDiscountDropdown': isUnlimited}" v-model="discount">
-            <option v-for="i in 31">{{i - 1}}%</option>
-        </select> -->
-    </div>
+    <plan-discounts/>
     <span>TMP and Misc.</span>
-    <div class="input eightColumns">
-<!--         <div>TMP</div>
-        <select v-model="tmp">
-            <option v-for="i in 201">${{i - 1}}</option>
-        </select>
-        <div>Phones in 2 year Contracts</div>
-        <select v-model="twoyear.value">
-            <option v-for="i in 11">{{i - 1}}</option>
-        </select>
-        <div>$30 Basic Phones</div>
-        <select v-model="basic.value">
-            <option v-for="i in 11">{{i - 1}}</option>
-        </select>
-        <div>Number Of New Devices</div>
-        <select v-model="numberOfNewDevices">
-            <option v-for="i in 11">{{i - 1}}</option>
-        </select> -->
-    </div>
+    <tmp-and-misc/>
 </div>
 </template>
 
 <script>
+import { mapState, mapGetters, mapMutations } from 'vuex'
+
 import PlanDropdown from './PlanDropdown'
 import NumberOfPhones from './NumberOfPhones'
-import { mapState, mapGetters, mapMutations } from 'vuex'
+import PlanDiscounts from './PlanDiscounts'
+import TmpAndMisc from './TmpAndMisc'
 
 export default {
     name: 'SectionPage',
-    components: { PlanDropdown, NumberOfPhones },
-    computed: {
-        ...mapState([
-            'chosenPlan',
-            'oldUnlimitedPlans',
-            'tieredPlans',
-            /*'autopay',
-            'militaryNew',
-            'militaryOld',
-            'responderNew',
-            'responderOld',
-            'discount',
-            'tmp',
-            'twoyear',
-            'basic',
-            'numberOfNewDevices',*/
-        ]),
-        ...mapGetters([
-            'isUnlimited',
-            'mixAndMatchNumberOfPhonesAndId'
-        ])
-    },
-    methods: {
-        ...mapMutations([
-            'setChosenPlan',
-            'setMixAndMatchPlans',
-        ])
-    }
+    components: { PlanDropdown, NumberOfPhones, PlanDiscounts, TmpAndMisc },
 }
 </script>
 

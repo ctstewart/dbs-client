@@ -5,22 +5,16 @@ const state = {
     mixAndMatchPlans: plans.mixAndMatchPlans,
     oldUnlimitedPlans: plans.oldUnlimitedPlans,
     tieredPlans: plans.tieredPlans,
-    twoyear: {
-        value: 0,
-        cost: 20
-    },
-    basic: {
-        value: 0,
-        cost: 30
-    },
+    twoyear: 0,
+    basic: 0,
     lineAccess: plans.lineAccess,
+    autopay: false,
     militaryNew: false,
     militaryOld: false,
     responderNew: false,
     responderOld: false,
     discount: '0%',
-    numberOfPhones: 0,
-    autopay: false,
+    numberOfPhonesTieredAndOldUnlimited: 0,
     numberOfNewDevices: 0,
     tmp: '$0',
     tmpConvertedFromString: 0,
