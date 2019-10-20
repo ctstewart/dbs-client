@@ -22,8 +22,11 @@ const computedNumberOfPhones = (() => {
     return localTotal
 })
 
-const mixAndMatchPlanMath = (({numberOfPhones, plansArray, autopay, militaryNew, militaryOld, responderNew, responderOld, militaryResponderDiscountAmountNew, militaryResponderDiscountAmountOld, twoYearNumber, twoYearCost, basicPhoneNumber, basicPhoneCost}) => {
+const mixAndMatchPlanMath = (({plansArray, autopay, militaryNew, militaryOld, responderNew, responderOld, militaryResponderDiscountAmountNew, militaryResponderDiscountAmountOld, twoYearNumber, twoYearCost, basicPhoneNumber, basicPhoneCost}) => {
     var localTotal = 0
+    var numberOfPhones = plansArray.reduce((accumulator, currentValue) => {
+        return accumulator + currentValue.numberOfPhones
+    },0)
 
     if (numberOfPhones < 1) {
         return 0
@@ -134,11 +137,11 @@ const planTotal = ((state) => {
     }
 })
 
-const lineAccessTotal = ((state) => {
+const lineAccessTotal = ((state, getters) => {
     var localTotal = 0
 
     // Checks if the current plan is unlimited
-    if (state.chosenPlan === 'Unlimited') {
+    if (getters.isUnlimited) {
         // Finds out how many phones there are for the Do More and Get More plans
         var numberOfDoMoreAndGetMorePhones = 0;
         state.mixAndMatchPlans.plans.forEach((mixAndMatchPlan) => {
