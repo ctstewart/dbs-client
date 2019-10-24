@@ -83,7 +83,7 @@ var mixAndMatchPlans = {
 		}
 	],
 
-	militaryResponderDiscountNew: {
+	militaryResponderDiscountAmountNew: {
 		1: 10,
 		2: 25,
 		3: 25,
@@ -91,7 +91,7 @@ var mixAndMatchPlans = {
 		5: 20
 	},
 
-	militaryResponderDiscountOld: {
+	militaryResponderDiscountAmountOld: {
 		1: 15,
 		2: 35,
 		3: 40,

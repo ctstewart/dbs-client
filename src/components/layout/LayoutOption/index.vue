@@ -1,42 +1,39 @@
 <template>
 <div class="all">
-    <layout-sidebar v-on:change-page="$emit('change-page', $event)" v-bind:version="version" v-bind:currentPage="currentPage"></layout-sidebar>
+    <layout-sidebar v-on:change-page="$emit('change-page', $event)" v-bind:version="version" v-bind:currentPage="currentPage"/>
     <div class="mainContent">
         <div class="titleBar">
             <div class="copyButton">
                 <i v-if="whichOption === 'Option 1'" class="far fa-copy fa-2x" v-on:click="copyToOption2"></i>
             </div>
             <p>{{whichOption}}</p>
-            <div class="clearButton">
+            <div class="clearButton" @click="resetState">
                 <span></span><i class="far fa-trash-alt fa-2x"></i>
             </div>
         </div>
         <div class="navBar">
             <button
                 v-for="tab in tabs"
-                v-bind:key="tab.name"
-                v-bind:class="{ activetab: currentTab === tab.name }"
-                v-on:click="currentTab = tab.name"
-                ><p>{{ tab.label }}</p></button>
-            <div>{{ textBeforeTotal }}{{ $store.getters.total }}</div>
+                v-bind:key="tab.id"
+                v-bind:class="{ activetab: tab.active }"
+                v-on:click="navbarClick(tab.id)"
+            ><p>{{ tab.label }}</p></button>
+            <div>Total: ${{ $store.getters.total }}</div>
         </div>
         <keep-alive>
-          <component
-              :is="currentTab"
-              v-model="mainObject"
-          ></component>
+            <component :is="currentTab"/>
         </keep-alive>
     </div>
 </div>
 </template>
 
 <script>
+import { mapState, mapGetters, mapMutations } from 'vuex'
+
 import LayoutSidebar from '@/components/layout/LayoutSidebar'
 import SectionPlan from './SectionPlan'
 import SectionPullthru from './SectionPullthru'
 import SectionDpp from './SectionDpp'
-
-// import { mixAndMatch, oldUnlimitedPlans, tieredPlans, lineAccess } from '@/externalData/plans'
 
 export default {
   name: 'LayoutOption',
@@ -46,48 +43,26 @@ export default {
     return {
       currentTab: 'SectionPlan',
       tabs: [
-        { name: 'SectionPlan', label: 'Plan' },
-        { name: 'SectionPullthru', label: 'Pull Thru' },
-        { name: 'SectionDpp', label: 'DPP' }
+        { id: 'SectionPlan', label: 'Plan', active: true },
+        { id: 'SectionPullthru', label: 'Pull Thru', active: false },
+        { id: 'SectionDpp', label: 'DPP', active: false }
       ],
-      mainObject: {
-        tmp: '$0',
-        tmpConvertedFromString: 0,
-        tabsArray: [
-          { name: 'planTabActive', value: true },
-          { name: 'pullthruTabActive', value: false },
-          { name: 'dppTabActive', value: false }
-        ]
-      }
     }
-  },
-
-  mounted () {
-    /* const parsed = JSON.stringify(this.mainObject)
-    localStorage.setItem('defaultMainObject', parsed)
-
-    if (localStorage.getItem(this.whichOptionObject)) {
-      try {
-        this.mainObject = JSON.parse(localStorage.getItem(this.whichOptionObject))
-      } catch (e) {
-        localStorage.removeItem(this.whichOptionObject)
-      }
-    }
-
-    this.isLoaded = true */
   },
 
   methods: {
-
-    navbarClick(button) {
-      for (var i = 0; i < mainObject.tabsArray.length; i++) {
-        mainObject.tabsArray[i].value = false
-        if (button === mainObject.tabsArray[i].name) {
-          mainObject.tabsArray[i].value = true
+    ...mapMutations([
+      'resetState'
+    ]),
+    navbarClick(id) {
+      this.tabs.forEach((tab) => {
+        if (tab.id === id) {
+          tab.active = true
+          this.currentTab = tab.id
         } else {
-          mainObject.tabsArray[i].value = false
+          tab.active = false
         }
-      }
+      })
     },
 
     copyToOption2() {
@@ -99,61 +74,12 @@ export default {
   },
 
   computed: {
-    chosenPlan() {
-      return this.$store.chosenPlan
-    },
-
-    total() {
-      return this.$store.getters.total
-    },
-
-    textBeforeTotal() {
-      if (this.total !== 'Add Phones') {
-        return 'Total: $'
-      }
-    },
-
-    benefitSheetTotalOption1() {
-      if (this.total === 'Add Phones') {
-        return this.total
-      } else if (this.total !== 'Add Phones') {
-        return '$' + this.total + ' plus tax'
-      }
-    },
-
-    tmpTotal() {
-      var localTotal = 0
-
-      this.mainObject.tmpConvertedFromString = parseInt(this.mainObject.tmp.replace('$', ''))
-      localTotal = localTotal + this.mainObject.tmpConvertedFromString
-
-      return localTotal
-    },
-
-    dppTotal() {
-      var localTotal = 0
-
-      this.mainObject.existingDPPValues.forEach((existingDPP) => {
-        if (isNaN(parseInt(existingDPP.value))) {
-        } else {
-          localTotal = localTotal + existingDPP.value
-        }
-      })
-
-      this.mainObject.existingCreditValues.forEach((existingCredit) => {
-        if (isNaN(parseInt(existingCredit.value))) {
-        } else {
-          localTotal = localTotal - existingCredit.value
-        }
-      })
-
-      return localTotal
-    },
-
-    computedNumberOfPhones() {
-
-    }
-
+    ...mapState([
+      'chosenPlan',
+    ]),
+    ...mapGetters([
+      'total'
+    ])
   }
 }
 </script>

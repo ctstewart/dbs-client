@@ -1,3 +1,5 @@
+import defaultState from './defaultState'
+
 const mutate = ((state, payload) => {
     state[payload.property] = payload.with
 })
@@ -30,6 +32,11 @@ const mutateExistingCredits = ((state, payload) => {
     state.existingCreditValues[payload.index].value = payload.value
 })
 
+const resetState = ((state) => {
+    Object.assign(state, defaultState())
+    console.log('success')
+})
+
 export {
     mutate,
     toggle,
@@ -37,5 +44,6 @@ export {
     incrementConnectedDevice,
     decrementConnectedDevice,
     mutateExistingDpp,
-    mutateExistingCredits
+    mutateExistingCredits,
+    resetState
 }
