@@ -11,5 +11,6 @@ export const store = new Vuex.Store({
     state,
     getters,
     mutations,
+    namespaced: true,
     strict: process.env.NODE_ENV !== 'production'
 })

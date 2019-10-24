@@ -1,5 +1,5 @@
 import defaultState from './defaultState'
 
-const state = () => defaultState()
+const state = defaultState
 
 export {state}

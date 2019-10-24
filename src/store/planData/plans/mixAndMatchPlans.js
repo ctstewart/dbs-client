@@ -1,4 +1,4 @@
-var mixAndMatchPlans = {
+const mixAndMatchPlans = {
 	plans: [
 		{
 			id: 'Start',

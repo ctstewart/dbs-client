@@ -1,4 +1,4 @@
-var tieredPlans = [
+const tieredPlans = [
     { id: '24GB', autopay: 110, noAutopay: 110 },
     { id: '16GB', autopay: 90, noAutopay: 90 },
     { id: '12GB', autopay: 80, noAutopay: 80 },
