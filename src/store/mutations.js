@@ -34,7 +34,6 @@ const mutateExistingCredits = ((state, payload) => {
 
 const resetState = ((state) => {
     Object.assign(state, defaultState())
-    console.log('success')
 })
 
 export {
