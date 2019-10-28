@@ -11,7 +11,8 @@
 </template>
 
 <script>
-import { mapState, mapGetters, mapMutations } from 'vuex'
+import { createNamespacedHelpers } from 'vuex'
+const { mapState, mapGetters, mapMutations } = createNamespacedHelpers('optionsModule')
 
 import PlanDropdown from './PlanDropdown'
 import NumberOfPhones from './NumberOfPhones'

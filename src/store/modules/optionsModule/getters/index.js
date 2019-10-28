@@ -3,9 +3,11 @@ import isUnlimited from './isUnlimited'
 import planTotal from './planTotal'
 import total from './total'
 
-export {
+const getters = {
     mixAndMatchNumberOfPhonesAndId,
     isUnlimited,
     planTotal,
     total
 }
+
+export default getters

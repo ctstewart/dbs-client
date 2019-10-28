@@ -43,7 +43,8 @@
 </template>
 
 <script>
-import { mapState, mapGetters, mapMutations } from 'vuex'
+import { createNamespacedHelpers } from 'vuex'
+const { mapState, mapGetters, mapMutations } = createNamespacedHelpers('optionsModule')
 
 export default {
     name: 'PlanDiscounts',

@@ -18,7 +18,7 @@
                 v-bind:class="{ activetab: tab.active }"
                 v-on:click="navbarClick(tab.id)"
             ><p>{{ tab.label }}</p></button>
-            <div>Total: ${{ $store.getters.total }}</div>
+            <div>Total: ${{ total }}</div>
         </div>
         <keep-alive>
             <component :is="currentTab"/>
@@ -28,7 +28,8 @@
 </template>
 
 <script>
-import { mapState, mapGetters, mapMutations } from 'vuex'
+import { createNamespacedHelpers } from 'vuex'
+const { mapState, mapGetters, mapMutations } = createNamespacedHelpers('optionsModule')
 
 import LayoutSidebar from '@/components/layout/LayoutSidebar'
 import SectionPlan from './SectionPlan'
