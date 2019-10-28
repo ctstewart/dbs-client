@@ -11,13 +11,13 @@ import optionsModule from './modules/optionsModule'
 
 export const store = new Vuex.Store({
     modules: {
-        optionOneModule: {
+        optionOne: {
             namespaced: true,
             state: optionsModule.state,
             getters: optionsModule.getters,
             mutations: optionsModule.mutations
         },
-        optionTwoModule: {
+        optionTwo: {
             namespaced: true,
             state: optionsModule.state,
             getters: optionsModule.getters,
