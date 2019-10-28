@@ -1,5 +1,6 @@
 <template>
-  <component v-bind:is="currentPage" v-bind:currentPage="currentPage" v-on:change-page="currentPage = $event"></component>
+  <!-- <component v-bind:is="currentPage" v-bind:currentPage="currentPage" v-on:change-page="currentPage = $event"></component> -->
+  <router-view v-bind:is="currentPage" v-bind:currentPage="currentPage" v-on:change-page="currentPage = $event"></router-view>
 </template>
 
 <script>
