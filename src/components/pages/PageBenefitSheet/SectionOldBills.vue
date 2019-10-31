@@ -1,8 +1,8 @@
 <template>
 <div class="oldBills">
-    <input placeholder="$0.00" type="tel" pattern="[0-9]*" step="0.01" v-model="oldPhoneBill" @change="saveOldBillsToLocalStorage">
+    <input placeholder="$0.00" type="tel" pattern="[0-9]*" step="0.01" :value="oldPhoneBill" @change="mutate({property: 'oldPhoneBill', with: $event.target.value})">
     <p>+</p>
-    <input placeholder="$0.00" type="tel" pattern="[0-9]*" step="0.01" v-model="oldHomeSolution" @change="saveOldBillsToLocalStorage">
+    <input placeholder="$0.00" type="tel" pattern="[0-9]*" step="0.01" :value="oldHomeSolution" @change="mutate({property: 'oldHomeSolution', with: $event.target.value})">
     <p>=</p>
     <p>${{ oldTotal.toFixed(2) }}</p>
     <p>Old phone bill</p>
@@ -12,48 +12,24 @@
 </template>
 
 <script>
+import { createNamespacedHelpers } from 'vuex'
+const { mapState, mapGetters, mapMutations } = createNamespacedHelpers('benefitSheet')
+
 export default {
     name: 'SectionOldBills',
-    data: function () {
-        return {
-            oldPhoneBill: null,
-            oldHomeSolution: null
-        }
-    },
-
-    created () {
-        if (localStorage.getItem('oldBills')) {
-            try {
-                var localArray = []
-                localArray = JSON.parse(localStorage.getItem('oldBills'))
-                this.oldPhoneBill = localArray[0]
-                this.oldHomeSolution = localArray[1]
-            } catch (e) {
-                localStorage.removeItem('oldBills')
-            }
-        }
-    },
-
-    methods: {
-        saveOldBillsToLocalStorage: function () {
-            var localArray = [this.oldPhoneBill, this.oldHomeSolution]
-            const parsed = JSON.stringify(localArray)
-            localStorage.setItem('oldBills', parsed)
-        }
-    },
-
     computed: {
-        oldTotal: function () {
-            var localTotal = 0
-            if (this.oldPhoneBill !== null && !isNaN(parseFloat(this.oldPhoneBill))) {
-                localTotal += parseFloat(this.oldPhoneBill)
-            }
-            if (this.oldHomeSolution !== null && !isNaN(parseFloat(this.oldHomeSolution))) {
-                localTotal += parseFloat(this.oldHomeSolution)
-            }
-            this.$emit('old-total-changed', localTotal)
-            return localTotal
-        }
+        ...mapState([
+            'oldPhoneBill',
+            'oldHomeSolution'
+        ]),
+        ...mapGetters([
+            'oldTotal'
+        ])
+    },
+    methods: {
+        ...mapMutations([
+            'mutate'
+        ])
     }
 }
 </script>

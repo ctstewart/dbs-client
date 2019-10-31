@@ -1,8 +1,8 @@
 <template>
 <div class="billBreakdown">
-    <div v-for="(i, index) in optionsComputed" class="option">
+    <div v-for="i in optionsComputed" :key="i.id" class="option">
         <div class="chosenPlanLabel">
-            <p>{{ optionNames[index] }}:</p>
+            <p>{{ i.id }}:</p>
             <div>{{ i.planName }}</div>
         </div>
         <div class="breakdown">
@@ -11,16 +11,12 @@
                 <div>${{ i.planTotal.toFixed(2) }}</div>
             </div>
             <div>
-                <p>Line Access:</p>
-                <div>${{ i.lineAccessTotal.toFixed(2) }}</div>
-            </div>
-            <div>
                 <p>TMP:</p>
-                <div>${{ i.tmpTotal.toFixed(2) }}</div>
+                <div>$0.00</div>
             </div>
             <div>
                 <p>DPP:</p>
-                <div>${{ i.dppTotal.toFixed(2) }}</div>
+                <div>$0.00</div>
             </div>
             <div>
                 <p>Total:</p>
@@ -32,23 +28,28 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
     name: 'SectionBillBreakdown',
-
-    props: {
-        optionsComputed: {
-            type: Array,
-            required: true
-        }
-    },
-
-    data: function () {
-        return {
-          optionNames: [
-            'Option 1',
-            'Option 2'
+    computed: {
+      ...mapState({
+        optionsComputed (state, getters) {
+          return [
+            {
+              id: 'Option 1',
+              chosenPlan: state['optionOne'].chosenPlan,
+              planTotal: getters['optionOne/planTotal'], total: getters['optionOne/total']
+            },
+            {
+              id: 'Option 2',
+              chosenPlan: state['optionTwo'].chosenPlan,
+              planTotal: getters['optionTwo/planTotal'],
+              total: getters['optionTwo/total']
+            },
           ]
-        }
+        },
+      })
     }
 
 }
@@ -88,7 +89,7 @@ export default {
 
 .breakdown {
   display: grid;
-  grid-template-rows: repeat(5, 1fr);
+  grid-template-rows: repeat(4, 1fr);
   border: 1px solid grey;
 }
 

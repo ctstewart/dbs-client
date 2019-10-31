@@ -1,9 +1,9 @@
 <template>
 <div class="costs">
-    <div v-for="(i, index) in optionsComputed">
-        <input placeholder="$0.00" v-model="todayCost[index].amount" @change="saveTodayCostToLocalStorage">
-        <p>${{ differenceMonthly[index].toFixed(2) }}</p>
-        <p>${{ i.fees.toFixed(2) }}</p>
+    <div v-for="i in costsArray" :key="i.id">
+        <input placeholder="$0.00" :value="i.value" @change="mutate({property: i.mutate, with: $event.target.value})">
+        <p>${{ i.differenceMonthly.toFixed(2) }}</p>
+        <p>${{ i.fees * 40 }}</p>
         <p>Cost today</p>
         <p>Diff. monthly</p>
         <p>One-time fees</p>
@@ -12,44 +12,31 @@
 </template>
 
 <script>
+import { createNamespacedHelpers } from 'vuex'
+const { mapState, mapGetters, mapMutations } = createNamespacedHelpers('benefitSheet')
+
 export default {
     name: 'SectionCosts',
-
-    props: {
-        optionsComputed: {
-            type: Array,
-            required: true
-        },
-        differenceMonthly: {
-            type: Array,
-            required: true
-        }
-    },
-
-    data: function () {
-        return {
-            todayCost: [
-                {name: 'Option 1', amount: null},
-                {name: 'Option 2', amount: null}
+    computed: {
+        ...mapState([
+            'optionOneTodayCost',
+            'optionTwoTodayCost'
+        ]),
+        ...mapGetters([
+            'optionOneDifferenceMonthly',
+            'optionTwoDifferenceMonthly'
+        ]),
+        costsArray () {
+            return [
+                { id: 'Option 1', value: this.optionOneTodayCost, mutate: 'optionOneTodayCost', differenceMonthly: this.optionOneDifferenceMonthly, fees: this.$store.state['optionOne'].numberOfNewDevices },
+                { id: 'Option 2', value: this.optionTwoTodayCost, mutate: 'optionTwoTodayCost', differenceMonthly: this.optionTwoDifferenceMonthly, fees: this.$store.state['optionTwo'].numberOfNewDevices }
             ]
         }
     },
-
-    created () {
-        if (localStorage.getItem('todayCost')) {
-            try {
-                this.todayCost = JSON.parse(localStorage.getItem('todayCost'))
-            } catch (e) {
-                localStorage.removeItem('todayCost')
-            }
-        }
-    },
-
     methods: {
-        saveTodayCostToLocalStorage: function () {
-            const parsed = JSON.stringify(this.todayCost)
-            localStorage.setItem('todayCost', parsed)
-        }
+        ...mapMutations([
+            'mutate'
+        ])
     }
 }
 </script>

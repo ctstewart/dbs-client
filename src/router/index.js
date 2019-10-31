@@ -3,8 +3,7 @@ import VueRouter from 'vue-router'
 
 //import PageLogin from '../components/pages/PageLogin'
 import PageBenefitSheet from '../components/pages/PageBenefitSheet'
-import PageOption1 from '../components/pages/PageOption1'
-import PageOption2 from '../components/pages/PageOption2'
+import PageOption from '../components/pages/PageOption'
 
 Vue.use(VueRouter)
 
@@ -20,14 +19,9 @@ const routes = [
         component: PageLogin
     }, */
     {
-        path: '/option1',
-        name: 'PageOption1',
-        component: PageOption1
-    },
-    {
-        path: '/option2',
-        name: 'PageOption2',
-        component: PageOption2
+        path: '/option/:vuexModule',
+        name: 'PageOption',
+        component: PageOption
     }
 ]
 

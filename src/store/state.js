@@ -1,5 +1,7 @@
-import defaultState from './defaultState'
+const state = () => {
+    return {
+        webappVersion: '1.0'
+    }
+}
 
-const state = defaultState
-
-export {state}
+export default state

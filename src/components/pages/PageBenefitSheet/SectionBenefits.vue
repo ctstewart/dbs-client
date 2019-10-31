@@ -1,49 +1,29 @@
 <template>
 <div class="benefits">
     <p class="benefitsTitle">New Plan Benefits</p>
-    <ui-autocomplete v-for="(i, index) in benefits" :benefit="i" v-on:changeBenefit="updateBenefit(index, $event)"></ui-autocomplete>
+    <ui-autocomplete v-for="(i, index) in benefits" :key="index" :benefit="i" v-on:changeBenefit="mutateBenefits({index, value: $event})"/>
 </div>
 </template>
 
 <script>
+import { createNamespacedHelpers } from 'vuex'
+const { mapState, mapMutations } = createNamespacedHelpers('benefitSheet')
+
 import UiAutocomplete from '@/components/ui/UiAutocomplete'
 
 export default {
     name: 'SectionBenefits',
-
-    components: {
-        UiAutocomplete
+    components: { UiAutocomplete },
+    computed: {
+        ...mapState([
+            'benefits'
+        ])
     },
-
-    data: function () {
-        return {
-            benefits: ['', '', '', '', '', '']
-        }
-    },
-
-    created () {
-        if (localStorage.getItem('benefits')) {
-            try {
-                this.benefits = JSON.parse(localStorage.getItem('benefits'))
-            } catch (e) {
-                localStorage.removeItem('benefits')
-            }
-        }
-    },
-
     methods: {
-        updateBenefit: function (parentBenefitIndex, childBenefit) {
-            console.log(this.benefits)
-            this.benefits[parentBenefitIndex] = childBenefit
-            this.saveBenefitsToLocalStorage()
-            console.log(this.benefits)
-        },
-        saveBenefitsToLocalStorage: function () {
-            const parsed = JSON.stringify(this.benefits)
-            localStorage.setItem('benefits', parsed)
-        }
+        ...mapMutations([
+            'mutateBenefits'
+        ])
     }
-
 }
 </script>
 

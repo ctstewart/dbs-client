@@ -1,6 +1,6 @@
 <template>
 <div class="BSContainer">
-  <layout-sidebar v-on:change-page="$emit('change-page', $event)" v-bind:version="version" v-bind:currentPage="currentPage"></layout-sidebar>
+  <layout-sidebar/>
   <div class="mainContent" :class="[ hamburgerStyle ? 'hamburgerStyle' : 'fullStyle' ]">
     <div class="titleBar">
       <div class="copyButton">
@@ -8,18 +8,21 @@
       </div>
       <p>Benefit Sheet<p>
       <div class="clearButton">
-        <i class="far fa-trash-alt fa-2x"></i>
+        <i class="far fa-trash-alt fa-2x" @click="resetState"></i>
       </div>
     </div>
-    <section-benefits></section-benefits>
-    <section-old-bills v-on:old-total-changed="oldTotal = $event"></section-old-bills>
-    <section-bill-breakdown :optionsComputed="optionsComputed" v-show="!hamburgerStyle"></section-bill-breakdown>
-    <section-costs :optionsComputed="optionsComputed" :differenceMonthly="differenceMonthly"></section-costs>
+    <section-benefits/>
+    <section-old-bills/>
+    <section-bill-breakdown v-show="!hamburgerStyle"/>
+    <section-costs/>
   </div>
 </div>
 </template>
 
 <script>
+import { createNamespacedHelpers } from 'vuex'
+const { mapState, mapGetters, mapMutations } = createNamespacedHelpers('benefitSheet')
+
 import LayoutSidebar from '@/components/layout/LayoutSidebar'
 import SectionBenefits from './SectionBenefits'
 import SectionOldBills from './SectionOldBills'
@@ -29,77 +32,16 @@ import externalData from '@/myJSON.json'
 
 export default {
   name: 'PageBenefitSheet',
-  
-  props: ['currentPage'],
-
-  components: {
-    LayoutSidebar, SectionBenefits, SectionOldBills, SectionBillBreakdown, SectionCosts
-  },
-
+  components: { LayoutSidebar, SectionBenefits, SectionOldBills, SectionBillBreakdown, SectionCosts },
   data: function () {
     return {
       hamburgerStyle: false,
-      version: externalData.version,
-      oldTotal: 0,
-      localStorageNames: [
-        'option1Computed',
-        'option2Computed'
-      ],
-      optionsComputed: [
-        {
-          "name": 'Option 1',
-          "planName": '',
-          "planTotal": 0,
-          "lineAccessTotal": 0,
-          "tmpTotal": 0,
-          "dppTotal": 0,
-          "total": 0,
-          "fees": 0
-        },
-        {
-          "name": 'Option 2',
-          "planName": '',
-          "planTotal": 0,
-          "lineAccessTotal": 0,
-          "tmpTotal": 0,
-          "dppTotal": 0,
-          "total": 0,
-          "fees": 0
-        }
-      ]
     }
   },
-
-  created () {
-    for (var i=0; i < this.localStorageNames.length; i++) {
-      if (localStorage.getItem(this.localStorageNames[i])) {
-        try {
-          this.optionsComputed[i] = JSON.parse(localStorage.getItem(this.localStorageNames[i]))
-        } catch (e) {
-          localStorage.removeItem(this.localStorageNames[i])
-        }
-      }
-    }
-    this.$nextTick(() => {
-      if (localStorage.getItem('benefitSheet')) {
-        try {
-            this.benefitSheet = JSON.parse(localStorage.getItem('benefitSheet'))
-        } catch (e) {
-          localStorage.removeItem('benefitSheet')
-        }
-        console.log(this.benefitSheet.benefits)
-      }
-    })
-  },
-
-  computed: {
-    differenceMonthly: function () {
-      var localArray = [0, 0]
-      for (var i=0; i < localArray.length; i++) {
-        localArray[i] = this.optionsComputed[i].total - this.oldTotal
-      }
-      return localArray
-    }
+  methods: {
+    ...mapMutations([
+      'resetState'
+    ])
   }
 }
 </script>
