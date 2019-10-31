@@ -9,5 +9,6 @@ module.exports = {
     port: process.env.DEV_SERVER_PORT,
     public: process.env.DEV_SERVER_PUBLIC,
     proxy: process.env.API_URL
-  }
+  },
+  transpileDependencies: ['vuex-persist']
 }
