@@ -1,9 +1,9 @@
 <template>
 <div class="sidebar">
   <div class="username"><img src="@/assets/tempUserIcon.png"><br>{{email}}</div>
-  <button @click="$emit('change-page', 'PageBenefitSheet')" :class="[ currentPage === 'PageBenefitSheet' ? 'activeButton' : '' ]" type="button">Benefit Sheet</button>
-  <button @click="$emit('change-page', 'PageOption1')" :class="[ currentPage === 'PageOption1' ? 'activeButton' : '' ]" type="button">Option 1</button>
-  <button @click="$emit('change-page', 'PageOption2')" :class="[ currentPage === 'PageOption2' ? 'activeButton' : '' ]" type="button">Option 2</button>
+  <router-link to="/" class="router-link">Benefit Sheet</router-link>
+  <router-link to="/option/optionOne" class="router-link">Option 1</router-link>
+  <router-link to="/option/optionTwo" class="router-link">Option 2</router-link>
   <!-- <button @click="logout" type="button">Logout</button> -->
   <div class="versionAndLogout">
     <a class="logout" @click="logout">Logout</a>
@@ -15,11 +15,10 @@
 <script>
 export default {
   name: 'Layoutsidebar',
-  props: ['version', 'currentPage'],
-
   data() {
     return {
-      email: ''
+      email: '',
+      version: 3
     }
   },
 
@@ -61,7 +60,23 @@ export default {
   outline: none;
 }
 
-.activeButton {
+.router-link {
+  color: black;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  text-decoration: none;
+  background-color: rgba(255,255,255,.8);
+  border-radius: 10px;
+  border: none;
+  margin: 4% 5%;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+  outline: none;
+}
+
+.router-link-exact-active {
   background-color: transparent !important;
   color: rgba(255,255,255,.8) !important;
   border: 1px solid rgba(255,255,255,.8) !important;
