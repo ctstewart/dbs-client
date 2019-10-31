@@ -1,24 +1,15 @@
 <template>
   <!-- <component v-bind:is="currentPage" v-bind:currentPage="currentPage" v-on:change-page="currentPage = $event"></component> -->
-  <router-view v-bind:is="currentPage" v-bind:currentPage="currentPage" v-on:change-page="currentPage = $event"></router-view>
+  <router-view/>
 </template>
 
 <script>
 import axios from 'axios'
 
-import PageLogin from '@/components/pages/PageLogin'
-import PageBenefitSheet from '@/components/pages/PageBenefitSheet'
-import PageOption1 from '@/components/pages/PageOption1'
-import PageOption2 from '@/components/pages/PageOption2'
-
 export default {
   name: 'app',
-  components: {
-    PageLogin, PageBenefitSheet, PageOption1, PageOption2
-  },
   data: function () {
     return {
-      currentPage: 'PageOption1',
       jwtoken: ''
     }
   },
