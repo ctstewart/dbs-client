@@ -2,10 +2,10 @@
 <div class="main dpp">
     <div class="dppColumn">
         <div>
-            <input v-for="(i, index) in existingDPPValues" :key="index" type='tel' pattern="[0-9]*" step='0.01' placeholder="Existing DPP" :value="i.value" @change="mutateExistingDpp({index, value: $event.target.value})">
+            <currency-input v-for="(i, index) in existingDPPValues" :key="index" type='tel' pattern="[0-9]*" step='0.01' placeholder="Existing DPP" :value="i.value" @change="mutateExistingDpp({index, value: $event.target.value})"/>
         </div>
         <div>
-            <input v-for="(i, index) in existingCreditValues" :key="index" type='tel' pattern="[0-9]*" step='0.01' placeholder="Existing Credits" :value="i.value" @change="mutateExistingCredits({index, value: $event.target.value})">
+            <currency-input v-for="(i, index) in existingCreditValues" :key="index" type='tel' pattern="[0-9]*" step='0.01' placeholder="Existing Credits" :value="i.value" @change="mutateExistingCredits({index, value: $event.target.value})"/>
         </div>
     </div>
     <div class="dppColumn">Coming Soon: Pricing and Ordering Sheet</div>

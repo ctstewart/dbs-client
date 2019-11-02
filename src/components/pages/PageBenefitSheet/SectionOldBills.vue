@@ -1,8 +1,8 @@
 <template>
 <div class="oldBills">
-    <input placeholder="$0.00" type="tel" pattern="[0-9]*" step="0.01" :value="oldPhoneBill" @change="mutate({property: 'oldPhoneBill', with: $event.target.value})">
+    <currency-input placeholder="$0.00" type="tel" pattern="[0-9]*" step="0.01" :value="oldPhoneBill" @change="mutate({property: 'oldPhoneBill', with: $event.target.value})"/>
     <p>+</p>
-    <input placeholder="$0.00" type="tel" pattern="[0-9]*" step="0.01" :value="oldHomeSolution" @change="mutate({property: 'oldHomeSolution', with: $event.target.value})">
+    <currency-input placeholder="$0.00" type="tel" pattern="[0-9]*" step="0.01" :value="oldHomeSolution" @change="mutate({property: 'oldHomeSolution', with: $event.target.value})"/>
     <p>=</p>
     <p>${{ oldTotal.toFixed(2) }}</p>
     <p>Old phone bill</p>
