@@ -39,7 +39,8 @@ export default {
             {
               id: 'Option 1',
               chosenPlan: state['optionOne'].chosenPlan,
-              planTotal: getters['optionOne/planTotal'], total: getters['optionOne/total']
+              planTotal: getters['optionOne/planTotal'],
+              total: getters['optionOne/total']
             },
             {
               id: 'Option 2',
