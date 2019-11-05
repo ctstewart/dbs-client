@@ -1,7 +1,7 @@
 <template>
 <div class="costs">
     <div v-for="i in costsArray" :key="i.id">
-        <currency-input placeholder="$0.00" :value="i.value.parseCurrency" @change="mutate({property: i.mutate, with: $event.target.value})"/>
+        <currency-input placeholder="$0.00" :value="parseFloat(i.value)" @change="mutate({property: i.mutate, with: $event.target.value})"/>
         <p>${{ i.differenceMonthly.toFixed(2) }}</p>
         <p>${{ i.fees * 40 }}</p>
         <p>Cost today</p>
@@ -28,8 +28,20 @@ export default {
         ]),
         costsArray () {
             return [
-                { id: 'Option 1', value: this.optionOneTodayCost, mutate: 'optionOneTodayCost', differenceMonthly: this.optionOneDifferenceMonthly, fees: this.$store.state['optionOne'].numberOfNewDevices },
-                { id: 'Option 2', value: this.optionTwoTodayCost, mutate: 'optionTwoTodayCost', differenceMonthly: this.optionTwoDifferenceMonthly, fees: this.$store.state['optionTwo'].numberOfNewDevices }
+                {
+                    id: 'Option 1',
+                    value: this.optionOneTodayCost,
+                    mutate: 'optionOneTodayCost',
+                    differenceMonthly: this.optionOneDifferenceMonthly,
+                    fees: this.$store.state['optionOne'].numberOfNewDevices
+                },
+                {
+                    id: 'Option 2',
+                    value: this.optionTwoTodayCost,
+                    mutate: 'optionTwoTodayCost',
+                    differenceMonthly: this.optionTwoDifferenceMonthly,
+                    fees: this.$store.state['optionTwo'].numberOfNewDevices
+                }
             ]
         }
     },

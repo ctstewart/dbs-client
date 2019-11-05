@@ -138,10 +138,10 @@ const defaultState = () => {
         numberOfPhonesTieredAndOldUnlimited: 0,
         numberOfNewDevices: 0,
         tmp: '$0',
-        existingDPPValues: Array.from({ length: 10 }, () => ({ value: 0 })),
-        existingCreditValues: Array.from({ length: 10 }, () => ({ value: 0 })),
-        newDPPValues: Array.from({ length: 10 }, () => ({ value: 0 })),
-        newCreditValues: Array.from({ length: 10 }, () => ({ value: 0 }))
+        existingDPPValues: Array.from({ length: 9 }, () => ({ value: 0 })),
+        existingCreditValues: Array.from({ length: 9 }, () => ({ value: 0 })),
+        newDPPValues: Array.from({ length: 9 }, () => ({ value: 0 })),
+        newCreditValues: Array.from({ length: 9 }, () => ({ value: 0 }))
     }
 }
 

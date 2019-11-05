@@ -2,10 +2,12 @@
 <div class="main dpp">
     <div class="dppColumn">
         <div>
-            <currency-input v-for="(i, index) in existingDPPValues" :key="index" placeholder="Existing DPP" :value="i.value.parseCurrency" @change="mutateExistingDpp({index, value: $event.target.value})"/>
+            <span>DPP</span>
+            <currency-input v-for="(i, index) in existingDPPValues" :key="index" placeholder="Existing DPP" :value="parseFloat(i.value)" @change="mutateExistingDpp({index, value: $event.target.value})"/>
         </div>
         <div>
-            <currency-input v-for="(i, index) in existingCreditValues" :key="index" placeholder="Existing Credits" :value="i.value.parseCurrency" @change="mutateExistingCredits({index, value: $event.target.value})"/>
+            <span>Monthly Credits</span>
+            <currency-input v-for="(i, index) in existingCreditValues" :key="index" placeholder="Existing Credits" :value="parseFloat(i.value)" @change="mutateExistingCredits({index, value: $event.target.value})"/>
         </div>
     </div>
     <div class="dppColumn">Coming Soon: Pricing and Ordering Sheet</div>
