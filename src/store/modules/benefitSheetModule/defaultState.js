@@ -1,10 +1,10 @@
 const defaultState = () => {
     return {
         benefits: ['', '', '', '', '', ''],
-        oldPhoneBill: null,
-        oldHomeSolution: null,
-        optionOneTodayCost: null,
-        optionTwoTodayCost: null,
+        oldPhoneBill: 0,
+        oldHomeSolution: 0,
+        optionOneTodayCost: 0,
+        optionTwoTodayCost: 0,
         autocompleteOptions: [
             "Protection from Damage, Loss, Theft",
             "Advanced Setup",
