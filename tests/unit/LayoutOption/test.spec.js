@@ -1,7 +1,7 @@
 import { expect } from 'chai'
-import defaultState from '../../../src/store/defaultState'
-import * as getters from '../../../src/store/getters'
-import * as mutations from '../../../src/store/mutations'
+import defaultState from '../../../src/store/modules/optionsModule/defaultState'
+import getters from '../../../src/store/modules/optionsModule/getters'
+import mutations from '../../../src/store/modules/optionsModule/mutations'
 
 describe('getters', () => {
     it('planTotal', () => {
