@@ -12,9 +12,7 @@ const routes = [
         path: '/',
         name: 'PageBenefitSheet',
         component: PageBenefitSheet,
-        meta: {
-            requiresAuth: true
-        }
+        meta: { requiresAuth: true }
     },
     {
         path: '/login',
@@ -25,9 +23,7 @@ const routes = [
         path: '/option/:vuexModule',
         name: 'PageOption',
         component: PageOption,
-        meta: {
-            requiresAuth: true
-        }
+        meta: { requiresAuth: true }
     }
 ]
 
