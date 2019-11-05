@@ -1,6 +1,6 @@
 <template>
   <div class="loginContainer">
-    <component v-bind:is="currentComponent" v-on:change-to-form="currentComponent = 'LoginForm'" v-on:change-page="$emit('change-page', $event)"></component>
+    <component v-bind:is="currentComponent" v-on:change-to-form="currentComponent = 'LoginForm'"/>
   </div>
 </template>
 
@@ -10,11 +10,7 @@ import LoginForm from './LoginForm'
 
 export default {
   name: 'PageLogin',
-
-  components: {
-    LoginLanding, LoginForm
-  },
-
+  components: { LoginLanding, LoginForm },
   data: function () {
     return {
       currentComponent: 'LoginLanding'

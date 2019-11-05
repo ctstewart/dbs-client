@@ -31,9 +31,8 @@ export default {
             })
             .then((response) => {
                 this.saveTokenToLocalStorage(response.data.token)
-                const parsed = JSON.stringify(this.email)
-                localStorage.setItem('email', parsed)
-                this.$emit('change-page', 'PageBenefitSheet')
+                this.$store.userEmail = this.email
+                this.$router.push('/')
             })
             .catch((error) => {
                 this.errorText = 'Incorrect username or password'
@@ -44,7 +43,7 @@ export default {
         },
         saveTokenToLocalStorage: function (value) {
             const parsed = JSON.stringify(value)
-            localStorage.setItem('jwtoken', parsed)
+            localStorage.setItem('jwt', parsed)
         }
     }
 }
