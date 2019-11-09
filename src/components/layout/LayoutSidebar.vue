@@ -1,41 +1,32 @@
 <template>
 <div class="sidebar">
-  <div class="username"><img src="@/assets/tempUserIcon.png"><br>{{email}}</div>
+  <div class="username"><img src="@/assets/tempUserIcon.png"><br>{{userEmail}}</div>
   <router-link to="/" class="router-link">Benefit Sheet</router-link>
   <router-link to="/option/optionOne" class="router-link">Option 1</router-link>
   <router-link to="/option/optionTwo" class="router-link">Option 2</router-link>
   <!-- <button @click="logout" type="button">Logout</button> -->
   <div class="versionAndLogout">
     <a class="logout" @click="logout">Logout</a>
-    <a class="versionFormatting">Version: {{version}}</a>
+    <a class="versionFormatting">Version: {{webappVersion}}</a>
   </div>
 </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
   name: 'Layoutsidebar',
-  data() {
-    return {
-      email: '',
-      version: 3
-    }
+  computed: {
+    ...mapState([
+      'userEmail',
+      'webappVersion'
+    ])
   },
-
-  created() {
-    if (localStorage.getItem('email')) {
-      try {
-        this.email = JSON.parse(localStorage.getItem('email'))
-      } catch (e) {
-        localStorage.removeItem('email')
-      }
-    }
-  },
-
   methods: {
     logout: function () {
       localStorage.clear()
-      this.$emit('change-page', 'PageLogin')
+      this.$router.push('/login')
     }
   }
 }
