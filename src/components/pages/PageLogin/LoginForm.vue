@@ -11,10 +11,10 @@
 
 <script>
 import axios from 'axios'
+import { mapMutations } from 'vuex'
 
 export default {
     name: 'LoginForm',
-
     data: function () {
         return {
             email: '',
@@ -22,8 +22,10 @@ export default {
             errorText: ''
         }
     },
-
     methods: {
+        ...mapMutations([
+            'mutate'
+        ]),
         loginUser: function () {
             axios.post('/api/users/login', {
                 "email": this.email,
@@ -31,7 +33,7 @@ export default {
             })
             .then((response) => {
                 this.saveTokenToLocalStorage(response.data.token)
-                this.$store.userEmail = this.email
+                this.mutate({property: 'userEmail', with: this.email})
                 this.$router.push('/')
             })
             .catch((error) => {
