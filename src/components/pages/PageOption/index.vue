@@ -1,6 +1,6 @@
 <template>
 <div class="all">
-    <layout-sidebar v-on:change-page="$emit('change-page', $event)" v-bind:version="version" v-bind:currentPage="currentPage"/>
+    <layout-sidebar/>
     <div class="mainContent">
         <div class="titleBar">
             <div class="copyButton">
@@ -30,6 +30,8 @@
 <script>
 import { mapState, mapGetters, mapMutations } from 'vuex'
 
+import jwtIntervalCheck from '@/mixins/jwtIntervalCheck'
+
 import LayoutSidebar from '@/components/layout/LayoutSidebar'
 import SectionPlan from './SectionPlan'
 import SectionPullthru from './SectionPullthru'
@@ -37,25 +39,36 @@ import SectionDpp from './SectionDpp'
 
 export default {
   name: 'LayoutOption',
-  props: ['version', 'whichOption', 'whichOptionObject', 'whichOptionComputed', 'currentPage'],
+  mixins: [jwtIntervalCheck],
   components: { LayoutSidebar, SectionPlan, SectionPullthru, SectionDpp },
   data() {
     return {
       currentTab: 'SectionPlan',
+      whichOption: '',
       tabs: [
         { id: 'SectionPlan', label: 'Plan', active: true },
         { id: 'SectionPullthru', label: 'Pull Thru', active: false },
         { id: 'SectionDpp', label: 'DPP', active: false }
       ],
-      vuexModule: null
     }
   },
 
-/*   beforeRouteUpdate (to, from, next) {
-    console.log(to.params.vuexModule)
-    console.log(from.params.vuexModule)
+  beforeRouteUpdate (to, from, next) {
+    if (to.params.vuexModule === 'optionOne') {
+      this.whichOption = 'Option 1'
+    } else if (to.params.vuexModule === 'optionTwo') {
+      this.whichOption = 'Option 2'
+    }
     next()
-  }, */
+  },
+
+  created () {
+    if (this.$route.params.vuexModule === 'optionOne') {
+      this.whichOption = 'Option 1'
+    } else if (this.$route.params.vuexModule === 'optionTwo') {
+      this.whichOption = 'Option 2'
+    }
+  },
 
   methods: {
     ...mapMutations({
@@ -76,13 +89,6 @@ export default {
         }
       })
     },
-
-/*     copyToOption2() {
-      const parsed = JSON.stringify(this.mainObject)
-      localStorage.setItem('option2Object', parsed)
-      alert('Copied to Option 2!')
-    } */
-
   },
 
   computed: {
@@ -93,7 +99,7 @@ export default {
       total (state, getters) {
         return getters[`${this.$route.params.vuexModule}/total`]
       }
-    })
+    }),
   }
 }
 </script>
