@@ -23,15 +23,17 @@
 import { createNamespacedHelpers } from 'vuex'
 const { mapState, mapGetters, mapMutations } = createNamespacedHelpers('benefitSheet')
 
+import jwtIntervalCheck from '@/mixins/jwtIntervalCheck'
+
 import LayoutSidebar from '@/components/layout/LayoutSidebar'
 import SectionBenefits from './SectionBenefits'
 import SectionOldBills from './SectionOldBills'
 import SectionBillBreakdown from './SectionBillBreakdown'
 import SectionCosts from './SectionCosts'
-import externalData from '@/myJSON.json'
 
 export default {
   name: 'PageBenefitSheet',
+  mixins: [jwtIntervalCheck],
   components: { LayoutSidebar, SectionBenefits, SectionOldBills, SectionBillBreakdown, SectionCosts },
   data: function () {
     return {
