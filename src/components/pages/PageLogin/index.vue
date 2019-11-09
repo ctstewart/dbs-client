@@ -15,6 +15,9 @@ export default {
     return {
       currentComponent: 'LoginLanding'
     }
+  },
+  created () {
+    localStorage.clear()
   }
 }
 </script>
