@@ -317,7 +317,7 @@ and (orientation : landscape)
 
   .breakdown {
     display: grid;
-    grid-template-rows: repeat(5, 1fr);
+    grid-template-rows: repeat(4, 1fr);
     border: 1px solid grey;
   }
 
