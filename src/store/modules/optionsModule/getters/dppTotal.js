@@ -6,7 +6,7 @@ const dppTotal = ((state) => {
     state.existingCreditValues.forEach((i) => {
         localTotal -= i.value
     })
-    return localTotal
+    return localTotal / 100
 })
 
 export default dppTotal
