@@ -23,7 +23,7 @@
 import { createNamespacedHelpers } from 'vuex'
 const { mapState, mapGetters, mapMutations } = createNamespacedHelpers('benefitSheet')
 
-import jwtIntervalCheck from '@/mixins/jwtIntervalCheck'
+import jwtExpCheck from '@/mixins/jwtExpCheck'
 
 import LayoutSidebar from '@/components/layout/LayoutSidebar'
 import SectionBenefits from './SectionBenefits'
@@ -33,7 +33,7 @@ import SectionCosts from './SectionCosts'
 
 export default {
   name: 'PageBenefitSheet',
-  mixins: [jwtIntervalCheck],
+  mixins: [jwtExpCheck],
   components: { LayoutSidebar, SectionBenefits, SectionOldBills, SectionBillBreakdown, SectionCosts },
   data: function () {
     return {

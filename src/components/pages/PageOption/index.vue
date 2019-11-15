@@ -30,7 +30,7 @@
 <script>
 import { mapState, mapGetters, mapMutations } from 'vuex'
 
-import jwtIntervalCheck from '@/mixins/jwtIntervalCheck'
+import jwtExpCheck from '@/mixins/jwtExpCheck'
 
 import LayoutSidebar from '@/components/layout/LayoutSidebar'
 import SectionPlan from './SectionPlan'
@@ -39,7 +39,7 @@ import SectionDpp from './SectionDpp'
 
 export default {
   name: 'LayoutOption',
-  mixins: [jwtIntervalCheck],
+  mixins: [jwtExpCheck],
   components: { LayoutSidebar, SectionPlan, SectionPullthru, SectionDpp },
   data() {
     return {
