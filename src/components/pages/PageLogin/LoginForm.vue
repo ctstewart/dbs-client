@@ -34,6 +34,7 @@ export default {
             .then((response) => {
                 this.saveTokenToLocalStorage(response.data.token)
                 this.mutate({property: 'userEmail', with: this.email})
+                this.mutate({ property: 'jwtExp', with: response.data.jwtExp})
                 this.$router.push('/')
             })
             .catch((error) => {

@@ -1,7 +1,8 @@
 const state = () => {
     return {
         webappVersion: '1.0',
-        userEmail: ''
+        userEmail: '',
+        jwtExp: null
     }
 }
 
