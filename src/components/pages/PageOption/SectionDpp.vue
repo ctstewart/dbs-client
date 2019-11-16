@@ -3,11 +3,11 @@
     <div class="dppColumn">
         <div>
             <span>DPP</span>
-            <currency-input v-for="(i, index) in existingDPPValues" :key="index" placeholder="Existing DPP" :value="parseFloat(i.value)" @change="mutateExistingDpp({index, value: $event.target.value * 100})"/>
+            <currency-input v-for="(i, index) in existingDPPValues" :key="index" placeholder="Existing DPP" :value="parseFloat(i.value / 100)" @change="mutateExistingDpp({index, value: $event.target.value * 100})"/>
         </div>
         <div>
             <span>Monthly Credits</span>
-            <currency-input v-for="(i, index) in existingCreditValues" :key="index" placeholder="Existing Credits" :value="parseFloat(i.value)" @change="mutateExistingCredits({index, value: $event.target.value * 100})"/>
+            <currency-input v-for="(i, index) in existingCreditValues" :key="index" placeholder="Existing Credits" :value="parseFloat(i.value / 100)" @change="mutateExistingCredits({index, value: $event.target.value * 100})"/>
         </div>
     </div>
     <div class="dppColumn">Coming Soon: Pricing and Ordering Sheet</div>
