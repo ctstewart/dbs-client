@@ -18,7 +18,7 @@
                 v-bind:class="{ activetab: tab.active }"
                 v-on:click="navbarClick(tab.id)"
             ><p>{{ tab.label }}</p></button>
-            <div>Total: ${{ total }}</div>
+            <div>Total: ${{ parseFloat(total).toFixed(2) }}</div>
         </div>
         <keep-alive>
             <component :is="currentTab"/>
