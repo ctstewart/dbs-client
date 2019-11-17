@@ -1,5 +1,7 @@
 const copyModuleOptionOneToOptionTwo = ((state) => {
-    Object.assign(state['optionTwo'], state['optionOne'])
+    const stateToCopy = JSON.parse(JSON.stringify(state['optionOne']))
+    Object.assign(state['optionTwo'], stateToCopy)
+    alert('Copied to Option 2!')
 })
 
 const mutate = ((state, payload) => {
