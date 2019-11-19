@@ -3,7 +3,7 @@
     <div v-for="i in optionsComputed" :key="i.id" class="option">
         <div class="chosenPlanLabel">
             <p>{{ i.id }}:</p>
-            <div>{{ i.planName }}</div>
+            <div>{{ i.chosenPlan }}</div>
         </div>
         <div class="breakdown">
             <div>
