@@ -1,6 +1,6 @@
 const state = () => {
     return {
-        webappVersion: '1.0.0',
+        webappVersion: '1.0.1',
         userEmail: '',
         jwtExp: null
     }
