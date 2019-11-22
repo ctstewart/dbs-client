@@ -2,7 +2,7 @@
 <div class="input eightColumns">
     <div :class="{'twoRows': isUnlimited}">Autopay?</div>
     <label class="switch" :class="{'twoRows': isUnlimited}">
-        <input type="checkbox" :checked="autopay" @input="toggle('autopay')">
+        <input type="checkbox" :checked="autopay" @change="toggle('autopay')">
         <span class="slider"></span>
     </label>
     <div v-if="isUnlimited">Military Discount (after 8/5/19)</div>
