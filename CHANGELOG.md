@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 - Add dropdown to change between hamburger, detailed, and difference only views
 
+## [1.0.2] - 2019-11-23
+### Fixed
+- Fixed the issue where DPP wasn't adding in properly.
+
 ## [1.0.1] - 2019-11-21
 ### Fixed
 - The autopay discount was not applying when used in Microsoft Edge. This is now fixed.
