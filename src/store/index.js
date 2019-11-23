@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 import VuexPersistence from 'vuex-persist'
 
 const vuexLocal = new VuexPersistence({
-    storage: window.localStorage
+    storage: window.sessionStorage
 })
 
 Vue.use(Vuex)
