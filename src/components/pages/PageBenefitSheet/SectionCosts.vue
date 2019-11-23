@@ -1,7 +1,7 @@
 <template>
 <div class="costs">
     <div v-for="i in costsArray" :key="i.id">
-        <currency-input placeholder="$0.00" :value="parseFloat(i.value)" @change="mutate({property: i.mutate, with: $event.target.value})"/>
+        <input placeholder="$0.00" type="tel" pattern="[0-9]*" step="0.01" :value="parseFloat(i.value)" @change="mutate({property: i.mutate, with: $event.target.value})"/>
         <p>${{ i.differenceMonthly.toFixed(2) }}</p>
         <p>${{ i.fees * 40 }}</p>
         <p>Cost today</p>
