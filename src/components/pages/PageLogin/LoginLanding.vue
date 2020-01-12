@@ -2,7 +2,7 @@
 <div class="loginLandingDiv">
     <h2>DIGITAL BENEFIT SHEET</h2>
     <h5>Making math easy,<br>so you can focus on what's<br>important.</h5>
-    <button type="button" @click="$emit('change-to-form')">LOGIN</button>
+    <button type="button" @click="$emit('change-to-form', 'LoginForm')">LOGIN</button>
 </div>
 </template>
 

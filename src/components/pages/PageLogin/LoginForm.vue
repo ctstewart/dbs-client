@@ -4,6 +4,7 @@
     <input type="email" placeholder="johndoe@gmail.com" v-model="email">
     <p>Password</p>
     <input type="password" placeholder="password" v-model="password" @keyup.enter="loginUser">
+    <div class="forgotPassword"><a @click="$emit('change-to-form', 'ResetPasswordForm')">Forgot your password?</a></div>
     <span v-if="errorText !== ''">{{ errorText }}</span>
     <button v-else @click="loginUser">LOGIN</button>
 </div>
@@ -32,10 +33,18 @@ export default {
                 "password": this.password
             })
             .then((response) => {
-                this.saveTokenToLocalStorage(response.data.token)
-                this.mutate({property: 'userEmail', with: this.email})
-                this.mutate({ property: 'jwtExp', with: response.data.jwtExp})
-                this.$router.push('/')
+                if (response.data.forceNewPassword) {
+                    this.errorText = 'Please create a new password'
+                    setTimeout(() => {
+                        this.errorText = ''
+                        this.$router.push(`/resetPassword/${response.data.token}`)
+                    }, 3000)
+                } else {
+                    this.saveTokenToLocalStorage(response.data.token)
+                    this.mutate({ property: 'userEmail', with: this.email })
+                    this.mutate({ property: 'jwtExp', with: response.data.jwtExp })
+                    this.$router.push('/')
+                }
             })
             .catch((error) => {
                 this.errorText = 'Incorrect username or password'
@@ -52,7 +61,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="less">
 .loginFormDiv {
     display: -ms-grid;
     display: grid;
@@ -66,49 +75,61 @@ export default {
     align-self: center;
     justify-self: center;
     border-radius: 5px;
-    grid-template-rows: 15% 15% 15% 15% 40%;
+    grid-template-rows: 15% 15% 15% 15% 10% 30%;
     justify-items: center;
+
+    p, input, button {
+        width: 80%;
+        padding: 1%;
+    }
+
+    p {
+        font-size: .9rem;
+        margin: 0;
+        padding: 0;
+        align-self: end;
+        font-weight: bold;
+    }
+
+    input {
+        margin: 0;
+        padding: 0;
+        text-indent: .5rem;
+        align-self: end;
+        height: 2rem;
+    }
+
+    button {
+        align-self: center;
+        color: white;
+        background-color: #1F596E;
+        border-radius: 5px;
+        width: 7rem;
+        height: 3.5rem;
+        border: none;
+        font-weight: bold;
+        font-size: 20px;
+        outline: none;
+        cursor: pointer;
+    }
+
+    span {
+        align-self: center;
+        color: red;
+    }
+
 }
 
-.loginFormDiv p,
-.loginFormDiv input,
-.loginFormDiv button {
+.forgotPassword {
     width: 80%;
-    padding: 1%;
-}
-
-.loginFormDiv p {
-    font-size: .9rem;
-    margin: 0;
-    padding: 0;
-    align-self: end;
-    font-weight: bold;
-}
-
-.loginFormDiv input {
-    margin: 0;
-    padding: 0;
-    text-indent: .5rem;
-    align-self: end;
-    height: 2rem;
-}
-
-.loginFormDiv span {
-    align-self: center;
-    color: red;
-}
-
-.loginFormDiv button {
-    align-self: center;
-    color: white;
-    background-color: #1F596E;
-    border-radius: 5px;
-    width: 7rem;
-    height: 3.5rem;
-    border: none;
-    font-weight: bold;
-    font-size: 20px;
-    outline: none;
+    padding-top: 1%;
+    font-size: 14px;
+    display: -ms-grid;
+    display: grid;
+    justify-items: start;
+    align-items: center;
+    color: #1F596E;
+    text-decoration: underline;
     cursor: pointer;
 }
 </style>
