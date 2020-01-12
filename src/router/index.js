@@ -1,9 +1,11 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import PageLogin from '../components/pages/PageLogin'
 import PageBenefitSheet from '../components/pages/PageBenefitSheet'
+import PageLogin from '../components/pages/PageLogin'
+import PageResetPassword from '../components/pages/PageResetPassword'
 import PageOption from '../components/pages/PageOption'
+import PageAdmin from '../components/pages/PageAdmin'
 
 Vue.use(VueRouter)
 
@@ -20,10 +22,21 @@ const routes = [
         component: PageLogin
     },
     {
+        path: '/resetPassword/:resetToken',
+        name: 'PageResetPassword',
+        component: PageResetPassword
+    },
+    {
         path: '/option/:vuexModule',
         name: 'PageOption',
         component: PageOption,
         meta: { requiresAuth: true }
+    },
+    {
+        path: '/admin',
+        name: 'PageAdmin',
+        component: PageAdmin,
+        meta: { requiresAdminAuth: true }
     }
 ]
 
