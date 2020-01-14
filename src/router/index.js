@@ -36,7 +36,7 @@ const routes = [
         path: '/admin',
         name: 'PageAdmin',
         component: PageAdmin,
-        meta: { requiresAdminAuth: true }
+        meta: { requiresAuth: true }
     }
 ]
 
