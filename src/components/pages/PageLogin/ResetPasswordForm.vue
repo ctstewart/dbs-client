@@ -1,11 +1,14 @@
 <template>
 <div class="passwordResetDiv">
     <h2>Password Reset</h2>
-    <p>Email</p>
-    <input type="email" placeholder="johndoe@gmail.com" v-model="email" @keyup.enter="sendEmailForPasswordReset">
+    <div>
+        <p>Email</p>
+        <input type="email" :value="email" @change="$emit('change-email', $event.target.value)" placeholder="johndoe@gmail.com" @keyup.enter="sendEmailForPasswordReset">
+    </div>
+    <div></div>
     <div class="buttonGroup">
-        <button @click="sendEmailForPasswordReset">RESET</button>
         <button @click="$emit('change-to-form', 'LoginForm')">Go Back</button>
+        <button @click="sendEmailForPasswordReset">RESET</button>
     </div>
 </div>
 </template>
@@ -15,11 +18,7 @@ import axios from 'axios'
 
 export default {
     name: 'ResetPasswordForm',
-    data: function () {
-        return {
-            email: ''
-        }
-    },
+    props: ['email'],
     methods: {
         sendEmailForPasswordReset: function () {
             axios.post('/api/users/sendPasswordResetEmail', {
@@ -33,83 +32,91 @@ export default {
                 console.log('API Error')
             })
         },
-    }
+    },
 }
 </script>
 
-<style>
+<style lang="less">
 .passwordResetDiv {
     display: -ms-grid;
     display: grid;
-    background-color: rgba(255,255,255,.8);
-    width: 50%;
-    height: 50%;
-    margin: 0 auto;
-    -ms-grid-row-align: center;
-    -ms-grid-column-align: center;
-    place-self: center;
-    align-self: center;
-    justify-self: center;
-    border-radius: 5px;
-    grid-template-rows: 15% 15% 15% 55%;
-    justify-items: center;
-}
+    grid-template-rows: 15% 30% 30% 25%;
+    border-right: 1px solid grey;
+    
+    > div {
+        display: -ms-grid;
+        display: grid;
+    }
 
-.passwordResetDiv p,
-.passwordResetDiv input,
-.passwordResetDiv button {
-    width: 80%;
-    padding: 1%;
-}
+    p {
+        font-size: .9rem;
+        margin: 0;
+        padding-bottom: .5rem;
+        align-self: end;
+        font-weight: bold;
+    }
 
-.passwordResetDiv p {
-    font-size: .9rem;
-    margin: 0;
-    padding: 0;
-    align-self: end;
-    font-weight: bold;
-}
+    input {
+        margin: 0;
+        padding: 0;
+        text-indent: .5rem;
+        height: 2rem;
+        border: 1px solid #1F596E;
+        border-radius: 5px;
 
-.passwordResetDiv input {
-    margin: 0;
-    padding: 0;
-    text-indent: .5rem;
-    align-self: end;
-    height: 2rem;
-}
+        &:focus {
+            outline: none;
+        }
+    }
 
-.passwordResetDiv span {
-    align-self: center;
-    color: red;
-}
+    button, span {
+        align-self: center;
+        justify-self: end;
+    }
 
-.passwordResetDiv button {
-    align-self: center;
-    color: white;
-    background-color: #1F596E;
-    border-radius: 5px;
-    width: 7rem;
-    height: 3.5rem;
-    border: none;
-    font-weight: bold;
-    font-size: 20px;
-    outline: none;
-    cursor: pointer;
+    button {
+        color: white;
+        background-color: #1F596E;
+        border-radius: 5px;
+        width: 7rem;
+        height: 3.5rem;
+        border: none;
+        font-weight: bold;
+        font-size: 20px;
+        outline: none;
+        cursor: pointer;
+    }
+
+    span {
+        color: red;
+    }
+
+    .forgotPassword {
+        padding-top: 1%;
+        font-size: 14px;
+        display: -ms-grid;
+        display: grid;
+        align-items: center;
+        color: #1F596E;
+        text-decoration: underline;
+        cursor: pointer;
+    }
 }
 
 .buttonGroup {
+    justify-self: end;
     display: -ms-grid;
     display: grid;
     grid-template-columns: 1fr 1fr;
-}
 
-.buttonGroup > button {
-    margin: 5%;
-}
+    > button {
+        margin: 2%;
+    }
 
-.buttonGroup > button:last-child {
-    background-color: white;
-    color: black;
-    border: 1px solid grey;
+    > button:first-child {
+        background-color: white;
+        color: #1F596E;
+        border: 1px solid #1F596E;
+    }
 }
 </style>

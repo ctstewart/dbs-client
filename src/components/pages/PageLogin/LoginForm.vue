@@ -1,12 +1,19 @@
 <template>
 <div class="loginFormDiv">
-    <p>Email</p>
-    <input type="email" placeholder="johndoe@gmail.com" v-model="email">
-    <p>Password</p>
-    <input type="password" placeholder="password" v-model="password" @keyup.enter="loginUser">
-    <div class="forgotPassword"><a @click="$emit('change-to-form', 'ResetPasswordForm')">Forgot your password?</a></div>
-    <span v-if="errorText !== ''">{{ errorText }}</span>
-    <button v-else @click="loginUser">LOGIN</button>
+    <h2>Login</h2>
+    <div>
+        <p>Email</p>
+        <input type="email" :value="email" @change="$emit('change-email', $event.target.value)" placeholder="johndoe@gmail.com" autofocus>
+    </div>
+    <div>
+        <p>Password</p>
+        <input type="password" placeholder="password" v-model="password" @keyup.enter="loginUser">
+        <div class="forgotPassword"><a @click="$emit('change-to-form', 'ResetPasswordForm')">Forgot your password?</a></div>
+    </div>
+    <div>
+        <span v-if="errorText !== ''">{{ errorText }}</span>
+        <button v-else @click="loginUser">LOGIN</button>
+    </div>
 </div>
 </template>
 
@@ -16,9 +23,9 @@ import { mapMutations } from 'vuex'
 
 export default {
     name: 'LoginForm',
+    props: ['email'],
     data: function () {
         return {
-            email: '',
             password: '',
             errorText: ''
         }
@@ -57,7 +64,7 @@ export default {
             const parsed = JSON.stringify(value)
             localStorage.setItem('jwt', parsed)
         }
-    }
+    },
 }
 </script>
 
@@ -65,28 +72,18 @@ export default {
 .loginFormDiv {
     display: -ms-grid;
     display: grid;
-    background-color: rgba(255,255,255,.8);
-    width: 50%;
-    height: 50%;
-    margin: 0 auto;
-    -ms-grid-row-align: center;
-    -ms-grid-column-align: center;
-    place-self: center;
-    align-self: center;
-    justify-self: center;
-    border-radius: 5px;
-    grid-template-rows: 15% 15% 15% 15% 10% 30%;
-    justify-items: center;
-
-    p, input, button {
-        width: 80%;
-        padding: 1%;
+    grid-template-rows: 15% 30% 30% 25%;
+    border-right: 1px solid grey;
+    
+    > div {
+        display: -ms-grid;
+        display: grid;
     }
 
     p {
         font-size: .9rem;
         margin: 0;
-        padding: 0;
+        padding-bottom: .5rem;
         align-self: end;
         font-weight: bold;
     }
@@ -95,12 +92,21 @@ export default {
         margin: 0;
         padding: 0;
         text-indent: .5rem;
-        align-self: end;
         height: 2rem;
+        border: 1px solid #1F596E;
+        border-radius: 5px;
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    button, span {
+        align-self: center;
+        justify-self: end;
     }
 
     button {
-        align-self: center;
         color: white;
         background-color: #1F596E;
         border-radius: 5px;
@@ -114,22 +120,28 @@ export default {
     }
 
     span {
-        align-self: center;
         color: red;
     }
 
+    .forgotPassword {
+        padding-top: 1%;
+        font-size: 14px;
+        display: -ms-grid;
+        display: grid;
+        align-items: center;
+        color: #1F596E;
+        text-decoration: underline;
+        cursor: pointer;
+    }
 }
 
-.forgotPassword {
-    width: 80%;
-    padding-top: 1%;
-    font-size: 14px;
-    display: -ms-grid;
-    display: grid;
-    justify-items: start;
-    align-items: center;
-    color: #1F596E;
-    text-decoration: underline;
-    cursor: pointer;
+.loginInfoDiv {
+    p, ul {
+        font-size: .83em;
+    }
+
+    li {
+        margin: 1rem 0;
+    }
 }
 </style>
