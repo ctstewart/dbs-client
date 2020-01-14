@@ -27,6 +27,7 @@ export default {
     justify-content: space-between;
     align-items: center;
     padding: 10px 30px;
+    height: 5rem;
 
     h3 {
         color: #edf0f1;
@@ -50,6 +51,10 @@ export default {
 
     button:hover {
         background-color: rgba(0, 136, 169, 0.8);
+    }
+
+    button:focus {
+        outline: none;
     }
 }
 
