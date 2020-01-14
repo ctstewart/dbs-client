@@ -1,13 +1,20 @@
 <template>
 <div class="newPasswordContainer">
     <div class="newPasswordDiv">
-        <p>Password</p>
-        <input type="password" placeholder="password" v-model="password">
-        <p>Confirm Password</p>
-        <input type="password" placeholder="password" v-model="confirmPassword" @keyup.enter="resetPassword">
-        <span v-if="errorText !== ''" class="errorText">{{ errorText }}</span>
-        <span v-else-if="successText !== ''" class="successText">{{ successText }}</span>
-        <button v-else @click="resetPassword">SUBMIT</button>
+        <div class="newPasswordFormDiv">
+            <h2>New Password</h2>
+            <div>
+                <p>Password</p>
+                <input type="password" placeholder="password" v-model="password">
+            </div>
+            <div>
+                <p>Confirm Password</p>
+                <input type="password" placeholder="password" v-model="confirmPassword" @keyup.enter="resetPassword">
+            </div>
+            <span v-if="errorText !== ''" class="errorText">{{ errorText }}</span>
+            <span v-else-if="successText !== ''" class="successText">{{ successText }}</span>
+            <button v-else @click="resetPassword">SUBMIT</button>
+        </div>
     </div>
 </div>
 </template>
@@ -66,76 +73,97 @@ export default {
 }
 </script>
 
-<style>
+<style lang="less">
+
+
 .newPasswordContainer {
     height: 100%;
     display: -ms-grid;
     display: grid;
-}
 
-.newPasswordDiv {
-    display: -ms-grid;
-    display: grid;
-    background-color: rgba(255,255,255,.8);
-    width: 50%;
-    height: 50%;
-    margin: 0 auto;
-    -ms-grid-row-align: center;
-    -ms-grid-column-align: center;
-    place-self: center;
-    align-self: center;
-    justify-self: center;
-    border-radius: 5px;
-    grid-template-rows: 15% 15% 15% 15% 40%;
-    justify-items: center;
-}
+    .newPasswordDiv {
+        display: -ms-grid;
+        display: grid;
+        width: 40%;
+        height: 50%;
+        margin: 0 auto;
+        -ms-grid-row-align: center;
+        -ms-grid-column-align: center;
+        place-self: center;
+        align-self: center;
+        justify-self: center;
+        border-radius: 5px;
+        background-color: white;
 
-.newPasswordDiv p,
-.newPasswordDiv input,
-.newPasswordDiv button {
-    width: 80%;
-    padding: 1%;
-}
+        > div {
+            padding: 1rem;
+        }
 
-.newPasswordDiv p {
-    font-size: .9rem;
-    margin: 0;
-    padding: 0;
-    align-self: end;
-    font-weight: bold;
-}
+        .newPasswordFormDiv {
+            display: -ms-grid;
+            display: grid;
+            grid-template-rows: 15% 30% 30% 25%;
+            border-right: 1px solid grey;
+            
+            > div {
+                display: -ms-grid;
+                display: grid;
+            }
 
-.newPasswordDiv input {
-    margin: 0;
-    padding: 0;
-    text-indent: .5rem;
-    align-self: end;
-    height: 2rem;
-}
+            p {
+                font-size: .9rem;
+                margin: 0;
+                padding-bottom: .5rem;
+                align-self: end;
+                font-weight: bold;
+            }
 
-.newPasswordDiv span {
-    align-self: center;
-}
+            input {
+                margin: 0;
+                padding: 0;
+                text-indent: .5rem;
+                height: 2rem;
+                border: 1px solid #1F596E;
+                border-radius: 5px;
 
-.errorText {
-    color: red;
-}
+                &:focus {
+                    outline: none;
+                }
+            }
 
-.successText {
-    color: green;
-}
+            button, span {
+                align-self: center;
+                justify-self: end;
+            }
 
-.newPasswordDiv button {
-    align-self: center;
-    color: white;
-    background-color: #1F596E;
-    border-radius: 5px;
-    width: 7rem;
-    height: 3.5rem;
-    border: none;
-    font-weight: bold;
-    font-size: 20px;
-    outline: none;
-    cursor: pointer;
+            button {
+                color: white;
+                background-color: #1F596E;
+                border-radius: 5px;
+                width: 7rem;
+                height: 3.5rem;
+                border: none;
+                font-weight: bold;
+                font-size: 20px;
+                outline: none;
+                cursor: pointer;
+            }
+
+            span {
+                color: red;
+            }
+
+            .forgotPassword {
+                padding-top: 1%;
+                font-size: 14px;
+                display: -ms-grid;
+                display: grid;
+                align-items: center;
+                color: #1F596E;
+                text-decoration: underline;
+                cursor: pointer;
+            }
+        }
+    }
 }
 </style>
