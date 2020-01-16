@@ -7,13 +7,20 @@
             <li><a href="#">App Usage (Coming Soon)</a></li>
         </ul>
     </nav>
-    <a href="#" class="cta"><button>Logout</button></a>
+    <a @click="logout" class="cta"><button>Logout</button></a>
 </div>
 </template>
 
 <script>
 export default {
-    name: 'AdminNavbar'
+    name: 'AdminNavbar',
+    methods: {
+        logout() {
+            localStorage.clear()
+            sessionStorage.clear()
+            this.$router.push('/login')
+        }
+    }
 }
 </script>
 
@@ -56,10 +63,6 @@ export default {
     button:focus {
         outline: none;
     }
-}
-
-.adminTitle {
-    cursor: pointer;
 }
 
 .nav__links {
