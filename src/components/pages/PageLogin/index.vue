@@ -48,6 +48,7 @@ export default {
     display: -ms-grid;
     display: grid;
     width: 70%;
+    max-width: 70rem;
     height: 50%;
     margin: 0 auto;
     -ms-grid-row-align: center;
