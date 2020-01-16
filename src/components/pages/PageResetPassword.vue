@@ -3,14 +3,8 @@
     <div class="newPasswordDiv">
         <div class="newPasswordFormDiv">
             <h2>New Password</h2>
-            <div>
-                <p>Password</p>
-                <input type="password" placeholder="password" v-model="password">
-            </div>
-            <div>
-                <p>Confirm Password</p>
-                <input type="password" placeholder="password" v-model="confirmPassword" @keyup.enter="resetPassword">
-            </div>
+            <input-field v-bind="{inputType: 'password', label:'Password', placeholder:'password', meter:true}" :value="password" v-on:value-changed="password = $event"/>
+            <input-field v-bind="{inputType: 'password', label:'Confirm Password', placeholder:'password', meter:false}" :value="confirmPassword" v-on:value-changed="confirmPassword = $event"/>
             <span v-if="errorText !== ''" class="errorText">{{ errorText }}</span>
             <span v-else-if="successText !== ''" class="successText">{{ successText }}</span>
             <button v-else @click="resetPassword">SUBMIT</button>
@@ -23,8 +17,11 @@
 import axios from 'axios'
 import { mapMutations } from 'vuex'
 
+import InputField from '@/components/ui/InputField'
+
 export default {
     name: 'LoginForm',
+    components: {InputField},
     data: function () {
         return {
             password: '',
@@ -69,7 +66,7 @@ export default {
             const parsed = JSON.stringify(value)
             localStorage.setItem('jwt', parsed)
         }
-    }
+    },
 }
 </script>
 
@@ -110,27 +107,6 @@ export default {
                 display: grid;
             }
 
-            p {
-                font-size: .9rem;
-                margin: 0;
-                padding-bottom: .5rem;
-                align-self: end;
-                font-weight: bold;
-            }
-
-            input {
-                margin: 0;
-                padding: 0;
-                text-indent: .5rem;
-                height: 2rem;
-                border: 1px solid #1F596E;
-                border-radius: 5px;
-
-                &:focus {
-                    outline: none;
-                }
-            }
-
             button, span {
                 align-self: center;
                 justify-self: end;
@@ -153,16 +129,7 @@ export default {
                 color: red;
             }
 
-            .forgotPassword {
-                padding-top: 1%;
-                font-size: 14px;
-                display: -ms-grid;
-                display: grid;
-                align-items: center;
-                color: #1F596E;
-                text-decoration: underline;
-                cursor: pointer;
-            }
+
         }
     }
 }

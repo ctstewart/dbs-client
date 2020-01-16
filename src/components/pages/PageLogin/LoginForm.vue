@@ -1,15 +1,9 @@
 <template>
 <div class="loginFormDiv">
     <h2>Login</h2>
-    <div>
-        <p>Email</p>
-        <input type="email" :value="email" @change="$emit('change-email', $event.target.value)" placeholder="johndoe@gmail.com" autofocus>
-    </div>
-    <div>
-        <p>Password</p>
-        <input type="password" placeholder="password" v-model="password" @keyup.enter="loginUser">
-        <div class="forgotPassword"><a @click="$emit('change-to-form', 'ResetPasswordForm')">Forgot your password?</a></div>
-    </div>
+    <input-field v-bind="{inputType: 'text', label:'Email', placeholder:'johndoe@gmail.com', meter:false}" :value="email" v-on:value-changed="$emit('change-email', $event)"/>
+    <input-field v-bind="{inputType: 'password', label:'Password', placeholder:'password', meter:false}" :value="password" v-on:value-changed="password = $event" v-on:keyupEnter="loginUser"/>
+    <div class="forgotPassword"><a @click="$emit('change-to-form', 'ResetPasswordForm')">Forgot your password?</a></div>
     <div>
         <span v-if="errorText !== ''">{{ errorText }}</span>
         <button v-else @click="loginUser">LOGIN</button>
@@ -21,9 +15,12 @@
 import axios from 'axios'
 import { mapMutations } from 'vuex'
 
+import InputField from '@/components/ui/InputField'
+
 export default {
     name: 'LoginForm',
     props: ['email'],
+    components: {InputField},
     data: function () {
         return {
             password: '',
@@ -72,33 +69,12 @@ export default {
 .loginFormDiv {
     display: -ms-grid;
     display: grid;
-    grid-template-rows: 15% 30% 30% 25%;
+    grid-template-rows: 15% 30% 20% 10% 25%;
     border-right: 1px solid grey;
     
     > div {
         display: -ms-grid;
         display: grid;
-    }
-
-    p {
-        font-size: .9rem;
-        margin: 0;
-        padding-bottom: .5rem;
-        align-self: end;
-        font-weight: bold;
-    }
-
-    input {
-        margin: 0;
-        padding: 0;
-        text-indent: .5rem;
-        height: 2rem;
-        border: 1px solid #1F596E;
-        border-radius: 5px;
-
-        &:focus {
-            outline: none;
-        }
     }
 
     button, span {

@@ -1,10 +1,7 @@
 <template>
 <div class="passwordResetDiv">
     <h2>Password Reset</h2>
-    <div>
-        <p>Email</p>
-        <input type="email" :value="email" @change="$emit('change-email', $event.target.value)" placeholder="johndoe@gmail.com" @keyup.enter="sendEmailForPasswordReset">
-    </div>
+    <input-field v-bind="{inputType: 'text', label:'Email', placeholder:'johndoe@gmail.com', meter:false}" :value="email" v-on:value-changed="$emit('change-email', $event.target.value)" v-on:keyupEnter="sendEmailForPasswordReset"/>
     <div></div>
     <div class="buttonGroup">
         <button @click="$emit('change-to-form', 'LoginForm')">Go Back</button>
@@ -16,9 +13,12 @@
 <script>
 import axios from 'axios'
 
+import InputField from '@/components/ui/InputField'
+
 export default {
     name: 'ResetPasswordForm',
     props: ['email'],
+    components: { InputField },
     methods: {
         sendEmailForPasswordReset: function () {
             axios.post('/api/users/sendPasswordResetEmail', {
@@ -46,27 +46,6 @@ export default {
     > div {
         display: -ms-grid;
         display: grid;
-    }
-
-    p {
-        font-size: .9rem;
-        margin: 0;
-        padding-bottom: .5rem;
-        align-self: end;
-        font-weight: bold;
-    }
-
-    input {
-        margin: 0;
-        padding: 0;
-        text-indent: .5rem;
-        height: 2rem;
-        border: 1px solid #1F596E;
-        border-radius: 5px;
-
-        &:focus {
-            outline: none;
-        }
     }
 
     button, span {
