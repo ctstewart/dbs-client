@@ -46,6 +46,8 @@ export default {
             createUserError: '',
             createUserMsg: '',
             stores: [
+                "Admin Staff",
+                "Business Rep",
                 "Aberdeen",                                                                                                                                                                       
                 "Albert Lea",                                                                                                                                                                     
                 "Ankeny",                                                                                                                                                                         
@@ -92,7 +94,8 @@ export default {
                 "Worthington",                                                                                                                                                                    
                 "Yankton"                                                                                                                                                                         
             ],
-            districts: [                                                                                                                                                                               
+            districts: [
+                "Admin Staff",
                 "Aaron Stickney",                                                                                                                                                                 
                 "Adam Harrington",                                                                                                                                                                
                 "Brooke Samuelson",                                                                                                                                                               
