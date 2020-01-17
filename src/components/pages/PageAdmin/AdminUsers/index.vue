@@ -1,6 +1,6 @@
 <template>
 <div class="usersContainer">
-    <button class="addUser" @click="modalActive = true">Add User</button>
+    <button class="addUser" @click="addUserModalActive = true">Add User</button>
     <div class="usersTable">
         <div>Name</div>
         <div>Email</div>
@@ -21,10 +21,11 @@
         <div v-else></div>
         <div class="actions">
             <!-- <i class="far fa-edit"></i> -->
-            <i class="fas fa-trash" @click="deleteUser(user._id)"></i>
+            <i class="fas fa-trash" @click="openDeleteUserModal(user)"></i>
         </div>
     </div>
-    <modal-add-user v-if="modalActive"/>
+    <modal-add-user v-if="addUserModalActive" v-on:close-modal="addUserModalActive = false"/>
+    <modal-delete-user v-if="deleteUserModalActive" v-bind="chosenUser" v-on:close-modal="deleteUserModalActive = false"/>
 </div>
 </template>
 
@@ -33,15 +34,23 @@ import axios from 'axios'
 
 import AdminNavbar from '../AdminNavbar'
 import ModalAddUser from './ModalAddUser'
+import ModalDeleteUser from './ModalDeleteUser'
 
 export default {
     name: 'PageAdmin',
-    components: { AdminNavbar, ModalAddUser },
+    components: { AdminNavbar, ModalAddUser, ModalDeleteUser },
     data: function () {
         return {
             users: [],
-            adminVerified: false,
-            modalActive: false,
+            chosenUser: {
+                _id: '',
+                firstName: '',
+                lastName: '',
+                store: '',
+                district: '',
+            },
+            addUserModalActive: false,
+            deleteUserModalActive: false,
         }
     },
     filters: {
@@ -76,19 +85,9 @@ export default {
                 console.log(error.msg)
             })
         },
-        deleteUser(_id) {
-            axios({
-                method: 'delete',
-                url: '/api/users/adminDeleteUser',
-                headers: { authorization: 'Bearer ' + JSON.parse(localStorage.getItem('jwt')) },
-                data: { _id }
-            })
-            .then((response) => {
-                location.reload()
-            })
-            .catch((error) => {
-                this.createUserError = error
-            })
+        openDeleteUserModal(user) {
+            this.chosenUser = user
+            this.deleteUserModalActive = true
         }
     },
     mounted() {
