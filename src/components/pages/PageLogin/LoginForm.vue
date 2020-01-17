@@ -1,8 +1,8 @@
 <template>
 <div class="loginFormDiv">
     <h2>Login</h2>
-    <input-field v-bind="{inputType: 'text', label:'Email', placeholder:'johndoe@gmail.com', meter:false}" :value="email" v-on:value-changed="$emit('change-email', $event)"/>
-    <input-field v-bind="{inputType: 'password', label:'Password', placeholder:'password', meter:false}" :value="password" v-on:value-changed="password = $event" v-on:keyupEnter="loginUser"/>
+    <input-field v-bind="{inputStyle: {initialInputType: 'text', label:'Email', placeholder:'johndoe@gmail.com', meter:false}}" :value="email" v-on:value-changed="$emit('change-email', $event)"/>
+    <input-field v-bind="{inputStyle: {initialInputType: 'password', label:'Password', placeholder:'password', meter:false}}" :value="password" v-on:value-changed="password = $event" v-on:keyupEnter="loginUser"/>
     <div class="forgotPassword"><a @click="$emit('change-to-form', 'ResetPasswordForm')">Forgot your password?</a></div>
     <div>
         <span v-if="errorText !== ''">{{ errorText }}</span>
@@ -47,6 +47,7 @@ export default {
                     this.saveTokenToLocalStorage(response.data.token)
                     this.mutate({ property: 'userEmail', with: this.email })
                     this.mutate({ property: 'jwtExp', with: response.data.jwtExp })
+                    this.mutate({ property: 'admin', with: response.data.admin })
                     this.$router.push('/')
                 }
             })
