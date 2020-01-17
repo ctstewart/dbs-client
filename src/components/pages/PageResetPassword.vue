@@ -3,10 +3,10 @@
     <div class="newPasswordDiv">
         <div class="newPasswordFormDiv">
             <h2>New Password</h2>
-            <input-field v-bind="{inputType: 'password', label:'Password', placeholder:'password', meter:true}" :value="password" v-on:value-changed="password = $event"/>
-            <input-field v-bind="{inputType: 'password', label:'Confirm Password', placeholder:'password', meter:false}" :value="confirmPassword" v-on:value-changed="confirmPassword = $event"/>
-            <span v-if="errorText !== ''" class="errorText">{{ errorText }}</span>
-            <span v-else-if="successText !== ''" class="successText">{{ successText }}</span>
+            <input-field v-bind="{inputStyle: {initialInputType: 'password', label:'Password', placeholder:'password', meter:true}}" :value="password" v-on:value-changed="password = $event"/>
+            <input-field v-bind="{inputStyle: {initialInputType: 'password', label:'Confirm Password', placeholder:'password', meter:false}}" :value="confirmPassword" v-on:value-changed="confirmPassword = $event"/>
+            <span v-if="errorText" class="errorText">{{ errorText }}</span>
+            <span v-else-if="successText" class="successText">{{ successText }}</span>
             <button v-else @click="resetPassword">SUBMIT</button>
         </div>
     </div>
@@ -15,6 +15,7 @@
 
 <script>
 import axios from 'axios'
+import zxcvbn from 'zxcvbn'
 import { mapMutations } from 'vuex'
 
 import InputField from '@/components/ui/InputField'
@@ -40,6 +41,12 @@ export default {
                 setTimeout(() => {
                     this.errorText = ''
                 }, 2000)
+            } else if (zxcvbn(this.password).score < 3) {
+                this.errorText = 'Please create a stronger password'
+                setTimeout(() => {
+                    this.errorText = ''
+                    this.$router.push('/login')
+                }, 2000)
             } else {
                 axios({
                     method: 'post',
@@ -54,10 +61,13 @@ export default {
                     }, 4000)
                 })
                 .catch((error) => {
-                    this.errorText = 'Unknown error. Please choose "Forgot your password?" again from the login page to send a new link.'
+                    if (error.msg) {
+                        this.errorText = error.msg
+                    } else {
+                        this.errorText = 'Unknown Error. Please try again.'
+                    }
                     setTimeout(() => {
                         this.errorText = ''
-                        this.$router.push('/login')
                     }, 4000)
                 })
             }
@@ -81,7 +91,7 @@ export default {
     .newPasswordDiv {
         display: -ms-grid;
         display: grid;
-        width: 40%;
+        width: 50%;
         height: 50%;
         margin: 0 auto;
         -ms-grid-row-align: center;
