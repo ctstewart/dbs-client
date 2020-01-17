@@ -127,7 +127,7 @@ export default {
                 this.createUserMsg = response.data.msg
                 setTimeout(() => {
                     location.reload()
-                }, 10000)
+                }, 5000)
             })
             .catch((error) => {
                 this.createUserError = error
