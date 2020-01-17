@@ -21,7 +21,7 @@
         <div v-else></div>
         <div class="actions">
             <!-- <i class="far fa-edit"></i> -->
-            <i class="fas fa-trash" @click="openDeleteUserModal(user)"></i>
+            <i v-if="!user.admin" class="fas fa-trash" @click="openDeleteUserModal(user)"></i>
         </div>
     </div>
     <modal-add-user v-if="addUserModalActive" v-on:close-modal="addUserModalActive = false"/>
