@@ -44,7 +44,6 @@ export default {
     border-right: 1px solid grey;
     
     > div {
-        display: -ms-grid;
         display: grid;
     }
 
@@ -73,7 +72,6 @@ export default {
     .forgotPassword {
         padding-top: 1%;
         font-size: 14px;
-        display: -ms-grid;
         display: grid;
         align-items: center;
         color: #1F596E;
@@ -84,15 +82,11 @@ export default {
 
 .buttonGroup {
     justify-self: end;
-    display: -ms-grid;
     display: grid;
     grid-template-columns: 1fr 1fr;
 
-    > button {
-        margin: 2%;
-    }
-
     > button:first-child {
+        margin-right: .25rem;
         background-color: white;
         color: #1F596E;
         border: 1px solid #1F596E;

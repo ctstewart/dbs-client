@@ -91,7 +91,6 @@ export default {
 
     .username {
         display: grid;
-        display: -ms-grid;
         text-align: center;
         align-self: center;
         /*border-bottom: 1px solid rgba(255,255,255,.8);*/
@@ -99,7 +98,6 @@ export default {
 
         .userInitials {
             display: grid;
-            display: -ms-grid;
             align-self: center;
             justify-self: center;
             border: 1px solid white;
