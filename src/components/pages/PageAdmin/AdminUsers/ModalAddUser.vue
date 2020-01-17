@@ -1,11 +1,11 @@
 <template>
 <div id="addUserModal" class="addUserModal">
     <div class="modal-content">
-        <span class="closeBtn" @click="modalActive = false">&times;</span>
+        <span class="closeBtn" @click="$emit('close-modal')">&times;</span>
         <h2>Create New User</h2>
-        <input-field v-bind="{inputType: 'text', label:'First Name', placeholder:'John', meter:false}" :value="firstName" v-on:value-changed="firstName = $event"/>
-        <input-field v-bind="{inputType: 'text', label:'Last Name', placeholder:'Doe', meter:false}" :value="lastName" v-on:value-changed="lastName = $event"/>
-        <input-field v-bind="{inputType: 'text', label:'Email', placeholder:'johndoe@wirelessworld.com', meter:false}" :value="email" v-on:value-changed="email = $event"/>
+        <input-field v-bind="{inputStyle: {initialInputType: 'text', label:'First Name', placeholder:'John', meter:false}}" :value="firstName" v-on:value-changed="firstName = $event"/>
+        <input-field v-bind="{inputStyle: {initialInputType: 'text', label:'Last Name', placeholder:'Doe', meter:false}}" :value="lastName" v-on:value-changed="lastName = $event"/>
+        <input-field v-bind="{inputStyle: {initialInputType: 'text', label:'Email', placeholder:'johndoe@wirelessworld.com', meter:false}}" :value="email" v-on:value-changed="email = $event"/>
         <div>
             <p>Store</p>
             <select v-model="store">
