@@ -1,7 +1,7 @@
 <template>
 <div class="passwordResetDiv">
     <h2>Password Reset</h2>
-    <input-field v-bind="{inputStyle: {initialInputType: 'text', label:'Email', placeholder:'johndoe@gmail.com', meter:false}}" :value="email" v-on:value-changed="$emit('change-email', $event.target.value)" v-on:keyupEnter="sendEmailForPasswordReset"/>
+    <input-field v-bind="{inputStyle: {initialInputType: 'text', label:'Email', placeholder:'johndoe@gmail.com', meter:false}}" :value="email" v-on:value-changed="$emit('change-email', $event)" v-on:keyupEnter="sendEmailForPasswordReset"/>
     <div></div>
     <div class="buttonGroup">
         <button @click="$emit('change-to-form', 'LoginForm')">Go Back</button>
