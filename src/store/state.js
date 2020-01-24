@@ -3,7 +3,8 @@ const state = () => {
         webappVersion: '1.1.0',
         userEmail: '',
         jwtExp: null,
-        admin: false
+        admin: false,
+        superAdmin: false
     }
 }
 
