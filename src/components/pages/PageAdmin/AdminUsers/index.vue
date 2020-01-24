@@ -2,15 +2,40 @@
 <div class="usersContainer">
     <button class="addUser" @click="addUserModalActive = true">Add User</button>
     <div class="usersTable">
-        <div>Name</div>
-        <div>Email</div>
-        <div>Store</div>
-        <div>District</div>
+        <div @click="sortMethod('firstName')">
+            Name
+            <i v-if="sort.sortField !== 'firstName'" class="fas fa-sort"></i>
+            <i v-else-if="sort.sortDirAsc" class="fas fa-sort-up"></i>
+            <i v-else-if="!sort.sortDirAsc" class="fas fa-sort-down"></i>
+        </div>
+        <div @click="sortMethod('email')">
+            Email
+            <i v-if="sort.sortField !== 'email'" class="fas fa-sort"></i>
+            <i v-else-if="sort.sortDirAsc" class="fas fa-sort-up"></i>
+            <i v-else-if="!sort.sortDirAsc" class="fas fa-sort-down"></i>
+        </div>
+        <div @click="sortMethod('store')">
+            Store
+            <i v-if="sort.sortField !== 'store'" class="fas fa-sort"></i>
+            <i v-else-if="sort.sortDirAsc" class="fas fa-sort-up"></i>
+            <i v-else-if="!sort.sortDirAsc" class="fas fa-sort-down"></i>
+        </div>
+        <div @click="sortMethod('district')">
+            District
+            <i v-if="sort.sortField !== 'district'" class="fas fa-sort"></i>
+            <i v-else-if="sort.sortDirAsc" class="fas fa-sort-up"></i>
+            <i v-else-if="!sort.sortDirAsc" class="fas fa-sort-down"></i>
+        </div>
         <div>Force New Password On Next Login?</div>
-        <div>Admin?</div>
+        <div @click="sortMethod('admin')">
+            Admin?
+            <i v-if="sort.sortField !== 'admin'" class="fas fa-sort"></i>
+            <i v-else-if="sort.sortDirAsc" class="fas fa-sort-up"></i>
+            <i v-else-if="!sort.sortDirAsc" class="fas fa-sort-down"></i>
+        </div>
         <div>Actions</div>
     </div>
-    <div class="usersTable" v-for="user in users" :key="user._id">
+    <div class="usersTable" v-for="user in sortedUsers" :key="user._id">
         <div>{{ user.firstName }} {{ user.lastName }}</div>
         <div>{{ user.email | abbreviateEmail }}@...</div>
         <div>{{ user.store }}</div>
@@ -51,7 +76,12 @@ export default {
                 email: '',
                 store: '',
                 district: '',
+                forceNewPasswordOnNextLogin: false,
                 admin: false,
+            },
+            sort: {
+                sortField: 'store',
+                sortDirAsc: true
             },
             addUserModalActive: false,
             deleteUserModalActive: false,
@@ -71,20 +101,7 @@ export default {
                 headers: { authorization: 'Bearer ' + JSON.parse(localStorage.getItem('jwt')) }
             })
             .then(response => {
-                const compare = ((a, b) => {
-                    const userA = a.email.toLowerCase()
-                    const userB = b.email.toLowerCase()
-
-                    var comparison = 0
-                    if (userA > userB) {
-                        comparison = 1
-                    } else if (userA < userB) {
-                        comparison = -1
-                    }
-
-                    return comparison
-                })
-                this.users = response.data.users.sort(compare)
+                this.users = response.data.users
             })
             .catch(error => {
                 console.log(error.msg)
@@ -97,6 +114,47 @@ export default {
         openUpdateUserModal(user) {
             this.chosenUser = user
             this.updateUserModalActive = true
+        },
+        sortMethod(clickedSortField) {
+            if (this.sort.sortField !== clickedSortField) {
+                this.sort.sortField = clickedSortField
+                this.sort.sortDirAsc = true
+            } else {
+                this.sort.sortDirAsc = !this.sort.sortDirAsc
+            }
+            console.log(this.sort.sortField)
+        },
+        compareValues(key, order = 'asc') {
+            return function innerSort(a, b) {
+                if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
+                    return 0
+                }
+
+                const varA = (typeof a[key] === 'string')
+                ? a[key].toUpperCase() : a[key]
+
+                const varB = (typeof b[key] === 'string')
+                ? b[key].toUpperCase() : b[key]
+
+                let comparison = 0
+                if (varA > varB) {
+                    comparison = 1
+                } else if (varA < varB) {
+                    comparison = -1
+                }
+                return (
+                    (order === 'desc') ? (comparison * -1) : comparison
+                )
+            }
+        }
+    },
+    computed: {
+        sortedUsers() {
+            if (this.sort.sortDirAsc) {
+                return this.users.sort(this.compareValues(this.sort.sortField))
+            } else if (!this.sort.sortDirAsc) {
+                return this.users.sort(this.compareValues(this.sort.sortField, 'desc'))
+            }
         }
     },
     mounted() {
@@ -140,6 +198,7 @@ export default {
 
         &:first-of-type {
             font-weight: bold;
+            cursor: pointer;
         }
 
         &:nth-of-type(2n) {

@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 - Add dropdown to change between hamburger, detailed, and difference only views
 
+## [1.3.0] - 2020-01-24
+### Added
+- Admins now have the ability to sort users
+
+## [1.2.0] - 2020-01-24
+### Added
+- Admins can now edit users
+- Added super admin functionality
+    - Super admins can edit and delete other admins
+    - They can also change users to admins
+
+## [1.1.0]
+
+## [1.0.0]
+
 ## [1.0.2] - 2019-11-23
 ### Fixed
 - Fixed the issue where DPP wasn't adding in properly.
