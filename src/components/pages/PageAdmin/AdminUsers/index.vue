@@ -20,12 +20,13 @@
         <div v-if="user.admin"><i class="fas fa-check"></i></div>
         <div v-else></div>
         <div class="actions">
-            <!-- <i class="far fa-edit"></i> -->
-            <i v-if="!user.admin" class="fas fa-trash" @click="openDeleteUserModal(user)"></i>
+            <i v-if="!user.admin || $store.state.superAdmin && !user.superAdmin" class="far fa-edit" @click="openUpdateUserModal(user)"></i>
+            <i v-if="!user.admin || $store.state.superAdmin && !user.superAdmin" class="fas fa-trash" @click="openDeleteUserModal(user)"></i>
         </div>
     </div>
     <modal-add-user v-if="addUserModalActive" v-on:close-modal="addUserModalActive = false"/>
     <modal-delete-user v-if="deleteUserModalActive" v-bind="chosenUser" v-on:close-modal="deleteUserModalActive = false"/>
+    <modal-update-user v-if="updateUserModalActive" v-bind="chosenUser" v-on:close-modal="updateUserModalActive = false"/>
 </div>
 </template>
 
@@ -35,10 +36,11 @@ import axios from 'axios'
 import AdminNavbar from '../AdminNavbar'
 import ModalAddUser from './ModalAddUser'
 import ModalDeleteUser from './ModalDeleteUser'
+import ModalUpdateUser from './ModalUpdateUser'
 
 export default {
     name: 'PageAdmin',
-    components: { AdminNavbar, ModalAddUser, ModalDeleteUser },
+    components: { AdminNavbar, ModalAddUser, ModalDeleteUser, ModalUpdateUser },
     data: function () {
         return {
             users: [],
@@ -46,11 +48,14 @@ export default {
                 _id: '',
                 firstName: '',
                 lastName: '',
+                email: '',
                 store: '',
                 district: '',
+                admin: false,
             },
             addUserModalActive: false,
             deleteUserModalActive: false,
+            updateUserModalActive: false,
         }
     },
     filters: {
@@ -88,6 +93,10 @@ export default {
         openDeleteUserModal(user) {
             this.chosenUser = user
             this.deleteUserModalActive = true
+        },
+        openUpdateUserModal(user) {
+            this.chosenUser = user
+            this.updateUserModalActive = true
         }
     },
     mounted() {
