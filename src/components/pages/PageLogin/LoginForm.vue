@@ -48,6 +48,7 @@ export default {
                     this.mutate({ property: 'userEmail', with: this.email })
                     this.mutate({ property: 'jwtExp', with: response.data.jwtExp })
                     this.mutate({ property: 'admin', with: response.data.admin })
+                    this.mutate({ property: 'superAdmin', with: response.data.superAdmin })
                     this.$router.push('/')
                 }
             })
