@@ -42,7 +42,6 @@ export default {
             email: '',
             store: '---Select a store---',
             district: '---Select a district---',
-            temporaryPassword: '',
             createUserError: '',
             createUserMsg: '',
             stores: [
@@ -120,7 +119,6 @@ export default {
                     email: this.email,
                     store: this.store,
                     district: this.district,
-                    password: this.temporaryPassword
                 }
             })
             .then((response) => {
