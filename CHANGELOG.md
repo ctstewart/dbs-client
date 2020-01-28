@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 - Add dropdown to change between hamburger, detailed, and difference only views
 
+## [1.4.0] - 2020-01-28
+### Added
+- Admins can now filter users
+
+### Changed
+- Due to popular request, I changed TMP to an input (instead of a dropdown)
+
 ## [1.3.0] - 2020-01-24
 ### Added
 - Admins now have the ability to sort users
@@ -18,9 +25,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - Super admins can edit and delete other admins
     - They can also change users to admins
 
-## [1.1.0]
+## [1.1.0] - 2020-01-21
+- First widespread release
 
-## [1.0.0]
+### Added
+- Added an admin panel
+    - The admin panel allows admins to add and remove users
+- Added the ability for users to reset their password
+    - This is done by sending an email to the user with a link for temporary authorization
+
+### Changed
+- Changed the login page layout and style
 
 ## [1.0.2] - 2019-11-23
 ### Fixed
