@@ -70,8 +70,8 @@ describe('2gb', () => {
     })
 
     it('tmp', () => {
-        mutations.mutate(state, {property: 'tmp', with: '$45'})
-        expect(state.tmp).to.equal('$45')
+        mutations.mutate(state, {property: 'tmp', with: 45})
+        expect(state.tmp).to.equal(45)
     })
 
     var tmpTotal = null
@@ -82,25 +82,25 @@ describe('2gb', () => {
 
     var dppTotal = null
     it('dppTotal', () => {
-        mutations.mutateExistingDpp(state, {index: 0, value: 22.50})
-        mutations.mutateExistingDpp(state, {index: 1, value: 50})
-        mutations.mutateExistingDpp(state, {index: 2, value: 19.17})
-        mutations.mutateExistingDpp(state, {index: 3, value: 25.42})
-        mutations.mutateExistingDpp(state, {index: 4, value: 35})
-        mutations.mutateExistingDpp(state, {index: 5, value: 52.50})
-        mutations.mutateExistingDpp(state, {index: 6, value: 10})
-        mutations.mutateExistingDpp(state, {index: 7, value: 21.25})
-        mutations.mutateExistingDpp(state, {index: 8, value: 29.58})
+        mutations.mutateExistingDpp(state, {index: 0, value: 22.50 * 100})
+        mutations.mutateExistingDpp(state, {index: 1, value: 50 * 100})
+        mutations.mutateExistingDpp(state, {index: 2, value: 19.17 * 100})
+        mutations.mutateExistingDpp(state, {index: 3, value: 25.42 * 100})
+        mutations.mutateExistingDpp(state, {index: 4, value: 35 * 100})
+        mutations.mutateExistingDpp(state, {index: 5, value: 52.50 * 100})
+        mutations.mutateExistingDpp(state, {index: 6, value: 10 * 100})
+        mutations.mutateExistingDpp(state, {index: 7, value: 21.25 * 100})
+        mutations.mutateExistingDpp(state, {index: 8, value: 29.58 * 100})
 
-        mutations.mutateExistingCredits(state, {index: 0, value: 17.19})
-        mutations.mutateExistingCredits(state, {index: 1, value: 30})
-        mutations.mutateExistingCredits(state, {index: 2, value: 15})
-        mutations.mutateExistingCredits(state, {index: 3, value: 10})
-        mutations.mutateExistingCredits(state, {index: 4, value: 8.34})
-        mutations.mutateExistingCredits(state, {index: 5, value: 15})
-        mutations.mutateExistingCredits(state, {index: 6, value: 19.17})
-        mutations.mutateExistingCredits(state, {index: 7, value: 5})
-        mutations.mutateExistingCredits(state, {index: 8, value: 10})
+        mutations.mutateExistingCredits(state, {index: 0, value: 17.19 * 100})
+        mutations.mutateExistingCredits(state, {index: 1, value: 30 * 100})
+        mutations.mutateExistingCredits(state, {index: 2, value: 15 * 100})
+        mutations.mutateExistingCredits(state, {index: 3, value: 10 * 100})
+        mutations.mutateExistingCredits(state, {index: 4, value: 8.34 * 100})
+        mutations.mutateExistingCredits(state, {index: 5, value: 15 * 100})
+        mutations.mutateExistingCredits(state, {index: 6, value: 19.17 * 100})
+        mutations.mutateExistingCredits(state, {index: 7, value: 5 * 100})
+        mutations.mutateExistingCredits(state, {index: 8, value: 10 * 100})
 
         dppTotal = getters.dppTotal(state)
         expect(parseFloat(dppTotal.toFixed(2))).to.equal(135.72)
