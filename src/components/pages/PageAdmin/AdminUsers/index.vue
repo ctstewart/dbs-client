@@ -1,6 +1,16 @@
 <template>
 <div class="usersContainer">
     <button class="addUser" @click="addUserModalActive = true">Add User</button>
+    <span class="filterUsers">
+        <p>Filter By:</p>
+        <select v-model="selectedFilter">
+            <option v-for="option in filter" :value="option.id" :key="option.id">{{ option.label }}</option>
+        </select>
+        <div class="filterSearch">
+            <i class="fas fa-search"></i>
+            <input type="text" placeholder="Filter" v-model="filterText"/>
+        </div>
+    </span>
     <div class="usersTable">
         <div @click="sortMethod('firstName')">
             Name
@@ -83,6 +93,13 @@ export default {
                 sortField: 'store',
                 sortDirAsc: true
             },
+            filter: [
+                { id: 'store', label: 'Store' },
+                { id: 'district', label: 'District' },
+                { id: 'firstName', label: 'Name' }
+            ],
+            selectedFilter: 'store',
+            filterText: '',
             addUserModalActive: false,
             deleteUserModalActive: false,
             updateUserModalActive: false,
@@ -150,11 +167,18 @@ export default {
     },
     computed: {
         sortedUsers() {
+            let localArray = []
             if (this.sort.sortDirAsc) {
-                return this.users.sort(this.compareValues(this.sort.sortField))
+                localArray = this.users.sort(this.compareValues(this.sort.sortField))
             } else if (!this.sort.sortDirAsc) {
-                return this.users.sort(this.compareValues(this.sort.sortField, 'desc'))
+                localArray = this.users.sort(this.compareValues(this.sort.sortField, 'desc'))
             }
+
+            if (this.filterText) {
+                localArray = localArray.filter(user => user[this.selectedFilter].toLowerCase().includes(this.filterText.toLowerCase())) 
+            }
+
+            return localArray
         }
     },
     mounted() {
@@ -185,6 +209,49 @@ export default {
 
         &:focus {
             outline: none;
+        }
+    }
+
+    .filterUsers {
+        display: flex;
+        align-items: center;
+        font-size: .9rem;
+
+        * {
+            margin: 1rem;
+        }
+
+        select {
+            border: none;
+            border-bottom: 1px solid grey;
+            outline: none;
+            height: 2rem;
+            width: 6rem;
+            text-align: center;
+            font-size: .9rem;
+        }
+
+        .filterSearch {
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid grey;
+            width: 15rem;
+            height: 2rem;
+            font-size: .9rem;
+
+            i {
+                margin: 0 .75rem 0 .25rem;
+            }
+
+            input {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+                border: none;
+                outline: none;
+                font-size: .9rem;
+            }
         }
     }
 
