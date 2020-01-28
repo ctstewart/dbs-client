@@ -15,6 +15,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Due to popular request, I changed TMP to an input (instead of a dropdown)
     - Make sure you do not add a "$" to the beginning of the amount, otherwise it will not calculate properly
 
+### Fixed
+- Fixed an issue where a single "Do More" phone was giving a discount on up to 10 jetpacks or tablets
+
 ## [1.3.0] - 2020-01-24
 ### Added
 - Admins now have the ability to sort users
