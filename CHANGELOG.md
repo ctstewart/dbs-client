@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 - Add dropdown to change between hamburger, detailed, and difference only views
 
+## [1.5.0] - 2020-01-28
+### Added
+- Added a Changelog page so people can actually see this!
+    - You get to it by clicking the version number on the sidebar
+
 ## [1.4.0] - 2020-01-28
 ### Added
 - Admins can now filter users
