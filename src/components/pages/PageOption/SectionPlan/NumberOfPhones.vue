@@ -2,7 +2,7 @@
 <div v-if="isUnlimited" class="input fiveColumns">
     <div class='twoColumns' v-for="(plan, index) in mixAndMatchNumberOfPhonesAndId" :key="plan.id">
         <div>{{plan.id}}</div>
-        <select :value="plan.numberOfPhones" @change="setMixAndMatchPlans({index, value: $event.target.value})">
+        <select :value="plan.numberOfPhones" @change="setMixAndMatchPlans({index, value: parseInt($event.target.value)})">
             <option v-for="i in 11" :key="i">{{i - 1}}</option>
         </select>
     </div>
