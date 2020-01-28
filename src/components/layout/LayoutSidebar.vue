@@ -15,7 +15,7 @@
     <div class="versionAndLogout">
         <a class="logout" @click="logout">Logout</a>
         <router-link v-if="admin" to="/admin">Admin Panel</router-link>
-        <a class="versionFormatting">Version: {{webappVersion}}</a>
+        <a class="versionFormatting">Version: 1.4.0</a>
     </div>
 </div>
 </template>
