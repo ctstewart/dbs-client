@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Due to popular request, I changed TMP to an input (instead of a dropdown)
+    - Make sure you do not add a "$" to the beginning of the amount, otherwise it will not calculate properly
 
 ## [1.3.0] - 2020-01-24
 ### Added
