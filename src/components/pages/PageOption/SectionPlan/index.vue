@@ -111,7 +111,7 @@ export default {
   align-self: end;
 }
 
-.main select, .switch {
+.main select, .main input, .switch {
   -webkit-appearance: none;  /* for webkit (safari, chrome) compatibility */
   -moz-appearance: none; /* for firefox compatibility */
   appearance: none;

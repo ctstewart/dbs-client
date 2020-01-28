@@ -12,7 +12,7 @@
             </div>
             <div>
                 <p>TMP:</p>
-                <div>{{ i.tmpTotal }}.00</div>
+                <div>${{ i.tmpTotal.toFixed(2) }}</div>
             </div>
             <div>
                 <p>DPP:</p>
@@ -40,7 +40,7 @@ export default {
               id: 'Option 1',
               chosenPlan: state['optionOne'].chosenPlan,
               planTotal: getters['optionOne/planTotal'],
-              tmpTotal: state['optionOne'].tmp,
+              tmpTotal: getters['optionOne/tmpTotal'],
               dppTotal: getters['optionOne/dppTotal'],
               total: getters['optionOne/total']
             },
@@ -48,7 +48,7 @@ export default {
               id: 'Option 2',
               chosenPlan: state['optionTwo'].chosenPlan,
               planTotal: getters['optionTwo/planTotal'],
-              tmpTotal: state['optionTwo'].tmp,
+              tmpTotal: getters['optionTwo/tmpTotal'],
               dppTotal: getters['optionTwo/dppTotal'],
               total: getters['optionTwo/total']
             },

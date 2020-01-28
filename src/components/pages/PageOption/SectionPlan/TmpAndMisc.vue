@@ -1,9 +1,7 @@
 <template>
 <div class="input eightColumns">
     <div>TMP</div>
-    <select :value="tmp" @change="mutate({property: 'tmp', with: $event.target.value})">
-        <option v-for="i in 201" :key="i">${{i - 1}}</option>
-    </select>
+    <input :value="tmp" @change="mutate({property: 'tmp', with: $event.target.value})">
     <div>Phones in 2 year Contracts</div>
     <select :value="twoyear" @change="mutate({property: 'twoyear', with: $event.target.value})">
         <option v-for="i in 11" :key="i">{{i - 1}}</option>
