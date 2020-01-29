@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 - Add dropdown to change between hamburger, detailed, and difference only views
 
+## [1.6.0] - 2020-01-29
+### Added
+- Admins can now see very basic app usage per user
+    - This shows a list of times the user has logged in
+
 ## [1.5.0] - 2020-01-28
 ### Added
 - Added a Changelog page so people can actually see this!
