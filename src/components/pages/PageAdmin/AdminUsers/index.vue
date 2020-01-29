@@ -11,57 +11,40 @@
             <input type="text" placeholder="Filter" v-model="filterText"/>
         </div>
     </span>
-    <div class="usersTable">
-        <div @click="sortMethod('firstName')">
-            Name
-            <i v-if="sort.sortField !== 'firstName'" class="fas fa-sort"></i>
-            <i v-else-if="sort.sortDirAsc" class="fas fa-sort-up"></i>
-            <i v-else-if="!sort.sortDirAsc" class="fas fa-sort-down"></i>
-        </div>
-        <div @click="sortMethod('email')">
-            Email
-            <i v-if="sort.sortField !== 'email'" class="fas fa-sort"></i>
-            <i v-else-if="sort.sortDirAsc" class="fas fa-sort-up"></i>
-            <i v-else-if="!sort.sortDirAsc" class="fas fa-sort-down"></i>
-        </div>
-        <div @click="sortMethod('store')">
-            Store
-            <i v-if="sort.sortField !== 'store'" class="fas fa-sort"></i>
-            <i v-else-if="sort.sortDirAsc" class="fas fa-sort-up"></i>
-            <i v-else-if="!sort.sortDirAsc" class="fas fa-sort-down"></i>
-        </div>
-        <div @click="sortMethod('district')">
-            District
-            <i v-if="sort.sortField !== 'district'" class="fas fa-sort"></i>
-            <i v-else-if="sort.sortDirAsc" class="fas fa-sort-up"></i>
-            <i v-else-if="!sort.sortDirAsc" class="fas fa-sort-down"></i>
-        </div>
-        <div>Force New Password On Next Login?</div>
-        <div @click="sortMethod('admin')">
-            Admin?
-            <i v-if="sort.sortField !== 'admin'" class="fas fa-sort"></i>
-            <i v-else-if="sort.sortDirAsc" class="fas fa-sort-up"></i>
-            <i v-else-if="!sort.sortDirAsc" class="fas fa-sort-down"></i>
-        </div>
-        <div>Actions</div>
+    <div class="loadingSpinner" v-if="loading">
+        <i class="fas fa-spinner fa-spin"></i>
     </div>
-    <div class="usersTable" v-for="user in sortedUsers" :key="user._id">
-        <div>{{ user.firstName }} {{ user.lastName }}</div>
-        <div>{{ user.email | abbreviateEmail }}@...</div>
-        <div>{{ user.store }}</div>
-        <div>{{ user.district }}</div>
-        <div v-if="user.forceNewPasswordOnNextLogin"><i class="fas fa-check"></i></div>
-        <div v-else></div>
-        <div v-if="user.admin"><i class="fas fa-check"></i></div>
-        <div v-else></div>
-        <div class="actions">
-            <i v-if="!user.admin || $store.state.superAdmin && !user.superAdmin" class="far fa-edit" @click="openUpdateUserModal(user)"></i>
-            <i v-if="!user.admin || $store.state.superAdmin && !user.superAdmin" class="fas fa-trash" @click="openDeleteUserModal(user)"></i>
+    <div v-else>
+        <div class="usersTable">
+            <div v-for="(i, index) in sortableTableHeaders" @click="sortMethod(i.sortMethodVariable)" :key="index">
+                {{ i.label }}
+                <i v-if="sort.sortField !== i.sortMethodVariable" class="fas fa-sort"></i>
+                <i v-else-if="sort.sortDirAsc" class="fas fa-sort-up"></i>
+                <i v-else-if="!sort.sortDirAsc" class="fas fa-sort-down"></i>
+            </div>
+            <div>Force New Password On Next Login?</div>
+            <div>Actions</div>
+        </div>
+        <div class="usersTable" v-for="user in sortedUsers" :key="user._id">
+            <div>{{ user.firstName }} {{ user.lastName }}</div>
+            <div>{{ user.email | abbreviateEmail }}@...</div>
+            <div>{{ user.store }}</div>
+            <div>{{ user.district }}</div>
+            <div v-if="user.admin"><i class="fas fa-check"></i></div>
+            <div v-else></div>
+            <div v-if="user.forceNewPasswordOnNextLogin"><i class="fas fa-check"></i></div>
+            <div v-else></div>
+            <div class="actions">
+                <i v-if="!user.admin || $store.state.superAdmin && !user.superAdmin" class="fas fa-scroll" @click="openUserUsageModal(user)"></i>
+                <i v-if="!user.admin || $store.state.superAdmin && !user.superAdmin" class="fas fa-edit" @click="openUpdateUserModal(user)"></i>
+                <i v-if="!user.admin || $store.state.superAdmin && !user.superAdmin" class="fas fa-trash" @click="openDeleteUserModal(user)"></i>
+            </div>
         </div>
     </div>
     <modal-add-user v-if="addUserModalActive" v-on:close-modal="addUserModalActive = false"/>
-    <modal-delete-user v-if="deleteUserModalActive" v-bind="chosenUser" v-on:close-modal="deleteUserModalActive = false"/>
-    <modal-update-user v-if="updateUserModalActive" v-bind="chosenUser" v-on:close-modal="updateUserModalActive = false"/>
+    <modal-delete-user v-else-if="deleteUserModalActive" v-bind="chosenUser" v-on:close-modal="deleteUserModalActive = false"/>
+    <modal-update-user v-else-if="updateUserModalActive" v-bind="chosenUser" v-on:close-modal="updateUserModalActive = false"/>
+    <modal-user-usage v-else-if="userUsageModalActive" v-bind="chosenUser" v-on:close-modal="userUsageModalActive = false"/>
 </div>
 </template>
 
@@ -69,15 +52,17 @@
 import axios from 'axios'
 
 import AdminNavbar from '../AdminNavbar'
-import ModalAddUser from './ModalAddUser'
-import ModalDeleteUser from './ModalDeleteUser'
-import ModalUpdateUser from './ModalUpdateUser'
+import ModalAddUser from './modals/ModalAddUser'
+import ModalDeleteUser from './modals/ModalDeleteUser'
+import ModalUpdateUser from './modals/ModalUpdateUser'
+import ModalUserUsage from './modals/ModalUserUsage'
 
 export default {
     name: 'PageAdmin',
-    components: { AdminNavbar, ModalAddUser, ModalDeleteUser, ModalUpdateUser },
+    components: { AdminNavbar, ModalAddUser, ModalDeleteUser, ModalUpdateUser, ModalUserUsage },
     data: function () {
         return {
+            loading: true,
             users: [],
             chosenUser: {
                 _id: '',
@@ -98,11 +83,19 @@ export default {
                 { id: 'district', label: 'District' },
                 { id: 'firstName', label: 'Name' }
             ],
+            sortableTableHeaders: [
+                { sortMethodVariable: 'firstName', label: 'Name' },
+                { sortMethodVariable: 'email', label: 'Email' },
+                { sortMethodVariable: 'store', label: 'Store' },
+                { sortMethodVariable: 'district', label: 'District' },
+                { sortMethodVariable: 'admin', label: 'Admin' },
+            ],
             selectedFilter: 'store',
             filterText: '',
             addUserModalActive: false,
             deleteUserModalActive: false,
             updateUserModalActive: false,
+            userUsageModalActive: false
         }
     },
     filters: {
@@ -119,6 +112,7 @@ export default {
             })
             .then(response => {
                 this.users = response.data.users
+                this.loading = false
             })
             .catch(error => {
                 console.log(error.msg)
@@ -131,6 +125,10 @@ export default {
         openUpdateUserModal(user) {
             this.chosenUser = user
             this.updateUserModalActive = true
+        },
+        openUserUsageModal(user) {
+            this.chosenUser = user
+            this.userUsageModalActive = true
         },
         sortMethod(clickedSortField) {
             if (this.sort.sortField !== clickedSortField) {
@@ -253,6 +251,11 @@ export default {
                 font-size: .9rem;
             }
         }
+    }
+
+    .loadingSpinner {
+        text-align: center;
+        font-size: 2rem;
     }
 
     .usersTable {
