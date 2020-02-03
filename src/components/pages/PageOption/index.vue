@@ -1,5 +1,5 @@
 <template>
-<div class="all">
+<div class="all gradientBackground">
     <layout-sidebar/>
     <div class="mainContent">
         <div class="titleBar">
@@ -38,69 +38,69 @@ import SectionPullthru from './SectionPullthru'
 import SectionDpp from './SectionDpp'
 
 export default {
-  name: 'LayoutOption',
-  mixins: [jwtExpCheck],
-  components: { LayoutSidebar, SectionPlan, SectionPullthru, SectionDpp },
-  data() {
-    return {
-      currentTab: 'SectionPlan',
-      whichOption: '',
-      tabs: [
-        { id: 'SectionPlan', label: 'Plan', active: true },
-        { id: 'SectionPullthru', label: 'Pull Thru', active: false },
-        { id: 'SectionDpp', label: 'DPP', active: false }
-      ],
-    }
-  },
-
-  beforeRouteUpdate (to, from, next) {
-    if (to.params.vuexModule === 'optionOne') {
-      this.whichOption = 'Option 1'
-    } else if (to.params.vuexModule === 'optionTwo') {
-      this.whichOption = 'Option 2'
-    }
-    next()
-  },
-
-  created () {
-    if (this.$route.params.vuexModule === 'optionOne') {
-      this.whichOption = 'Option 1'
-    } else if (this.$route.params.vuexModule === 'optionTwo') {
-      this.whichOption = 'Option 2'
-    }
-  },
-
-  methods: {
-    ...mapMutations({
-      resetState (commit) {
-        return commit(`${this.$route.params.vuexModule}/resetState`)
-      }
-    }),
-    ...mapMutations([
-      'copyModuleOptionOneToOptionTwo'
-    ]),
-    navbarClick(id) {
-      this.tabs.forEach((tab) => {
-        if (tab.id === id) {
-          tab.active = true
-          this.currentTab = tab.id
-        } else {
-          tab.active = false
+    name: 'LayoutOption',
+    mixins: [jwtExpCheck],
+    components: { LayoutSidebar, SectionPlan, SectionPullthru, SectionDpp },
+    data() {
+        return {
+            currentTab: 'SectionPlan',
+            whichOption: '',
+            tabs: [
+                { id: 'SectionPlan', label: 'Plan', active: true },
+                { id: 'SectionPullthru', label: 'Pull Thru', active: false },
+                { id: 'SectionDpp', label: 'DPP', active: false }
+            ],
         }
-      })
     },
-  },
 
-  computed: {
-    ...mapState({
-      chosenPlan (state) {
-        return state[this.$route.params.vuexModule].chosenPlan
-      },
-      total (state, getters) {
-        return getters[`${this.$route.params.vuexModule}/total`]
-      }
-    }),
-  }
+    beforeRouteUpdate (to, from, next) {
+        if (to.params.vuexModule === 'optionOne') {
+            this.whichOption = 'Option 1'
+        } else if (to.params.vuexModule === 'optionTwo') {
+            this.whichOption = 'Option 2'
+        }
+        next()
+    },
+
+    created () {
+        if (this.$route.params.vuexModule === 'optionOne') {
+            this.whichOption = 'Option 1'
+        } else if (this.$route.params.vuexModule === 'optionTwo') {
+            this.whichOption = 'Option 2'
+        }
+    },
+
+    methods: {
+        ...mapMutations({
+            resetState (commit) {
+                return commit(`${this.$route.params.vuexModule}/resetState`)
+            }
+        }),
+        ...mapMutations([
+            'copyModuleOptionOneToOptionTwo'
+        ]),
+        navbarClick(id) {
+            this.tabs.forEach((tab) => {
+                if (tab.id === id) {
+                    tab.active = true
+                    this.currentTab = tab.id
+                } else {
+                    tab.active = false
+                }
+            })
+        },
+    },
+
+    computed: {
+        ...mapState({
+            chosenPlan (state) {
+                return state[this.$route.params.vuexModule].chosenPlan
+            },
+            total (state, getters) {
+                return getters[`${this.$route.params.vuexModule}/total`]
+            }
+        }),
+    }
 }
 </script>
 
@@ -109,121 +109,113 @@ export default {
 @newBlue: rgba(31,89,110);
 @oldSectionGreen: #387A77;
 
-.display-none {
-    display: none;
-}
-
-.display-grid {
-    display: grid;
-}
-
 .all {
     height: 100%;
     display: grid;
     grid-template-columns: 1fr 4fr;
-}
 
-.mainContent {
-    display: grid;
-    margin: 2%;
-    background-color: rgba(255,255,255,.9);
-    grid-template-rows: 10% 10% 80%;
-    border-radius: 5px;
-}
+    .mainContent {
+        display: grid;
+        margin: 2%;
+        background-color: rgba(255,255,255,.9);
+        grid-template-rows: 10% 10% 80%;
+        border-radius: 5px;
 
-.titleBar {
-    background-color: @oldSectionGreen;
-    color: #F6F6F6;
-    font-weight: bold;
-    text-align: center;
-    display: grid;
-    border-bottom: 2px solid rgba(0,0,0,.5);
-    border-radius: 5px 5px 0 0;
-    grid-template-columns: 1fr 1fr 1fr;
-}
+        .titleBar {
+            background-color: @oldSectionGreen;
+            color: #F6F6F6;
+            font-weight: bold;
+            text-align: center;
+            display: grid;
+            border-bottom: 2px solid rgba(0,0,0,.5);
+            border-radius: 5px 5px 0 0;
+            grid-template-columns: 1fr 1fr 1fr;
 
-.titleBar p {
-    width: 0 auto;
-    margin: 0;
-    align-self: center;
-    font-size: 24px;
-    grid-area: 1 / 2 / 2 / 3;
-}
+            p {
+                width: 0 auto;
+                margin: 0;
+                align-self: center;
+                font-size: 24px;
+                grid-area: 1 / 2 / 2 / 3;
+            }
 
-.copyButton, .clearButton {
-    align-items: center;
-    display: grid;
-    margin-right: 3%;
-    margin-left: 3%;
-}
+            .copyButton, .clearButton {
+                align-items: center;
+                display: grid;
+                margin-right: 3%;
+                margin-left: 3%;
 
-.titleBar i {
-    cursor: pointer;
-}
+                i {
+                    cursor: pointer;
+                }
+            }
 
-.copyButton {
-    grid-template-columns: 30% 70%;
-}
+            .copyButton {
+                grid-template-columns: 30% 70%;
+            }
 
-.clearButton {
-    grid-template-columns: 70% 30%;
-}
+            .clearButton {
+                grid-template-columns: 70% 30%;
+            }           
+        }
 
-.navBar {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 5fr;
-    margin-left: 1%;
-    color: @oldSectionGreen;
-}
+        .navBar {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 5fr;
+            margin-left: 1%;
+            color: @oldSectionGreen;
 
-.navBar button {
-    margin: 0;
-    padding: 0;
-    background-color: #D3DFE1;
-    height: 70%;
-    align-self: end;
-    border: 1px solid rgba(0,0,0,.2);
-    font-size: 16px;
-    font-weight: bold;
-    /* font-style: italic; */
-    display: grid;
-    align-items: center;
-    cursor: pointer;
-    outline: 0;
-    color: @oldSectionGreen;
-}
+            button {
+                margin: 0;
+                padding: 0;
+                background-color: #D3DFE1;
+                height: 70%;
+                align-self: end;
+                border: 1px solid rgba(0,0,0,.2);
+                font-size: 16px;
+                font-weight: bold;
+                /* font-style: italic; */
+                display: grid;
+                align-items: center;
+                cursor: pointer;
+                outline: 0;
+                color: @oldSectionGreen;
 
-.navBar button p {
-    margin: 0;
-    padding: 0;
-}
+                &:first-child {
+                    border-top-left-radius: 10px;
+                }
 
-.navBar button:first-child {
-    border-top-left-radius: 10px;
-}
+                &:nth-child(3) {
+                    border-top-right-radius: 10px;
+                }
 
-.navBar button:nth-child(3) {
-    border-top-right-radius: 10px;
-}
+                &.activetab {
+                    background-color: @oldSectionGreen;
+                    color: white;
+                    border: none;
+                }
 
-.navBar button.activetab {
-    background-color: @oldSectionGreen;
-    color: white;
-    border: none;
-}
+                p {
+                    margin: 0;
+                    padding: 0;
+                }
+            }
 
-div.active {
-    display: grid;
-}
+            div {
+                align-self: end;
+                justify-self: end;
+                font-size: 24px;
+                font-weight: bold;
+                margin-right: 1%;
+                margin-bottom: 1%;
+                width: 40%;
+                text-align: center;
 
-.navBar div {
-    align-self: end;
-    justify-self: end;
-    font-size: 24px;
-    font-weight: bold;
-    margin-right: 1%;
-    margin-bottom: 1%;
-    width: 40%;
-    text-align: center;
+                &.active {
+                    display: grid;
+                }
+            }
+        }
+    }
 }
 </style>
