@@ -14,7 +14,7 @@
             </ul>
         </div>
     </div>
-    <div class="footer">Copyright &#9400; 2018-Current Christian Stewart All Rights Reserved</div>
+    <div class="footer">Copyright &#9400; 2018-present, Christian Stewart All Rights Reserved</div>
 </div>
 </template>
 
