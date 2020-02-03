@@ -1,5 +1,5 @@
 <template>
-<div class="loginContainer">
+<div class="loginContainer gradientBackground">
     <div class="mainLoginDiv">
         <component v-bind:is="currentComponent" :email="email" v-on:change-email="email = $event" v-on:change-to-form="currentComponent = $event"/>
         <div class="loginInfoDiv">
@@ -14,6 +14,7 @@
             </ul>
         </div>
     </div>
+    <div class="footer">Copyright &#9400; 2018-Current Christian Stewart All Rights Reserved</div>
 </div>
 </template>
 
@@ -63,5 +64,15 @@ export default {
     > div {
         padding: 1rem;
     }
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 400px;
+    left: 50%;
+    margin-left: -200px;
+    font-size: .8rem;
+    color: white;
 }
 </style>
