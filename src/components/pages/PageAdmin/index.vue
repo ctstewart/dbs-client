@@ -17,13 +17,8 @@ export default {
 }
 </script>
 
-<style>
-html, body {
-    background-color: white !important;
-}
-
+<style lang="less" scoped>
 .fullscreenContainer {
     min-height: 100%;
-    background-color: white;
 }
 </style>

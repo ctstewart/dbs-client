@@ -1,6 +1,5 @@
 <template>
 <div class="sidebar">
-    <!-- <div class="username"><img src="@/assets/tempUserIcon.png"><br>{{userEmail}}</div> -->
     <div class="username">
         <div class="userInitials">
             <span>{{userEmail.slice(0,2).toUpperCase()}}</span>
@@ -11,7 +10,6 @@
     <router-link to="/" class="router-link">Benefit Sheet</router-link>
     <router-link to="/option/optionOne" class="router-link">Option 1</router-link>
     <router-link to="/option/optionTwo" class="router-link">Option 2</router-link>
-    <!-- <button @click="logout" type="button">Logout</button> -->
     <div class="versionAndLogout">
         <a class="logout" @click="logout">Logout</a>
         <router-link v-if="admin" to="/admin">Admin Panel</router-link>
@@ -42,12 +40,16 @@ export default {
 }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 .sidebar {
     background-color: rgba(0,0,0,.4);
     height: 100%;
     display: grid;
     grid-template-rows: 25% 15% 15% 15% 30%;
+
+    @media print {
+        display: none !important;
+    }
 
     button {
         background-color: rgba(255,255,255,.8);
@@ -86,14 +88,12 @@ export default {
         align-self: end;
         color: rgba(255,255,255,.8);
         font-size: 14px;
-        /*visibility: hidden;*/
     }
 
     .username {
         display: grid;
         text-align: center;
         align-self: center;
-        /*border-bottom: 1px solid rgba(255,255,255,.8);*/
         padding-bottom: 3%;
 
         .userInitials {

@@ -1,5 +1,5 @@
 <template>
-<div :class="{ 'positionRelative': focus === true }">
+<div class="autocomplete" :class="{ 'positionRelative': focus === true }">
   <input type="text" v-model="search" @input="onChange($event)" @keydown.down="onArrowDown" @keydown.up="onArrowUp" @keydown.enter="onEnter" @keydown.esc="onEsc" @focus="focus = true; onChange($event)"/>
   <ul class="autocompleteResults" v-show="isOpen">
     <li class="autocompleteResult" v-for="(result, i) in results" :key="i" @click="setresult($event, result)" :class="{ 'is-active': i === arrowCounter }" @mouseover="handleMouseOver">
@@ -88,37 +88,66 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="less" scoped>
 .positionRelative {
-  position: relative;
+    position: relative;
 }
 
-.autocompleteResults {
-  position: absolute;
-  top: 100%;
-  left: 10%;
-  background-color: white;
-  width: 80%;
-  align-self: start;
-  padding: 0;
-  margin: 0;
-  border: 1px solid #eeeeee;
-  height: 15rem;
-  overflow: auto;
-  z-index: 1;
-}
+.autocomplete {
+    display: grid;
+    justify-items: center;
+    align-items: center;
 
-.autocompleteResult {
-  list-style: none;
-  text-align: left;
-  padding: 4px 2px;
-  cursor: pointer;
-  z-index: 1;
-}
+    input {
+        width: 80%;
+        -webkit-appearance: none;
+        border-radius: 0;
+        border: none;
+        border-bottom: 1px solid black;
+        background-color: silver;
+        font-size: 16px;
+        text-align: center;
+        font-weight: bold;
+        color: black;
 
-.autocompleteResult:hover,
-.autocompleteResult.is-active {
-  background-color: #4AAE9B;
-  color: white;
+        @media print {
+            font-size: 18px;
+            background-color: lightgray;
+        }
+
+        &:focus {
+            outline: none;
+            border: 1px solid blue;
+        }
+    }
+
+    .autocompleteResults {
+        position: absolute;
+        top: 100%;
+        left: 10%;
+        background-color: white;
+        width: 80%;
+        align-self: start;
+        padding: 0;
+        margin: 0;
+        border: 1px solid #eeeeee;
+        height: 15rem;
+        overflow: auto;
+        z-index: 1;
+
+        .autocompleteResult {
+            list-style: none;
+            text-align: left;
+            padding: 4px 2px;
+            cursor: pointer;
+            z-index: 1;
+
+            &:hover,
+            &.is-active {
+                background-color: #4AAE9B;
+                color: white;
+            }
+        }
+    }
 }
 </style>

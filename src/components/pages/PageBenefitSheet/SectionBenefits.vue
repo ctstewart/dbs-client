@@ -27,46 +27,30 @@ export default {
 }
 </script>
 
-<style>
+<style lang="less" scoped>
 .benefits {
-  margin: 1%;
-  border-radius: 5px;
-  padding: 1%;
-  background-color: silver;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 2fr 2fr 2fr;
-}
+    margin: 1%;
+    border-radius: 5px;
+    padding: 1%;
+    background-color: silver;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 2fr 2fr 2fr;
 
-.benefitsTitle {
-  margin: 0;
-  font-size: 16px;
-  grid-column: 1 / 3;
-  align-self: start;
-  text-align: center;
-}
+    @media print {
+        background-color: lightgray;
+    }
 
-.benefits > div {
-  display: grid;
-  justify-items: center;
-  align-items: center;
-}
+    .benefitsTitle {
+        margin: 0;
+        font-size: 16px;
+        grid-column: 1 / span 2;
+        align-self: start;
+        text-align: center;
 
-.benefits input {
-  width: 80%;
-  -webkit-appearance: none;
-  border-radius: 0;
-  border: none;
-  border-bottom: 1px solid black;
-  background-color: silver;
-  font-size: 16px;
-  text-align: center;
-  font-weight: bold;
-  color: black;
-}
-
-.benefits input:focus {
-    outline: none;
-    border: 1px solid blue;
+        @media print {
+            color: red;
+        }
+    }
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-<div class="newPasswordContainer">
+<div class="newPasswordContainer gradientBackground">
     <div class="newPasswordDiv">
         <div class="newPasswordFormDiv">
             <h2>New Password</h2>
@@ -81,8 +81,6 @@ export default {
 </script>
 
 <style lang="less">
-
-
 .newPasswordContainer {
     height: 100%;
     display: -ms-grid;
@@ -110,7 +108,6 @@ export default {
             display: -ms-grid;
             display: grid;
             grid-template-rows: 15% 30% 30% 25%;
-            border-right: 1px solid grey;
             
             > div {
                 display: -ms-grid;
