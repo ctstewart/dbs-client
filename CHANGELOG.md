@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 - Add dropdown to change between hamburger, detailed, and difference only views
 
+## [1.6.1] - 2020-02-03
+### Added
+- Added the required copyright notice to the bottom of the login page
+
+### Changed
+- Changed a lot of how I wrote my styling
+    - You shouldn't notice a difference, but this will make it easier to maintain and make future changes
+
 ## [1.6.0] - 2020-01-29
 ### Added
 - Admins can now see very basic app usage per user

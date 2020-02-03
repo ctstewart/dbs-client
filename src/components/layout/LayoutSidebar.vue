@@ -13,7 +13,7 @@
     <div class="versionAndLogout">
         <a class="logout" @click="logout">Logout</a>
         <router-link v-if="admin" to="/admin">Admin Panel</router-link>
-        <router-link to="/changelog" class="versionFormatting">Version: 1.6.0</router-link>
+        <router-link to="/changelog" class="versionFormatting">Version: 1.6.1</router-link>
     </div>
 </div>
 </template>
