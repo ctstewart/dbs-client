@@ -4,16 +4,19 @@
         <div class="userInitials">
             <span>{{userEmail.slice(0,2).toUpperCase()}}</span>
         </div>
-        <br>
         {{userEmail}}
     </div>
-    <router-link to="/" class="router-link">Benefit Sheet</router-link>
-    <router-link to="/option/optionOne" class="router-link">Option 1</router-link>
-    <router-link to="/option/optionTwo" class="router-link">Option 2</router-link>
-    <div class="versionAndLogout">
-        <a class="logout" @click="logout">Logout</a>
-        <router-link v-if="admin" to="/admin">Admin Panel</router-link>
-        <router-link to="/changelog" class="versionFormatting">Version: 1.6.1</router-link>
+    <div class="sidebar-links">
+        <router-link to="/"><i class="fas fa-home"></i>Benefit Sheet</router-link>
+        <router-link to="/option/optionOne"><i class="fas fa-dice-one"></i>Option 1</router-link>
+        <router-link to="/option/optionTwo"><i class="fas fa-dice-two"></i>Option 2</router-link>
+        <router-link to="/admin" v-if="$store.state.admin"><i class="fas fa-users-cog"></i>Admin Panel</router-link>
+        <a><i class="fas fa-building"></i>Business Plans</a>
+        <router-link to="/changelog"><i class="fas fa-clipboard"></i>Changelog</router-link>
+    </div>
+    <div class="footer">
+        <a @click="logout">Logout</a>
+        <router-link to="/changelog">Verison: 1.6.1</router-link>
     </div>
 </div>
 </template>
@@ -22,7 +25,7 @@
 import { mapState } from 'vuex'
 
 export default {
-    name: 'Layoutsidebar',
+    name: 'LayoutSidebar',
     computed: {
         ...mapState([
             'userEmail',
@@ -36,112 +39,101 @@ export default {
             localStorage.clear()
             this.$router.push('/login')
         }
-    }
+    },
 }
 </script>
 
 <style lang="less" scoped>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+}
+
 .sidebar {
-    background-color: rgba(0,0,0,.4);
+    width: 100%;
     height: 100%;
-    display: grid;
-    grid-template-rows: 25% 15% 15% 15% 30%;
+    background: rgba(0,0,0,.4);
+    padding: 30px 0px;
+    position: relative;
 
-    @media print {
-        display: none !important;
-    }
-
-    button {
-        background-color: rgba(255,255,255,.8);
-        border-radius: 10px;
-        border: none;
-        margin: 4% 5%;
-        font-size: 24px;
-        font-weight: bold;
-        cursor: pointer;
-        outline: none;
-    }
-
-    .router-link {
-        color: black;
-        display: grid;
-        align-items: center;
-        justify-items: center;
-        text-decoration: none;
-        background-color: rgba(255,255,255,.8);
-        border-radius: 10px;
-        border: none;
-        margin: 4% 5%;
-        font-size: 24px;
-        font-weight: bold;
-        cursor: pointer;
-        outline: none;
-    }
-
-    .router-link-exact-active {
-        background-color: transparent !important;
-        color: rgba(255,255,255,.8) !important;
-        border: 1px solid rgba(255,255,255,.8) !important;
-    }
-
-    .username, .versionAndLogout {
-        align-self: end;
-        color: rgba(255,255,255,.8);
-        font-size: 14px;
+    h2 {
+        color: #fff;
+        text-transform: uppercase;
+        text-align: center;
+        margin-bottom: 30px;
     }
 
     .username {
         display: grid;
+        color: white;
         text-align: center;
         align-self: center;
         padding-bottom: 3%;
+        margin-bottom: .5rem;
+        font-size: .9rem;
+        // font-family: 'Josefin Sans', sans-serif;
 
         .userInitials {
             display: grid;
             align-self: center;
             justify-self: center;
+            color: white;
             border: 1px solid white;
             border-radius: 5px;
             padding: .5rem;
+            margin-bottom: .75rem;
 
             span {
                 align-self: center;
                 justify-self: center;
                 font-size: 2rem;
+                font-family: 'Montserrat', sans-serif;
             }
-        }
-
-        img {
-            margin-bottom: 1%;
-            width: 75px;
-            height: 75px;
-            border-radius: 50%;
-            border: 1px solid rgba(255,255,255,.8);
         }
     }
 
-    .versionAndLogout {
+    .sidebar-links {
         display: flex;
-        justify-content: space-between;
-        font-size: .9rem;
-        margin: 0 3% 3%;
-        cursor: pointer;
-
-        .logout {
-            text-decoration: underline;
-        }
+        flex-direction: column;
+        color: white;
 
         a {
             color: white;
-        }
+            padding: 15px;
+            border-bottom: 1px solid #bdb8d7;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            border-top: 1px solid rgba(255,255,255,0.05);
+            cursor: pointer;
 
-        .versionFormatting {
-            text-align: right;
-        }
+            .fas {
+                width: 2rem;
+            }
 
-        @media (max-width: 1280px) {
-            font-size: .75rem;
+            &:hover, &.router-link-exact-active {
+                background-color: rgba(0,0,0,.2);
+            }
+        }
+    }
+
+    .footer {
+        position: absolute;
+        display: flex;
+        justify-content: space-between;
+        bottom: .4rem;
+        padding: 0 .65rem;
+        width: 100%;
+        font-size: 1rem;
+
+        a {
+            color: white;
+            cursor: pointer;
+            text-decoration: underline;
         }
     }
 }
+
+
 </style>
