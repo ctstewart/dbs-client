@@ -44,7 +44,7 @@ DEALINGS IN THE SOFTWARE.
     </div>
     <div class="footer">
         <a @click="logout">Logout</a>
-        <router-link to="/changelog">Verison: 1.6.1</router-link>
+        <router-link to="/changelog">Verison: 1.7.0</router-link>
     </div>
 </div>
 </template>

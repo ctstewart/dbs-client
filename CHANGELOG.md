@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 - Add dropdown to change between hamburger, detailed, and difference only views
 
+## [1.7.0] - TBD
+### Changed
+- Changed the style of the sidebar
+    - The new style has more room to add more links, as well as being cleaner and more uniform with the rest of the app
+
 ## [1.6.1] - 2020-02-03
 ### Added
 - Added the required copyright notice to the bottom of the login page
