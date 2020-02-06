@@ -8,7 +8,10 @@
         </div>
     </div>
     <div class="outerContainer">
-        <div class="innerContainer">
+        <div class="loadingSpinner innerContainer" v-if="loading">
+            <i class="fas fa-spinner fa-spin"></i>
+        </div>
+        <div v-else class="innerContainer">
             <div v-html="changelog"></div>
         </div>
     </div>
@@ -23,12 +26,16 @@ export default {
     name: 'PageChangelog',
     data() {
         return {
-            changelog: ''
+            changelog: '',
+            loading: true
         }
     },
     created() {
         axios.get('CHANGELOG.md')
-        .then(response => this.changelog = marked(response.data))
+        .then(response => {
+            this.changelog = marked(response.data)
+            this.loading = false
+        })
         .catch(error => console.log(error))
     },
     methods: {
@@ -120,6 +127,11 @@ html, body {
     .outerContainer {
         display: flex;
         justify-content: center;
+
+        .loadingSpinner {
+            text-align: center;
+            font-size: 2rem;
+        }
 
         .innerContainer {
             margin: 1rem;
