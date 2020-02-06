@@ -38,41 +38,41 @@ export default {
 }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 .loginContainer {
     height: 100%;
     display: -ms-grid;
     display: grid;
-}
 
-.mainLoginDiv {
-    display: -ms-grid;
-    display: grid;
-    width: 70%;
-    max-width: 70rem;
-    height: 50%;
-    margin: 0 auto;
-    -ms-grid-row-align: center;
-    -ms-grid-column-align: center;
-    place-self: center;
-    align-self: center;
-    justify-self: center;
-    border-radius: 5px;
-    grid-template-columns: repeat(2, 1fr);
-    background-color: white;
+    .mainLoginDiv {
+        display: -ms-grid;
+        display: grid;
+        width: 70%;
+        max-width: 70rem;
+        height: 50%;
+        margin: 0 auto;
+        -ms-grid-row-align: center;
+        -ms-grid-column-align: center;
+        place-self: center;
+        align-self: center;
+        justify-self: center;
+        border-radius: 5px;
+        grid-template-columns: repeat(2, 1fr);
+        background-color: white;
 
-    > div {
-        padding: 1rem;
+        > div {
+            padding: 1rem;
+        }
     }
-}
 
-.footer {
-    position: fixed;
-    bottom: 0;
-    width: 400px;
-    left: 50%;
-    margin-left: -200px;
-    font-size: .8rem;
-    color: white;
+    .footer {
+        position: fixed;
+        bottom: 0;
+        width: 400px;
+        left: 50%;
+        margin-left: -200px;
+        font-size: .8rem;
+        color: white;
+    }
 }
 </style>
