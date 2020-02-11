@@ -33,14 +33,14 @@ export default {
                     value: this.optionOneTodayCost,
                     mutate: 'optionOneTodayCost',
                     differenceMonthly: this.optionOneDifferenceMonthly,
-                    fees: this.$store.state['business']['optionOne'].numberOfNewDevices
+                    fees: this.$store.state['business']['optionOne'].numberOfActivationFees
                 },
                 {
                     id: 'Option 2',
                     value: this.optionTwoTodayCost,
                     mutate: 'optionTwoTodayCost',
                     differenceMonthly: this.optionTwoDifferenceMonthly,
-                    fees: this.$store.state['business']['optionTwo'].numberOfNewDevices
+                    fees: this.$store.state['business']['optionTwo'].numberOfActivationFees
                 }
             ]
         }
