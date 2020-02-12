@@ -78,6 +78,10 @@ export default {
     box-sizing: border-box;
     list-style: none;
     text-decoration: none;
+
+    @media print {
+        display: none;
+    }
 }
 
 .sidebar {
