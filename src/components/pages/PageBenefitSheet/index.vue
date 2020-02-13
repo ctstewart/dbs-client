@@ -3,7 +3,7 @@
     <layout-sidebar/>
     <div class="print-info print-only">
         <span class="print-date print-only">{{ `${new Date().getMonth()+1}/${new Date().getDate()}/${new Date().getFullYear()}`}}</span>
-        <span class="print-customer-name print-only">Guest:</span>
+        <span class="print-customer-name print-only">Guest: {{ guestName }}</span>
         <span class="print-rep-name print-only">{{ `${$store.state.userInfo.firstName} ${$store.state.userInfo.lastName}` }}</span>
     </div>
     <div class="mainContent" :class="[ hamburgerStyle ? 'hamburgerStyle' : 'fullStyle' ]">
@@ -11,6 +11,7 @@
             <div class="copyButton">
                 <i class="fas fa-align-justify fa-2x" @click="hamburgerStyle = !hamburgerStyle"></i>
             </div>
+            <input class="guestName" v-model="guestName">
             <p>Benefit Sheet</p>
             <div class="clearButton">
                 <i class="far fa-trash-alt fa-2x" @click="resetState"></i>
@@ -43,6 +44,7 @@ export default {
     data: function () {
         return {
             hamburgerStyle: false,
+            guestName: ''
         }
     },
     methods: {
