@@ -105,7 +105,7 @@ export default {
         display: flex;
         flex-direction: column;
         justify-content: center;
-        margin-bottom: .75rem;
+        margin-bottom: .5rem;
 
         > p {
             align-self: flex-start;
@@ -114,8 +114,8 @@ export default {
 
         .group-container-main {
             border: 1px solid white;
-            padding: .5rem;
-            height: 100%;
+            padding: .25rem;
+            height: 75%;
             border-radius: 10px;
             display: grid;
             grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -125,10 +125,10 @@ export default {
             .input-container {
                 display: flex;
                 align-items: center;
-                margin: 1rem .5rem;
+                margin: .25rem;
 
                 > * {
-                    margin: 0 1rem;
+                    margin-right: 1rem;
                 }
 
                 label {

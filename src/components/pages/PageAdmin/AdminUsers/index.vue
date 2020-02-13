@@ -282,12 +282,11 @@ export default {
 
         > .actions {
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
         }
 
         > .actions > i {
             cursor: pointer;
-            margin: 0 2rem;
         }
 
         input {
