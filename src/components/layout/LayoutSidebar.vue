@@ -38,7 +38,7 @@ DEALINGS IN THE SOFTWARE.
         <router-link to="/business"><i class="fas fa-home"></i>Benefit Sheet: Business</router-link>
         <router-link to="/business/option/optionOne"><i class="fas fa-dice-one"></i>Option 1: Business</router-link>
         <router-link to="/business/option/optionTwo"><i class="fas fa-dice-two"></i>Option 2: Business</router-link>
-        <router-link to="/admin" v-if="$store.state.admin"><i class="fas fa-users-cog"></i>Admin Panel</router-link>
+        <router-link to="/admin" v-if="$store.state.userInfo.admin"><i class="fas fa-users-cog"></i>Admin Panel</router-link>
         <router-link to="/"><i class="fas fa-users"></i>Consumer Plans</router-link>
         <router-link to="/changelog"><i class="fas fa-clipboard"></i>Changelog</router-link>
     </div>
