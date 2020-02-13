@@ -8,7 +8,7 @@ const planTotal = ((state, getters) => {
     })
 
     if (state.militaryDiscount.isActive) {
-        totalNumberOfPhones -= totalNumberOfPhones * state.militaryDiscount.amount
+        localTotal -= totalNumberOfPhones * state.militaryDiscount.amount
     }
 
     localTotal += state.twoYear.numberOfPhones * state.twoYear.cost

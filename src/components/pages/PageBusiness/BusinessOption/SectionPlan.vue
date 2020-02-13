@@ -4,7 +4,7 @@
         <p class="group-container-label">Number of Phones</p>
         <div class="group-container-main">
             <div class="input-container" v-for="(plan, index) in plans" :key="plan.id">
-                <label>Unlimited Basic Phone</label>
+                <label>{{ plan.id }}</label>
                 <input :value="plan.numberOfPhones" @change="setPlans({index, value: parseInt($event.target.value)})">
             </div>
         </div>
