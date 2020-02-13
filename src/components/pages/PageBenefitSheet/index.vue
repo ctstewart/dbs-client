@@ -1,6 +1,11 @@
 <template>
 <div class="BSContainer gradientBackground">
     <layout-sidebar/>
+    <div class="print-info print-only">
+        <span class="print-date print-only">{{ `${new Date().getMonth()+1}/${new Date().getDate()}/${new Date().getFullYear()}`}}</span>
+        <span class="print-customer-name print-only">Guest:</span>
+        <span class="print-rep-name print-only">{{ `${$store.state.userInfo.firstName} ${$store.state.userInfo.lastName}` }}</span>
+    </div>
     <div class="mainContent" :class="[ hamburgerStyle ? 'hamburgerStyle' : 'fullStyle' ]">
         <div class="titleBar">
             <div class="copyButton">
@@ -59,6 +64,14 @@ and (orientation : landscape)
     }
 }
 
+.print-only {
+    display: none;
+
+    @media print {
+        display: flex;
+    }
+}
+
 .displayNone {
     display: none !important;
 }
@@ -70,6 +83,7 @@ and (orientation : landscape)
 
     @media print {
         grid-template-columns: 1fr;
+        grid-template-rows: 2rem auto;
     }
 
     .fullStyle {
@@ -81,6 +95,14 @@ and (orientation : landscape)
         margin-top: 5%;
         margin-bottom: 5%;
         transition: all 1s;
+    }
+
+    .print-info {
+        @media print {
+            margin: 2%;
+            display: flex;
+            justify-content: space-between;
+        }
     }
 
     .mainContent {

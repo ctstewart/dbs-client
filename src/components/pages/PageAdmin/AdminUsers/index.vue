@@ -35,9 +35,9 @@
             <div v-if="user.forceNewPasswordOnNextLogin"><i class="fas fa-check"></i></div>
             <div v-else></div>
             <div class="actions">
-                <i v-if="!user.admin || $store.state.superAdmin && !user.superAdmin" class="fas fa-scroll" @click="openUserUsageModal(user)"></i>
-                <i v-if="!user.admin || $store.state.superAdmin && !user.superAdmin" class="fas fa-edit" @click="openUpdateUserModal(user)"></i>
-                <i v-if="!user.admin || $store.state.superAdmin && !user.superAdmin" class="fas fa-trash" @click="openDeleteUserModal(user)"></i>
+                <i v-if="!user.admin || $store.state.userInfo.superAdmin && !user.superAdmin" class="fas fa-scroll" @click="openUserUsageModal(user)"></i>
+                <i v-if="!user.admin || $store.state.userInfo.superAdmin && !user.superAdmin" class="fas fa-edit" @click="openUpdateUserModal(user)"></i>
+                <i v-if="!user.admin || $store.state.userInfo.superAdmin && !user.superAdmin" class="fas fa-trash" @click="openDeleteUserModal(user)"></i>
             </div>
         </div>
     </div>

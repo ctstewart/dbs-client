@@ -30,15 +30,15 @@ DEALINGS IN THE SOFTWARE.
 <div class="sidebar">
     <div class="username">
         <div class="userInitials">
-            <span>{{userEmail.slice(0,2).toUpperCase()}}</span>
+            <span>{{userInfo.email.slice(0,2).toUpperCase()}}</span>
         </div>
-        {{userEmail}}
+        {{userInfo.email}}
     </div>
     <div class="sidebar-links">
         <router-link to="/"><i class="fas fa-home"></i>Benefit Sheet</router-link>
         <router-link to="/option/optionOne"><i class="fas fa-dice-one"></i>Option 1</router-link>
         <router-link to="/option/optionTwo"><i class="fas fa-dice-two"></i>Option 2</router-link>
-        <router-link to="/admin" v-if="$store.state.admin"><i class="fas fa-users-cog"></i>Admin Panel</router-link>
+        <router-link to="/admin" v-if="$store.state.userInfo.admin"><i class="fas fa-users-cog"></i>Admin Panel</router-link>
         <a><i class="fas fa-building"></i>Business Plans</a>
         <router-link to="/changelog"><i class="fas fa-clipboard"></i>Changelog</router-link>
     </div>
@@ -56,9 +56,8 @@ export default {
     name: 'LayoutSidebar',
     computed: {
         ...mapState([
-            'userEmail',
+            'userInfo',
             'webappVersion',
-            'admin'
         ])
     },
     methods: {

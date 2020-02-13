@@ -29,7 +29,8 @@ export default {
     },
     methods: {
         ...mapMutations([
-            'mutate'
+            'mutate',
+            'mutateUserInfo'
         ]),
         loginUser: function () {
             axios.post('/api/users/login', {
@@ -45,10 +46,12 @@ export default {
                     }, 3000)
                 } else {
                     this.saveTokenToLocalStorage(response.data.token)
-                    this.mutate({ property: 'userEmail', with: this.email })
+                    this.mutateUserInfo({ property: 'email', with: this.email })
+                    this.mutateUserInfo({ property: 'firstName', with: response.data.firstName })
+                    this.mutateUserInfo({ property: 'lastName', with: response.data.lastName })
+                    this.mutateUserInfo({ property: 'admin', with: response.data.admin })
+                    this.mutateUserInfo({ property: 'superAdmin', with: response.data.superAdmin })
                     this.mutate({ property: 'jwtExp', with: response.data.jwtExp })
-                    this.mutate({ property: 'admin', with: response.data.admin })
-                    this.mutate({ property: 'superAdmin', with: response.data.superAdmin })
                     this.$router.push('/')
                 }
             })

@@ -20,7 +20,7 @@
                 <option v-for="district in districts" :key="district">{{ district }}</option>
             </select>
         </div>
-        <div v-if="$store.state.superAdmin">
+        <div v-if="$store.state.userInfo.superAdmin">
             <p>Admin?</p>
             <label class="adminSwitch">
                 <input type="checkbox" :checked="updatedAdmin" @change="updatedAdmin = !updatedAdmin">
@@ -126,7 +126,7 @@ export default {
     },
     methods: {
         updateUser() {
-            if (this.$store.state.superAdmin) {
+            if (this.$store.state.userInfo.superAdmin) {
                 var axiosUrl = '/api/users/superAdminUpdateUser'
             } else {
                 var axiosUrl = '/api/users/adminUpdateUser'
