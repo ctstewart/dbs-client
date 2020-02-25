@@ -7,17 +7,17 @@ const defaultState = () => {
                 cost: 30
             },
             {
-                id: 'Unlimited Essentials',
+                id: 'Unlimited Essentials (min. 5 lines)',
                 numberOfPhones: 0,
                 cost: 35
             },
             {
-                id: 'Unlimited $45',
+                id: 'Unlimited $45 (min. 4 lines)',
                 numberOfPhones: 0,
                 cost: 45
             },
             {
-                id: 'Unlimited $50',
+                id: 'Unlimited $50 (min. 4 lines)',
                 numberOfPhones: 0,
                 cost: 50
             },
