@@ -1,6 +1,14 @@
 <template>
 <div class="option-plan">
     <div class="group-container two-column-width">
+        <div class="group-dropdown">
+            <select id="consumer-business-dropdown" @change="toggleOptionsType($route.params.vuexModule)">
+                <option default>Business</option>
+                <option>Consumer</option>
+            </select>
+        </div>
+    </div>
+    <div class="group-container two-column-width">
         <p class="group-container-label">Number of Phones</p>
         <div class="group-container-main">
             <div class="input-container" v-for="(plan, index) in plans" :key="plan.id">
@@ -39,7 +47,7 @@
             </div>
             <div class="input-container two-column-width-second">
                 <label>Number of Activation Fees</label>
-                <input :value="numberOfActivationFees" @change="mutate({property: 'numberOfActivationFees', with: $event.target.value})">
+                <input :value="numberOfNewDevices" @change="mutate({property: 'numberOfNewDevices', with: $event.target.value})">
             </div>
         </div>
     </div>
@@ -65,8 +73,8 @@ export default {
             twoYear (state) {
                 return state['business'][this.$route.params.vuexModule].twoYear
             },
-            numberOfActivationFees (state) {
-                return state['business'][this.$route.params.vuexModule].numberOfActivationFees
+            numberOfNewDevices (state) {
+                return state['business'][this.$route.params.vuexModule].numberOfNewDevices
             },
         }),
     },
@@ -83,6 +91,10 @@ export default {
             },
             mutateTwoYear (commit, payload) {
                 return commit(`business/${this.$route.params.vuexModule}/mutateTwoYear`, payload)
+            },
+            toggleOptionsType (commit, payload) {
+                commit('toggleOptionsType', payload)
+                return this.$router.push(`/options/consumer/${this.$route.params.vuexModule}`)
             }
         })
     }
@@ -99,7 +111,7 @@ export default {
     padding: 3%;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-rows: 10% 1fr 1fr 1fr;
 
     .group-container {
         display: flex;
@@ -110,6 +122,27 @@ export default {
         > p {
             align-self: flex-start;
             margin-bottom: 0;
+        }
+
+        .group-dropdown {
+            display: flex;
+            align-items: center;
+
+            #consumer-business-dropdown {
+                -webkit-appearance: none;  /* for webkit (safari, chrome) compatibility */
+                -moz-appearance: none; /* for firefox compatibility */
+                appearance: none;
+                background-color: rgba(255,255,255,0.8);
+                width: 128px;
+                height: 48px;
+                border-radius: 5px;
+                padding: 0;
+                display: block;
+                margin: 0 auto;
+                text-align: center;
+                text-align-last: center;
+                font-size: 16px;
+            }
         }
 
         .group-container-main {
@@ -204,11 +237,11 @@ export default {
             }
         }
 
-        &:nth-of-type(2) {
+        &:nth-of-type(3) {
             margin-right: 1rem;
         }
 
-        &:nth-of-type(3) {
+        &:nth-of-type(4) {
             margin-left: 1rem;
         }
     }

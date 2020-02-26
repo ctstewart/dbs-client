@@ -1,6 +1,10 @@
 <template>
 <div class="dropdownAndButtons">
-    <select id="planDropdown" :value="chosenPlan" @change="mutate({property: 'chosenPlan', with: $event.target.value})">
+    <select id="dropdown" @change="toggleOptionsType($route.params.vuexModule)">
+        <option default>Consumer</option>
+        <option>Business</option>
+    </select>
+    <select id="dropdown" :value="chosenPlan" @change="mutate({property: 'chosenPlan', with: $event.target.value})">
         <option>Unlimited</option>
         <option v-for="i in oldUnlimitedPlans" :key="i.id">{{i.id}}</option>
         <option v-for="i in tieredPlans" :key="i.id">{{i.id}}</option>
@@ -16,20 +20,24 @@ export default {
     computed: {
         ...mapState({
             chosenPlan (state) {
-                return state[this.$route.params.vuexModule].chosenPlan
+                return state['consumer'][this.$route.params.vuexModule].chosenPlan
             },
             oldUnlimitedPlans (state) {
-                return state[this.$route.params.vuexModule].oldUnlimitedPlans
+                return state['consumer'][this.$route.params.vuexModule].oldUnlimitedPlans
             },
             tieredPlans (state) {
-                return state[this.$route.params.vuexModule].tieredPlans
+                return state['consumer'][this.$route.params.vuexModule].tieredPlans
             },
         })
     },
     methods: {
         ...mapMutations({
             mutate (commit, payload) {
-                return commit(`${this.$route.params.vuexModule}/mutate`, payload)
+                return commit(`consumer/${this.$route.params.vuexModule}/mutate`, payload)
+            },
+            toggleOptionsType (commit, payload) {
+                commit('toggleOptionsType', payload)
+                return this.$router.push(`/options/business/${this.$route.params.vuexModule}`)
             }
         })
     },
@@ -54,14 +62,15 @@ select {
 }
 
 .dropdownAndButtons {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
 }
 
-#planDropdown {
+#dropdown {
     width: 128px;
-    place-self: center;
-    grid-area: 1 / 2 / 2 / 3;
+    /* place-self: center; */
+    /* grid-area: 1 / 2 / 2 / 3; */
 }
 
 @media only screen

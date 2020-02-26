@@ -22,20 +22,20 @@ export default {
     computed: {
         ...mapState({
             existingDPPValues (state) {
-                return state[this.$route.params.vuexModule].existingDPPValues
+                return state['consumer'][this.$route.params.vuexModule].existingDPPValues
             },
             existingCreditValues (state) {
-                return state[this.$route.params.vuexModule].existingCreditValues
+                return state['consumer'][this.$route.params.vuexModule].existingCreditValues
             },
         })
     },
     methods: {
         ...mapMutations({
             mutateExistingDpp (commit, payload) {
-                return commit(`${this.$route.params.vuexModule}/mutateExistingDpp`, payload)
+                return commit(`consumer/${this.$route.params.vuexModule}/mutateExistingDpp`, payload)
             },
             mutateExistingCredits (commit, payload) {
-                return commit(`${this.$route.params.vuexModule}/mutateExistingCredits`, payload)
+                return commit(`consumer/${this.$route.params.vuexModule}/mutateExistingCredits`, payload)
             }
         })
     }

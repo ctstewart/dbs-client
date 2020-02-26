@@ -50,35 +50,35 @@ export default {
     computed: {
         ...mapState({
             autopay (state) {
-                return state[this.$route.params.vuexModule].autopay
+                return state['consumer'][this.$route.params.vuexModule].autopay
             },
             militaryNew (state) {
-                return state[this.$route.params.vuexModule].militaryNew
+                return state['consumer'][this.$route.params.vuexModule].militaryNew
             },
             responderNew (state) {
-                return state[this.$route.params.vuexModule].responderNew
+                return state['consumer'][this.$route.params.vuexModule].responderNew
             },
             militaryOld (state) {
-                return state[this.$route.params.vuexModule].militaryOld
+                return state['consumer'][this.$route.params.vuexModule].militaryOld
             },
             responderOld (state) {
-                return state[this.$route.params.vuexModule].responderOld
+                return state['consumer'][this.$route.params.vuexModule].responderOld
             },
             discount (state) {
-                return state[this.$route.params.vuexModule].discount
+                return state['consumer'][this.$route.params.vuexModule].discount
             },
             isUnlimited (state, getters) {
-                return getters[`${this.$route.params.vuexModule}/isUnlimited`]
+                return getters[`consumer/${this.$route.params.vuexModule}/isUnlimited`]
             }
         })
     },
     methods: {
         ...mapMutations({
             mutate (commit, payload) {
-                return commit(`${this.$route.params.vuexModule}/mutate`, payload)
+                return commit(`consumer/${this.$route.params.vuexModule}/mutate`, payload)
             },
             toggle (commit, property) {
-                return commit(`${this.$route.params.vuexModule}/toggle`, property)
+                return commit(`consumer/${this.$route.params.vuexModule}/toggle`, property)
             }
         })
     }

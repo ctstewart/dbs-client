@@ -10,6 +10,10 @@ const state = () => {
         },
         userEmail: '',
         jwtExp: null,
+        optionsType: {
+            optionOne: 'consumer',
+            optionTwo: 'consumer'
+        }
     }
 }
 

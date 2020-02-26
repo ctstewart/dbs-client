@@ -11,7 +11,7 @@
             <div class="copyButton">
                 <i class="fas fa-align-justify fa-2x" @click="hamburgerStyle = !hamburgerStyle"></i>
             </div>
-            <input class="guestName" v-model="guestName">
+            <!-- <input class="guestName" v-model="guestName"> -->
             <p>Benefit Sheet</p>
             <div class="clearButton">
                 <i class="far fa-trash-alt fa-2x" @click="resetState"></i>

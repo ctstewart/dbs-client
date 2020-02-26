@@ -25,23 +25,23 @@ export default {
     computed: {
         ...mapState({
             numberOfPhonesTieredAndOldUnlimited (state) {
-                return state[this.$route.params.vuexModule].numberOfPhonesTieredAndOldUnlimited
+                return state['consumer'][this.$route.params.vuexModule].numberOfPhonesTieredAndOldUnlimited
             },
             isUnlimited (state, getters) {
-                return getters[`${this.$route.params.vuexModule}/isUnlimited`]
+                return getters[`consumer/${this.$route.params.vuexModule}/isUnlimited`]
             },
             mixAndMatchNumberOfPhonesAndId (state, getters) {
-                return getters[`${this.$route.params.vuexModule}/mixAndMatchNumberOfPhonesAndId`]
+                return getters[`consumer/${this.$route.params.vuexModule}/mixAndMatchNumberOfPhonesAndId`]
             }
         }),
     },
     methods: {
         ...mapMutations({
             mutate (commit, payload) {
-                return commit(`${this.$route.params.vuexModule}/mutate`, payload)
+                return commit(`consumer/${this.$route.params.vuexModule}/mutate`, payload)
             },
             setMixAndMatchPlans (commit, payload) {
-                return commit(`${this.$route.params.vuexModule}/setMixAndMatchPlans`, payload)
+                return commit(`consumer/${this.$route.params.vuexModule}/setMixAndMatchPlans`, payload)
             }
         })
     }

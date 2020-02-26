@@ -1,5 +1,6 @@
 const defaultState = () => {
     return {
+        chosenPlan: 'Business Unlimited',
         plans: [
             {
                 id: 'Unlimited Basic Phone',
@@ -41,7 +42,7 @@ const defaultState = () => {
             { id: 'Smartwatch', cost: 10, numberOfDevices: 0 },
             { id: 'Arlo', cost: 45, numberOfDevices: 0 }
         ],
-        numberOfActivationFees: 0,
+        numberOfNewDevices: 0,
         tmp: 0,
         existingDPPValues: [],
         existingCreditValues: [],

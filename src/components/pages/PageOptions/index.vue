@@ -4,6 +4,10 @@
 
 <script>
 export default {
-    name: 'PageBusiness'
+	name: 'PageOptions'
 }
 </script>
+
+<style>
+
+</style>

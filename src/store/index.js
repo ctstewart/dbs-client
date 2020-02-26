@@ -12,8 +12,8 @@ import state from './state'
 import mutations from './mutations'
 
 import benefitSheetModule from './modules/benefitSheetModule'
-import optionsModule from './modules/optionsModule'
-import businessOptionsModule from './modules/business/optionsModule'
+import optionsModuleConsumer from './modules/optionsModuleConsumer'
+import optionsModuleBusiness from './modules/optionsModuleBusiness'
 
 export const store = new Vuex.Store({
     state,
@@ -25,38 +25,37 @@ export const store = new Vuex.Store({
             getters: benefitSheetModule.getters,
             mutations: benefitSheetModule.mutations
         },
-        optionOne: {
+        consumer: {
             namespaced: true,
-            state: optionsModule.state,
-            getters: optionsModule.getters,
-            mutations: optionsModule.mutations
-        },
-        optionTwo: {
-            namespaced: true,
-            state: optionsModule.state,
-            getters: optionsModule.getters,
-            mutations: optionsModule.mutations
+            modules: {
+                optionOne: {
+                    namespaced: true,
+                    state: optionsModuleConsumer.state,
+                    getters: optionsModuleConsumer.getters,
+                    mutations: optionsModuleConsumer.mutations
+                },
+                optionTwo: {
+                    namespaced: true,
+                    state: optionsModuleConsumer.state,
+                    getters: optionsModuleConsumer.getters,
+                    mutations: optionsModuleConsumer.mutations
+                },
+            }
         },
         business: {
             namespaced: true,
             modules: {
-                benefitSheet: {
-                    namespaced: true,
-                    state: benefitSheetModule.state,
-                    getters: benefitSheetModule.getters,
-                    mutations: benefitSheetModule.mutations
-                },
                 optionOne: {
                     namespaced: true,
-                    state: businessOptionsModule.state,
-                    getters: businessOptionsModule.getters,
-                    mutations: businessOptionsModule.mutations
+                    state: optionsModuleBusiness.state,
+                    getters: optionsModuleBusiness.getters,
+                    mutations: optionsModuleBusiness.mutations
                 },
                 optionTwo: {
                     namespaced: true,
-                    state: businessOptionsModule.state,
-                    getters: businessOptionsModule.getters,
-                    mutations: businessOptionsModule.mutations
+                    state: optionsModuleBusiness.state,
+                    getters: optionsModuleBusiness.getters,
+                    mutations: optionsModuleBusiness.mutations
                 }
             }
         }

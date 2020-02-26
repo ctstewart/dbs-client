@@ -2,10 +2,9 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 import PageBenefitSheet from '../components/pages/PageBenefitSheet'
-import PageOption from '../components/pages/PageOption'
-import PageBusiness from '../components/pages/PageBusiness'
-import BusinessBenefitSheet from '../components/pages/PageBusiness/BusinessBenefitSheet'
-import BusinessOption from '../components/pages/PageBusiness/BusinessOption'
+import PageOptions from '../components/pages/PageOptions'
+import PageConsumerOption from '../components/pages/PageOptions/PageConsumerOption'
+import PageBusinessOption from '../components/pages/PageOptions/PageBusinessOption'
 import PageAdmin from '../components/pages/PageAdmin'
 import PageChangelog from '../components/pages/PageChangelog'
 import PageLogin from '../components/pages/PageLogin'
@@ -21,22 +20,20 @@ const routes = [
         meta: { requiresAuth: true }
     },
     {
-        path: '/option/:vuexModule',
-        name: 'PageOption',
-        component: PageOption,
-        meta: { requiresAuth: true }
-    },
-    {
-        path: '/business',
-        component: PageBusiness,
+        path: '/options',
+        component: PageOptions,
         children: [
             {
-                path: '',
-                component: BusinessBenefitSheet
+                path: 'consumer/:vuexModule',
+                name: 'PageConsumerOption',
+                component: PageConsumerOption,
+                meta: { requiresAuth: true }
             },
             {
-                path: 'option/:vuexModule',
-                component: BusinessOption
+                path: 'business/:vuexModule',
+                name: 'PageBusinessOption',
+                component: PageBusinessOption,
+                meta: { requiresAuth: true }
             }
         ]
     },

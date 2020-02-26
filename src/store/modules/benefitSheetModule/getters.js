@@ -10,11 +10,11 @@ const oldTotal = ((state) => {
 })
 
 const optionOneDifferenceMonthly = ((state, getters, rootState, rootGetters) => {
-    return rootGetters['optionOne/total'] - getters.oldTotal
+    return rootGetters[`${rootState.optionsType.optionOne}/optionOne/total`] - getters.oldTotal
 })
 
 const optionTwoDifferenceMonthly = ((state, getters, rootState, rootGetters) => {
-    return rootGetters['optionTwo/total'] - getters.oldTotal
+    return rootGetters[`${rootState.optionsType.optionTwo}/optionTwo/total`] - getters.oldTotal
 })
 
 const getters = {

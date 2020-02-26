@@ -4,9 +4,9 @@
     <div class="mainContent">
         <div class="titleBar">
             <div class="copyButton">
-                <i v-if="this.$route.params.vuexModule === 'optionOne'" class="far fa-copy fa-2x" v-on:click="copyModuleOptionOneToOptionTwo"></i>
+                <!-- <i v-if="this.$route.params.vuexModule === 'optionOne'" class="far fa-copy fa-2x" v-on:click="copyModuleOptionOneToOptionTwo"></i> -->
             </div>
-            <p>Business: {{whichOption}}</p>
+            <p>{{whichOption}}</p>
             <div class="clearButton" @click="resetState">
                 <span></span><i class="far fa-trash-alt fa-2x"></i>
             </div>
@@ -73,7 +73,7 @@ export default {
     methods: {
         ...mapMutations({
             resetState (commit) {
-                return commit(`business/${this.$route.params.vuexModule}/resetState`)
+                return commit(`consumer/${this.$route.params.vuexModule}/resetState`)
             }
         }),
         // I STILL NEED TO ADD THIS FUNCTIONALITY. DO NOT FORGET FUTURE ME.
@@ -95,10 +95,10 @@ export default {
     computed: {
         ...mapState({
             chosenPlan (state) {
-                return state['business'][this.$route.params.vuexModule].chosenPlan
+                return state['consumer'][this.$route.params.vuexModule].chosenPlan
             },
             total (state, getters) {
-                return getters[`business/${this.$route.params.vuexModule}/total`]
+                return getters[`consumer/${this.$route.params.vuexModule}/total`]
             }
         }),
     }
@@ -111,7 +111,7 @@ export default {
 @oldSectionGreen: #387A77;
 
 .all {
-    height: 100vh;
+    height: 100%;
     display: grid;
     grid-template-columns: 1fr 4fr;
 

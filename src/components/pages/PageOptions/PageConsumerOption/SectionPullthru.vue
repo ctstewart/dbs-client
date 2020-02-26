@@ -27,17 +27,17 @@ export default {
     computed: {
         ...mapState({
             connectedDevices (state) {
-                return state[this.$route.params.vuexModule].connectedDevices
+                return state['consumer'][this.$route.params.vuexModule].connectedDevices
             }
         })
     },
     methods: {
         ...mapMutations({
             incrementConnectedDevice (commit, payload) {
-                return commit(`${this.$route.params.vuexModule}/incrementConnectedDevice`, payload)
+                return commit(`consumer/${this.$route.params.vuexModule}/incrementConnectedDevice`, payload)
             },
             decrementConnectedDevice (commit, payload) {
-                return commit(`${this.$route.params.vuexModule}/decrementConnectedDevice`, payload)
+                return commit(`consumer/${this.$route.params.vuexModule}/decrementConnectedDevice`, payload)
             }
         })
     }

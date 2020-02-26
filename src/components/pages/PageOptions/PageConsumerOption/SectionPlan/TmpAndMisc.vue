@@ -25,23 +25,23 @@ export default {
     computed: {
         ...mapState({
             tmp (state) {
-                return state[this.$route.params.vuexModule].tmp
+                return state['consumer'][this.$route.params.vuexModule].tmp
             },
             twoyear (state) {
-                return state[this.$route.params.vuexModule].twoyear
+                return state['consumer'][this.$route.params.vuexModule].twoyear
             },
             basic (state) {
-                return state[this.$route.params.vuexModule].basic
+                return state['consumer'][this.$route.params.vuexModule].basic
             },
             numberOfNewDevices (state) {
-                return state[this.$route.params.vuexModule].numberOfNewDevices
+                return state['consumer'][this.$route.params.vuexModule].numberOfNewDevices
             },
         })
     },
     methods: {
         ...mapMutations({
             mutate (commit, payload) {
-                return commit(`${this.$route.params.vuexModule}/mutate`, payload)
+                return commit(`consumer/${this.$route.params.vuexModule}/mutate`, payload)
             }
         })
     }

@@ -34,20 +34,13 @@ DEALINGS IN THE SOFTWARE.
         </div>
         {{userInfo.email}}
     </div>
-    <div v-if="$route.path.includes('/business')" class="sidebar-links">
-        <router-link to="/business"><i class="fas fa-home"></i>Benefit Sheet: Business</router-link>
-        <router-link to="/business/option/optionOne"><i class="fas fa-dice-one"></i>Option 1: Business</router-link>
-        <router-link to="/business/option/optionTwo"><i class="fas fa-dice-two"></i>Option 2: Business</router-link>
-        <router-link to="/admin" v-if="$store.state.userInfo.admin"><i class="fas fa-users-cog"></i>Admin Panel</router-link>
-        <router-link to="/"><i class="fas fa-users"></i>Consumer Plans</router-link>
-        <router-link to="/changelog"><i class="fas fa-clipboard"></i>Changelog</router-link>
-    </div>
-    <div v-else class="sidebar-links">
+    <div class="sidebar-links">
         <router-link to="/"><i class="fas fa-home"></i>Benefit Sheet</router-link>
-        <router-link to="/option/optionOne"><i class="fas fa-dice-one"></i>Option 1</router-link>
-        <router-link to="/option/optionTwo"><i class="fas fa-dice-two"></i>Option 2</router-link>
+        <router-link v-if="$store.state.optionsType.optionOne === 'consumer'" to="/options/consumer/optionOne"><i class="fas fa-dice-one"></i>Option 1</router-link>
+        <router-link v-else-if="$store.state.optionsType.optionOne === 'business'" to="/options/business/optionOne"><i class="fas fa-dice-one"></i>Option 1</router-link>
+        <router-link v-if="$store.state.optionsType.optionTwo === 'consumer'" to="/options/consumer/optionTwo"><i class="fas fa-dice-two"></i>Option 2</router-link>
+        <router-link v-else-if="$store.state.optionsType.optionTwo === 'business'" to="/options/business/optionTwo"><i class="fas fa-dice-two"></i>Option 2</router-link>
         <router-link to="/admin" v-if="$store.state.userInfo.admin"><i class="fas fa-users-cog"></i>Admin Panel</router-link>
-        <router-link to="/business"><i class="fas fa-building"></i>Business Plans</router-link>
         <router-link to="/changelog"><i class="fas fa-clipboard"></i>Changelog</router-link>
     </div>
     <div class="footer">
