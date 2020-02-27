@@ -1,22 +1,17 @@
 import { expect } from 'chai'
-import state from '../../../src/store/modules/optionsModule/defaultState'
-import getters from '../../../src/store/modules/optionsModule/getters'
-import mutations from '../../../src/store/modules/optionsModule/mutations'
-import connectedDeviceMath from '../../../src/store/modules/optionsModule/getters/planTotal/connectedDeviceMath'
+import state from '../../../src/store/modules/optionsModuleConsumer/defaultState'
+import getters from '../../../src/store/modules/optionsModuleConsumer/getters'
+import mutations from '../../../src/store/modules/optionsModuleConsumer/mutations'
+import connectedDeviceMath from '../../../src/store/modules/optionsModuleConsumer/getters/planTotal/connectedDeviceMath'
 
-describe('5gb', () => {
+describe('4gb', () => {
     before(() => {
         mutations.resetState(state)
     })
 
     it('chosenPlan', () => {
-        mutations.mutate(state, {property: 'chosenPlan', with: '5GB'})
-        expect(state.chosenPlan).to.equal('5GB')
-    })
-
-    it('autopay', () => {
-        mutations.toggle(state, 'autopay')
-        expect(state.autopay).to.equal(true)
+        mutations.mutate(state, {property: 'chosenPlan', with: '4GB'})
+        expect(state.chosenPlan).to.equal('4GB')
     })
 
     it('numberOfPhones', () => {
@@ -24,9 +19,9 @@ describe('5gb', () => {
         expect(state.numberOfPhonesTieredAndOldUnlimited).to.equal(5)
     })
 
-    it('militaryDiscount', () => {
-        mutations.toggle(state, 'militaryNew')
-        expect(state.militaryNew).to.equal(true)
+    it('discount', () => {
+        mutations.mutate(state, {property: 'discount', with: '22%'})
+        expect(state.discount).to.equal('22%')
     })
 
     it('twoyear', () => {
@@ -71,7 +66,7 @@ describe('5gb', () => {
     var planTotal = null
     it('planTotal', () => {
         planTotal = getters.planTotal(state, {isUnlimited})
-        expect(planTotal).to.equal(659.75)
+        expect(planTotal).to.equal(669)
     })
 
     it('tmp', () => {
@@ -114,6 +109,6 @@ describe('5gb', () => {
     var total = null
     it('total', () => {
         total = getters.total(state, {isUnlimited, planTotal, tmpTotal, dppTotal})
-        expect(parseFloat(total.toFixed(2))).to.equal(840.47)
+        expect(parseFloat(total.toFixed(2))).to.equal(849.72)
     })
 })

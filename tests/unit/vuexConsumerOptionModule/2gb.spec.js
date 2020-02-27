@@ -1,17 +1,17 @@
 import { expect } from 'chai'
-import state from '../../../src/store/modules/optionsModule/defaultState'
-import getters from '../../../src/store/modules/optionsModule/getters'
-import mutations from '../../../src/store/modules/optionsModule/mutations'
-import connectedDeviceMath from '../../../src/store/modules/optionsModule/getters/planTotal/connectedDeviceMath'
+import state from '../../../src/store/modules/optionsModuleConsumer/defaultState'
+import getters from '../../../src/store/modules/optionsModuleConsumer/getters'
+import mutations from '../../../src/store/modules/optionsModuleConsumer/mutations'
+import connectedDeviceMath from '../../../src/store/modules/optionsModuleConsumer/getters/planTotal/connectedDeviceMath'
 
-describe('4gb', () => {
+describe('2gb', () => {
     before(() => {
         mutations.resetState(state)
     })
 
     it('chosenPlan', () => {
-        mutations.mutate(state, {property: 'chosenPlan', with: '4GB'})
-        expect(state.chosenPlan).to.equal('4GB')
+        mutations.mutate(state, {property: 'chosenPlan', with: '2GB'})
+        expect(state.chosenPlan).to.equal('2GB')
     })
 
     it('numberOfPhones', () => {
@@ -66,7 +66,7 @@ describe('4gb', () => {
     var planTotal = null
     it('planTotal', () => {
         planTotal = getters.planTotal(state, {isUnlimited})
-        expect(planTotal).to.equal(669)
+        expect(planTotal).to.equal(657.30)
     })
 
     it('tmp', () => {
@@ -109,6 +109,6 @@ describe('4gb', () => {
     var total = null
     it('total', () => {
         total = getters.total(state, {isUnlimited, planTotal, tmpTotal, dppTotal})
-        expect(parseFloat(total.toFixed(2))).to.equal(849.72)
+        expect(parseFloat(total.toFixed(2))).to.equal(838.02)
     })
 })
