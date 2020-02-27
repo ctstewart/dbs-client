@@ -4,7 +4,7 @@
     <div class="mainContent">
         <div class="titleBar">
             <div class="copyButton">
-                <!-- <i v-if="this.$route.params.vuexModule === 'optionOne'" class="far fa-copy fa-2x" v-on:click="copyModuleOptionOneToOptionTwo"></i> -->
+                <i v-if="this.$route.params.vuexModule === 'optionOne'" class="far fa-copy fa-2x" v-on:click="copyModuleOptionOneToOptionTwo"></i>
             </div>
             <p>{{whichOption}}</p>
             <div class="clearButton" @click="resetState">
@@ -94,9 +94,6 @@ export default {
 
     computed: {
         ...mapState({
-            chosenPlan (state) {
-                return state['business'][this.$route.params.vuexModule].chosenPlan
-            },
             total (state, getters) {
                 return getters[`business/${this.$route.params.vuexModule}/total`]
             }
