@@ -8,9 +8,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add dropdown to change between hamburger, detailed, and difference only views
 
 ## [1.7.0] - TBD
+### Added
+- Added Business Unlimited Plans
+
 ### Changed
 - Changed the style of the sidebar
-    - The new style has more room to add more links, as well as being cleaner and more uniform with the rest of the app
+	- The new style has more room to add more links, as well as being cleaner and more uniform with the rest of the app
 
 ## [1.6.1] - 2020-02-03
 ### Added
@@ -18,17 +21,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Changed a lot of how I wrote my styling
-    - You shouldn't notice a difference, but this will make it easier to maintain and make future changes
+	- You shouldn't notice a difference, but this will make it easier to maintain and make future changes
 
 ## [1.6.0] - 2020-01-29
 ### Added
 - Admins can now see very basic app usage per user
-    - This shows a list of times the user has logged in
+	- This shows a list of times the user has logged in
 
 ## [1.5.0] - 2020-01-28
 ### Added
 - Added a Changelog page so people can actually see this!
-    - You get to it by clicking the version number on the sidebar
+	- You get to it by clicking the version number on the sidebar
 
 ## [1.4.0] - 2020-01-28
 ### Added
@@ -36,7 +39,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Due to popular request, I changed TMP to an input (instead of a dropdown)
-    - Make sure you do not add a "$" to the beginning of the amount, otherwise it will not calculate properly
+	- Make sure you do not add a "$" to the beginning of the amount, otherwise it will not calculate properly
 
 ### Fixed
 - Fixed an issue where a single "Do More" phone was giving a discount on up to 10 jetpacks or tablets
@@ -49,17 +52,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Admins can now edit users
 - Added super admin functionality
-    - Super admins can edit and delete other admins
-    - They can also change users to admins
+	- Super admins can edit and delete other admins
+	- They can also change users to admins
 
 ## [1.1.0] - 2020-01-21
 - First widespread release
 
 ### Added
 - Added an admin panel
-    - The admin panel allows admins to add and remove users
+	- The admin panel allows admins to add and remove users
 - Added the ability for users to reset their password
-    - This is done by sending an email to the user with a link for temporary authorization
+	- This is done by sending an email to the user with a link for temporary authorization
 
 ### Changed
 - Changed the login page layout and style
@@ -75,7 +78,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.0] - 2019-11-18
 ### Added
 - New changelog to accompany the 1.0.0 release
-    - New changelog structure
+	- New changelog structure
 - Added currency formatting
 - Added trash can functionality to the Benefit Sheet page
 - Added url routing
