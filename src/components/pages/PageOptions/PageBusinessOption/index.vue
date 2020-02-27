@@ -73,6 +73,7 @@ export default {
     methods: {
         ...mapMutations({
             resetState (commit) {
+                commit(`consumer/${this.$route.params.vuexModule}/resetState`)
                 return commit(`business/${this.$route.params.vuexModule}/resetState`)
             }
         }),
