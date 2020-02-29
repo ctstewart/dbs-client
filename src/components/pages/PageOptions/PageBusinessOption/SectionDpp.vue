@@ -13,7 +13,6 @@
                 <i class="fas fa-minus-circle" @click="removeExistingDpp(index)"></i>
             </div>
         </div>
-        <!-- <input v-for="(i, index) in existingDPPValues" type="tel" pattern="[0-9]*" step="0.01"  :key="index" placeholder="Existing DPP" :value="parseFloat(i.value / 100)" @change="mutateExistingDpp({index, value: parseFloat($event.target.value) * 100})"/> -->
     </div>
     <div class="dppColumn">
         <span>Monthly Credits</span>
@@ -28,7 +27,6 @@
                 <i class="fas fa-minus-circle" @click="removeExistingCredit(index)"></i>
             </div>
         </div>
-        <!-- <input v-for="(i, index) in existingCreditValues" type="tel" pattern="[0-9]*" step="0.01"  :key="index" placeholder="Existing Credits" :value="parseFloat(i.value / 100)" @change="mutateExistingCredits({index, value: parseFloat($event.target.value) * 100})"/> -->
     </div>
 </div>
 </template>

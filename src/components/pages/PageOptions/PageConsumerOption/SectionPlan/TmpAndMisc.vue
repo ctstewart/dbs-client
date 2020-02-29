@@ -1,49 +1,59 @@
 <template>
 <div class="input eightColumns">
-    <div>TMP</div>
-    <input :value="tmp" @change="mutate({property: 'tmp', with: $event.target.value})">
-    <div>Phones in 2 year Contracts</div>
-    <select :value="twoyear" @change="mutate({property: 'twoyear', with: $event.target.value})">
-        <option v-for="i in 11" :key="i">{{i - 1}}</option>
-    </select>
-    <div>$30 Basic Phones</div>
-    <select :value="basic" @change="mutate({property: 'basic', with: $event.target.value})">
-        <option v-for="i in 11" :key="i">{{i - 1}}</option>
-    </select>
-    <div>Number Of New Devices</div>
-    <select :value="numberOfNewDevices" @change="mutate({property: 'numberOfNewDevices', with: $event.target.value})">
-        <option v-for="i in 11" :key="i">{{i - 1}}</option>
-    </select>
+	<input-dropdown v-bind="{inputType: 'numberInput', label: 'TMP', value: tmp}" v-on:value-changed="mutate({property: 'tmp', with: $event})"/>
+	<input-dropdown v-bind="{inputType: 'numberDropdown', label: 'Phones in 2 year Contracts', value: twoyear, range: 11}" v-on:value-changed="mutate({property: 'twoyear', with: $event})"/>
+	<input-dropdown v-bind="{inputType: 'numberDropdown', label: '$30 Basic Phones', value: basic, range: 11}" v-on:value-changed="mutate({property: 'basic', with: $event})"/>
+	<input-dropdown v-bind="{inputType: 'numberDropdown', label: 'Number of New Devices', value: numberOfNewDevices, range: 11}" v-on:value-changed="mutate({property: 'numberOfNewDevices', with: $event})"/>
 </div>
 </template>
 
 <script>
 import { mapState, mapGetters, mapMutations } from 'vuex'
 
+import InputDropdown from '@/components/input/InputDropdown'
+
 export default {
-    name: 'TmpAndMisc',
-    computed: {
-        ...mapState({
-            tmp (state) {
-                return state['consumer'][this.$route.params.vuexModule].tmp
-            },
-            twoyear (state) {
-                return state['consumer'][this.$route.params.vuexModule].twoyear
-            },
-            basic (state) {
-                return state['consumer'][this.$route.params.vuexModule].basic
-            },
-            numberOfNewDevices (state) {
-                return state['consumer'][this.$route.params.vuexModule].numberOfNewDevices
-            },
-        })
-    },
-    methods: {
-        ...mapMutations({
-            mutate (commit, payload) {
-                return commit(`consumer/${this.$route.params.vuexModule}/mutate`, payload)
-            }
-        })
-    }
+	name: 'TmpAndMisc',
+	components: {InputDropdown},
+	computed: {
+		...mapState({
+			tmp (state) {
+				return state['consumer'][this.$route.params.vuexModule].tmp
+			},
+			twoyear (state) {
+				return state['consumer'][this.$route.params.vuexModule].twoyear
+			},
+			basic (state) {
+				return state['consumer'][this.$route.params.vuexModule].basic
+			},
+			numberOfNewDevices (state) {
+				return state['consumer'][this.$route.params.vuexModule].numberOfNewDevices
+			},
+		})
+	},
+	methods: {
+		...mapMutations({
+			mutate (commit, payload) {
+				return commit(`consumer/${this.$route.params.vuexModule}/mutate`, payload)
+			}
+		})
+	}
 }
 </script>
+
+<style lang="less" scoped>
+.input {
+	border: 1px solid white;
+	border-radius: 10px;
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	align-items: center;
+	justify-items: end;
+
+	> div {
+		font-size: 14px;
+		width: 100%;
+		text-align: right;
+	}
+}
+</style>

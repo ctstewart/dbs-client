@@ -46,8 +46,6 @@ const defaultState = () => {
         tmp: 0,
         existingDPPValues: [],
         existingCreditValues: [],
-        newDPPValues: [],
-        newCreditValues: []
     }
 }
 

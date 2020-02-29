@@ -10,45 +10,27 @@
     </div>
     <div class="group-container two-column-width">
         <p class="group-container-label">Number of Phones</p>
-        <div class="group-container-main">
-            <div class="input-container" v-for="(plan, index) in plans" :key="plan.id">
-                <label>{{ plan.id }}</label>
-                <input :value="plan.numberOfPhones" @change="setPlans({index, value: parseInt($event.target.value)})">
-            </div>
+        <div class="group-container-main four-columns">
+            <input-dropdown v-for="(plan, index) in plans" :key="plan.id" v-bind="{inputType: 'numberInput', label: plan.id, value: plan.numberOfPhones}" v-on:value-changed="setPlans({index, value: parseInt($event)})"/>
         </div>
     </div>
     <div class="group-container">
         <p class="group-container-label">Discount</p>
-        <div class="group-container-main">
-            <div class="input-container four-column-width">
-                <label>Military Discount</label>
-                <label class="switch">
-                    <input type="checkbox" :checked="militaryDiscount.isActive" @change="toggleMilitaryDiscount">
-                    <span class="slider"></span>
-                </label>
-            </div>
+        <div class="group-container-main one-column">
+            <input-switch v-bind="{label: 'Military Discount', value: militaryDiscount.isActive}" v-on:toggle="toggleMilitaryDiscount"/>
         </div>
     </div>
     <div class="group-container">
         <p class="group-container-label">TMP</p>
-        <div class="group-container-main">
-            <div class="input-container four-column-width">
-                <label>TMP</label>
-                <input :value="tmp" @change="mutate({property: 'tmp', with: $event.target.value})">
-            </div>
+        <div class="group-container-main one-column">
+            <input-dropdown v-bind="{inputType: 'numberInput', label: 'TMP', value: tmp}" v-on:value-changed="mutate({property: 'tmp', with: $event})"/>
         </div>
     </div>
     <div class="group-container two-column-width">
         <p class="group-container-label">Misc.</p>
-        <div class="group-container-main">
-            <div class="input-container two-column-width">
-                <label>Number of 2 Year Phones</label>
-                <input :value="twoYear.numberOfPhones" @change="mutateTwoYear($event.target.value)">
-            </div>
-            <div class="input-container two-column-width-second">
-                <label>Number of Activation Fees</label>
-                <input :value="numberOfNewDevices" @change="mutate({property: 'numberOfNewDevices', with: $event.target.value})">
-            </div>
+        <div class="group-container-main two-columns">
+            <input-dropdown v-bind="{inputType: 'numberInput', label: 'Number of 2 Year Phones', value: twoYear.numberOfPhones}" v-on:value-changed="mutateTwoYear($event)"/>
+            <input-dropdown v-bind="{inputType: 'numberInput', label: 'Number of Activation Fees', value: numberOfNewDevices}" v-on:value-changed="mutate({property: 'numberOfNewDevices', with: $event})"/>
         </div>
     </div>
 </div>
@@ -57,8 +39,12 @@
 <script>
 import { mapState, mapGetters, mapMutations } from 'vuex'
 
+import InputDropdown from '@/components/input/InputDropdown'
+import InputSwitch from '@/components/input/InputSwitch'
+
 export default {
     name: 'SectionPlan',
+    components: {InputDropdown, InputSwitch},
     computed: {
         ...mapState({
             plans (state) {
@@ -151,90 +137,20 @@ export default {
             height: 75%;
             border-radius: 10px;
             display: grid;
-            grid-template-columns: 1fr 1fr 1fr 1fr;
             align-items: center;
             justify-items: center;
+        }
 
-            .input-container {
-                display: flex;
-                align-items: center;
-                margin: .25rem;
+        .one-column {
+            grid-template-columns: 1fr;
+        }
 
-                > * {
-                    margin-right: 1rem;
-                }
+        .two-columns {
+            grid-template-columns: 1fr 1fr;
+        }
 
-                label {
-                    text-align: right;
-                }
-
-                input {
-                    -webkit-appearance: none;  /* for webkit (safari, chrome) compatibility */
-                    -moz-appearance: none; /* for firefox compatibility */
-                    appearance: none;
-                    background-color: rgba(255,255,255,0.8);
-                    width: 64px;
-                    height: 48px;
-                    border-radius: 5px;
-                    padding: 0;
-                    display: block;
-                    margin: 0 auto;
-                    text-align: center;
-                    text-align-last: center;
-                    font-size: 16px;
-                }
-
-                .switch {
-                    position: relative;
-                    display: inline-block;
-                    width: 60px;
-                    height: 34px;
-
-                    input {
-                        opacity: 0;
-                        width: 0;
-                        height: 0;
-                    }
-
-                    .slider {
-                        position: absolute;
-                        cursor: pointer;
-                        top: 0;
-                        left: 0;
-                        right: 0;
-                        bottom: 0;
-                        background-color: #ccc;
-                        -webkit-transition: .4s;
-                        transition: .4s;
-
-                        &:before {
-                            position: absolute;
-                            content: "";
-                            height: 26px;
-                            width: 26px;
-                            left: 4px;
-                            bottom: 4px;
-                            background-color: white;
-                            -webkit-transition: .4s;
-                            transition: .4s;
-                        }
-                    }
-
-                    input:checked + .slider {
-                        background-color: #2196F3;
-                    }
-
-                    input:focus + .slider {
-                        box-shadow: 0 0 1px #2196F3;
-                    }
-
-                    input:checked + .slider:before {
-                        -webkit-transform: translateX(26px);
-                        -ms-transform: translateX(26px);
-                        transform: translateX(26px);
-                    }
-                }
-            }
+        .four-columns {
+            grid-template-columns: 1fr 1fr 1fr 1fr;
         }
 
         &:nth-of-type(3) {
@@ -249,13 +165,5 @@ export default {
 
 .two-column-width {
     grid-column: 1 / span 2;
-}
-
-.two-column-width-second {
-    grid-column: 3 / span 2;
-}
-
-.four-column-width {
-    grid-column: 1 / span 4;
 }
 </style>
