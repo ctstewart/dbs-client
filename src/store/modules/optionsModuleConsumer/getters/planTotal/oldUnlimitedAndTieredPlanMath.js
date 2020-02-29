@@ -10,7 +10,7 @@ const oldUnlimitedAndTieredPlanMath = (({numberOfPhones, oldUnlimitedPlansArray,
                 localTotal += oldUnlimitedPlan.noAutopay
             }
 
-            if (militaryNew || responderNew) {
+            if (militaryNew) {
                 localTotal = localTotal * 0.85
             }
         }
