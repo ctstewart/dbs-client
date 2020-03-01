@@ -5,7 +5,6 @@
         <ul class="nav__links">
             <li><router-link to="/admin/" style="color: #0088a9;">Users</router-link></li>
             <li><router-link to="/admin/">App Usage (Coming Soon)</router-link></li>
-            <!-- <li><a @click="$router.push('/')" href="#">Benefit Sheet</a></li> -->
         </ul>
     </nav>
     <div>
@@ -17,14 +16,14 @@
 
 <script>
 export default {
-    name: 'AdminNavbar',
-    methods: {
-        logout() {
-            localStorage.clear()
-            sessionStorage.clear()
-            this.$router.push('/login')
-        }
-    }
+	name: 'AdminNavbar',
+	methods: {
+		logout () {
+			localStorage.clear()
+			sessionStorage.clear()
+			this.$router.push('/login')
+		}
+	}
 }
 </script>
 

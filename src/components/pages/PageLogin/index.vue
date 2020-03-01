@@ -24,17 +24,17 @@ import ResetPasswordForm from './ResetPasswordForm'
 import ResetPasswordConfirmation from './ResetPasswordConfirmation'
 
 export default {
-    name: 'PageLogin',
-    components: { LoginForm, ResetPasswordForm, ResetPasswordConfirmation },
-    data: function () {
-        return {
-            currentComponent: 'LoginForm',
-            email: ''
-        }
-    },
-    created () {
-        localStorage.clear()
-    }
+	name: 'PageLogin',
+	components: { LoginForm, ResetPasswordForm, ResetPasswordConfirmation },
+	data: function () {
+		return {
+			currentComponent: 'LoginForm',
+			email: ''
+		}
+	},
+	created () {
+		localStorage.clear()
+	}
 }
 </script>
 

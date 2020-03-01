@@ -40,125 +40,126 @@ import axios from 'axios'
 import InputField from '@/components/ui/InputField'
 
 export default {
-    name: 'ModalUpdateUser',
-    components: { InputField },
-    props: {
-        _id: String,
-        firstName: String,
-        lastName: String,
-        email: String,
-        store: String,
-        district: String,
-        admin: Boolean,
-    },
-    data() {
-        return {
-            updatedFirstName: this.firstName,
-            updatedLastName: this.lastName,
-            updatedEmail: this.email,
-            updatedStore: this.store,
-            updatedDistrict: this.district,
-            updatedAdmin: this.admin,
-            updateUserError: '',
-            updateUserMsg: '',
-            stores: [
-                "Admin Staff",
-                "Business Rep",
-                "Aberdeen",
-                "Albert Lea",
-                "Ankeny",
-                "Atlantic",
-                "Aurora",
-                "Brookings",
-                "Chadron",
-                "Chamberlain",
-                "Cherokee",
-                "Cottage Grove",
-                "Denison",
-                "East Sioux Falls",
-                "Edgerton",
-                "Fairmont",
-                "Faribault",
-                "Hamilton",
-                "Hastings NE",
-                "Le Mars",
-                "Lexington",
-                "Lincoln",
-                "Madison",
-                "McCook",
-                "Monticello",
-                "Morningside",
-                "Northfield",
-                "Onawa",
-                "Ord",
-                "Owatonna North",
-                "Owatonna South",
-                "Plymouth",
-                "Red Wing",
-                "River Falls",
-                "Rock Valley",
-                "Sartell",
-                "Sidney",
-                "Sioux Center",
-                "South Sioux Falls",
-                "St. Anthony",
-                "Storm Lake",
-                "Vermillion",
-                "Waseca",
-                "West Sioux Falls",
-                "Willmar",
-                "Worthington",
-                "Yankton"
-            ],
-            districts: [
-                "Admin Staff",
-                "Aaron Stickney",
-                "Adam Harrington",
-                "Brooke Samuelson",
-                "Chelsea Cahoy",
-                "Jason Hansen",
-                "Kyle Kortz",
-                "Marcus Malcom",
-                "Matt De Wit",
-                "Scot Suess"
-            ]
-        }
-    },
-    methods: {
-        updateUser() {
-            if (this.$store.state.userInfo.superAdmin) {
-                var axiosUrl = '/api/users/superAdminUpdateUser'
-            } else {
-                var axiosUrl = '/api/users/adminUpdateUser'
-            }
-            axios({
-                method: 'post',
-                url: axiosUrl,
-                headers: { authorization: 'Bearer ' + JSON.parse(localStorage.getItem('jwt')) },
-                data: {
-                    _id: this._id,
-                    firstName: this.updatedFirstName,
-                    lastName: this.updatedLastName,
-                    email: this.updatedEmail,
-                    store: this.updatedStore,
-                    district: this.updatedDistrict,
-                    admin: this.updatedAdmin
-                }
-            })
-            .then((response) => {
-                this.updateUserMsg = response.data.msg
-                setTimeout(() => {
-                    location.reload()
-                }, 3000)
-            })
-            .catch((error) => {
-                this.createUserError = error
-                setTimeout(() => {
-                    this.createUserError = ''
-                }, 2000)
-            })
-        },
-    }
+	name: 'ModalUpdateUser',
+	components: { InputField },
+	props: {
+		_id: String,
+		firstName: String,
+		lastName: String,
+		email: String,
+		store: String,
+		district: String,
+		admin: Boolean
+	},
+	data () {
+		return {
+			updatedFirstName: this.firstName,
+			updatedLastName: this.lastName,
+			updatedEmail: this.email,
+			updatedStore: this.store,
+			updatedDistrict: this.district,
+			updatedAdmin: this.admin,
+			updateUserError: '',
+			updateUserMsg: '',
+			stores: [
+				'Admin Staff',
+				'Business Rep',
+				'Aberdeen',
+				'Albert Lea',
+				'Ankeny',
+				'Atlantic',
+				'Aurora',
+				'Brookings',
+				'Chadron',
+				'Chamberlain',
+				'Cherokee',
+				'Cottage Grove',
+				'Denison',
+				'East Sioux Falls',
+				'Edgerton',
+				'Fairmont',
+				'Faribault',
+				'Hamilton',
+				'Hastings NE',
+				'Le Mars',
+				'Lexington',
+				'Lincoln',
+				'Madison',
+				'McCook',
+				'Monticello',
+				'Morningside',
+				'Northfield',
+				'Onawa',
+				'Ord',
+				'Owatonna North',
+				'Owatonna South',
+				'Plymouth',
+				'Red Wing',
+				'River Falls',
+				'Rock Valley',
+				'Sartell',
+				'Sidney',
+				'Sioux Center',
+				'South Sioux Falls',
+				'St. Anthony',
+				'Storm Lake',
+				'Vermillion',
+				'Waseca',
+				'West Sioux Falls',
+				'Willmar',
+				'Worthington',
+				'Yankton'
+			],
+			districts: [
+				'Admin Staff',
+				'Aaron Stickney',
+				'Adam Harrington',
+				'Brooke Samuelson',
+				'Chelsea Cahoy',
+				'Jason Hansen',
+				'Kyle Kortz',
+				'Marcus Malcom',
+				'Matt De Wit',
+				'Scot Suess'
+			]
+		}
+	},
+	methods: {
+		updateUser () {
+			let axiosUrl = null
+			if (this.$store.state.userInfo.superAdmin) {
+				axiosUrl = '/api/users/superAdminUpdateUser'
+			} else {
+				axiosUrl = '/api/users/adminUpdateUser'
+			}
+			axios({
+				method: 'post',
+				url: axiosUrl,
+				headers: { authorization: 'Bearer ' + JSON.parse(localStorage.getItem('jwt')) },
+				data: {
+					_id: this._id,
+					firstName: this.updatedFirstName,
+					lastName: this.updatedLastName,
+					email: this.updatedEmail,
+					store: this.updatedStore,
+					district: this.updatedDistrict,
+					admin: this.updatedAdmin
+				}
+			})
+				.then((response) => {
+					this.updateUserMsg = response.data.msg
+					setTimeout(() => {
+						location.reload()
+					}, 3000)
+				})
+				.catch((error) => {
+					this.createUserError = error
+					setTimeout(() => {
+						this.createUserError = ''
+					}, 2000)
+				})
+		}
+	}
 }
 </script>
 

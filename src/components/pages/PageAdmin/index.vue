@@ -6,14 +6,12 @@
 </template>
 
 <script>
-import axios from 'axios'
-
 import AdminNavbar from './AdminNavbar'
 import AdminUsers from './AdminUsers'
 
 export default {
-    name: 'PageAdmin',
-    components: { AdminNavbar, AdminUsers },
+	name: 'PageAdmin',
+	components: { AdminNavbar, AdminUsers }
 }
 </script>
 

@@ -16,23 +16,24 @@ import axios from 'axios'
 import InputField from '@/components/ui/InputField'
 
 export default {
-    name: 'ResetPasswordForm',
-    props: ['email'],
-    components: { InputField },
-    methods: {
-        sendEmailForPasswordReset: function () {
-            axios.post('/api/users/sendPasswordResetEmail', {
-                "email": this.email
-            })
-            .then((response) => {
-                console.log(response.data.msg)
-                this.$emit('change-to-form', 'ResetPasswordConfirmation')
-            })
-            .catch((error) => {
-                console.log('API Error')
-            })
-        },
-    },
+	name: 'ResetPasswordForm',
+	props: ['email'],
+	components: { InputField },
+	methods: {
+		sendEmailForPasswordReset: function () {
+			axios.post('/api/users/sendPasswordResetEmail', {
+				'email': this.email
+			})
+				.then((response) => {
+					console.log(response.data.msg)
+					this.$emit('change-to-form', 'ResetPasswordConfirmation')
+				})
+				.catch((error) => {
+					console.log('API Error')
+					console.log(error)
+				})
+		}
+	}
 }
 </script>
 
@@ -42,7 +43,7 @@ export default {
     display: grid;
     grid-template-rows: 15% 30% 30% 25%;
     border-right: 1px solid grey;
-    
+
     > div {
         display: grid;
     }

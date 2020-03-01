@@ -33,108 +33,108 @@ import axios from 'axios'
 import InputField from '@/components/ui/InputField'
 
 export default {
-    name: 'ModalAddUser',
-    components: { InputField },
-    data() {
-        return {
-            firstName: '',
-            lastName: '',
-            email: '',
-            store: '---Select a store---',
-            district: '---Select a district---',
-            createUserError: '',
-            createUserMsg: '',
-            stores: [
-                "Admin Staff",
-                "Business Rep",
-                "Aberdeen",                                                                                                                                                                       
-                "Albert Lea",                                                                                                                                                                     
-                "Ankeny",                                                                                                                                                                         
-                "Atlantic",                                                                                                                                                                       
-                "Aurora",                                                                                                                                                                         
-                "Brookings",                                                                                                                                                                      
-                "Chadron",                                                                                                                                                                        
-                "Chamberlain",                                                                                                                                                                    
-                "Cherokee",                                                                                                                                                                       
-                "Cottage Grove",                                                                                                                                                                  
-                "Denison",                                                                                                                                                                        
-                "East Sioux Falls",                                                                                                                                                               
-                "Edgerton",                                                                                                                                                                       
-                "Fairmont",                                                                                                                                                                       
-                "Faribault",                                                                                                                                                                      
-                "Hamilton",                                                                                                                                                                       
-                "Hastings NE",                                                                                                                                                                    
-                "Le Mars",                                                                                                                                                                        
-                "Lexington",                                                                                                                                                                      
-                "Lincoln",                                                                                                                                                                        
-                "Madison",                                                                                                                                                                        
-                "McCook",                                                                                                                                                                         
-                "Monticello",                                                                                                                                                                     
-                "Morningside",                                                                                                                                                                    
-                "Northfield",                                                                                                                                                                     
-                "Onawa",                                                                                                                                                                          
-                "Ord",                                                                                                                                                                            
-                "Owatonna North",                                                                                                                                                                 
-                "Owatonna South",                                                                                                                                                                 
-                "Plymouth",                                                                                                                                                                       
-                "Red Wing",                                                                                                                                                                       
-                "River Falls",                                                                                                                                                                    
-                "Rock Valley",                                                                                                                                                                    
-                "Sartell",                                                                                                                                                                        
-                "Sidney",                                                                                                                                                                         
-                "Sioux Center",                                                                                                                                                                   
-                "South Sioux Falls",                                                                                                                                                              
-                "St. Anthony",                                                                                                                                                                    
-                "Storm Lake",                                                                                                                                                                     
-                "Vermillion",                                                                                                                                                                     
-                "Waseca",                                                                                                                                                                         
-                "West Sioux Falls",                                                                                                                                                               
-                "Willmar",                                                                                                                                                                        
-                "Worthington",                                                                                                                                                                    
-                "Yankton"                                                                                                                                                                         
-            ],
-            districts: [
-                "Admin Staff",
-                "Aaron Stickney",                                                                                                                                                                 
-                "Adam Harrington",                                                                                                                                                                
-                "Brooke Samuelson",                                                                                                                                                               
-                "Chelsea Cahoy",                                                                                                                                                                  
-                "Jason Hansen",                                                                                                                                                                   
-                "Kyle Kortz",                                                                                                                                                                     
-                "Marcus Malcom",                                                                                                                                                                  
-                "Matt De Wit",                                                                                                                                                                    
-                "Scot Suess"                                                                                                                                                                      
-            ]
-        }
-    },
-    methods: {
-        createUser() {
-            axios({
-                method: 'post',
-                url: '/api/users/adminCreateNewUser',
-                headers: { authorization: 'Bearer ' + JSON.parse(localStorage.getItem('jwt')) },
-                data: {
-                    firstName: this.firstName,
-                    lastName: this.lastName,
-                    email: this.email,
-                    store: this.store,
-                    district: this.district,
-                }
-            })
-            .then((response) => {
-                this.createUserMsg = response.data.msg
-                setTimeout(() => {
-                    location.reload()
-                }, 5000)
-            })
-            .catch((error) => {
-                this.createUserError = error
-                setTimeout(() => {
-                    this.createUserError = ''
-                }, 2000)
-            })
-        },
-    }
+	name: 'ModalAddUser',
+	components: { InputField },
+	data () {
+		return {
+			firstName: '',
+			lastName: '',
+			email: '',
+			store: '---Select a store---',
+			district: '---Select a district---',
+			createUserError: '',
+			createUserMsg: '',
+			stores: [
+				'Admin Staff',
+				'Business Rep',
+				'Aberdeen',
+				'Albert Lea',
+				'Ankeny',
+				'Atlantic',
+				'Aurora',
+				'Brookings',
+				'Chadron',
+				'Chamberlain',
+				'Cherokee',
+				'Cottage Grove',
+				'Denison',
+				'East Sioux Falls',
+				'Edgerton',
+				'Fairmont',
+				'Faribault',
+				'Hamilton',
+				'Hastings NE',
+				'Le Mars',
+				'Lexington',
+				'Lincoln',
+				'Madison',
+				'McCook',
+				'Monticello',
+				'Morningside',
+				'Northfield',
+				'Onawa',
+				'Ord',
+				'Owatonna North',
+				'Owatonna South',
+				'Plymouth',
+				'Red Wing',
+				'River Falls',
+				'Rock Valley',
+				'Sartell',
+				'Sidney',
+				'Sioux Center',
+				'South Sioux Falls',
+				'St. Anthony',
+				'Storm Lake',
+				'Vermillion',
+				'Waseca',
+				'West Sioux Falls',
+				'Willmar',
+				'Worthington',
+				'Yankton'
+			],
+			districts: [
+				'Admin Staff',
+				'Aaron Stickney',
+				'Adam Harrington',
+				'Brooke Samuelson',
+				'Chelsea Cahoy',
+				'Jason Hansen',
+				'Kyle Kortz',
+				'Marcus Malcom',
+				'Matt De Wit',
+				'Scot Suess'
+			]
+		}
+	},
+	methods: {
+		createUser () {
+			axios({
+				method: 'post',
+				url: '/api/users/adminCreateNewUser',
+				headers: { authorization: 'Bearer ' + JSON.parse(localStorage.getItem('jwt')) },
+				data: {
+					firstName: this.firstName,
+					lastName: this.lastName,
+					email: this.email,
+					store: this.store,
+					district: this.district
+				}
+			})
+				.then((response) => {
+					this.createUserMsg = response.data.msg
+					setTimeout(() => {
+						location.reload()
+					}, 5000)
+				})
+				.catch((error) => {
+					this.createUserError = error
+					setTimeout(() => {
+						this.createUserError = ''
+					}, 2000)
+				})
+		}
+	}
 }
 </script>
 

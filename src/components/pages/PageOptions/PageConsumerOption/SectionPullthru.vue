@@ -20,27 +20,27 @@
 </template>
 
 <script>
-import { mapState, mapGetters, mapMutations } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 
 export default {
-    name: 'SectionPullthru',
-    computed: {
-        ...mapState({
-            connectedDevices (state) {
-                return state['consumer'][this.$route.params.vuexModule].connectedDevices
-            }
-        })
-    },
-    methods: {
-        ...mapMutations({
-            incrementConnectedDevice (commit, payload) {
-                return commit(`consumer/${this.$route.params.vuexModule}/incrementConnectedDevice`, payload)
-            },
-            decrementConnectedDevice (commit, payload) {
-                return commit(`consumer/${this.$route.params.vuexModule}/decrementConnectedDevice`, payload)
-            }
-        })
-    }
+	name: 'SectionPullthru',
+	computed: {
+		...mapState({
+			connectedDevices (state) {
+				return state['consumer'][this.$route.params.vuexModule].connectedDevices
+			}
+		})
+	},
+	methods: {
+		...mapMutations({
+			incrementConnectedDevice (commit, payload) {
+				return commit(`consumer/${this.$route.params.vuexModule}/incrementConnectedDevice`, payload)
+			},
+			decrementConnectedDevice (commit, payload) {
+				return commit(`consumer/${this.$route.params.vuexModule}/decrementConnectedDevice`, payload)
+			}
+		})
+	}
 }
 </script>
 

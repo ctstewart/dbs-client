@@ -18,55 +18,55 @@ import { mapMutations } from 'vuex'
 import InputField from '@/components/ui/InputField'
 
 export default {
-    name: 'LoginForm',
-    props: ['email'],
-    components: {InputField},
-    data: function () {
-        return {
-            password: '',
-            errorText: ''
-        }
-    },
-    methods: {
-        ...mapMutations([
-            'mutate',
-            'mutateUserInfo'
-        ]),
-        loginUser: function () {
-            axios.post('/api/users/login', {
-                "email": this.email,
-                "password": this.password
-            })
-            .then((response) => {
-                if (response.data.forceNewPassword) {
-                    this.errorText = 'Please create a new password'
-                    setTimeout(() => {
-                        this.errorText = ''
-                        this.$router.push(`/resetPassword/${response.data.token}`)
-                    }, 3000)
-                } else {
-                    this.saveTokenToLocalStorage(response.data.token)
-                    this.mutateUserInfo({ property: 'email', with: this.email })
-                    this.mutateUserInfo({ property: 'firstName', with: response.data.firstName })
-                    this.mutateUserInfo({ property: 'lastName', with: response.data.lastName })
-                    this.mutateUserInfo({ property: 'admin', with: response.data.admin })
-                    this.mutateUserInfo({ property: 'superAdmin', with: response.data.superAdmin })
-                    this.mutate({ property: 'jwtExp', with: response.data.jwtExp })
-                    this.$router.push('/')
-                }
-            })
-            .catch((error) => {
-                this.errorText = 'Incorrect username or password'
-                setTimeout(() => {
-                    this.errorText = ''
-                }, 2000)
-            })
-        },
-        saveTokenToLocalStorage: function (value) {
-            const parsed = JSON.stringify(value)
-            localStorage.setItem('jwt', parsed)
-        }
-    },
+	name: 'LoginForm',
+	props: ['email'],
+	components: { InputField },
+	data: function () {
+		return {
+			password: '',
+			errorText: ''
+		}
+	},
+	methods: {
+		...mapMutations([
+			'mutate',
+			'mutateUserInfo'
+		]),
+		loginUser: function () {
+			axios.post('/api/users/login', {
+				'email': this.email,
+				'password': this.password
+			})
+				.then((response) => {
+					if (response.data.forceNewPassword) {
+						this.errorText = 'Please create a new password'
+						setTimeout(() => {
+							this.errorText = ''
+							this.$router.push(`/resetPassword/${response.data.token}`)
+						}, 3000)
+					} else {
+						this.saveTokenToLocalStorage(response.data.token)
+						this.mutateUserInfo({ property: 'email', with: this.email })
+						this.mutateUserInfo({ property: 'firstName', with: response.data.firstName })
+						this.mutateUserInfo({ property: 'lastName', with: response.data.lastName })
+						this.mutateUserInfo({ property: 'admin', with: response.data.admin })
+						this.mutateUserInfo({ property: 'superAdmin', with: response.data.superAdmin })
+						this.mutate({ property: 'jwtExp', with: response.data.jwtExp })
+						this.$router.push('/')
+					}
+				})
+				.catch(() => {
+					this.errorText = 'Incorrect username or password'
+					setTimeout(() => {
+						this.errorText = ''
+					}, 2000)
+				})
+		},
+		saveTokenToLocalStorage: function (value) {
+			const parsed = JSON.stringify(value)
+			localStorage.setItem('jwt', parsed)
+		}
+	}
 }
 </script>
 
@@ -76,7 +76,7 @@ export default {
     display: grid;
     grid-template-rows: 15% 30% 20% 10% 25%;
     border-right: 1px solid grey;
-    
+
     > div {
         display: -ms-grid;
         display: grid;

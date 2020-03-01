@@ -8,13 +8,13 @@
 </template>
 
 <script>
-import { mapState, mapGetters, mapMutations } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 
 import InputDropdown from '@/components/input/InputDropdown'
 
 export default {
 	name: 'NumberOfPhones',
-	components: {InputDropdown},
+	components: { InputDropdown },
 	computed: {
 		...mapState({
 			numberOfPhonesTieredAndOldUnlimited (state) {
@@ -26,7 +26,7 @@ export default {
 			mixAndMatchNumberOfPhonesAndId (state, getters) {
 				return getters[`consumer/${this.$route.params.vuexModule}/mixAndMatchNumberOfPhonesAndId`]
 			}
-		}),
+		})
 	},
 	methods: {
 		...mapMutations({

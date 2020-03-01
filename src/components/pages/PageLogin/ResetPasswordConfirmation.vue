@@ -7,8 +7,8 @@
 
 <script>
 export default {
-    name: 'ResetPasswordConfirmation',
-    props: ['email']
+	name: 'ResetPasswordConfirmation',
+	props: ['email']
 }
 </script>
 
@@ -18,7 +18,7 @@ export default {
     display: grid;
     grid-template-rows: 15% 30% 30% 25%;
     border-right: 1px solid grey;
-    
+
     p {
         font-size: .9rem;
         margin: 0;

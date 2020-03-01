@@ -54,9 +54,9 @@ export default {
 						tmpTotal: getters[`${this.optionsType.optionTwo}/optionTwo/tmpTotal`],
 						dppTotal: getters[`${this.optionsType.optionTwo}/optionTwo/dppTotal`],
 						total: getters[`${this.optionsType.optionTwo}/optionTwo/total`]
-					},
+					}
 				]
-			},
+			}
 		})
 	}
 
@@ -83,9 +83,9 @@ export default {
 		}
 
 		.chosenPlanLabel {
-		  display: grid;
-		  grid-template-columns: 1fr 2fr;
-		  margin: 0 1%;
+			display: grid;
+			grid-template-columns: 1fr 2fr;
+			margin: 0 1%;
 
 			> p {
 				font-size: 12px;

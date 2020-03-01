@@ -3,9 +3,9 @@ import getters from './getters'
 import mutations from './mutations'
 
 const module = {
-    state,
-    getters,
-    mutations
+	state,
+	getters,
+	mutations
 }
 
 export default module

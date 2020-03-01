@@ -24,40 +24,40 @@
 import axios from 'axios'
 
 export default {
-    name: 'ModalUserUsage',
-    props: {
-        _id: String,
-        firstName: String,
-        lastName: String,
-    },
-    data() {
-        return {
-            reports: [],
-            loading: true
-        }
-    },
-    methods: {
-        getReports() {
-            axios({
-                method: 'post',
-                url: '/api/usageReports/getUsageReportsByUserId',
-                headers: { authorization: 'Bearer ' + JSON.parse(localStorage.getItem('jwt')) },
-                data: {
-                    userId: this._id
-                }
-            })
-            .then(response => {
-                this.reports = response.data.usageReports
-                this.loading = false
-            })
-            .catch(error => {
-                console.log(error)
-            })
-        },
-    },
-    mounted() {
-        this.getReports()
-    }
+	name: 'ModalUserUsage',
+	props: {
+		_id: String,
+		firstName: String,
+		lastName: String
+	},
+	data () {
+		return {
+			reports: [],
+			loading: true
+		}
+	},
+	methods: {
+		getReports () {
+			axios({
+				method: 'post',
+				url: '/api/usageReports/getUsageReportsByUserId',
+				headers: { authorization: 'Bearer ' + JSON.parse(localStorage.getItem('jwt')) },
+				data: {
+					userId: this._id
+				}
+			})
+				.then(response => {
+					this.reports = response.data.usageReports
+					this.loading = false
+				})
+				.catch(error => {
+					console.log(error)
+				})
+		}
+	},
+	mounted () {
+		this.getReports()
+	}
 }
 </script>
 

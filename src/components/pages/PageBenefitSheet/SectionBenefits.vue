@@ -7,23 +7,23 @@
 
 <script>
 import { createNamespacedHelpers } from 'vuex'
-const { mapState, mapMutations } = createNamespacedHelpers('benefitSheet')
 
 import UiAutocomplete from '@/components/ui/UiAutocomplete'
+const { mapState, mapMutations } = createNamespacedHelpers('benefitSheet')
 
 export default {
-    name: 'SectionBenefits',
-    components: { UiAutocomplete },
-    computed: {
-        ...mapState([
-            'benefits'
-        ])
-    },
-    methods: {
-        ...mapMutations([
-            'mutateBenefits'
-        ])
-    }
+	name: 'SectionBenefits',
+	components: { UiAutocomplete },
+	computed: {
+		...mapState([
+			'benefits'
+		])
+	},
+	methods: {
+		...mapMutations([
+			'mutateBenefits'
+		])
+	}
 }
 </script>
 

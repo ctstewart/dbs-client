@@ -13,69 +13,69 @@ import PageResetPassword from '../components/pages/PageResetPassword'
 Vue.use(VueRouter)
 
 const routes = [
-    {
-        path: '/',
-        name: 'PageBenefitSheet',
-        component: PageBenefitSheet,
-        meta: { requiresAuth: true }
-    },
-    {
-        path: '/options',
-        component: PageOptions,
-        children: [
-            {
-                path: 'consumer/:vuexModule',
-                name: 'PageConsumerOption',
-                component: PageConsumerOption,
-                meta: { requiresAuth: true }
-            },
-            {
-                path: 'business/:vuexModule',
-                name: 'PageBusinessOption',
-                component: PageBusinessOption,
-                meta: { requiresAuth: true }
-            }
-        ]
-    },
-    {
-        path: '/admin',
-        name: 'PageAdmin',
-        component: PageAdmin,
-        meta: { requiresAuth: true }
-    },
-    {
-        path: '/changelog',
-        name: 'PageChangelog',
-        component: PageChangelog,
-        meta: { requiresAuth: true }
-    },
-    {
-        path: '/login',
-        name: 'PageLogin',
-        component: PageLogin
-    },
-    {
-        path: '/resetPassword/:resetToken',
-        name: 'PageResetPassword',
-        component: PageResetPassword
-    },
+	{
+		path: '/',
+		name: 'PageBenefitSheet',
+		component: PageBenefitSheet,
+		meta: { requiresAuth: true }
+	},
+	{
+		path: '/options',
+		component: PageOptions,
+		children: [
+			{
+				path: 'consumer/:vuexModule',
+				name: 'PageConsumerOption',
+				component: PageConsumerOption,
+				meta: { requiresAuth: true }
+			},
+			{
+				path: 'business/:vuexModule',
+				name: 'PageBusinessOption',
+				component: PageBusinessOption,
+				meta: { requiresAuth: true }
+			}
+		]
+	},
+	{
+		path: '/admin',
+		name: 'PageAdmin',
+		component: PageAdmin,
+		meta: { requiresAuth: true }
+	},
+	{
+		path: '/changelog',
+		name: 'PageChangelog',
+		component: PageChangelog,
+		meta: { requiresAuth: true }
+	},
+	{
+		path: '/login',
+		name: 'PageLogin',
+		component: PageLogin
+	},
+	{
+		path: '/resetPassword/:resetToken',
+		name: 'PageResetPassword',
+		component: PageResetPassword
+	}
 ]
 
 const router = new VueRouter({
-    routes
+	routes
 })
 
 router.beforeEach((to, from, next) => {
-    if(to.matched.some(record => record.meta.requiresAuth)) {
-        if (localStorage.getItem('jwt') == null) {
-            localStorage.clear()
-            next({path: '/login'})
-        } else {
-            next()
-        }
-    } else {
-        next()
-    }
+	if (to.matched.some(record => record.meta.requiresAuth)) {
+		if (localStorage.getItem('jwt') == null) {
+			localStorage.clear()
+			next({ path: '/login' })
+		} else {
+			next()
+		}
+	} else {
+		next()
+	}
 })
 
 export default router

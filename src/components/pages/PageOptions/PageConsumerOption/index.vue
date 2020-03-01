@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters, mapMutations } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 
 import jwtExpCheck from '@/mixins/jwtExpCheck'
 
@@ -41,7 +41,7 @@ export default {
 	name: 'LayoutOption',
 	mixins: [jwtExpCheck],
 	components: { LayoutSidebar, SectionPlan, SectionPullthru, SectionDpp },
-	data() {
+	data () {
 		return {
 			currentTab: 'SectionPlan',
 			whichOption: '',
@@ -49,7 +49,7 @@ export default {
 				{ id: 'SectionPlan', label: 'Plan', active: true },
 				{ id: 'SectionPullthru', label: 'Pull Thru', active: false },
 				{ id: 'SectionDpp', label: 'DPP', active: false }
-			],
+			]
 		}
 	},
 
@@ -81,7 +81,7 @@ export default {
 		...mapMutations([
 			'copyModuleOptionOneToOptionTwo'
 		]),
-		navbarClick(id) {
+		navbarClick (id) {
 			this.tabs.forEach((tab) => {
 				if (tab.id === id) {
 					tab.active = true
@@ -90,7 +90,7 @@ export default {
 					tab.active = false
 				}
 			})
-		},
+		}
 	},
 
 	computed: {
@@ -98,7 +98,7 @@ export default {
 			total (state, getters) {
 				return getters[`consumer/${this.$route.params.vuexModule}/total`]
 			}
-		}),
+		})
 	}
 }
 </script>
@@ -155,7 +155,7 @@ export default {
 
 			.clearButton {
 				grid-template-columns: 70% 30%;
-			}           
+			}
 		}
 
 		.navBar {

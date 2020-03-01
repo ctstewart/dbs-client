@@ -8,13 +8,13 @@
 </template>
 
 <script>
-import { mapState, mapGetters, mapMutations } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 
 import InputDropdown from '@/components/input/InputDropdown'
 
 export default {
 	name: 'TmpAndMisc',
-	components: {InputDropdown},
+	components: { InputDropdown },
 	computed: {
 		...mapState({
 			tmp (state) {
@@ -28,7 +28,7 @@ export default {
 			},
 			numberOfNewDevices (state) {
 				return state['consumer'][this.$route.params.vuexModule].numberOfNewDevices
-			},
+			}
 		})
 	},
 	methods: {

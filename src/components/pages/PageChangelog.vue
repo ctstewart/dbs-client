@@ -23,28 +23,28 @@ import axios from 'axios'
 import marked from 'marked'
 
 export default {
-    name: 'PageChangelog',
-    data() {
-        return {
-            changelog: '',
-            loading: true
-        }
-    },
-    created() {
-        axios.get('CHANGELOG.md')
-        .then(response => {
-            this.changelog = marked(response.data)
-            this.loading = false
-        })
-        .catch(error => console.log(error))
-    },
-    methods: {
-        logout() {
-            localStorage.clear()
-            sessionStorage.clear()
-            this.$router.push('/login')
-        }
-    }
+	name: 'PageChangelog',
+	data () {
+		return {
+			changelog: '',
+			loading: true
+		}
+	},
+	created () {
+		axios.get('CHANGELOG.md')
+			.then(response => {
+				this.changelog = marked(response.data)
+				this.loading = false
+			})
+			.catch(error => console.log(error))
+	},
+	methods: {
+		logout () {
+			localStorage.clear()
+			sessionStorage.clear()
+			this.$router.push('/login')
+		}
+	}
 }
 </script>
 

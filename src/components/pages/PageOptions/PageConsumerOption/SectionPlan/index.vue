@@ -11,8 +11,6 @@
 </template>
 
 <script>
-import { mapState, mapGetters, mapMutations } from 'vuex'
-
 import PlanDropdown from './PlanDropdown'
 import NumberOfPhones from './NumberOfPhones'
 import PlanDiscounts from './PlanDiscounts'
@@ -20,7 +18,7 @@ import TmpAndMisc from './TmpAndMisc'
 
 export default {
 	name: 'SectionPage',
-	components: { PlanDropdown, NumberOfPhones, PlanDiscounts, TmpAndMisc },
+	components: { PlanDropdown, NumberOfPhones, PlanDiscounts, TmpAndMisc }
 }
 </script>
 

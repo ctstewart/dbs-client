@@ -35,41 +35,41 @@
 import { mapState, mapMutations } from 'vuex'
 
 export default {
-    name: 'SectionDpp',
-    data() {
-        return {
-            addDpp: 0,
-            addCredit: 0
-        }
-    },
-    computed: {
-        ...mapState({
-            existingDPPValues (state) {
-                return state['business'][this.$route.params.vuexModule].existingDPPValues
-            },
-            existingCreditValues (state) {
-                return state['business'][this.$route.params.vuexModule].existingCreditValues
-            },
-        })
-    },
-    methods: {
-        ...mapMutations({
-            addExistingDpp (commit, payload) {
-                this.addDpp = 0
-                return commit(`business/${this.$route.params.vuexModule}/addExistingDpp`, payload)
-            },
-            removeExistingDpp (commit, payload) {
-                return commit(`business/${this.$route.params.vuexModule}/removeExistingDpp`, payload)
-            },
-            addExistingCredit (commit, payload) {
-                this.addCredit = 0
-                return commit(`business/${this.$route.params.vuexModule}/addExistingCredit`, payload)
-            },
-            removeExistingCredit (commit, payload) {
-                return commit(`business/${this.$route.params.vuexModule}/removeExistingCredit`, payload)
-            }
-        })
-    }
+	name: 'SectionDpp',
+	data () {
+		return {
+			addDpp: 0,
+			addCredit: 0
+		}
+	},
+	computed: {
+		...mapState({
+			existingDPPValues (state) {
+				return state['business'][this.$route.params.vuexModule].existingDPPValues
+			},
+			existingCreditValues (state) {
+				return state['business'][this.$route.params.vuexModule].existingCreditValues
+			}
+		})
+	},
+	methods: {
+		...mapMutations({
+			addExistingDpp (commit, payload) {
+				this.addDpp = 0
+				return commit(`business/${this.$route.params.vuexModule}/addExistingDpp`, payload)
+			},
+			removeExistingDpp (commit, payload) {
+				return commit(`business/${this.$route.params.vuexModule}/removeExistingDpp`, payload)
+			},
+			addExistingCredit (commit, payload) {
+				this.addCredit = 0
+				return commit(`business/${this.$route.params.vuexModule}/addExistingCredit`, payload)
+			},
+			removeExistingCredit (commit, payload) {
+				return commit(`business/${this.$route.params.vuexModule}/removeExistingCredit`, payload)
+			}
+		})
+	}
 }
 </script>
 

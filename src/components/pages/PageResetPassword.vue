@@ -21,62 +21,62 @@ import { mapMutations } from 'vuex'
 import InputField from '@/components/ui/InputField'
 
 export default {
-    name: 'LoginForm',
-    components: {InputField},
-    data: function () {
-        return {
-            password: '',
-            confirmPassword: '',
-            errorText: '',
-            successText: ''
-        }
-    },
-    methods: {
-        ...mapMutations([
-            'mutate'
-        ]),
-        resetPassword: function () {
-            if (this.password !== this.confirmPassword) {
-                this.errorText = 'Passwords do not match'
-                setTimeout(() => {
-                    this.errorText = ''
-                }, 2000)
-            } else if (zxcvbn(this.password).score < 3) {
-                this.errorText = 'Please create a stronger password'
-                setTimeout(() => {
-                    this.errorText = ''
-                    this.$router.push('/login')
-                }, 2000)
-            } else {
-                axios({
-                    method: 'post',
-                    url: '/api/users/resetPassword',
-                    data: { password: this.password },
-                    headers: { authorization: `Bearer: ${this.$route.params.resetToken}` }
-                })
-                .then((response) => {
-                    this.successText = response.data.msg
-                    setTimeout(() => {
-                        this.$router.push('/login')
-                    }, 4000)
-                })
-                .catch((error) => {
-                    if (error.msg) {
-                        this.errorText = error.msg
-                    } else {
-                        this.errorText = 'Unknown Error. Please try again.'
-                    }
-                    setTimeout(() => {
-                        this.errorText = ''
-                    }, 4000)
-                })
-            }
-        },
-        saveTokenToLocalStorage: function (value) {
-            const parsed = JSON.stringify(value)
-            localStorage.setItem('jwt', parsed)
-        }
-    },
+	name: 'LoginForm',
+	components: { InputField },
+	data: function () {
+		return {
+			password: '',
+			confirmPassword: '',
+			errorText: '',
+			successText: ''
+		}
+	},
+	methods: {
+		...mapMutations([
+			'mutate'
+		]),
+		resetPassword: function () {
+			if (this.password !== this.confirmPassword) {
+				this.errorText = 'Passwords do not match'
+				setTimeout(() => {
+					this.errorText = ''
+				}, 2000)
+			} else if (zxcvbn(this.password).score < 3) {
+				this.errorText = 'Please create a stronger password'
+				setTimeout(() => {
+					this.errorText = ''
+					this.$router.push('/login')
+				}, 2000)
+			} else {
+				axios({
+					method: 'post',
+					url: '/api/users/resetPassword',
+					data: { password: this.password },
+					headers: { authorization: `Bearer: ${this.$route.params.resetToken}` }
+				})
+					.then((response) => {
+						this.successText = response.data.msg
+						setTimeout(() => {
+							this.$router.push('/login')
+						}, 4000)
+					})
+					.catch((error) => {
+						if (error.msg) {
+							this.errorText = error.msg
+						} else {
+							this.errorText = 'Unknown Error. Please try again.'
+						}
+						setTimeout(() => {
+							this.errorText = ''
+						}, 4000)
+					})
+			}
+		},
+		saveTokenToLocalStorage: function (value) {
+			const parsed = JSON.stringify(value)
+			localStorage.setItem('jwt', parsed)
+		}
+	}
 }
 </script>
 
@@ -108,7 +108,7 @@ export default {
             display: -ms-grid;
             display: grid;
             grid-template-rows: 15% 30% 30% 25%;
-            
+
             > div {
                 display: -ms-grid;
                 display: grid;
@@ -135,7 +135,6 @@ export default {
             span {
                 color: red;
             }
-
 
         }
     }

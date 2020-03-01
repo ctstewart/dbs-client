@@ -31,7 +31,6 @@
 
 <script>
 import { createNamespacedHelpers } from 'vuex'
-const { mapState, mapGetters, mapMutations } = createNamespacedHelpers('benefitSheet')
 
 import jwtExpCheck from '@/mixins/jwtExpCheck'
 
@@ -40,6 +39,7 @@ import SectionBenefits from './SectionBenefits'
 import SectionOldBills from './SectionOldBills'
 import SectionBillBreakdown from './SectionBillBreakdown'
 import SectionCosts from './SectionCosts'
+const { mapMutations } = createNamespacedHelpers('benefitSheet')
 
 export default {
 	name: 'PageBenefitSheet',
@@ -61,9 +61,9 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@media only screen 
-and (min-device-width : 768px) 
-and (max-device-width : 1024px) 
+@media only screen
+and (min-device-width : 768px)
+and (max-device-width : 1024px)
 and (orientation : landscape)
 {
 	.main select {
@@ -163,7 +163,6 @@ and (orientation : landscape)
 		}
 	}
 }
-
 
 @media print {
 

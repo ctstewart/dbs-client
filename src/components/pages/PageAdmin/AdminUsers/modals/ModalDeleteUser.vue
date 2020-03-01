@@ -16,30 +16,30 @@
 import axios from 'axios'
 
 export default {
-    name: 'ModalAddUser',
-    props: {
-        _id: String,
-        firstName: String,
-        lastName: String,
-        store: String,
-        district: String,
-    },
-    methods: {
-        deleteUser() {
-            axios({
-                method: 'delete',
-                url: '/api/users/adminDeleteUser',
-                headers: { authorization: 'Bearer ' + JSON.parse(localStorage.getItem('jwt')) },
-                data: { _id: this._id }
-            })
-            .then((response) => {
-                location.reload()
-            })
-            .catch((error) => {
-                this.createUserError = error
-            })
-        }
-    }
+	name: 'ModalAddUser',
+	props: {
+		_id: String,
+		firstName: String,
+		lastName: String,
+		store: String,
+		district: String
+	},
+	methods: {
+		deleteUser () {
+			axios({
+				method: 'delete',
+				url: '/api/users/adminDeleteUser',
+				headers: { authorization: 'Bearer ' + JSON.parse(localStorage.getItem('jwt')) },
+				data: { _id: this._id }
+			})
+				.then((response) => {
+					location.reload()
+				})
+				.catch((error) => {
+					this.createUserError = error
+				})
+		}
+	}
 }
 </script>
 

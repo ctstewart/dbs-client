@@ -37,53 +37,53 @@
 </template>
 
 <script>
-import { mapState, mapGetters, mapMutations } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 
 import InputDropdown from '@/components/input/InputDropdown'
 import InputSwitch from '@/components/input/InputSwitch'
 
 export default {
-    name: 'SectionPlan',
-    components: {InputDropdown, InputSwitch},
-    computed: {
-        ...mapState({
-            plans (state) {
-                return state['business'][this.$route.params.vuexModule].plans
-            },
-            militaryDiscount (state) {
-                return state['business'][this.$route.params.vuexModule].militaryDiscount
-            },
-            tmp (state) {
-                return state['business'][this.$route.params.vuexModule].tmp
-            },
-            twoYear (state) {
-                return state['business'][this.$route.params.vuexModule].twoYear
-            },
-            numberOfNewDevices (state) {
-                return state['business'][this.$route.params.vuexModule].numberOfNewDevices
-            },
-        }),
-    },
-    methods: {
-        ...mapMutations({
-            mutate (commit, payload) {
-                return commit(`business/${this.$route.params.vuexModule}/mutate`, payload)
-            },
-            setPlans (commit, payload) {
-                return commit(`business/${this.$route.params.vuexModule}/setPlans`, payload)
-            },
-            toggleMilitaryDiscount (commit) {
-                return commit(`business/${this.$route.params.vuexModule}/toggleMilitaryDiscount`)
-            },
-            mutateTwoYear (commit, payload) {
-                return commit(`business/${this.$route.params.vuexModule}/mutateTwoYear`, payload)
-            },
-            toggleOptionsType (commit, payload) {
-                commit('toggleOptionsType', payload)
-                return this.$router.push(`/options/consumer/${this.$route.params.vuexModule}`)
-            }
-        })
-    }
+	name: 'SectionPlan',
+	components: { InputDropdown, InputSwitch },
+	computed: {
+		...mapState({
+			plans (state) {
+				return state['business'][this.$route.params.vuexModule].plans
+			},
+			militaryDiscount (state) {
+				return state['business'][this.$route.params.vuexModule].militaryDiscount
+			},
+			tmp (state) {
+				return state['business'][this.$route.params.vuexModule].tmp
+			},
+			twoYear (state) {
+				return state['business'][this.$route.params.vuexModule].twoYear
+			},
+			numberOfNewDevices (state) {
+				return state['business'][this.$route.params.vuexModule].numberOfNewDevices
+			}
+		})
+	},
+	methods: {
+		...mapMutations({
+			mutate (commit, payload) {
+				return commit(`business/${this.$route.params.vuexModule}/mutate`, payload)
+			},
+			setPlans (commit, payload) {
+				return commit(`business/${this.$route.params.vuexModule}/setPlans`, payload)
+			},
+			toggleMilitaryDiscount (commit) {
+				return commit(`business/${this.$route.params.vuexModule}/toggleMilitaryDiscount`)
+			},
+			mutateTwoYear (commit, payload) {
+				return commit(`business/${this.$route.params.vuexModule}/mutateTwoYear`, payload)
+			},
+			toggleOptionsType (commit, payload) {
+				commit('toggleOptionsType', payload)
+				return this.$router.push(`/options/consumer/${this.$route.params.vuexModule}`)
+			}
+		})
+	}
 }
 </script>
 

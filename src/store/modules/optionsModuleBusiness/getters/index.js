@@ -4,10 +4,10 @@ import tmpTotal from './tmpTotal'
 import total from './total'
 
 const getters = {
-    planTotal,
-    dppTotal,
-    tmpTotal,
-    total
+	planTotal,
+	dppTotal,
+	tmpTotal,
+	total
 }
 
 export default getters

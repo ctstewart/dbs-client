@@ -6,12 +6,12 @@ import tmpTotal from './tmpTotal'
 import total from './total'
 
 const getters = {
-    mixAndMatchNumberOfPhonesAndId,
-    isUnlimited,
-    planTotal,
-    dppTotal,
-    tmpTotal,
-    total
+	mixAndMatchNumberOfPhonesAndId,
+	isUnlimited,
+	planTotal,
+	dppTotal,
+	tmpTotal,
+	total
 }
 
 export default getters

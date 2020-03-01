@@ -16,21 +16,21 @@ import { createNamespacedHelpers } from 'vuex'
 const { mapState, mapGetters, mapMutations } = createNamespacedHelpers('benefitSheet')
 
 export default {
-    name: 'SectionOldBills',
-    computed: {
-        ...mapState([
-            'oldPhoneBill',
-            'oldHomeSolution'
-        ]),
-        ...mapGetters([
-            'oldTotal'
-        ])
-    },
-    methods: {
-        ...mapMutations([
-            'mutate'
-        ])
-    }
+	name: 'SectionOldBills',
+	computed: {
+		...mapState([
+			'oldPhoneBill',
+			'oldHomeSolution'
+		]),
+		...mapGetters([
+			'oldTotal'
+		])
+	},
+	methods: {
+		...mapMutations([
+			'mutate'
+		])
+	}
 }
 </script>
 

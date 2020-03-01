@@ -18,27 +18,27 @@
 import { mapState, mapMutations } from 'vuex'
 
 export default {
-    name: 'SectionDpp',
-    computed: {
-        ...mapState({
-            existingDPPValues (state) {
-                return state['consumer'][this.$route.params.vuexModule].existingDPPValues
-            },
-            existingCreditValues (state) {
-                return state['consumer'][this.$route.params.vuexModule].existingCreditValues
-            },
-        })
-    },
-    methods: {
-        ...mapMutations({
-            mutateExistingDpp (commit, payload) {
-                return commit(`consumer/${this.$route.params.vuexModule}/mutateExistingDpp`, payload)
-            },
-            mutateExistingCredits (commit, payload) {
-                return commit(`consumer/${this.$route.params.vuexModule}/mutateExistingCredits`, payload)
-            }
-        })
-    }
+	name: 'SectionDpp',
+	computed: {
+		...mapState({
+			existingDPPValues (state) {
+				return state['consumer'][this.$route.params.vuexModule].existingDPPValues
+			},
+			existingCreditValues (state) {
+				return state['consumer'][this.$route.params.vuexModule].existingCreditValues
+			}
+		})
+	},
+	methods: {
+		...mapMutations({
+			mutateExistingDpp (commit, payload) {
+				return commit(`consumer/${this.$route.params.vuexModule}/mutateExistingDpp`, payload)
+			},
+			mutateExistingCredits (commit, payload) {
+				return commit(`consumer/${this.$route.params.vuexModule}/mutateExistingCredits`, payload)
+			}
+		})
+	}
 }
 </script>
 

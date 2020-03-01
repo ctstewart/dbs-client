@@ -14,55 +14,57 @@
 import zxcvbn from 'zxcvbn'
 
 export default {
-    name: 'InputPassword',
-    props: {
-        inputStyle: {
-            initialInputType: {
-                validator: function (value) {
-                    // The value must match one of these strings
-                    return ['text', 'email', 'password'].indexOf(value) !== -1
-                },
-            },
-            label: String,
-            placeholder: String,
-            meter: Boolean
-        },
-        value: String,
+	name: 'InputPassword',
+	props: {
+		inputStyle: {
+			initialInputType: {
+				validator: function (value) {
+					// The value must match one of these strings
+					return ['text', 'email', 'password'].indexOf(value) !== -1
+				}
+			},
+			label: String,
+			placeholder: String,
+			meter: Boolean
+		},
+		value: String
 
-    },
-    data() {
-        return {
-            passwordHidden: true,
-            inputType: this.inputStyle.initialInputType,
-            strength: {
-                0: "Worst",
-                1: "Bad",
-                2: "Weak",
-                3: "Good",
-                4: "Strong"
-            }
-        }
-    },
-    computed: {
-        passwordStrengthValue() {
-            if (this.inputStyle.initialInputType === 'password' && this.inputStyle.meter) {
-                return zxcvbn(this.value).score
-            } else {
-                return 0
-            }
-        },
-        passwordStrengthFeedback() {
-            if (this.inputStyle.initialInputType === 'password' && this.inputStyle.meter && !this.value) {
-                return 'Please enter a password'
-            } else if (this.inputStyle.initialInputType === 'password' && this.inputStyle.meter && this.passwordStrengthValue < 3 && this.value) {
-                return zxcvbn(this.value).feedback.suggestions[0]
-            } else if (this.inputStyle.initialInputType === 'password' && this.inputStyle.meter && this.passwordStrengthValue === 3) {
-                return 'Good!'
-            } else if (this.inputStyle.initialInputType === 'password' && this.inputStyle.meter && this.passwordStrengthValue === 4) {
-                return 'Great!'
-            }
-        },
-    }
+	},
+	data () {
+		return {
+			passwordHidden: true,
+			inputType: this.inputStyle.initialInputType,
+			strength: {
+				0: 'Worst',
+				1: 'Bad',
+				2: 'Weak',
+				3: 'Good',
+				4: 'Strong'
+			}
+		}
+	},
+	computed: {
+		passwordStrengthValue () {
+			if (this.inputStyle.initialInputType === 'password' && this.inputStyle.meter) {
+				return zxcvbn(this.value).score
+			} else {
+				return 0
+			}
+		},
+		passwordStrengthFeedback () {
+			if (this.inputStyle.initialInputType === 'password' && this.inputStyle.meter && !this.value) {
+				return 'Please enter a password'
+			} else if (this.inputStyle.initialInputType === 'password' && this.inputStyle.meter && this.passwordStrengthValue < 3 && this.value) {
+				return zxcvbn(this.value).feedback.suggestions[0]
+			} else if (this.inputStyle.initialInputType === 'password' && this.inputStyle.meter && this.passwordStrengthValue === 3) {
+				return 'Good!'
+			} else if (this.inputStyle.initialInputType === 'password' && this.inputStyle.meter && this.passwordStrengthValue === 4) {
+				return 'Great!'
+			} else {
+				return ''
+			}
+		}
+	}
 }
 </script>
 
@@ -98,7 +100,7 @@ div {
     }
 
     meter {
-        /* Reset the default appearance 
+        /* Reset the default appearance
         -webkit-appearance: none;
             -moz-appearance: none;
                 appearance: none; */

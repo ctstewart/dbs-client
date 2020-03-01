@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters, mapMutations } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 
 import jwtExpCheck from '@/mixins/jwtExpCheck'
 
@@ -38,68 +38,68 @@ import SectionPullthru from './SectionPullthru'
 import SectionDpp from './SectionDpp'
 
 export default {
-    name: 'LayoutOption',
-    mixins: [jwtExpCheck],
-    components: { LayoutSidebar, SectionPlan, SectionPullthru, SectionDpp },
-    data() {
-        return {
-            currentTab: 'SectionPlan',
-            whichOption: '',
-            tabs: [
-                { id: 'SectionPlan', label: 'Plan', active: true },
-                { id: 'SectionPullthru', label: 'Pull Thru', active: false },
-                { id: 'SectionDpp', label: 'DPP', active: false }
-            ],
-        }
-    },
+	name: 'LayoutOption',
+	mixins: [jwtExpCheck],
+	components: { LayoutSidebar, SectionPlan, SectionPullthru, SectionDpp },
+	data () {
+		return {
+			currentTab: 'SectionPlan',
+			whichOption: '',
+			tabs: [
+				{ id: 'SectionPlan', label: 'Plan', active: true },
+				{ id: 'SectionPullthru', label: 'Pull Thru', active: false },
+				{ id: 'SectionDpp', label: 'DPP', active: false }
+			]
+		}
+	},
 
-    beforeRouteUpdate (to, from, next) {
-        if (to.params.vuexModule === 'optionOne') {
-            this.whichOption = 'Option 1'
-        } else if (to.params.vuexModule === 'optionTwo') {
-            this.whichOption = 'Option 2'
-        }
-        next()
-    },
+	beforeRouteUpdate (to, from, next) {
+		if (to.params.vuexModule === 'optionOne') {
+			this.whichOption = 'Option 1'
+		} else if (to.params.vuexModule === 'optionTwo') {
+			this.whichOption = 'Option 2'
+		}
+		next()
+	},
 
-    created () {
-        if (this.$route.params.vuexModule === 'optionOne') {
-            this.whichOption = 'Option 1'
-        } else if (this.$route.params.vuexModule === 'optionTwo') {
-            this.whichOption = 'Option 2'
-        }
-    },
+	created () {
+		if (this.$route.params.vuexModule === 'optionOne') {
+			this.whichOption = 'Option 1'
+		} else if (this.$route.params.vuexModule === 'optionTwo') {
+			this.whichOption = 'Option 2'
+		}
+	},
 
-    methods: {
-        ...mapMutations({
-            resetState (commit) {
-                commit(`consumer/${this.$route.params.vuexModule}/resetState`)
-                return commit(`business/${this.$route.params.vuexModule}/resetState`)
-            }
-        }),
-        // I STILL NEED TO ADD THIS FUNCTIONALITY. DO NOT FORGET FUTURE ME.
-        ...mapMutations([
-            'copyModuleOptionOneToOptionTwo'
-        ]),
-        navbarClick(id) {
-            this.tabs.forEach((tab) => {
-                if (tab.id === id) {
-                    tab.active = true
-                    this.currentTab = tab.id
-                } else {
-                    tab.active = false
-                }
-            })
-        },
-    },
+	methods: {
+		...mapMutations({
+			resetState (commit) {
+				commit(`consumer/${this.$route.params.vuexModule}/resetState`)
+				return commit(`business/${this.$route.params.vuexModule}/resetState`)
+			}
+		}),
+		// I STILL NEED TO ADD THIS FUNCTIONALITY. DO NOT FORGET FUTURE ME.
+		...mapMutations([
+			'copyModuleOptionOneToOptionTwo'
+		]),
+		navbarClick (id) {
+			this.tabs.forEach((tab) => {
+				if (tab.id === id) {
+					tab.active = true
+					this.currentTab = tab.id
+				} else {
+					tab.active = false
+				}
+			})
+		}
+	},
 
-    computed: {
-        ...mapState({
-            total (state, getters) {
-                return getters[`business/${this.$route.params.vuexModule}/total`]
-            }
-        }),
-    }
+	computed: {
+		...mapState({
+			total (state, getters) {
+				return getters[`business/${this.$route.params.vuexModule}/total`]
+			}
+		})
+	}
 }
 </script>
 
@@ -155,7 +155,7 @@ export default {
 
             .clearButton {
                 grid-template-columns: 70% 30%;
-            }           
+            }
         }
 
         .navBar {

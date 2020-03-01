@@ -15,15 +15,15 @@ import returnNumberOfPhones from './returnNumberOfPhones'
 import returnTotalPhoneCost from './returnTotalPhoneCost'
 import returnMilitaryResponderDiscount from './returnMilitaryResponderDiscount'
 
-const mixAndMatchPlanMath = (({plansArray, autopay, militaryNew, militaryOld, responderNew, responderOld, militaryResponderDiscountAmountNew, militaryResponderDiscountAmountOld}) => {
-    const numberOfPhones = returnNumberOfPhones(plansArray)
-    if (numberOfPhones === 0) { return 0 }
+const mixAndMatchPlanMath = ({ plansArray, autopay, militaryNew, militaryOld, responderNew, responderOld, militaryResponderDiscountAmountNew, militaryResponderDiscountAmountOld }) => {
+	const numberOfPhones = returnNumberOfPhones(plansArray)
+	if (numberOfPhones === 0) { return 0 }
 
-    var localTotal = 0
-    localTotal += returnTotalPhoneCost(plansArray, numberOfPhones, autopay)
-    localTotal -= returnMilitaryResponderDiscount(militaryNew, responderNew, militaryOld, responderOld, militaryResponderDiscountAmountNew, militaryResponderDiscountAmountOld, numberOfPhones)
+	var localTotal = 0
+	localTotal += returnTotalPhoneCost(plansArray, numberOfPhones, autopay)
+	localTotal -= returnMilitaryResponderDiscount(militaryNew, responderNew, militaryOld, responderOld, militaryResponderDiscountAmountNew, militaryResponderDiscountAmountOld, numberOfPhones)
 
-    return localTotal
-})
+	return localTotal
+}
 
 export default mixAndMatchPlanMath

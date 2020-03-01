@@ -13,34 +13,34 @@
 </template>
 
 <script>
-import { mapState, mapGetters, mapMutations } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 
 export default {
-    name: 'PlanDropdown',
-    computed: {
-        ...mapState({
-            chosenPlan (state) {
-                return state['consumer'][this.$route.params.vuexModule].chosenPlan
-            },
-            oldUnlimitedPlans (state) {
-                return state['consumer'][this.$route.params.vuexModule].oldUnlimitedPlans
-            },
-            tieredPlans (state) {
-                return state['consumer'][this.$route.params.vuexModule].tieredPlans
-            },
-        })
-    },
-    methods: {
-        ...mapMutations({
-            mutate (commit, payload) {
-                return commit(`consumer/${this.$route.params.vuexModule}/mutate`, payload)
-            },
-            toggleOptionsType (commit, payload) {
-                commit('toggleOptionsType', payload)
-                return this.$router.push(`/options/business/${this.$route.params.vuexModule}`)
-            }
-        })
-    },
+	name: 'PlanDropdown',
+	computed: {
+		...mapState({
+			chosenPlan (state) {
+				return state['consumer'][this.$route.params.vuexModule].chosenPlan
+			},
+			oldUnlimitedPlans (state) {
+				return state['consumer'][this.$route.params.vuexModule].oldUnlimitedPlans
+			},
+			tieredPlans (state) {
+				return state['consumer'][this.$route.params.vuexModule].tieredPlans
+			}
+		})
+	},
+	methods: {
+		...mapMutations({
+			mutate (commit, payload) {
+				return commit(`consumer/${this.$route.params.vuexModule}/mutate`, payload)
+			},
+			toggleOptionsType (commit, payload) {
+				commit('toggleOptionsType', payload)
+				return this.$router.push(`/options/business/${this.$route.params.vuexModule}`)
+			}
+		})
+	}
 }
 </script>
 

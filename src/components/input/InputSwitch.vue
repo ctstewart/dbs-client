@@ -11,7 +11,7 @@
 <script>
 export default {
 	name: 'InputSwitch',
-	props: ['label', 'value'],
+	props: ['label', 'value']
 }
 </script>
 

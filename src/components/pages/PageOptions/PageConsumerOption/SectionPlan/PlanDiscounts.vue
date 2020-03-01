@@ -23,7 +23,7 @@ import InputDropdown from '@/components/input/InputDropdown'
 
 export default {
 	name: 'PlanDiscounts',
-	components: {InputSwitch, InputDropdown},
+	components: { InputSwitch, InputDropdown },
 	computed: {
 		...mapState({
 			chosenPlan (state) {
