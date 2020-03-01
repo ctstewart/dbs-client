@@ -10,6 +10,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.7.0] - TBD
 ### Added
 - Added Business Unlimited Plans
+- Added rep name, date, customer name, and customer phone number to the top of the Benefit Sheet
+	- This only shows up when you print
 
 ### Changed
 - Changed the style of the sidebar
