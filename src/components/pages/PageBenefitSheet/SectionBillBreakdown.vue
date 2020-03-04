@@ -11,7 +11,7 @@
 				<div>${{ i.planTotal.toFixed(2) }}</div>
 			</div>
 			<div>
-				<p>TMP:</p>
+				<p>TMP/VZ Protect:</p>
 				<div>${{ i.tmpTotal.toFixed(2) }}</div>
 			</div>
 			<div>

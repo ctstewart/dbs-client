@@ -1,6 +1,6 @@
 <template>
 <div class="input eightColumns">
-	<input-dropdown v-bind="{inputType: 'numberInput', label: 'TMP', value: tmp}" v-on:value-changed="mutate({property: 'tmp', with: $event})"/>
+	<input-dropdown v-bind="{inputType: 'numberInput', label: 'TMP/VZ Protect $', value: tmp}" v-on:value-changed="mutate({property: 'tmp', with: $event})"/>
 	<input-dropdown v-bind="{inputType: 'numberDropdown', label: 'Phones in 2 year Contracts', value: twoyear, range: 11}" v-on:value-changed="mutate({property: 'twoyear', with: $event})"/>
 	<input-dropdown v-bind="{inputType: 'numberDropdown', label: '$30 Basic Phones', value: basic, range: 11}" v-on:value-changed="mutate({property: 'basic', with: $event})"/>
 	<input-dropdown v-bind="{inputType: 'numberDropdown', label: 'Number of New Devices', value: numberOfNewDevices, range: 11}" v-on:value-changed="mutate({property: 'numberOfNewDevices', with: $event})"/>

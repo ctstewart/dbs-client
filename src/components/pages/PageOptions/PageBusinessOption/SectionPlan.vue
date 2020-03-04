@@ -21,7 +21,7 @@
         </div>
     </div>
     <div class="group-container">
-        <p class="group-container-label">TMP</p>
+        <p class="group-container-label">TMP/VZ Protect $</p>
         <div class="group-container-main one-column">
             <input-dropdown v-bind="{inputType: 'numberInput', label: 'TMP', value: tmp}" v-on:value-changed="mutate({property: 'tmp', with: $event})"/>
         </div>
