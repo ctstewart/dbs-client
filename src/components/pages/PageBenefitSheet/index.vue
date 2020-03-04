@@ -7,8 +7,8 @@
 			<span class="print-rep-name print-only">Rep: {{ `${$store.state.userInfo.firstName} ${$store.state.userInfo.lastName}` }}</span>
 		</div>
 		<div class="print-right">
-			<span class="print-customer-name print-only">Guest Name: {{ guestName }}</span>
-			<span class="print-customer-number print-only">Guest Number: {{ guestNumber }}</span>
+			<!-- <span class="print-customer-name print-only">Guest Name: {{ guestName }}</span> -->
+			<!-- <span class="print-customer-number print-only">Guest Number: {{ guestNumber }}</span> -->
 		</div>
 	</div>
 	<div class="mainContent" :class="[ hamburgerStyle ? 'hamburgerStyle' : 'fullStyle' ]">
@@ -48,8 +48,8 @@ export default {
 	data: function () {
 		return {
 			hamburgerStyle: false,
-			guestName: 'Bob Barker',
-			guestNumber: '(507)-555-1234'
+			guestName: '',
+			guestNumber: ''
 		}
 	},
 	methods: {
