@@ -6,16 +6,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 - Add dropdown to change between hamburger, detailed, and difference only views
+- Add customer name and phone number when printing
 
-## [1.7.0] - TBD
+## [2.0.0] - 2020-03-04
 ### Added
 - Added Business Unlimited Plans
-- Added rep name, date, customer name, and customer phone number to the top of the Benefit Sheet
-	- This only shows up when you print
+- Added rep name and date when printing
+	- This is auto-generated
+- Added the military 15% discount to the $30 basic phone plans
 
 ### Changed
 - Changed the style of the sidebar
 	- The new style has more room to add more links, as well as being cleaner and more uniform with the rest of the app
+- Re-labeled TMP to include VZ Protect
+
+### Fixed
+- Removed the first responder discount from the $110 and $65 Unlimited plans
 
 ## [1.6.1] - 2020-02-03
 ### Added
