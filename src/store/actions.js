@@ -1,4 +1,4 @@
-const resetBenefitSheetAndOptions = ({dispatch, commit}) => {
+const resetBenefitSheetAndOptions = ({ dispatch, commit }) => {
 	commit('benefitSheet/resetState')
 	commit('consumer/optionOne/resetState')
 	commit('business/optionOne/resetState')
@@ -6,7 +6,7 @@ const resetBenefitSheetAndOptions = ({dispatch, commit}) => {
 	commit('business/optionTwo/resetState')
 }
 
-const resetAll = ({dispatch, commit}) => {
+const resetAll = ({ dispatch, commit }) => {
 	dispatch('resetBenefitSheetAndOptions')
 	commit('resetState')
 }
