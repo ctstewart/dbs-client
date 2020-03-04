@@ -1,3 +1,5 @@
+import defaultState from './defaultState'
+
 const copyModuleOptionOneToOptionTwo = (state) => {
 	const stateToCopy = JSON.parse(JSON.stringify(state[state.optionsType.optionOne]['optionOne']))
 	Object.assign(state[state.optionsType.optionOne]['optionTwo'], stateToCopy)
@@ -21,11 +23,16 @@ const toggleOptionsType = (state, payload) => {
 	}
 }
 
+const resetState = (state) => {
+	Object.assign(state, defaultState())
+}
+
 const mutations = {
 	copyModuleOptionOneToOptionTwo,
 	mutate,
 	mutateUserInfo,
-	toggleOptionsType
+	toggleOptionsType,
+	resetState
 }
 
 export default mutations

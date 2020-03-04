@@ -4,6 +4,7 @@ import VuexPersistence from 'vuex-persist'
 
 import state from './state'
 import mutations from './mutations'
+import actions from './actions'
 
 import benefitSheetModule from './modules/benefitSheetModule'
 import optionsModuleConsumer from './modules/optionsModuleConsumer'
@@ -18,6 +19,7 @@ Vue.use(Vuex)
 export const store = new Vuex.Store({
 	state,
 	mutations,
+	actions,
 	modules: {
 		benefitSheet: {
 			namespaced: true,

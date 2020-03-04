@@ -30,7 +30,10 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 import { createNamespacedHelpers } from 'vuex'
+const { mapMutations } = createNamespacedHelpers('benefitSheet')
 
 import jwtExpCheck from '@/mixins/jwtExpCheck'
 
@@ -39,7 +42,6 @@ import SectionBenefits from './SectionBenefits'
 import SectionOldBills from './SectionOldBills'
 import SectionBillBreakdown from './SectionBillBreakdown'
 import SectionCosts from './SectionCosts'
-const { mapMutations } = createNamespacedHelpers('benefitSheet')
 
 export default {
 	name: 'PageBenefitSheet',
@@ -55,6 +57,9 @@ export default {
 	methods: {
 		...mapMutations([
 			'resetState'
+		]),
+		...mapActions([
+			'resetBenefitSheetAndOptions'
 		])
 	}
 }

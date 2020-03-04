@@ -13,7 +13,7 @@
 
 <script>
 import axios from 'axios'
-import { mapMutations } from 'vuex'
+import { mapMutations, mapActions } from 'vuex'
 
 import InputField from '@/components/ui/InputField'
 
@@ -31,7 +31,10 @@ export default {
 		...mapMutations([
 			'mutate',
 			'mutateUserInfo'
-		]),
+        ]),
+        ...mapActions([
+            'resetAll'
+        ]),
 		loginUser: function () {
 			axios.post('/api/users/login', {
 				'email': this.email,
@@ -45,13 +48,16 @@ export default {
 							this.$router.push(`/resetPassword/${response.data.token}`)
 						}, 3000)
 					} else {
+                        this.resetAll()
+                        sessionStorage.clear()
+                        localStorage.clear()
 						this.saveTokenToLocalStorage(response.data.token)
 						this.mutateUserInfo({ property: 'email', with: this.email })
 						this.mutateUserInfo({ property: 'firstName', with: response.data.firstName })
 						this.mutateUserInfo({ property: 'lastName', with: response.data.lastName })
 						this.mutateUserInfo({ property: 'admin', with: response.data.admin })
 						this.mutateUserInfo({ property: 'superAdmin', with: response.data.superAdmin })
-						this.mutate({ property: 'jwtExp', with: response.data.jwtExp })
+                        this.mutate({ property: 'jwtExp', with: response.data.jwtExp })
 						this.$router.push('/')
 					}
 				})
