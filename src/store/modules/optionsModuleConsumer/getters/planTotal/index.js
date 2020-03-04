@@ -39,7 +39,7 @@ const planTotal = (state, getters) => {
 	localTotal += state.twoyear * 20
 
 	if (state.militaryNew || state.militaryOld) {
-		localTotal += state.basic * 30 * .85
+		localTotal += state.basic * 30 * 0.85
 	} else {
 		localTotal += state.basic * 30
 	}
