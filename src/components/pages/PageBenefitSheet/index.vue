@@ -17,8 +17,16 @@
 				<i class="fas fa-align-justify fa-2x" @click="hamburgerStyle = !hamburgerStyle"></i>
 			</div>
 			<p>Benefit Sheet</p>
-			<div class="clearButton">
-				<i class="far fa-trash-alt fa-2x" @click="resetState"></i>
+			<div class="action-menu-container">
+				<!-- <i class="far fa-trash-alt fa-2x" @click="resetState"></i> -->
+				<i class="fas fa-ellipsis-v fa-2x" @click="actionMenuDropdown = !actionMenuDropdown"></i>
+				<ul v-if="actionMenuDropdown" class="action-menu-dropdown">
+					<li><i class="fas fa-print"></i>Print</li>
+					<li><i class="fas fa-file-download"></i>Save Simple</li>
+					<li><i class="fas fa-file-download"></i>Save Detailed</li>
+					<li><i class="fas fa-trash"></i>Trash Benefit Sheet</li>
+					<li><i class="fas fa-trash"></i>Trash All</li>
+				</ul>
 			</div>
 		</div>
 		<section-benefits/>
@@ -49,7 +57,8 @@ export default {
 		return {
 			hamburgerStyle: false,
 			guestName: '',
-			guestNumber: ''
+			guestNumber: '',
+			actionMenuDropdown: false
 		}
 	},
 	methods: {
@@ -162,6 +171,37 @@ and (orientation : landscape)
 
 			i {
 				cursor: pointer;
+			}
+
+			.action-menu-container {
+				position: relative;
+
+				.action-menu-dropdown {
+					list-style-type: none;
+					position: absolute;
+					z-index: 1;
+					top: 3rem;
+					right: 0;
+					background-color: white;
+					color: black;
+					width: 15rem;
+					padding: 0;
+					margin: 0;
+
+					> li {
+						padding: 1rem .5rem;
+						border: 1px solid rgb(220, 220, 220);
+						cursor: pointer;
+
+						&:hover {
+							background-color: rgb(225, 225, 225);
+						}
+
+						> i {
+							margin-right: 1rem;
+						}
+					}
+				}
 			}
 		}
 	}
