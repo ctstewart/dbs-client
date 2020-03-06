@@ -20,12 +20,12 @@
 			<div class="action-menu-container">
 				<!-- <i class="far fa-trash-alt fa-2x" @click="resetState"></i> -->
 				<i class="fas fa-ellipsis-v fa-2x" @click="actionMenuDropdown = !actionMenuDropdown"></i>
-				<ul v-if="actionMenuDropdown" class="action-menu-dropdown">
-					<li><i class="fas fa-print"></i>Print</li>
-					<li><i class="fas fa-file-download"></i>Save Simple</li>
-					<li><i class="fas fa-file-download"></i>Save Detailed</li>
-					<li><i class="fas fa-trash"></i>Trash Benefit Sheet</li>
-					<li><i class="fas fa-trash"></i>Trash All</li>
+				<ul v-if="actionMenuDropdown" class="action-menu-dropdown" @click="actionMenuDropdown = false">
+					<li @click="print"><i class="fas fa-print"></i>Print</li>
+					<li @click="deleteBenefitSheet"><i class="fas fa-trash"></i>Delete Benefit Sheet</li>
+					<li @click="deleteAll"><i class="fas fa-trash"></i>Delete All</li>
+					<!-- <li><i class="fas fa-file-download"></i>Save Simple</li> -->
+					<!-- <li><i class="fas fa-file-download"></i>Save Detailed</li> -->
 				</ul>
 			</div>
 		</div>
@@ -67,7 +67,19 @@ export default {
 		]),
 		...mapActions([
 			'resetBenefitSheetAndOptions'
-		])
+		]),
+		print () {
+			window.print()
+			this.actionMenuDropdown = false
+		},
+		deleteBenefitSheet () {
+			this.resetState()
+			this.actionMenuDropdown = false
+		},
+		deleteAll () {
+			this.resetBenefitSheetAndOptions()
+			this.actionMenuDropdown = false
+		}
 	}
 }
 </script>
