@@ -8,6 +8,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add dropdown to change between hamburger, detailed, and difference only views
 - Add customer name and phone number when printing
 
+## [2.1.0] - TBD
+### Changed
+- Added a "load more" option to the usage tracking in the admin panel
+	- Now it shows the current month by default, and adds a month every time you press, "load more"
+
 ## [2.0.0] - 2020-03-04
 ### Added
 - Added Business Unlimited Plans
