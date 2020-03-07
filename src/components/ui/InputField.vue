@@ -4,7 +4,8 @@
         <i v-if="passwordHidden && inputStyle.initialInputType==='password'" @click="passwordHidden = !passwordHidden; inputType = 'text'" class="far fa-eye-slash"></i>
         <i v-if="!passwordHidden && inputStyle.initialInputType==='password'" @click="passwordHidden = !passwordHidden; inputType = 'password'" class="far fa-eye"></i>
     </p>
-    <input :type="inputType" :placeholder="inputStyle.placeholder" :value="value" @input="$emit('value-changed', $event.target.value)" @keyup.enter="$emit('keyupEnter')">
+    <input v-if="!inputStyle.maskValue" :type="inputType" :placeholder="inputStyle.placeholder" :value="value" @input="$emit('value-changed', $event.target.value)" @keyup.enter="$emit('keyupEnter')">
+    <input v-else :type="inputType" v-mask="inputStyle.maskValue" :placeholder="inputStyle.placeholder" :value="value" @input="$emit('value-changed', $event.target.value)" @keyup.enter="$emit('keyupEnter')">
     <meter v-if="inputStyle.meter" :value="passwordStrengthValue" max="4"></meter>
     <span id="passwordStrengthFeedback" v-if="inputStyle.meter">{{ passwordStrengthFeedback }}</span>
 </div>
@@ -12,9 +13,11 @@
 
 <script>
 import zxcvbn from 'zxcvbn'
+import {mask} from 'vue-the-mask'
 
 export default {
-	name: 'InputPassword',
+    name: 'InputPassword',
+    directives: {mask},
 	props: {
 		inputStyle: {
 			initialInputType: {
@@ -25,7 +28,8 @@ export default {
 			},
 			label: String,
 			placeholder: String,
-			meter: Boolean
+            meter: Boolean,
+            maskValue: String
 		},
 		value: String
 

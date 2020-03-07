@@ -7,8 +7,8 @@
 			<span class="print-rep-name print-only">Rep: {{ `${$store.state.userInfo.firstName} ${$store.state.userInfo.lastName}` }}</span>
 		</div>
 		<div class="print-right">
-			<!-- <span class="print-customer-name print-only">Guest Name: {{ guestName }}</span> -->
-			<!-- <span class="print-customer-number print-only">Guest Number: {{ guestNumber }}</span> -->
+			<span v-if="guestInfo.guestName" class="print-customer-name print-only">Guest Name: {{ guestInfo.guestName }}</span>
+			<span v-if="guestInfo.guestNumber" class="print-customer-number print-only">Guest Number: {{ guestInfo.guestNumber }}</span>
 		</div>
 	</div>
 	<div class="mainContent" :class="[ hamburgerStyle ? 'hamburgerStyle' : 'fullStyle' ]">
@@ -21,7 +21,7 @@
 				<!-- <i class="far fa-trash-alt fa-2x" @click="resetState"></i> -->
 				<i class="fas fa-ellipsis-v fa-2x" @click="actionMenuDropdown = !actionMenuDropdown"></i>
 				<ul v-if="actionMenuDropdown" class="action-menu-dropdown" @click="actionMenuDropdown = false">
-					<li @click="print"><i class="fas fa-print"></i>Print</li>
+					<li @click="openPrintModal"><i class="fas fa-print"></i>Print</li>
 					<li @click="deleteBenefitSheet"><i class="fas fa-trash"></i>Delete Benefit Sheet</li>
 					<li @click="deleteAll"><i class="fas fa-trash"></i>Delete All</li>
 					<!-- <li><i class="fas fa-file-download"></i>Save Simple</li> -->
@@ -34,6 +34,7 @@
 		<section-bill-breakdown v-show="!hamburgerStyle"/>
 		<section-costs/>
 	</div>
+	<print-modal v-if="printModalActive" v-on:close-modal="printModalActive = false" v-on:print="print($event)"/>
 </div>
 </template>
 
@@ -46,19 +47,23 @@ import LayoutSidebar from '@/components/layout/LayoutSidebar'
 import SectionBenefits from './SectionBenefits'
 import SectionOldBills from './SectionOldBills'
 import SectionBillBreakdown from './SectionBillBreakdown'
+import PrintModal from './PrintModal'
 import SectionCosts from './SectionCosts'
 const { mapMutations } = createNamespacedHelpers('benefitSheet')
 
 export default {
 	name: 'PageBenefitSheet',
 	mixins: [jwtExpCheck],
-	components: { LayoutSidebar, SectionBenefits, SectionOldBills, SectionBillBreakdown, SectionCosts },
+	components: { LayoutSidebar, SectionBenefits, SectionOldBills, SectionBillBreakdown, SectionCosts, NewChangesModal },
 	data: function () {
 		return {
 			hamburgerStyle: false,
-			guestName: '',
-			guestNumber: '',
-			actionMenuDropdown: false
+			guestInfo: {
+				guestName: '',
+				guestNumber: ''
+			},
+			actionMenuDropdown: false,
+			printModalActive: false
 		}
 	},
 	methods: {
@@ -68,9 +73,19 @@ export default {
 		...mapActions([
 			'resetBenefitSheetAndOptions'
 		]),
-		print () {
-			window.print()
+		openPrintModal () {
+			this.newChangesModalActive = true
 			this.actionMenuDropdown = false
+		},
+		print (guestInfoFromComponent) {
+			this.newChangesModalActive = false
+			this.guestInfo = guestInfoFromComponent
+
+			setTimeout(() => window.print(), 1000)
+			setTimeout(() => {
+				this.guestInfo.guestName = ''
+				this.guestInfo.guestNumber = ''
+			}, 5000)
 		},
 		deleteBenefitSheet () {
 			this.resetState()
