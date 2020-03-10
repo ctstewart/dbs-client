@@ -1,13 +1,13 @@
 <template>
 <div class="new-changes-modal hide-on-print">
-	<div class="modal-content">
+	<form class="modal-content">
         <span class="closeBtn" @click="$emit('close-modal')">&times;</span>
         <h2>User Info to Print</h2>
         <input-field v-bind="{inputStyle: {initialInputType: 'text', label:'Guest Name', placeholder:'John Doe', meter:false}}" :value="guestInfo.guestName" v-on:value-changed="guestInfo.guestName = $event"/>
         <input-field v-bind="{inputStyle: {initialInputType: 'tel', label:'Guest Phone Number', placeholder:'(555)-555-5555', meter:false, maskValue:'(XXX) XXX-XXXX'}}" :value="guestInfo.guestNumber" v-on:value-changed="guestInfo.guestNumber = $event"/>
         <span v-if="inputError" class="error">{{ inputError }}</span>
         <button v-else @click="$emit('print', guestInfo)">PRINT</button>
-	</div>
+	</form>
 </div>
 </template>
 
