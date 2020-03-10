@@ -54,7 +54,7 @@ const { mapMutations } = createNamespacedHelpers('benefitSheet')
 export default {
 	name: 'PageBenefitSheet',
 	mixins: [jwtExpCheck],
-	components: { LayoutSidebar, SectionBenefits, SectionOldBills, SectionBillBreakdown, SectionCosts, NewChangesModal },
+	components: { LayoutSidebar, SectionBenefits, SectionOldBills, SectionBillBreakdown, SectionCosts, PrintModal },
 	data: function () {
 		return {
 			hamburgerStyle: false,
@@ -74,11 +74,11 @@ export default {
 			'resetBenefitSheetAndOptions'
 		]),
 		openPrintModal () {
-			this.newChangesModalActive = true
+			this.printModalActive = true
 			this.actionMenuDropdown = false
 		},
 		print (guestInfoFromComponent) {
-			this.newChangesModalActive = false
+			this.printModalActive = false
 			this.guestInfo = guestInfoFromComponent
 
 			setTimeout(() => window.print(), 1000)
