@@ -60,7 +60,14 @@ export default {
 
         &:hover {
             background-color: rgba(0, 136, 169, 0.8);
-        }
+			transform: translateY(-3px);
+			box-shadow: 0 3px 5px rgba(0,0,0,0.2);
+		}
+
+		&:active {
+			transform: translateY(-1px);
+			box-shadow: 0 1px 5px rgba(0,0,0,0.2);
+		}
 
         &:focus {
             outline: none;
