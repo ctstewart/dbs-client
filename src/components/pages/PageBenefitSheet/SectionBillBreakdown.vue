@@ -101,6 +101,7 @@ export default {
 			p {
 				font-size: 14px;
 				justify-self: end;
+				text-align: right;
 			}
 
 			> div {

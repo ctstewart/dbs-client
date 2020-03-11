@@ -6,7 +6,8 @@ const state = () => {
 			firstName: '',
 			lastName: '',
 			admin: false,
-			superAdmin: false
+			superAdmin: false,
+			hasSeenNewChanges: true
 		},
 		userEmail: '',
 		jwtExp: null,

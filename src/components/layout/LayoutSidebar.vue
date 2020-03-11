@@ -41,7 +41,13 @@ DEALINGS IN THE SOFTWARE.
 		<router-link v-if="$store.state.optionsType.optionTwo === 'consumer'" to="/options/consumer/optionTwo"><i class="fas fa-dice-two"></i>Option 2</router-link>
 		<router-link v-else-if="$store.state.optionsType.optionTwo === 'business'" to="/options/business/optionTwo"><i class="fas fa-dice-two"></i>Option 2</router-link>
 		<router-link to="/admin" v-if="$store.state.userInfo.admin"><i class="fas fa-users-cog"></i>Admin Panel</router-link>
-		<router-link to="/changelog"><i class="fas fa-clipboard"></i>Changelog <span class="new-changes"><i class="fas fa-exclamation-triangle"></i> New Changes!</span></router-link>
+		<router-link to="/changelog">
+			<span class="navbar-link"><i class="fas fa-clipboard"></i>Changelog</span>
+			<span v-if="!$store.state.userInfo.hasSeenNewChanges" class="new-changes">
+				<i class="fas fa-exclamation-triangle"></i>
+				<span class="new-changes-text">New Changes!</span>
+			</span>
+		</router-link>
 	</div>
 	<div class="footer">
 		<a @click="logout">Logout</a>
@@ -114,7 +120,6 @@ export default {
 		padding-bottom: 3%;
 		margin-bottom: .5rem;
 		font-size: .9rem;
-		// font-family: 'Josefin Sans', sans-serif;
 
 		.userInitials {
 			display: grid;
@@ -160,11 +165,16 @@ export default {
 		.new-changes {
 			color: yellow;
 			font-size: 12px;
-			// letter-spacing: 1.2;
-			margin-left: 1rem;
+			margin-left: .5rem;
 
 			i {
-				width: 1rem;
+				width: 1.25rem;
+			}
+
+			.new-changes-text {
+				@media screen and (max-width: 1200px) {
+					display: none;
+				}
 			}
 		}
 	}

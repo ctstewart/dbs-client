@@ -57,6 +57,7 @@ export default {
 						this.mutateUserInfo({ property: 'lastName', with: response.data.lastName })
 						this.mutateUserInfo({ property: 'admin', with: response.data.admin })
 						this.mutateUserInfo({ property: 'superAdmin', with: response.data.superAdmin })
+						this.mutateUserInfo({ property: 'hasSeenNewChanges', with: response.data.hasSeenNewChanges })
 						this.mutate({ property: 'jwtExp', with: response.data.jwtExp })
 						this.$router.push('/')
 					}
