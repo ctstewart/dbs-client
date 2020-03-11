@@ -161,6 +161,15 @@ export default {
 					(order === 'desc') ? (comparison * -1) : comparison
 				)
 			}
+		},
+		resetHasSeenNewChanges () {
+			axios({
+				method: 'post',
+				url: '/api/users/resetHasSeenNewChanges',
+				headers: { authorization: 'Bearer ' + JSON.parse(localStorage.getItem('jwt')) }
+			})
+			.then(() => location.reload())
+			.catch(error => console.log(error))
 		}
 	},
 	computed: {
