@@ -1,6 +1,7 @@
 <template>
 <div class="usersContainer">
 	<button class="addUser" @click="addUserModalActive = true">Add User</button>
+	<button v-if="$store.state.userInfo.superAdmin" class="addUser" @click="resetHasSeenNewChanges">New Changes Reset</button>
 	<span class="filterUsers">
 		<p>Filter By:</p>
 		<select v-model="selectedFilter">
@@ -200,6 +201,7 @@ export default {
 		border-radius: 50px;
 		cursor: pointer;
 		transition: all 0.3s ease 0s;
+		margin-bottom: 2rem;
 
 		&:hover {
 			background-color: rgba(0, 136, 169, 0.8);
@@ -208,6 +210,10 @@ export default {
 		&:focus {
 			outline: none;
 		}
+	}
+
+	.addUser + button:nth-of-type(n+1) {
+		margin-left: 1rem;
 	}
 
 	.filterUsers {
