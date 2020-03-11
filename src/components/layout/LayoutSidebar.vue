@@ -51,7 +51,7 @@ DEALINGS IN THE SOFTWARE.
 	</div>
 	<div class="footer">
 		<a @click="logout">Logout</a>
-		<router-link to="/changelog">Verison: 2.0.0</router-link>
+		<router-link to="/changelog">Verison: {{ $state.store.webappVersion }}</router-link>
 	</div>
 </div>
 </template>
