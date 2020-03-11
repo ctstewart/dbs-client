@@ -9,7 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add customer name and phone number when printing
 
 ## [2.1.0] - TBD
+### Added
+- Added a "New Changes!" alert to the sidebar the first time a user logs in after an update
+- Added a menu to the top-right of the Benefit Sheet page
+	- This dropdown menu allows you to print, delete all, and delete the Benefit Sheet
+	- The print option pops up with a screen to be able to add the customer name and phone number, which then ends up on the printed Benefit Sheet
+
 ### Changed
+- Changed the gizmo pricing
+- Changed the wording of the label for the activation fee dropdown to make it more clear about what it does
 - Added a "load more" option to the usage tracking in the admin panel
 	- Now it shows the current month by default, and adds a month every time you press, "load more"
 
