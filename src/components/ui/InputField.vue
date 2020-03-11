@@ -13,11 +13,11 @@
 
 <script>
 import zxcvbn from 'zxcvbn'
-import {mask} from 'vue-the-mask'
+import { mask } from 'vue-the-mask'
 
 export default {
-    name: 'InputPassword',
-    directives: {mask},
+	name: 'InputPassword',
+	directives: { mask },
 	props: {
 		inputStyle: {
 			initialInputType: {
@@ -28,8 +28,8 @@ export default {
 			},
 			label: String,
 			placeholder: String,
-            meter: Boolean,
-            maskValue: String
+			meter: Boolean,
+			maskValue: String
 		},
 		value: String
 

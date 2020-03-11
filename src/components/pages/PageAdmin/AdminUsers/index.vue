@@ -168,8 +168,8 @@ export default {
 				url: '/api/users/resetHasSeenNewChanges',
 				headers: { authorization: 'Bearer ' + JSON.parse(localStorage.getItem('jwt')) }
 			})
-			.then(() => location.reload())
-			.catch(error => console.log(error))
+				.then(() => location.reload())
+				.catch(error => console.log(error))
 		}
 	},
 	computed: {
