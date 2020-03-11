@@ -41,7 +41,7 @@ DEALINGS IN THE SOFTWARE.
 		<router-link v-if="$store.state.optionsType.optionTwo === 'consumer'" to="/options/consumer/optionTwo"><i class="fas fa-dice-two"></i>Option 2</router-link>
 		<router-link v-else-if="$store.state.optionsType.optionTwo === 'business'" to="/options/business/optionTwo"><i class="fas fa-dice-two"></i>Option 2</router-link>
 		<router-link to="/admin" v-if="$store.state.userInfo.admin"><i class="fas fa-users-cog"></i>Admin Panel</router-link>
-		<router-link to="/changelog"><i class="fas fa-clipboard"></i>Changelog</router-link>
+		<router-link to="/changelog"><i class="fas fa-clipboard"></i>Changelog <span class="new-changes"><i class="fas fa-exclamation-triangle"></i> New Changes!</span></router-link>
 	</div>
 	<div class="footer">
 		<a @click="logout">Logout</a>
@@ -154,6 +154,17 @@ export default {
 
 			&:hover, &.router-link-exact-active {
 				background-color: rgba(0,0,0,.2);
+			}
+		}
+
+		.new-changes {
+			color: yellow;
+			font-size: 12px;
+			// letter-spacing: 1.2;
+			margin-left: 1rem;
+
+			i {
+				width: 1rem;
 			}
 		}
 	}
