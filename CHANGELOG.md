@@ -4,11 +4,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
-- Add dropdown to change between hamburger, detailed, and difference only views
-- Add customer name and phone number when printing
-
-## [2.1.0] - TBD
+## [2.1.0] - 2020-03-11
 ### Added
 - Added a "New Changes!" alert to the sidebar the first time a user logs in after an update
 - Added a menu to the top-right of the Benefit Sheet page
@@ -18,7 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Changed the gizmo pricing
 - Changed the wording of the label for the activation fee dropdown to make it more clear about what it does
-- Added a "load more" option to the usage tracking in the admin panel
+- Added a "load more" option to the usage in the admin panel
 	- Now it shows the current month by default, and adds a month every time you press, "load more"
 
 ## [2.0.0] - 2020-03-04
