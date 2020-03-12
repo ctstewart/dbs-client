@@ -6,31 +6,19 @@ import getters from '../../../src/store/modules/optionsModuleConsumer/getters'
 import mutations from '../../../src/store/modules/optionsModuleConsumer/mutations'
 import connectedDeviceMath from '../../../src/store/modules/optionsModuleConsumer/getters/planTotal/connectedDeviceMath'
 
-describe('mixAndMatch1', () => {
+describe('110Unlimited', () => {
   before(() => {
     mutations.resetState(state)
   })
 
   it('chosenPlan', () => {
-    mutations.mutate(state, { property: 'chosenPlan', with: 'Unlimited' })
-    expect(state.chosenPlan).to.equal('Unlimited')
+    mutations.mutate(state, { property: 'chosenPlan', with: '$110 Unlimited' })
+    expect(state.chosenPlan).to.equal('$110 Unlimited')
   })
 
   it('numberOfPhones', () => {
-    mutations.setMixAndMatchPlans(state, { index: 0, value: 1 })
-    mutations.setMixAndMatchPlans(state, { index: 1, value: 1 })
-    mutations.setMixAndMatchPlans(state, { index: 2, value: 1 })
-    mutations.setMixAndMatchPlans(state, { index: 3, value: 1 })
-    mutations.setMixAndMatchPlans(state, { index: 4, value: 1 })
-    mutations.setMixAndMatchPlans(state, { index: 5, value: 1 })
-    mutations.setMixAndMatchPlans(state, { index: 6, value: 1 })
-    mutations.setMixAndMatchPlans(state, { index: 7, value: 1 })
-    mutations.setMixAndMatchPlans(state, { index: 8, value: 1 })
-    const mixAndMatchNumberOfPhonesAndId = getters.mixAndMatchNumberOfPhonesAndId(state)
-    const numberOfPhones = mixAndMatchNumberOfPhonesAndId.reduce((accumulator, currentValue) => {
-      return parseInt(accumulator) + parseInt(currentValue.numberOfPhones)
-    }, 0)
-    expect(numberOfPhones).to.deep.equal(9)
+	mutations.mutate(state, { property: 'numberOfPhonesTieredAndOldUnlimited', with: 5 })
+    expect(state.numberOfPhonesTieredAndOldUnlimited).to.equal(5)
   })
 
   it('autopay', () => {
@@ -44,19 +32,19 @@ describe('mixAndMatch1', () => {
   })
 
   it('twoyear', () => {
-    mutations.mutate(state, { property: 'twoyear', with: 2 })
-    expect(state.twoyear).to.equal(2)
+    mutations.mutate(state, { property: 'twoyear', with: 1 })
+    expect(state.twoyear).to.equal(1)
   })
 
   it('basic', () => {
-    mutations.mutate(state, { property: 'basic', with: 3 })
-    expect(state.basic).to.equal(3)
+    mutations.mutate(state, { property: 'basic', with: 5 })
+    expect(state.basic).to.equal(5)
   })
 
   var isUnlimited = null
   it('isUnlimited', () => {
     isUnlimited = getters.isUnlimited(state)
-    expect(isUnlimited).to.equal(true)
+    expect(isUnlimited).to.equal(false)
   })
 
   var connectedDeviceMathResult = null
@@ -79,13 +67,13 @@ describe('mixAndMatch1', () => {
       'militaryNew': state.militaryNew,
       'militaryOld': state.militaryOld
     })
-    expect(connectedDeviceMathResult).to.equal(433.50)
+    expect(connectedDeviceMathResult).to.equal(530)
   })
 
   var planTotal = null
   it('planTotal', () => {
     planTotal = getters.planTotal(state, { isUnlimited })
-    expect(planTotal).to.equal(900.00)
+    expect(planTotal).to.equal(862.50)
   })
 
   it('tmp', () => {
@@ -128,6 +116,6 @@ describe('mixAndMatch1', () => {
   var total = null
   it('total', () => {
     total = getters.total(state, { isUnlimited, planTotal, tmpTotal, dppTotal })
-    expect(parseFloat(total.toFixed(2))).to.equal(1080.72)
+    expect(parseFloat(total.toFixed(2))).to.equal(1043.22)
   })
 })

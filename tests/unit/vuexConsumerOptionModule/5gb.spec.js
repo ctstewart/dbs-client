@@ -73,7 +73,7 @@ describe('5gb', () => {
   var planTotal = null
   it('planTotal', () => {
     planTotal = getters.planTotal(state, { isUnlimited })
-    expect(planTotal).to.equal(659.75)
+    expect(planTotal).to.equal(646.25)
   })
 
   it('tmp', () => {
@@ -116,6 +116,6 @@ describe('5gb', () => {
   var total = null
   it('total', () => {
     total = getters.total(state, { isUnlimited, planTotal, tmpTotal, dppTotal })
-    expect(parseFloat(total.toFixed(2))).to.equal(840.47)
+    expect(parseFloat(total.toFixed(2))).to.equal(826.97)
   })
 })
