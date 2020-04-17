@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.1] - 2020-04-17
+### Changed
+- Price correction for HumX on Business Accounts
+
 ## [2.1.0] - 2020-03-11
 ### Added
 - Added a "New Changes!" alert to the sidebar the first time a user logs in after an update

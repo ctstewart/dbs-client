@@ -36,7 +36,7 @@ const defaultState = () => {
 			{ id: 'Tablet', cost: 45, numberOfDevices: 0 },
 			{ id: 'Jetpack', cost: 45, numberOfDevices: 0 },
 			{ id: 'Hum+', cost: 10, numberOfDevices: 0 },
-			{ id: 'HumX', cost: 20, numberOfDevices: 0 },
+			{ id: 'HumX', cost: 35, numberOfDevices: 0 },
 			{ id: 'Homephone', cost: 20, numberOfDevices: 0 },
 			{ id: 'Gizmo (grandfathered)', cost: 5, numberOfDevices: 0 },
 			{ id: 'Smartwatch/Gizmo', cost: 10, numberOfDevices: 0 },
