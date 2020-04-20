@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [2.1.1] - 2020-04-17
 ### Changed
 - Price correction for HumX on Business Accounts
+	- Please logout and log back in to see the changes
 
 ## [2.1.0] - 2020-03-11
 ### Added
