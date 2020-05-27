@@ -5,13 +5,13 @@
 		<input-switch v-bind="{label: 'Military Discount (after 8/5/19)', value: militaryNew}" v-on:toggle="toggle('militaryNew')"/>
 		<input-switch v-bind="{label: 'Military Discount (before 8/5/19)', value: militaryOld}" v-on:toggle="toggle('militaryOld')"/>
 	</div>
-	<input-switch v-else v-bind="{label: 'Military Discount', value: militaryNew}" v-on:toggle="toggle('militaryNew')"/>
+	<input-switch v-else-if="chosenPlan !== 'Loyalty'" v-bind="{label: 'Military Discount', value: militaryNew}" v-on:toggle="toggle('militaryNew')"/>
 	<div v-if="isUnlimited" class="two-rows">
 		<input-switch v-bind="{label: 'First Responder Discount (after 8/5/19)', value: responderNew}" v-on:toggle="toggle('responderNew')"/>
 		<input-switch v-bind="{label: 'First Responder Discount (before 8/5/19)', value: responderOld}" v-on:toggle="toggle('responderOld')"/>
 	</div>
-	<input-switch v-else-if="chosenPlan !== '$110 Unlimited' && chosenPlan !== '$65 Unlimited'" v-bind="{label: 'First Responder Discount', value: responderNew}" v-on:toggle="toggle('responderNew')"/>
-	<input-dropdown v-bind="{inputType: 'numberDropdown', label: 'Other Discount %', value: discount, range: 31}" v-on:value-changed="mutate({property: 'discount', with: $event})"/>
+	<input-switch v-else-if="chosenPlan !== '$110 Unlimited' && chosenPlan !== '$65 Unlimited' && chosenPlan !== 'Loyalty'" v-bind="{label: 'First Responder Discount', value: responderNew}" v-on:toggle="toggle('responderNew')"/>
+	<input-dropdown v-if="chosenPlan !== 'Loyalty'" v-bind="{inputType: 'numberDropdown', label: 'Other Discount %', value: discount, range: 31}" v-on:value-changed="mutate({property: 'discount', with: $event})"/>
 </div>
 </template>
 

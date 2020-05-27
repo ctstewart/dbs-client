@@ -1,5 +1,6 @@
 import mixAndMatchPlanMath from './mixAndMatchPlanMath'
 import oldUnlimitedAndTieredPlanMath from './oldUnlimitedAndTieredPlanMath'
+import loyaltyPlanMath from './loyaltyPlanMath'
 import connectedDeviceMath from './connectedDeviceMath'
 
 const planTotal = (state, getters) => {
@@ -19,8 +20,17 @@ const planTotal = (state, getters) => {
 		}
 
 		localTotal += mixAndMatchPlanMath(objectForMethod)
+	
+	} else if (state.chosenPlan === 'Loyalty') {
+		const objectForMethod = {
+			'numberOfPhones': state.numberOfPhonesTieredAndOldUnlimited,
+			'loyaltyPlans': state.loyaltyPlans,
+			'autopay': state.autopay,
+		}
 
-		// If Tiered or old Unlimited Plans
+		localTotal += loyaltyPlanMath(objectForMethod)
+
+	// If Tiered or old Unlimited Plans
 	} else {
 		const objectForMethod = {
 			'numberOfPhones': state.numberOfPhonesTieredAndOldUnlimited,

@@ -2,6 +2,9 @@
 <div v-if="isUnlimited" class="number-of-phones-unlimited">
 	<input-dropdown v-for="(plan, index) in mixAndMatchNumberOfPhonesAndId" :key="plan.id" v-bind="{inputType: 'numberDropdown', label: plan.id, value: plan.numberOfPhones, range: 11}" v-on:value-changed="setMixAndMatchPlans({index, value: parseInt($event)})"/>
 </div>
+<div v-else-if="chosenPlan === 'Loyalty'" class="number-of-phones-not-unlimited">
+	<input-dropdown v-bind="{inputType: 'numberDropdown', label: 'Number of Phones', value: numberOfPhonesTieredAndOldUnlimited, range: 5}" v-on:value-changed="mutate({property: 'numberOfPhonesTieredAndOldUnlimited', with: $event})"/>
+</div>
 <div v-else-if="!isUnlimited" class="number-of-phones-not-unlimited">
 	<input-dropdown v-bind="{inputType: 'numberDropdown', label: 'Number of Phones', value: numberOfPhonesTieredAndOldUnlimited, range: 11}" v-on:value-changed="mutate({property: 'numberOfPhonesTieredAndOldUnlimited', with: $event})"/>
 </div>
@@ -17,6 +20,9 @@ export default {
 	components: { InputDropdown },
 	computed: {
 		...mapState({
+			chosenPlan (state) {
+				return state['consumer'][this.$route.params.vuexModule].chosenPlan
+			},
 			numberOfPhonesTieredAndOldUnlimited (state) {
 				return state['consumer'][this.$route.params.vuexModule].numberOfPhonesTieredAndOldUnlimited
 			},

@@ -38,6 +38,12 @@ const connectedDeviceMath = ({
 		}
 	}
 
+	if (chosenPlan === 'Loyalty') {
+		connectedDevicesArray.forEach((connectedDevice) => {
+			localTotal = localTotal + (connectedDevice.unlimited * connectedDevice.value)
+		})
+	}
+
 	oldUnlimitedPlansArray.forEach((plan) => {
 		if (chosenPlan === plan.id) {
 			connectedDevicesArray.forEach((connectedDevice) => {

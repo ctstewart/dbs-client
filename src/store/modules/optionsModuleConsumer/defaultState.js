@@ -104,6 +104,12 @@ const defaultState = () => {
 				5: 40
 			}
 		},
+		loyaltyPlans: {
+			1: { lines: 1, autopay: 60, noAutopay: 65 },
+			2: { lines: 2, autopay: 80, noAutopay: 90 },
+			3: { lines: 3, autopay: 110, noAutopay: 125 },
+			4: { lines: 4, autopay: 120, noAutopay: 140 }
+		},
 		oldUnlimitedPlans: [
 			{ id: '$110 Unlimited', autopay: 100, noAutopay: 110 },
 			{ id: '$65 Unlimited', autopay: 60, noAutopay: 65 }
@@ -138,6 +144,7 @@ const defaultState = () => {
 		numberOfPhonesTieredAndOldUnlimited: 0,
 		numberOfNewDevices: 0,
 		tmp: 0,
+		otherCost: 0,
 		existingDPPValues: Array.from({ length: 9 }, () => ({ value: 0 })),
 		existingCreditValues: Array.from({ length: 9 }, () => ({ value: 0 })),
 		newDPPValues: Array.from({ length: 9 }, () => ({ value: 0 })),

@@ -6,6 +6,7 @@
     </select>
     <select id="dropdown" :value="chosenPlan" @change="mutate({property: 'chosenPlan', with: $event.target.value})">
         <option>Unlimited</option>
+        <option>Loyalty</option>
         <option v-for="i in oldUnlimitedPlans" :key="i.id">{{i.id}}</option>
         <option v-for="i in tieredPlans" :key="i.id">{{i.id}}</option>
     </select>
