@@ -18,12 +18,12 @@
 			</div>
 			<p>Benefit Sheet</p>
 			<div class="action-menu-container">
-				<!-- <i class="far fa-trash-alt fa-2x" @click="resetState"></i> -->
 				<i class="fas fa-ellipsis-v fa-2x" @click="actionMenuDropdown = !actionMenuDropdown"></i>
 				<ul v-if="actionMenuDropdown" class="action-menu-dropdown" @click="actionMenuDropdown = false">
 					<li @click="openPrintModal"><i class="fas fa-print"></i>Print</li>
 					<li @click="deleteBenefitSheet"><i class="fas fa-trash"></i>Delete Benefit Sheet</li>
 					<li @click="deleteAll"><i class="fas fa-trash"></i>Delete All</li>
+					<li @click="openTaxModal"><i class="fas fa-percent"></i>Tax</li>
 					<!-- <li><i class="fas fa-file-download"></i>Save Simple</li> -->
 					<!-- <li><i class="fas fa-file-download"></i>Save Detailed</li> -->
 				</ul>
@@ -35,6 +35,7 @@
 		<section-costs/>
 	</div>
 	<print-modal v-if="printModalActive" v-on:close-modal="printModalActive = false" v-on:print="print($event)"/>
+	<tax-modal v-if="taxModalActive" v-on:close-modal="taxModalActive = false"/>
 </div>
 </template>
 
@@ -48,13 +49,14 @@ import SectionBenefits from './SectionBenefits'
 import SectionOldBills from './SectionOldBills'
 import SectionBillBreakdown from './SectionBillBreakdown'
 import PrintModal from './PrintModal'
+import TaxModal from './TaxModal'
 import SectionCosts from './SectionCosts'
 const { mapMutations } = createNamespacedHelpers('benefitSheet')
 
 export default {
 	name: 'PageBenefitSheet',
 	mixins: [jwtExpCheck],
-	components: { LayoutSidebar, SectionBenefits, SectionOldBills, SectionBillBreakdown, SectionCosts, PrintModal },
+	components: { LayoutSidebar, SectionBenefits, SectionOldBills, SectionBillBreakdown, SectionCosts, PrintModal, TaxModal },
 	data: function () {
 		return {
 			hamburgerStyle: false,
@@ -63,7 +65,8 @@ export default {
 				guestNumber: ''
 			},
 			actionMenuDropdown: false,
-			printModalActive: false
+			printModalActive: false,
+			taxModalActive: false
 		}
 	},
 	methods: {
@@ -75,6 +78,10 @@ export default {
 		]),
 		openPrintModal () {
 			this.printModalActive = true
+			this.actionMenuDropdown = false
+		},
+		openTaxModal () {
+			this.taxModalActive = true
 			this.actionMenuDropdown = false
 		},
 		print (guestInfoFromComponent) {

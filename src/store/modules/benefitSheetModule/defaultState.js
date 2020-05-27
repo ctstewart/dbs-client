@@ -26,7 +26,8 @@ const defaultState = () => {
 			'20GB High Speed Hotspot',
 			'Keep Your Same Phone Number',
 			'International Calling'
-		]
+		],
+		taxPercent: 0
 	}
 }
 

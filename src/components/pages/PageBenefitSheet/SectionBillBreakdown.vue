@@ -11,7 +11,7 @@
 				<div>${{ i.planTotal.toFixed(2) }}</div>
 			</div>
 			<div>
-				<p>TMP/VZ Protect:</p>
+				<p>Protection/Other:</p>
 				<div>${{ i.tmpTotal.toFixed(2) }}</div>
 			</div>
 			<div>
@@ -20,7 +20,8 @@
 			</div>
 			<div>
 				<p>Total:</p>
-				<div>${{ i.total.toFixed(2) }} plus tax</div>
+				<div v-if="taxPercent > 0">${{ i.total.toFixed(2) }} (with {{ taxPercent * 100 }}% tax)</div>
+				<div v-else>${{ i.total.toFixed(2) }} plus tax</div>
 			</div>
 		</div>
 	</div>
@@ -36,6 +37,9 @@ export default {
 		...mapState({
 			optionsType (state) {
 				return state.optionsType
+			},
+			taxPercent (state) {
+				return state['benefitSheet'].taxPercent
 			},
 			optionsComputed (state, getters) {
 				return [
