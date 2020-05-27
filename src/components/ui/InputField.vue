@@ -16,14 +16,14 @@ import zxcvbn from 'zxcvbn'
 import { mask } from 'vue-the-mask'
 
 export default {
-	name: 'InputPassword',
+	name: 'InputField',
 	directives: { mask },
 	props: {
 		inputStyle: {
 			initialInputType: {
 				validator: function (value) {
 					// The value must match one of these strings
-					return ['text', 'email', 'password'].indexOf(value) !== -1
+					return ['text', 'email', 'password', 'number'].indexOf(value) !== -1
 				}
 			},
 			label: String,
@@ -31,7 +31,7 @@ export default {
 			meter: Boolean,
 			maskValue: String
 		},
-		value: String
+		value: [String, Number]
 
 	},
 	data () {
