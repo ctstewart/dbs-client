@@ -1,9 +1,10 @@
 <template>
-<div class="input eightColumns">
-	<input-dropdown v-bind="{inputType: 'numberInput', label: 'TMP/VZ Protect $', value: tmp}" v-on:value-changed="mutate({property: 'tmp', with: $event})"/>
+<div class="input">
+	<input-dropdown v-bind="{inputType: 'numberInput', label: 'Protection $', value: tmp}" v-on:value-changed="mutate({property: 'tmp', with: $event})"/>
 	<input-dropdown v-bind="{inputType: 'numberDropdown', label: 'Phones in 2 year Contracts', value: twoyear, range: 11}" v-on:value-changed="mutate({property: 'twoyear', with: $event})"/>
 	<input-dropdown v-bind="{inputType: 'numberDropdown', label: '$30 Basic Phones', value: basic, range: 11}" v-on:value-changed="mutate({property: 'basic', with: $event})"/>
 	<input-dropdown v-bind="{inputType: 'numberDropdown', label: 'Number of Activation Fees', value: numberOfNewDevices, range: 11}" v-on:value-changed="mutate({property: 'numberOfNewDevices', with: $event})"/>
+	<input-dropdown v-bind="{inputType: 'numberInput', label: 'Other', value: otherCost}" v-on:value-changed="mutate({property: 'otherCost', with: $event})"/>
 </div>
 </template>
 
@@ -28,6 +29,9 @@ export default {
 			},
 			numberOfNewDevices (state) {
 				return state['consumer'][this.$route.params.vuexModule].numberOfNewDevices
+			},
+			otherCost (state) {
+				return state['consumer'][this.$route.params.vuexModule].otherCost
 			}
 		})
 	},
@@ -46,7 +50,7 @@ export default {
 	border: 1px solid white;
 	border-radius: 10px;
 	display: grid;
-	grid-template-columns: repeat(4, 1fr);
+	grid-template-columns: repeat(5, 1fr);
 	align-items: center;
 	justify-items: end;
 
