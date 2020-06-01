@@ -104,11 +104,19 @@ const defaultState = () => {
 				5: 40
 			}
 		},
-		loyaltyPlans: {
+		loyalty55Plans: {
 			1: { lines: 1, autopay: 60, noAutopay: 65 },
 			2: { lines: 2, autopay: 80, noAutopay: 90 },
 			3: { lines: 3, autopay: 110, noAutopay: 125 },
 			4: { lines: 4, autopay: 120, noAutopay: 140 }
+		},
+		loyaltyGoPlans: {
+			1: { lines: 1, autopay: 60, noAutopay: 65 },
+			2: { lines: 2, autopay: 90, noAutopay: 100 },
+			3: { lines: 3, autopay: 105, noAutopay: 120 },
+			4: { lines: 4, autopay: 120, noAutopay: 140 },
+			5: { lines: 5, autopay: 135, noAutopay: 160 },
+			6: { lines: 6, autopay: 150, noAutopay: 180 }
 		},
 		oldUnlimitedPlans: [
 			{ id: '$110 Unlimited', autopay: 100, noAutopay: 110 },
