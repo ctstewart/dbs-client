@@ -69,8 +69,12 @@ export default {
 			array = array.filter((item) => {
 				return new Date(item.dateAndTimeString).getTime() >= startDate.getTime() && new Date(item.dateAndTimeString).getTime() <= endDate.getTime()
 			})
-			this.loadMoreLoading = false
 			return array
+		}
+	},
+	watch: {
+		sortedReports: function () {
+			this.loadMoreLoading = false
 		}
 	},
 	mounted () {
