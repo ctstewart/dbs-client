@@ -21,16 +21,14 @@ const planTotal = (state, getters) => {
 		}
 
 		localTotal += mixAndMatchPlanMath(objectForMethod)
-	
 	} else if (state.chosenPlan === 'Loyalty 55+') {
 		const objectForMethod = {
 			'numberOfPhones': state.numberOfPhonesTieredAndOldUnlimited,
 			'loyalty55Plans': state.loyalty55Plans,
-			'autopay': state.autopay,
+			'autopay': state.autopay
 		}
 
 		localTotal += loyalty55PlanMath(objectForMethod)
-
 	} else if (state.chosenPlan === 'Loyalty Go') {
 		const objectForMethod = {
 			'numberOfPhones': state.numberOfPhonesTieredAndOldUnlimited,

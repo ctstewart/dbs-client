@@ -16,12 +16,12 @@ import InputField from '@/components/ui/InputField'
 
 export default {
 	name: 'TaxModal',
-    components: { InputField },
-    data() {
-        return {
-            newPercent: 0
-        }
-    },
+	components: { InputField },
+	data () {
+		return {
+			newPercent: 0
+		}
+	},
 	computed: {
 		...mapState({
 			taxPercent (state) {
@@ -34,11 +34,11 @@ export default {
 			mutate (commit, payload) {
 				return commit(`benefitSheet/mutate`, payload)
 			}
-        }),
-        saveTaxPercent () {
-            this.$emit('close-modal')
-            this.mutate({property: 'taxPercent', with: this.newPercent / 100})
-        }
+		}),
+		saveTaxPercent () {
+			this.$emit('close-modal')
+			this.mutate({ property: 'taxPercent', with: this.newPercent / 100 })
+		}
 	}
 }
 </script>

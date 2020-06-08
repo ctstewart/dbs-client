@@ -19,35 +19,35 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from "vuex";
+import { mapState, mapMutations } from 'vuex'
 
 export default {
-	name: "PlanDropdown",
+	name: 'PlanDropdown',
 	computed: {
 		...mapState({
-			chosenPlan(state) {
-				return state["consumer"][this.$route.params.vuexModule].chosenPlan
+			chosenPlan (state) {
+				return state['consumer'][this.$route.params.vuexModule].chosenPlan
 			},
-			oldUnlimitedPlans(state) {
-				return state["consumer"][this.$route.params.vuexModule].oldUnlimitedPlans
+			oldUnlimitedPlans (state) {
+				return state['consumer'][this.$route.params.vuexModule].oldUnlimitedPlans
 			},
-			tieredPlans(state) {
-				return state["consumer"][this.$route.params.vuexModule].tieredPlans
+			tieredPlans (state) {
+				return state['consumer'][this.$route.params.vuexModule].tieredPlans
 			}
 		})
 	},
 	methods: {
 		...mapMutations({
-			mutate(commit, payload) {
+			mutate (commit, payload) {
 				return commit(`consumer/${this.$route.params.vuexModule}/mutate`, payload)
 			},
-			toggleOptionsType(commit, payload) {
-				commit("toggleOptionsType", payload)
+			toggleOptionsType (commit, payload) {
+				commit('toggleOptionsType', payload)
 				return this.$router.push(`/options/business/${this.$route.params.vuexModule}`)
 			}
 		})
 	}
-};
+}
 </script>
 
 <style scoped>
