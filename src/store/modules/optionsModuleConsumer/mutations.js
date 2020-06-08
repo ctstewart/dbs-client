@@ -12,13 +12,17 @@ const setMixAndMatchPlans = (state, payload) => {
 	state.mixAndMatchPlans.plans[payload.index].numberOfPhones = payload.value
 }
 
-const incrementConnectedDevice = (state, index) => {
+const incrementConnectedDevice = (state, id) => {
+	const findId = (i) => i.id === id
+	const index = state.connectedDevices.findIndex(findId)
 	if (state.connectedDevices[index].value < 25) {
 		state.connectedDevices[index].value++
 	}
 }
 
-const decrementConnectedDevice = (state, index) => {
+const decrementConnectedDevice = (state, id) => {
+	const findId = (i) => i.id === id
+	const index = state.connectedDevices.findIndex(findId)
 	if (state.connectedDevices[index].value > 0) {
 		state.connectedDevices[index].value--
 	}
