@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.2.0] - 2020-06-01
+### Added
+- Added the Loyalty 55+ plan
+	- Since Jetpacks are not allowed on this plan, Option 1 and Option 2 will dynamically remove Jetpacks as an option when this plan is selected
+- Added the Loyalty Go Unlimited plan
+- Added an "other" section for miscellaneous costs
+- Added a "tax" option
+	- You can find this under the dropdown menu on the "Benefit Sheet" page (the same place "Print", "Delete Benefit Sheet", and "Delete All" are located)
+
 ## [2.1.1] - 2020-04-17
 ### Changed
 - Price correction for HumX on Business Accounts
