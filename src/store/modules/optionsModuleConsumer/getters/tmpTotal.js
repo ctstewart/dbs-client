@@ -7,8 +7,6 @@ const tmpTotal = (state) => {
 	}
 
 	if (state.otherCost && !isNaN(state.otherCost)) {
-		localTotal += 0.00
-	} else {
 		localTotal += parseFloat(state.otherCost)
 	}
 
