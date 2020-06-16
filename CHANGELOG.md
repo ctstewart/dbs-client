@@ -4,7 +4,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [2.2.0] - 2020-06-01
+## [2.3.0] - 2020-06-16
+### Added
+- Added some more benefits to the dropdown on the Benefit Sheet Page
+
+### Fixed
+- I am now rounding the displayed tax percent on the Benefit Sheet to the nearest third decimal point
+	- This is because of a known issue when dealing with decimal points when programming
+	- [Here](https://floating-point-gui.de/) is more information on this issue if you're curious
+
+## [2.2.0] - 2020-06-09
 ### Added
 - Added the Loyalty 55+ plan
 	- Since Jetpacks are not allowed on this plan, Option 1 and Option 2 will dynamically remove Jetpacks as an option when this plan is selected
@@ -14,7 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 	- You can find this under the dropdown menu on the "Benefit Sheet" page (the same place "Print", "Delete Benefit Sheet", and "Delete All" are located)
 
 ## [2.1.1] - 2020-04-17
-### Changed
+### Fixed
 - Price correction for HumX on Business Accounts
 	- Please logout and log back in to see the changes
 
