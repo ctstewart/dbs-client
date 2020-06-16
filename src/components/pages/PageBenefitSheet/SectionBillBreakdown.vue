@@ -20,7 +20,7 @@
 			</div>
 			<div>
 				<p>Total:</p>
-				<div v-if="taxPercent > 0">${{ i.total.toFixed(2) }} (with {{ taxPercent * 100 }}% tax)</div>
+				<div v-if="taxPercent > 0">${{ i.total.toFixed(2) }} (with {{ (taxPercent * 100).toFixed(3) }}% tax)</div>
 				<div v-else>${{ i.total.toFixed(2) }} plus tax</div>
 			</div>
 		</div>
