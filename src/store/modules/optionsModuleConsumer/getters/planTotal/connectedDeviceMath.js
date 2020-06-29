@@ -5,6 +5,7 @@ const connectedDeviceMath = ({
 	connectedDevicesArray,
 	oldUnlimitedPlansArray,
 	tieredPlansArray,
+	plans5GB10GBArray,
 	militaryNew,
 	militaryOld
 }) => {
@@ -53,6 +54,14 @@ const connectedDeviceMath = ({
 	})
 
 	tieredPlansArray.forEach((plan) => {
+		if (chosenPlan === plan.id) {
+			connectedDevicesArray.forEach((connectedDevice) => {
+				localTotal = localTotal + (connectedDevice.tiered * connectedDevice.value)
+			})
+		}
+	})
+
+	plans5GB10GBArray.forEach((plan) => {
 		if (chosenPlan === plan.id) {
 			connectedDevicesArray.forEach((connectedDevice) => {
 				localTotal = localTotal + (connectedDevice.tiered * connectedDevice.value)

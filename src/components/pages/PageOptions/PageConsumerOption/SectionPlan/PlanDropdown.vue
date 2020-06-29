@@ -9,45 +9,55 @@
 			:value="chosenPlan"
 			@change="mutate({property: 'chosenPlan', with: $event.target.value})"
 		>
-			<option>Unlimited</option>
-			<option>Loyalty 55+</option>
-			<option>Loyalty Go</option>
-			<option v-for="i in oldUnlimitedPlans" :key="i.id">{{i.id}}</option>
-			<option v-for="i in tieredPlans" :key="i.id">{{i.id}}</option>
+			<option value="Unlimited">Unlimited</option>
+			<option v-for="i in plans5GB10GB" :key="i.id" :value="i.id">{{i.name}}</option>
+			<option value="Loyalty 55+">Loyalty 55+</option>
+			<option value="Loyalty Go">Loyalty Go</option>
+			<option v-for="i in oldUnlimitedPlans" :key="i.id" :value="i.id">{{i.id}}</option>
+			<option v-for="i in tieredPlans" :key="i.id" :value="i.id">{{i.id}}</option>
 		</select>
 	</div>
 </template>
 
 <script>
-import { mapState, mapMutations } from 'vuex'
+import { mapState, mapMutations } from "vuex";
 
 export default {
-	name: 'PlanDropdown',
+	name: "PlanDropdown",
 	computed: {
 		...mapState({
-			chosenPlan (state) {
-				return state['consumer'][this.$route.params.vuexModule].chosenPlan
+			chosenPlan(state) {
+				return state["consumer"][this.$route.params.vuexModule].chosenPlan;
 			},
-			oldUnlimitedPlans (state) {
-				return state['consumer'][this.$route.params.vuexModule].oldUnlimitedPlans
+			oldUnlimitedPlans(state) {
+				return state["consumer"][this.$route.params.vuexModule]
+					.oldUnlimitedPlans;
 			},
-			tieredPlans (state) {
-				return state['consumer'][this.$route.params.vuexModule].tieredPlans
+			tieredPlans(state) {
+				return state["consumer"][this.$route.params.vuexModule].tieredPlans;
+			},
+			plans5GB10GB(state) {
+				return state["consumer"][this.$route.params.vuexModule].plans5GB10GB;
 			}
 		})
 	},
 	methods: {
 		...mapMutations({
-			mutate (commit, payload) {
-				return commit(`consumer/${this.$route.params.vuexModule}/mutate`, payload)
+			mutate(commit, payload) {
+				return commit(
+					`consumer/${this.$route.params.vuexModule}/mutate`,
+					payload
+				);
 			},
-			toggleOptionsType (commit, payload) {
-				commit('toggleOptionsType', payload)
-				return this.$router.push(`/options/business/${this.$route.params.vuexModule}`)
+			toggleOptionsType(commit, payload) {
+				commit("toggleOptionsType", payload);
+				return this.$router.push(
+					`/options/business/${this.$route.params.vuexModule}`
+				);
 			}
 		})
 	}
-}
+};
 </script>
 
 <style scoped>

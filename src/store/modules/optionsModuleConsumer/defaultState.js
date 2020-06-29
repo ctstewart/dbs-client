@@ -122,12 +122,16 @@ const defaultState = () => {
 			{ id: '$110 Unlimited', autopay: 100, noAutopay: 110 },
 			{ id: '$65 Unlimited', autopay: 60, noAutopay: 65 }
 		],
+		plans5GB10GB: [
+			{ id: '5GB', name: '5GB', accountCost: 30, lineAccessAutopay: 25, lineAccessNoAutopay: 35 },
+			{ id: '10GB', name: '10GB', accountCost: 40, lineAccessAutopay: 25, lineAccessNoAutopay: 35 },
+		],
 		tieredPlans: [
 			{ id: '24GB', autopay: 110, noAutopay: 110 },
 			{ id: '16GB', autopay: 90, noAutopay: 90 },
 			{ id: '12GB', autopay: 80, noAutopay: 80 },
 			{ id: '8GB', autopay: 70, noAutopay: 70 },
-			{ id: '5GB', autopay: 35, noAutopay: 40 },
+			{ id: '5GB Single', autopay: 35, noAutopay: 40 },
 			{ id: '4GB', autopay: 50, noAutopay: 50 },
 			{ id: '2GB', autopay: 35, noAutopay: 35 }
 		],
