@@ -1,53 +1,82 @@
 <template>
-<div v-if="isUnlimited" class="number-of-phones-unlimited">
-	<input-dropdown v-for="(plan, index) in mixAndMatchNumberOfPhonesAndId" :key="plan.id" v-bind="{inputType: 'numberDropdown', label: plan.id, value: plan.numberOfPhones, range: 11}" v-on:value-changed="setMixAndMatchPlans({index, value: parseInt($event)})"/>
-</div>
-<div v-else-if="chosenPlan === 'Loyalty 55+'" class="number-of-phones-not-unlimited">
-	<input-dropdown v-bind="{inputType: 'numberDropdown', label: 'Number of Phones', value: numberOfPhonesTieredAndOldUnlimited, range: 5}" v-on:value-changed="mutate({property: 'numberOfPhonesTieredAndOldUnlimited', with: $event})"/>
-</div>
-<div v-else-if="chosenPlan === 'Loyalty Go'" class="number-of-phones-not-unlimited">
-	<input-dropdown v-bind="{inputType: 'numberDropdown', label: 'Number of Phones', value: numberOfPhonesTieredAndOldUnlimited, range: 7}" v-on:value-changed="mutate({property: 'numberOfPhonesTieredAndOldUnlimited', with: $event})"/>
-</div>
-<div v-else-if="!isUnlimited" class="number-of-phones-not-unlimited">
-	<input-dropdown v-bind="{inputType: 'numberDropdown', label: 'Number of Phones', value: numberOfPhonesTieredAndOldUnlimited, range: 11}" v-on:value-changed="mutate({property: 'numberOfPhonesTieredAndOldUnlimited', with: $event})"/>
-</div>
+	<div v-if="isUnlimited" class="number-of-phones-unlimited">
+		<input-dropdown
+			v-for="(plan, index) in mixAndMatchNumberOfPhonesAndId"
+			:key="plan.id"
+			v-bind="{inputType: 'numberDropdown', label: plan.id, value: plan.numberOfPhones, range: 11}"
+			v-on:value-changed="setMixAndMatchPlans({index, value: parseInt($event)})"
+		/>
+	</div>
+	<div v-else-if="chosenPlan === 'Loyalty 55+'" class="number-of-phones-not-unlimited">
+		<input-dropdown
+			v-bind="{inputType: 'numberDropdown', label: 'Number of Phones', value: numberOfPhonesTieredAndOldUnlimited, range: 5}"
+			v-on:value-changed="mutate({property: 'numberOfPhonesTieredAndOldUnlimited', with: $event})"
+		/>
+	</div>
+	<div v-else-if="chosenPlan === 'Loyalty Go'" class="number-of-phones-not-unlimited">
+		<input-dropdown
+			v-bind="{inputType: 'numberDropdown', label: 'Number of Phones', value: numberOfPhonesTieredAndOldUnlimited, range: 7}"
+			v-on:value-changed="mutate({property: 'numberOfPhonesTieredAndOldUnlimited', with: $event})"
+		/>
+	</div>
+	<div v-else-if="chosenPlan === '5GB Single'" class="number-of-phones-not-unlimited">
+		<input-dropdown
+			v-bind="{inputType: 'numberDropdown', label: 'Number of Phones', value: numberOfPhonesTieredAndOldUnlimited, range: 4}"
+			v-on:value-changed="mutate({property: 'numberOfPhonesTieredAndOldUnlimited', with: $event})"
+		/>
+	</div>
+	<div v-else class="number-of-phones-not-unlimited">
+		<input-dropdown
+			v-bind="{inputType: 'numberDropdown', label: 'Number of Phones', value: numberOfPhonesTieredAndOldUnlimited, range: 11}"
+			v-on:value-changed="mutate({property: 'numberOfPhonesTieredAndOldUnlimited', with: $event})"
+		/>
+	</div>
 </template>
 
 <script>
-import { mapState, mapMutations } from 'vuex'
+import { mapState, mapMutations } from "vuex";
 
-import InputDropdown from '@/components/input/InputDropdown'
+import InputDropdown from "@/components/input/InputDropdown";
 
 export default {
-	name: 'NumberOfPhones',
+	name: "NumberOfPhones",
 	components: { InputDropdown },
 	computed: {
 		...mapState({
-			chosenPlan (state) {
-				return state['consumer'][this.$route.params.vuexModule].chosenPlan
+			chosenPlan(state) {
+				return state["consumer"][this.$route.params.vuexModule].chosenPlan;
 			},
-			numberOfPhonesTieredAndOldUnlimited (state) {
-				return state['consumer'][this.$route.params.vuexModule].numberOfPhonesTieredAndOldUnlimited
+			numberOfPhonesTieredAndOldUnlimited(state) {
+				return state["consumer"][this.$route.params.vuexModule]
+					.numberOfPhonesTieredAndOldUnlimited;
 			},
-			isUnlimited (state, getters) {
-				return getters[`consumer/${this.$route.params.vuexModule}/isUnlimited`]
+			isUnlimited(state, getters) {
+				return getters[`consumer/${this.$route.params.vuexModule}/isUnlimited`];
 			},
-			mixAndMatchNumberOfPhonesAndId (state, getters) {
-				return getters[`consumer/${this.$route.params.vuexModule}/mixAndMatchNumberOfPhonesAndId`]
+			mixAndMatchNumberOfPhonesAndId(state, getters) {
+				return getters[
+					`consumer/${this.$route.params.vuexModule}/mixAndMatchNumberOfPhonesAndId`
+				];
 			}
 		})
 	},
 	methods: {
 		...mapMutations({
-			mutate (commit, payload) {
-				return commit(`consumer/${this.$route.params.vuexModule}/mutate`, payload)
+			mutate(commit, payload) {
+				return commit(
+					`consumer/${this.$route.params.vuexModule}/mutate`,
+					payload
+				);
 			},
-			setMixAndMatchPlans (commit, payload) {
-				return commit(`consumer/${this.$route.params.vuexModule}/setMixAndMatchPlans`, payload)
+			setMixAndMatchPlans(commit, payload) {
+				return commit(
+					`consumer/${this.$route.params.vuexModule}/setMixAndMatchPlans`,
+					payload
+				);
 			}
 		})
 	}
-}
+};
 </script>
 
 <style lang="less" scoped>
