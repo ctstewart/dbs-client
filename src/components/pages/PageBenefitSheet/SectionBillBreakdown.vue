@@ -1,70 +1,111 @@
 <template>
-<div class="billBreakdown">
-	<div v-for="i in optionsComputed" :key="i.id" class="option">
-		<div class="chosenPlanLabel">
-			<p>{{ i.id }}:</p>
-			<div>{{ i.chosenPlan }}</div>
-		</div>
-		<div class="breakdown">
-			<div>
-				<p>Plan:</p>
-				<div>${{ i.planTotal.toFixed(2) }}</div>
+	<div class="billBreakdown">
+		<div v-for="i in optionsComputed" :key="i.id" class="option">
+			<div class="chosenPlanLabel">
+				<p>{{ i.id }}:</p>
+				<!-- <div>{{ i.chosenPlan }}</div> -->
+				<div>
+					<span>{{ i.chosenPlanAndDevices }}</span>
+				</div>
 			</div>
-			<div>
-				<p>Protection/Other:</p>
-				<div>${{ i.tmpTotal.toFixed(2) }}</div>
-			</div>
-			<div>
-				<p>DPP:</p>
-				<div>${{ i.dppTotal.toFixed(2) }}</div>
-			</div>
-			<div>
-				<p>Total:</p>
-				<div v-if="taxPercent > 0">${{ i.total.toFixed(2) }} (with {{ (taxPercent * 100).toFixed(3) }}% tax)</div>
-				<div v-else>${{ i.total.toFixed(2) }} plus tax</div>
+			<div class="breakdown">
+				<div>
+					<p>Plan:</p>
+					<div>${{ i.planTotal.toFixed(2) }}</div>
+				</div>
+				<div>
+					<p>Protection/Other:</p>
+					<div>${{ i.tmpTotal.toFixed(2) }}</div>
+				</div>
+				<div>
+					<p>DPP:</p>
+					<div>${{ i.dppTotal.toFixed(2) }}</div>
+				</div>
+				<div>
+					<p>Total:</p>
+					<div v-if="taxPercent > 0">
+						${{ i.total.toFixed(2) }} (with
+						{{ (taxPercent * 100).toFixed(3) }}% tax)
+					</div>
+					<div v-else>${{ i.total.toFixed(2) }} plus tax</div>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState } from "vuex";
 
 export default {
-	name: 'SectionBillBreakdown',
+	name: "SectionBillBreakdown",
 	computed: {
 		...mapState({
-			optionsType (state) {
-				return state.optionsType
+			optionsType(state) {
+				return state.optionsType;
 			},
-			taxPercent (state) {
-				return state['benefitSheet'].taxPercent
+			taxPercent(state) {
+				return state["benefitSheet"].taxPercent;
 			},
-			optionsComputed (state, getters) {
+			optionsComputed(state, getters) {
 				return [
 					{
-						id: 'Option 1',
-						chosenPlan: state[this.optionsType.optionOne]['optionOne'].chosenPlan,
-						planTotal: getters[`${this.optionsType.optionOne}/optionOne/planTotal`],
-						tmpTotal: getters[`${this.optionsType.optionOne}/optionOne/tmpTotal`],
-						dppTotal: getters[`${this.optionsType.optionOne}/optionOne/dppTotal`],
-						total: getters[`${this.optionsType.optionOne}/optionOne/total`]
+						id: "Option 1",
+						chosenPlan:
+							state[this.optionsType.optionOne]["optionOne"]
+								.chosenPlan,
+						chosenPlanAndDevices:
+							getters[
+								`${this.optionsType.optionOne}/optionOne/chosenPlanAndDevices`
+							],
+						planTotal:
+							getters[
+								`${this.optionsType.optionOne}/optionOne/planTotal`
+							],
+						tmpTotal:
+							getters[
+								`${this.optionsType.optionOne}/optionOne/tmpTotal`
+							],
+						dppTotal:
+							getters[
+								`${this.optionsType.optionOne}/optionOne/dppTotal`
+							],
+						total:
+							getters[
+								`${this.optionsType.optionOne}/optionOne/total`
+							]
 					},
 					{
-						id: 'Option 2',
-						chosenPlan: state[this.optionsType.optionTwo]['optionTwo'].chosenPlan,
-						planTotal: getters[`${this.optionsType.optionTwo}/optionTwo/planTotal`],
-						tmpTotal: getters[`${this.optionsType.optionTwo}/optionTwo/tmpTotal`],
-						dppTotal: getters[`${this.optionsType.optionTwo}/optionTwo/dppTotal`],
-						total: getters[`${this.optionsType.optionTwo}/optionTwo/total`]
+						id: "Option 2",
+						chosenPlan:
+							state[this.optionsType.optionTwo]["optionTwo"]
+								.chosenPlan,
+						chosenPlanAndDevices:
+							getters[
+								`${this.optionsType.optionTwo}/optionTwo/chosenPlanAndDevices`
+							],
+						planTotal:
+							getters[
+								`${this.optionsType.optionTwo}/optionTwo/planTotal`
+							],
+						tmpTotal:
+							getters[
+								`${this.optionsType.optionTwo}/optionTwo/tmpTotal`
+							],
+						dppTotal:
+							getters[
+								`${this.optionsType.optionTwo}/optionTwo/dppTotal`
+							],
+						total:
+							getters[
+								`${this.optionsType.optionTwo}/optionTwo/total`
+							]
 					}
-				]
+				];
 			}
 		})
 	}
-
-}
+};
 </script>
 
 <style lang="less" scoped>
@@ -88,12 +129,16 @@ export default {
 
 		.chosenPlanLabel {
 			display: grid;
-			grid-template-columns: 1fr 2fr;
+			grid-template-columns: 1fr 7fr;
 			margin: 0 1%;
 
 			> p {
 				font-size: 12px;
 				color: red;
+			}
+
+			span {
+				font-size: 12px;
 			}
 		}
 
