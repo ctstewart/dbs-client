@@ -6,10 +6,12 @@ const plans5GB10GBMath = ({ numberOfPhones, plansArray, chosenPlan, autopay, mil
 		if (chosenPlan === plan.id) {
 			localTotal += plan.accountCost
 
-			if (militaryNew || responderNew) {
-				localTotal *= .85
-			} else if (parseInt(discount) > 0) {
-				localTotal *= (0.01 * (100 - parseInt(discount)))
+			if (plan.eligibleForDiscounts) {
+				if (militaryNew || responderNew) {
+					localTotal *= .85
+				} else if (parseInt(discount) > 0) {
+					localTotal *= (0.01 * (100 - parseInt(discount)))
+				}
 			}
 
 			if (autopay) {

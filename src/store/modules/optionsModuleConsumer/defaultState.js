@@ -2,11 +2,11 @@
 
 const defaultState = () => {
 	return {
-		chosenPlan: 'Unlimited',
+		chosenPlan: "Unlimited",
 		mixAndMatchPlans: {
 			plans: [
 				{
-					id: 'Start',
+					id: "Start",
 					numberOfPhones: 0,
 					1: { lines: 1, autopay: 70, noAutopay: 80 },
 					2: { lines: 2, autopay: 60, noAutopay: 70 },
@@ -15,7 +15,7 @@ const defaultState = () => {
 					5: { lines: 5, autopay: 30, noAutopay: 40 }
 				},
 				{
-					id: 'Play More',
+					id: "Play More",
 					numberOfPhones: 0,
 					1: { lines: 1, autopay: 80, noAutopay: 90 },
 					2: { lines: 2, autopay: 70, noAutopay: 80 },
@@ -24,7 +24,7 @@ const defaultState = () => {
 					5: { lines: 5, autopay: 40, noAutopay: 50 }
 				},
 				{
-					id: 'Do More',
+					id: "Do More",
 					numberOfPhones: 0,
 					1: { lines: 1, autopay: 80, noAutopay: 90 },
 					2: { lines: 2, autopay: 70, noAutopay: 80 },
@@ -33,7 +33,7 @@ const defaultState = () => {
 					5: { lines: 5, autopay: 40, noAutopay: 50 }
 				},
 				{
-					id: 'Get More',
+					id: "Get More",
 					numberOfPhones: 0,
 					1: { lines: 1, autopay: 90, noAutopay: 100 },
 					2: { lines: 2, autopay: 80, noAutopay: 90 },
@@ -42,7 +42,7 @@ const defaultState = () => {
 					5: { lines: 5, autopay: 50, noAutopay: 60 }
 				},
 				{
-					id: 'Just Kids (New)',
+					id: "Just Kids (New)",
 					numberOfPhones: 0,
 					1: { lines: 1, autopay: 0, noAutopay: 0 },
 					2: { lines: 2, autopay: 50, noAutopay: 60 },
@@ -51,7 +51,7 @@ const defaultState = () => {
 					5: { lines: 5, autopay: 25, noAutopay: 35 }
 				},
 				{
-					id: 'Go',
+					id: "Go",
 					numberOfPhones: 0,
 					1: { lines: 1, autopay: 75, noAutopay: 80 },
 					2: { lines: 2, autopay: 65, noAutopay: 70 },
@@ -60,7 +60,7 @@ const defaultState = () => {
 					5: { lines: 5, autopay: 40, noAutopay: 45 }
 				},
 				{
-					id: 'Beyond',
+					id: "Beyond",
 					numberOfPhones: 0,
 					1: { lines: 1, autopay: 85, noAutopay: 90 },
 					2: { lines: 2, autopay: 80, noAutopay: 85 },
@@ -69,7 +69,7 @@ const defaultState = () => {
 					5: { lines: 5, autopay: 50, noAutopay: 55 }
 				},
 				{
-					id: 'Above',
+					id: "Above",
 					numberOfPhones: 0,
 					1: { lines: 1, autopay: 95, noAutopay: 100 },
 					2: { lines: 2, autopay: 90, noAutopay: 95 },
@@ -78,7 +78,7 @@ const defaultState = () => {
 					5: { lines: 5, autopay: 60, noAutopay: 65 }
 				},
 				{
-					id: 'Just Kids (Old)',
+					id: "Just Kids (Old)",
 					numberOfPhones: 0,
 					1: { lines: 1, autopay: 0, noAutopay: 0 },
 					2: { lines: 2, autopay: 55, noAutopay: 60 },
@@ -119,33 +119,47 @@ const defaultState = () => {
 			6: { lines: 6, autopay: 150, noAutopay: 180 }
 		},
 		oldUnlimitedPlans: [
-			{ id: '$110 Unlimited', autopay: 100, noAutopay: 110 },
-			{ id: '$65 Unlimited', autopay: 60, noAutopay: 65 }
+			{ id: "$110 Unlimited", autopay: 100, noAutopay: 110 },
+			{ id: "$65 Unlimited", autopay: 60, noAutopay: 65 }
 		],
 		plans5GB10GB: [
-			{ id: '5GB', name: '5GB', accountCost: 30, lineAccessAutopay: 25, lineAccessNoAutopay: 35 },
-			{ id: '10GB', name: '10GB', accountCost: 40, lineAccessAutopay: 25, lineAccessNoAutopay: 35 },
+			{
+				id: "5GB",
+				name: "5GB",
+				accountCost: 30,
+				lineAccessAutopay: 25,
+				lineAccessNoAutopay: 35,
+				eligibleForDiscounts: false
+			},
+			{
+				id: "10GB",
+				name: "10GB",
+				accountCost: 40,
+				lineAccessAutopay: 25,
+				lineAccessNoAutopay: 35,
+				eligibleForDiscounts: true
+			}
 		],
 		tieredPlans: [
-			{ id: '24GB', autopay: 110, noAutopay: 110 },
-			{ id: '16GB', autopay: 90, noAutopay: 90 },
-			{ id: '12GB', autopay: 80, noAutopay: 80 },
-			{ id: '8GB', autopay: 70, noAutopay: 70 },
-			{ id: '5GB Single', autopay: 35, noAutopay: 40 },
-			{ id: '4GB', autopay: 50, noAutopay: 50 },
-			{ id: '2GB', autopay: 35, noAutopay: 35 }
+			{ id: "24GB", autopay: 110, noAutopay: 110 },
+			{ id: "16GB", autopay: 90, noAutopay: 90 },
+			{ id: "12GB", autopay: 80, noAutopay: 80 },
+			{ id: "8GB", autopay: 70, noAutopay: 70 },
+			{ id: "5GB Single", autopay: 35, noAutopay: 40 },
+			{ id: "4GB", autopay: 50, noAutopay: 50 },
+			{ id: "2GB", autopay: 35, noAutopay: 35 }
 		],
 		twoyear: 0,
 		basic: 0,
 		connectedDevices: [
-			{ id: 'Tablet', tiered: 10, unlimited: 20, value: 0 },
-			{ id: 'Jetpack', tiered: 10, unlimited: 20, value: 0 },
-			{ id: 'Hum+', tiered: 10, unlimited: 10, value: 0 },
-			{ id: 'HumX', tiered: 15, unlimited: 20, value: 0 },
-			{ id: 'Homephone', tiered: 20, unlimited: 20, value: 0 },
-			{ id: 'Gizmo (grandfathered)', tiered: 5, unlimited: 5, value: 0 },
-			{ id: 'Smartwatch/Gizmo', tiered: 10, unlimited: 10, value: 0 },
-			{ id: 'Arlo', tiered: 10, unlimited: 20, value: 0 }
+			{ id: "Tablet", tiered: 10, unlimited: 20, value: 0 },
+			{ id: "Jetpack", tiered: 10, unlimited: 20, value: 0 },
+			{ id: "Hum+", tiered: 10, unlimited: 10, value: 0 },
+			{ id: "HumX", tiered: 15, unlimited: 20, value: 0 },
+			{ id: "Homephone", tiered: 20, unlimited: 20, value: 0 },
+			{ id: "Gizmo (grandfathered)", tiered: 5, unlimited: 5, value: 0 },
+			{ id: "Smartwatch/Gizmo", tiered: 10, unlimited: 10, value: 0 },
+			{ id: "Arlo", tiered: 10, unlimited: 20, value: 0 }
 		],
 		autopay: false,
 		militaryNew: false,
@@ -161,7 +175,7 @@ const defaultState = () => {
 		existingCreditValues: Array.from({ length: 9 }, () => ({ value: 0 })),
 		newDPPValues: Array.from({ length: 9 }, () => ({ value: 0 })),
 		newCreditValues: Array.from({ length: 9 }, () => ({ value: 0 }))
-	}
-}
+	};
+};
 
-export default defaultState
+export default defaultState;
