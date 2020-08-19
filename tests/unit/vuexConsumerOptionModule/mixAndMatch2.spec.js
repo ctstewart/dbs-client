@@ -57,8 +57,8 @@ describe('mixAndMatch1', () => {
 
   var connectedDeviceMathResult = null
   it('connectedDevices', () => {
-    for (var i = 0; i < 5; i++)mutations.incrementConnectedDevice(state, 0)
-    for (var i = 0; i < 3; i++)mutations.incrementConnectedDevice(state, 1)
+    for (var i = 0; i < 5; i++)mutations.incrementConnectedDevice(state, 'Tablet')
+    for (var i = 0; i < 3; i++)mutations.incrementConnectedDevice(state, 'Jetpack')
     connectedDeviceMathResult = connectedDeviceMath({
       'chosenPlan': state.chosenPlan,
       'isUnlimited': getters.isUnlimited(state),
@@ -117,7 +117,7 @@ describe('mixAndMatch1', () => {
 
   var total = null
   it('total', () => {
-    total = getters.total(state, { isUnlimited, planTotal, tmpTotal, dppTotal })
+    total = planTotal + tmpTotal + dppTotal
     expect(parseFloat(total.toFixed(2))).to.equal(420.72)
   })
 })

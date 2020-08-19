@@ -44,14 +44,14 @@ describe('8gb', () => {
 
   var connectedDeviceMathResult = null
   it('connectedDevices', () => {
-    for (var i = 0; i < 1; i++)mutations.incrementConnectedDevice(state, 0)
-    for (var i = 0; i < 2; i++)mutations.incrementConnectedDevice(state, 1)
-    for (var i = 0; i < 3; i++)mutations.incrementConnectedDevice(state, 2)
-    for (var i = 0; i < 4; i++)mutations.incrementConnectedDevice(state, 3)
-    for (var i = 0; i < 5; i++)mutations.incrementConnectedDevice(state, 4)
-    for (var i = 0; i < 6; i++)mutations.incrementConnectedDevice(state, 5)
-    for (var i = 0; i < 7; i++)mutations.incrementConnectedDevice(state, 6)
-    for (var i = 0; i < 8; i++)mutations.incrementConnectedDevice(state, 7)
+    for (var i = 0; i < 1; i++)mutations.incrementConnectedDevice(state, 'Tablet')
+    for (var i = 0; i < 2; i++)mutations.incrementConnectedDevice(state, 'Jetpack')
+    for (var i = 0; i < 3; i++)mutations.incrementConnectedDevice(state, 'Hum+')
+    for (var i = 0; i < 4; i++)mutations.incrementConnectedDevice(state, 'HumX')
+    for (var i = 0; i < 5; i++)mutations.incrementConnectedDevice(state, 'Homephone')
+    for (var i = 0; i < 6; i++)mutations.incrementConnectedDevice(state, 'Gizmo (grandfathered)')
+    for (var i = 0; i < 7; i++)mutations.incrementConnectedDevice(state, 'Smartwatch/Gizmo')
+    for (var i = 0; i < 8; i++)mutations.incrementConnectedDevice(state, 'Arlo')
     connectedDeviceMathResult = connectedDeviceMath({
       'chosenPlan': state.chosenPlan,
       'isUnlimited': getters.isUnlimited(state),
@@ -110,7 +110,7 @@ describe('8gb', () => {
 
   var total = null
   it('total', () => {
-    total = getters.total(state, { isUnlimited, planTotal, tmpTotal, dppTotal })
+    total = planTotal + tmpTotal + dppTotal
     expect(parseFloat(total.toFixed(2))).to.equal(865.32)
   })
 })
