@@ -9,26 +9,53 @@ const connectedDeviceMath = ({
 	militaryNew,
 	militaryOld
 }) => {
-	var localTotal = 0
+	let localTotal = 0
 
 	// Checks if the current plan is unlimited
 	if (isUnlimited) {
+		let cdArray = JSON.parse(JSON.stringify(connectedDevicesArray))
+
+		function compare(a, b) {
+			const x = a.unlimited
+			const y = b.unlimited
+
+			let comparison = 0
+			if (x > y) {
+				comparison = -1
+			} else if (x < y) {
+				comparison = 1
+			}
+			return comparison
+		}
+
+		cdArray.sort(compare)
+
 		// Finds out how many phones there are for the Do More and Get More plans
-		var numberOfDoMoreAndGetMorePhones = 0
+		let numberOfDoMoreAndGetMorePhones = 0
 		mixAndMatchPlansArray.forEach((mixAndMatchPlan) => {
-			if (mixAndMatchPlan.id === 'Do More' || mixAndMatchPlan.id === 'Get More') {
+			if (mixAndMatchPlan.id === 'Do More' || mixAndMatchPlan.id === 'Get More' || mixAndMatchPlan.id === 'Do More 5G UW' || mixAndMatchPlan.id === 'Get More 5G UW') {
 				numberOfDoMoreAndGetMorePhones += mixAndMatchPlan.numberOfPhones
 			}
 		})
-		// Finds out how many tablets and jetpacks there are
-		var numberOfTabletsAndJetpacks = 0
-		connectedDevicesArray.forEach((connectedDevice) => {
-			if (connectedDevice.id === 'Tablet' || connectedDevice.id === 'Jetpack') {
-				numberOfTabletsAndJetpacks += connectedDevice.value
+
+		console.log(numberOfDoMoreAndGetMorePhones)
+
+		let halfOffTotal = 0
+		cdArray.forEach(i => {
+			console.log(halfOffTotal)
+			if (i.halfOffEligible === true && numberOfDoMoreAndGetMorePhones > 0) {
+				if (numberOfDoMoreAndGetMorePhones > i.value) {
+					halfOffTotal += i.value * i.unlimited * .5
+					numberOfDoMoreAndGetMorePhones -= i.value
+				} else if (numberOfDoMoreAndGetMorePhones <= i.value) {
+					halfOffTotal += numberOfDoMoreAndGetMorePhones * i.unlimited * .5
+					numberOfDoMoreAndGetMorePhones -= i.value
+				}
 			}
 		})
-		// Subtracts the smaller amount between tablets + jetpacks and do more + get more multiplied it by 10 from the localTotal for the half-off line access cost
-		localTotal -= Math.min(numberOfDoMoreAndGetMorePhones, numberOfTabletsAndJetpacks) * 10
+
+		localTotal -= halfOffTotal
+
 		// Multiplies the number of connected devices by the plan cost and adds it to the localTotal variable
 		connectedDevicesArray.forEach((connectedDevice) => {
 			localTotal = localTotal + (connectedDevice.unlimited * connectedDevice.value)
