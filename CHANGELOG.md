@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.6.0] - 2020-08-20
+### Added
+- Added Mix and Match 3.0 plans
+- Added a CSV download to the admin panel
+
 ## [2.5.1] - 2020-07-21
 ### Changed
 - There is some confusion about what discounts apply to the 5GB plan, so I have temporarily removed any discounts (other than autopay) from the calculations

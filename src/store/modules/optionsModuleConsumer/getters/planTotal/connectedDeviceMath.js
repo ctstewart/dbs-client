@@ -30,31 +30,65 @@ const connectedDeviceMath = ({
 
 		cdArray.sort(compare)
 
-		// Finds out how many phones there are for the Do More and Get More plans
 		let numberOfDoMoreAndGetMorePhones = 0
 		mixAndMatchPlansArray.forEach((mixAndMatchPlan) => {
-			if (mixAndMatchPlan.id === 'Do More' || mixAndMatchPlan.id === 'Get More' || mixAndMatchPlan.id === 'Do More 5G UW' || mixAndMatchPlan.id === 'Get More 5G UW') {
+			if (mixAndMatchPlan.id === 'Do More' || mixAndMatchPlan.id === 'Get More') {
 				numberOfDoMoreAndGetMorePhones += mixAndMatchPlan.numberOfPhones
 			}
 		})
 
-		console.log(numberOfDoMoreAndGetMorePhones)
+		// console.log(`Number of Do More and Get More phones is ${numberOfDoMoreAndGetMorePhones}`)
 
 		let halfOffTotal = 0
 		cdArray.forEach(i => {
-			console.log(halfOffTotal)
-			if (i.halfOffEligible === true && numberOfDoMoreAndGetMorePhones > 0) {
+			if (i.halfOffEligible2 === true && numberOfDoMoreAndGetMorePhones > 0 && i.value > 0) {
+				let numberOfDevices = i.value
 				if (numberOfDoMoreAndGetMorePhones > i.value) {
-					halfOffTotal += i.value * i.unlimited * .5
-					numberOfDoMoreAndGetMorePhones -= i.value
+					// console.log(`This is taking ${i.value * i.unlimited * 0.5} off of a ${i.id}`)
+					halfOffTotal += i.value * i.unlimited * 0.5
+					i.value = 0
+					numberOfDoMoreAndGetMorePhones -= numberOfDevices
+					// console.log(`The number of discounts left is ${numberOfDoMoreAndGetMorePhones}`)
 				} else if (numberOfDoMoreAndGetMorePhones <= i.value) {
-					halfOffTotal += numberOfDoMoreAndGetMorePhones * i.unlimited * .5
-					numberOfDoMoreAndGetMorePhones -= i.value
+					// console.log(`This is taking ${numberOfDoMoreAndGetMorePhones * i.unlimited * 0.5} off of a ${i.id}`)
+					halfOffTotal += numberOfDoMoreAndGetMorePhones * i.unlimited * 0.5
+					i.value -= numberOfDoMoreAndGetMorePhones
+					numberOfDoMoreAndGetMorePhones -= numberOfDevices
+					// console.log(`The number of discounts left is ${numberOfDoMoreAndGetMorePhones}`)
 				}
 			}
 		})
 
+		numberOfDoMoreAndGetMorePhones = 0
+		mixAndMatchPlansArray.forEach((mixAndMatchPlan) => {
+			if (mixAndMatchPlan.id === 'Do More 3.0' || mixAndMatchPlan.id === 'Get More 3.0') {
+				numberOfDoMoreAndGetMorePhones += mixAndMatchPlan.numberOfPhones
+			}
+		})
+
+		// console.log(`Number of Do More 3.0 and Get More 3.0 phones is ${numberOfDoMoreAndGetMorePhones}`)
+
+		cdArray.forEach(i => {
+			if (i.halfOffEligible3 === true && numberOfDoMoreAndGetMorePhones > 0 && i.value > 0) {
+				let numberOfDevices = i.value
+				if (numberOfDoMoreAndGetMorePhones > i.value) {
+					// console.log(`This is taking ${i.value * i.unlimited * 0.5} off of a ${i.id}`)
+					halfOffTotal += i.value * i.unlimited * 0.5
+					i.value = 0
+					numberOfDoMoreAndGetMorePhones -= numberOfDevices
+				} else if (numberOfDoMoreAndGetMorePhones <= i.value) {
+					// console.log(`This is taking ${numberOfDoMoreAndGetMorePhones * i.unlimited * 0.5} off of a ${i.id}`)
+					halfOffTotal += numberOfDoMoreAndGetMorePhones * i.unlimited * 0.5
+					i.value -= numberOfDoMoreAndGetMorePhones
+					numberOfDoMoreAndGetMorePhones -= numberOfDevices
+				}
+				// console.log(`The number of discounts left is ${numberOfDoMoreAndGetMorePhones}`)
+			}
+		})
+
 		localTotal -= halfOffTotal
+
+		// console.log('-----------------------------------------------------')
 
 		// Multiplies the number of connected devices by the plan cost and adds it to the localTotal variable
 		connectedDevicesArray.forEach((connectedDevice) => {

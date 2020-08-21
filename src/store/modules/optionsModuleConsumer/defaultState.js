@@ -6,7 +6,7 @@ const defaultState = () => {
 		mixAndMatchPlans: {
 			plans: [
 				{
-					id: "Start 5G UW",
+					id: "Start 3.0",
 					numberOfPhones: 0,
 					1: { lines: 1, autopay: 70, noAutopay: 80 },
 					2: { lines: 2, autopay: 60, noAutopay: 70 },
@@ -15,7 +15,7 @@ const defaultState = () => {
 					5: { lines: 5, autopay: 30, noAutopay: 40 }
 				},
 				{
-					id: "Play More 5G UW",
+					id: "Play More 3.0",
 					numberOfPhones: 0,
 					1: { lines: 1, autopay: 80, noAutopay: 90 },
 					2: { lines: 2, autopay: 70, noAutopay: 80 },
@@ -24,7 +24,7 @@ const defaultState = () => {
 					5: { lines: 5, autopay: 40, noAutopay: 50 }
 				},
 				{
-					id: "Do More 5G UW",
+					id: "Do More 3.0",
 					numberOfPhones: 0,
 					1: { lines: 1, autopay: 80, noAutopay: 90 },
 					2: { lines: 2, autopay: 70, noAutopay: 80 },
@@ -33,7 +33,7 @@ const defaultState = () => {
 					5: { lines: 5, autopay: 40, noAutopay: 50 }
 				},
 				{
-					id: "Get More 5G UW",
+					id: "Get More 3.0",
 					numberOfPhones: 0,
 					1: { lines: 1, autopay: 90, noAutopay: 100 },
 					2: { lines: 2, autopay: 80, noAutopay: 90 },
@@ -188,14 +188,14 @@ const defaultState = () => {
 		twoyear: 0,
 		basic: 0,
 		connectedDevices: [
-			{ id: "Tablet", tiered: 10, unlimited: 20, value: 0, halfOffEligible: true },
-			{ id: "Jetpack", tiered: 10, unlimited: 20, value: 0, halfOffEligible: true },
-			{ id: "Hum+", tiered: 10, unlimited: 10, value: 0, halfOffEligible: false },
-			{ id: "HumX", tiered: 15, unlimited: 20, value: 0, halfOffEligible: true },
-			{ id: "Homephone", tiered: 20, unlimited: 20, value: 0, halfOffEligible: false },
-			{ id: "Gizmo (grandfathered)", tiered: 5, unlimited: 5, value: 0, halfOffEligible: false },
-			{ id: "Smartwatch/Gizmo", tiered: 10, unlimited: 10, value: 0, halfOffEligible: true },
-			{ id: "Arlo", tiered: 10, unlimited: 20, value: 0, halfOffEligible: false }
+			{ id: "Tablet", tiered: 10, unlimited: 20, value: 0, halfOffEligible3: true, halfOffEligible2: true },
+			{ id: "Jetpack", tiered: 10, unlimited: 20, value: 0, halfOffEligible3: true, halfOffEligible2: true },
+			{ id: "Hum+", tiered: 10, unlimited: 10, value: 0, halfOffEligible3: false, halfOffEligible2: false },
+			{ id: "HumX", tiered: 15, unlimited: 20, value: 0, halfOffEligible3: true, halfOffEligible2: false },
+			{ id: "Homephone", tiered: 20, unlimited: 20, value: 0, halfOffEligible3: false, halfOffEligible2: false },
+			{ id: "Gizmo (grandfathered)", tiered: 5, unlimited: 5, value: 0, halfOffEligible3: false, halfOffEligible2: false },
+			{ id: "Smartwatch/Gizmo", tiered: 10, unlimited: 10, value: 0, halfOffEligible3: true, halfOffEligible2: false },
+			{ id: "Arlo", tiered: 10, unlimited: 20, value: 0, halfOffEligible3: false, halfOffEligible2: false }
 		],
 		autopay: false,
 		militaryNew: false,
