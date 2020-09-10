@@ -11,10 +11,10 @@
 			<span v-if="guestInfo.guestNumber" class="print-customer-number print-only">Guest Number: {{ guestInfo.guestNumber }}</span>
 		</div>
 	</div>
-	<div class="mainContent" :class="[ hamburgerStyle ? 'hamburgerStyle' : 'fullStyle' ]">
+	<div class="mainContent" :class="[ accordionStyle ? 'accordionStyle' : 'fullStyle' ]">
 		<div class="titleBar">
 			<div class="copyButton">
-				<i class="fas fa-align-justify fa-2x" @click="hamburgerStyle = !hamburgerStyle"></i>
+				<i class="fas fa-align-justify fa-2x" @click="accordionStyle = !accordionStyle"></i>
 			</div>
 			<p>Benefit Sheet</p>
 			<div class="action-menu-container">
@@ -31,7 +31,8 @@
 		</div>
 		<section-benefits/>
 		<section-old-bills/>
-		<section-bill-breakdown v-show="!hamburgerStyle"/>
+		<section-accordion-notes v-show="accordionStyle"/>
+		<section-bill-breakdown v-show="!accordionStyle" />
 		<section-costs/>
 	</div>
 	<print-modal v-if="printModalActive" v-on:close-modal="printModalActive = false" v-on:print="print($event)"/>
@@ -48,6 +49,7 @@ import LayoutSidebar from '@/components/layout/LayoutSidebar'
 import SectionBenefits from './SectionBenefits'
 import SectionOldBills from './SectionOldBills'
 import SectionBillBreakdown from './SectionBillBreakdown'
+import SectionAccordionNotes from './SectionAccordionNotes'
 import PrintModal from './PrintModal'
 import TaxModal from './TaxModal'
 import SectionCosts from './SectionCosts'
@@ -56,10 +58,10 @@ const { mapMutations } = createNamespacedHelpers('benefitSheet')
 export default {
 	name: 'PageBenefitSheet',
 	mixins: [jwtExpCheck],
-	components: { LayoutSidebar, SectionBenefits, SectionOldBills, SectionBillBreakdown, SectionCosts, PrintModal, TaxModal },
+	components: { LayoutSidebar, SectionBenefits, SectionOldBills, SectionBillBreakdown, SectionAccordionNotes, SectionCosts, PrintModal, TaxModal },
 	data: function () {
 		return {
-			hamburgerStyle: false,
+			accordionStyle: false,
 			guestInfo: {
 				guestName: '',
 				guestNumber: ''
@@ -152,7 +154,7 @@ and (orientation : landscape)
 		transition: all 1s;
 	}
 
-	.hamburgerStyle {
+	.accordionStyle {
 		grid-template-rows: 10% 45% 20% 25%;
 		margin-top: 5%;
 		margin-bottom: 5%;
