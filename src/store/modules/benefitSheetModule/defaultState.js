@@ -25,7 +25,8 @@ const defaultState = () => {
 			'15GB High Speed Hotspot',
 			'20GB High Speed Hotspot',
 			'Keep Your Same Phone Number',
-			'International Calling'
+			'International Calling',
+			'Disney+, Hulu, ESPN+'
 		],
 		taxPercent: 0
 	}
