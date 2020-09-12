@@ -14,7 +14,7 @@
 	<div class="mainContent" :class="[ accordionStyle ? 'accordionStyle' : 'fullStyle' ]">
 		<div class="titleBar">
 			<div class="copyButton">
-				<i class="fas fa-align-justify fa-2x" @click="accordionStyle = !accordionStyle"></i>
+				<i class="fas fa-align-justify fa-2x" @click="toggleAccordionStyle"></i>
 			</div>
 			<p>Benefit Sheet</p>
 			<div class="action-menu-container">
@@ -53,7 +53,7 @@ import SectionAccordionNotes from './SectionAccordionNotes'
 import PrintModal from './PrintModal'
 import TaxModal from './TaxModal'
 import SectionCosts from './SectionCosts'
-const { mapMutations } = createNamespacedHelpers('benefitSheet')
+const { mapMutations, mapState } = createNamespacedHelpers('benefitSheet')
 
 export default {
 	name: 'PageBenefitSheet',
@@ -61,19 +61,19 @@ export default {
 	components: { LayoutSidebar, SectionBenefits, SectionOldBills, SectionBillBreakdown, SectionAccordionNotes, SectionCosts, PrintModal, TaxModal },
 	data: function () {
 		return {
-			accordionStyle: false,
 			guestInfo: {
 				guestName: '',
 				guestNumber: ''
 			},
 			actionMenuDropdown: false,
 			printModalActive: false,
-			taxModalActive: false
+			taxModalActive: false,
 		}
 	},
 	methods: {
 		...mapMutations([
-			'resetState'
+			'resetState',
+			'toggleAccordionStyle'
 		]),
 		...mapActions([
 			'resetBenefitSheetAndOptions'
@@ -104,6 +104,11 @@ export default {
 			this.resetBenefitSheetAndOptions()
 			this.actionMenuDropdown = false
 		}
+	},
+	computed: {
+		...mapState([
+			'accordionStyle'
+		])
 	}
 }
 </script>

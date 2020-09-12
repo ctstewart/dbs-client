@@ -28,7 +28,12 @@ const defaultState = () => {
 			'International Calling',
 			'Disney+, Hulu, ESPN+'
 		],
-		taxPercent: 0
+		taxPercent: 0,
+		notes: [
+			'',
+			''
+		],
+		accordionStyle: false
 	}
 }
 

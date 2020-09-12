@@ -1,19 +1,19 @@
 <template>
 	<div class="billBreakdown">
-		<div v-for="i in optionsComputed" :key="i.id" class="option">
+		<div v-for="(i, index) in optionsComputed" :key="i.id" class="option">
 			<div class="chosenPlanLabel">
 				<p>{{ i.id }}:</p>
 				<div>
 					<span>{{ i.chosenPlanAndDevices }}</span>
 				</div>
 			</div>
-			<textarea class="breakdown" v-model="i.notes"></textarea>
+			<textarea class="breakdown" :value="i.notes" @change="mutateNotes({index, value: $event.target.value})"></textarea>
 		</div>
 	</div>
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapMutations } from "vuex";
 
 export default {
 	name: "SectionBillBreakdown",
@@ -33,7 +33,7 @@ export default {
 							getters[
 								`${this.optionsType.optionOne}/optionOne/chosenPlanAndDevices`
 							],
-						notes: ''
+						notes: state.benefitSheet.notes[0],
 					},
 					{
 						id: "Option 2",
@@ -44,9 +44,16 @@ export default {
 							getters[
 								`${this.optionsType.optionTwo}/optionTwo/chosenPlanAndDevices`
 							],
-						notes:''
+						notes: state.benefitSheet.notes[1],
 					}
 				];
+			}
+		})
+	},
+	methods: {
+		...mapMutations({
+			mutateNotes (commit, payload) {
+				return commit('benefitSheet/mutateNotes', payload)
 			}
 		})
 	}
