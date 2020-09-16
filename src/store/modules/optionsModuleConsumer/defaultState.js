@@ -190,6 +190,7 @@ const defaultState = () => {
 		connectedDevices: [
 			{ id: "Tablet", tiered: 10, unlimited: 20, value: 0, halfOffEligible3: true, halfOffEligible2: true },
 			{ id: "Jetpack", tiered: 10, unlimited: 20, value: 0, halfOffEligible3: true, halfOffEligible2: true },
+			{ id: "Jetpack 5G", tiered: 10, unlimited: 30, value: 0, halfOffEligible3: true, halfOffEligible2: true },
 			{ id: "Hum+", tiered: 10, unlimited: 10, value: 0, halfOffEligible3: false, halfOffEligible2: false },
 			{ id: "HumX", tiered: 15, unlimited: 20, value: 0, halfOffEligible3: true, halfOffEligible2: false },
 			{ id: "Homephone", tiered: 20, unlimited: 20, value: 0, halfOffEligible3: false, halfOffEligible2: false },
