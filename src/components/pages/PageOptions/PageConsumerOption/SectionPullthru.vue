@@ -74,7 +74,7 @@ export default {
 }
 
 .pullthruColumn {
-	grid-template-rows: 1fr 1fr 1fr 1fr;
+	grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
 	align-items: center;
 }
 
