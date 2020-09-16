@@ -26,7 +26,15 @@ const defaultState = () => {
 			'20GB High Speed Hotspot',
 			'Keep Your Same Phone Number',
 			'International Calling',
-			'Disney+, Hulu, ESPN+'
+			'Disney+, Hulu, ESPN+',
+			"Block Robocalls",
+			"Wifi Security",
+			"VPN",
+			"Overnight Shipping",
+			"Same-day Repair",
+			"$29 Screen Repair",
+			"$10 Screen Protector Replacements",
+			"Consistent Bill"
 		],
 		taxPercent: 0,
 		notes: [
