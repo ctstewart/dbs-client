@@ -1,21 +1,21 @@
 const state = () => {
 	return {
-		webappVersion: '2.7.0',
+		webappVersion: "2.8.0",
 		userInfo: {
-			email: '',
-			firstName: '',
-			lastName: '',
+			email: "",
+			firstName: "",
+			lastName: "",
 			admin: false,
 			superAdmin: false,
 			hasSeenNewChanges: true
 		},
-		userEmail: '',
+		userEmail: "",
 		jwtExp: null,
 		optionsType: {
-			optionOne: 'consumer',
-			optionTwo: 'consumer'
+			optionOne: "consumer",
+			optionTwo: "consumer"
 		}
-	}
-}
+	};
+};
 
-export default state
+export default state;
