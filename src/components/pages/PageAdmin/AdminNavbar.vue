@@ -8,7 +8,16 @@
 						>Users</router-link
 					>
 				</li>
-				<li><a @click="usageCSV">Download Usage CSV</a></li>
+				<li>
+					<a @click="usageCSVThisMonth"
+						>Download Usage CSV (this month)</a
+					>
+				</li>
+				<li>
+					<a @click="usageCSVLastMonth"
+						>Download Usage CSV (last month)</a
+					>
+				</li>
 				<!-- <li><router-link to="/admin/">App Usage (Coming Soon)</router-link></li> -->
 			</ul>
 		</nav>
@@ -49,7 +58,7 @@ export default {
 				console.error(err);
 			}
 		},
-		async usageCSV() {
+		async usageCSVThisMonth() {
 			try {
 				const response = await axios({
 					method: "get",
@@ -69,6 +78,87 @@ export default {
 				for (let i = 0; i < todayDate; i++) {
 					let day = moment()
 						.startOf("month")
+						.add(i, "days")
+						.format("MMM Do");
+					daysInMonthArr.push(day);
+				}
+
+				let objectByEmail = {};
+
+				response.data.data.forEach(i => {
+					if (!(i.email in objectByEmail)) {
+						objectByEmail[i.email] = [];
+					}
+
+					let timestampFormatted = moment
+						.utc(i.createdAt)
+						.subtract(5, "hours")
+						.format("MMM Do");
+
+					if (daysInMonthArr.includes(timestampFormatted)) {
+						objectByEmail[i.email].push(timestampFormatted);
+					}
+				});
+
+				let csvContent = "data:text/csv;charset=utf-8,\n";
+
+				csvContent += "Email,";
+
+				daysInMonthArr.forEach(i => {
+					csvContent += `${i},`;
+				});
+
+				csvContent += "\n";
+
+				for (const property in objectByEmail) {
+					csvContent += `${property},`;
+
+					daysInMonthArr.forEach(i => {
+						if (objectByEmail[property].includes(i)) {
+							csvContent += "true,";
+						} else {
+							csvContent += " ,";
+						}
+					});
+
+					csvContent += "\n";
+				}
+
+				let encodedUri = encodeURI(csvContent);
+				var link = document.createElement("a");
+				link.setAttribute("href", encodedUri);
+				link.setAttribute("download", "usage_reports.csv");
+				document.body.appendChild(link); // Required for FF
+
+				link.click();
+			} catch (err) {
+				console.log(err);
+			}
+		},
+		async usageCSVLastMonth() {
+			try {
+				const response = await axios({
+					method: "get",
+					url: "/api/loginLogs/lastMonth",
+					headers: {
+						authorization: `Bearer ${JSON.parse(
+							localStorage.getItem("jwt")
+						)}`
+					}
+				});
+
+				let daysInMonthArr = [];
+
+				// Get the amount of days from the start of the month until today
+				let todayDate = moment().date();
+				let daysInLastMonth = moment(todayDate)
+					.subtract(1, "months")
+					.daysInMonth();
+
+				for (let i = 0; i < daysInLastMonth; i++) {
+					let day = moment()
+						.startOf("month")
+						.subtract(1, "months")
 						.add(i, "days")
 						.format("MMM Do");
 					daysInMonthArr.push(day);
