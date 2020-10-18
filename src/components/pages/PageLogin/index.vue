@@ -33,7 +33,8 @@ export default {
 		}
 	},
 	created () {
-		localStorage.clear()
+        localStorage.clear()
+        sessionStorage.clear()
 	}
 }
 </script>
