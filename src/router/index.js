@@ -1,5 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import axios from 'axios'
+
+import { store } from '../store'
 
 import PageBenefitSheet from '../components/pages/PageBenefitSheet'
 import PageOptions from '../components/pages/PageOptions'
@@ -22,18 +25,19 @@ const routes = [
 	{
 		path: '/options',
 		component: PageOptions,
+		meta: { requiresAuth: true },
 		children: [
 			{
 				path: 'consumer/:vuexModule',
 				name: 'PageConsumerOption',
 				component: PageConsumerOption,
-				meta: { requiresAuth: true }
+				// meta: { requiresAuth: true }
 			},
 			{
 				path: 'business/:vuexModule',
 				name: 'PageBusinessOption',
 				component: PageBusinessOption,
-				meta: { requiresAuth: true }
+				// meta: { requiresAuth: true }
 			}
 		]
 	},
@@ -52,12 +56,14 @@ const routes = [
 	{
 		path: '/login',
 		name: 'PageLogin',
-		component: PageLogin
+		component: PageLogin,
+		meta: { requiresAuth: false },
 	},
 	{
 		path: '/resetPassword/:resetToken',
 		name: 'PageResetPassword',
-		component: PageResetPassword
+		component: PageResetPassword,
+		meta: { requiresAuth: false },
 	}
 ]
 
@@ -65,12 +71,30 @@ const router = new VueRouter({
 	routes
 })
 
-router.beforeEach((to, from, next) => {
-	if (to.matched.some(record => record.meta.requiresAuth)) {
-		if (localStorage.getItem('jwt') == null) {
-			localStorage.clear()
-			next({ path: '/login' })
-		} else {
+router.beforeEach(async (to, from, next) => {
+	if (to.meta.requiresAuth) {
+		try {
+			const response = await axios({
+				method: 'get',
+				url: `${process.env.VUE_APP_API_URL}/api/v1/auth/me`,
+				withCredentials: true,
+			})
+
+			if (!response || !response.data.success) {
+				if (from.path === '/login') {
+					next(false)
+				} else {
+					router.push('/login')
+					next()
+				}
+			}
+
+			store.commit('mutate', { property: 'userInfo', with: response.data.data })
+
+			next()
+		} catch (err) {
+			console.error(err)
+			router.push('/login')
 			next()
 		}
 	} else {
