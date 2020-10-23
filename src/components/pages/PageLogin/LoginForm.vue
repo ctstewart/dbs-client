@@ -39,11 +39,12 @@ export default {
 			try {
 				const response = await axios({
 					method: "post",
-					url: `${process.env.API_URL}/api/v1/auth/login`,
+					url: `${process.env.VUE_APP_API_URL}/api/v1/auth/login`,
+					withCredentials: true,
 					data: {
 						'email': this.email,
 						'password': this.password
-					}
+					},
 				})
 
 				if (response.data.forceNewPassword) {
@@ -53,17 +54,13 @@ export default {
 						this.$router.push(`/resetPassword/${response.data.token}`)
 					}, 3000)
 				} else {
-					this.resetAll()
-					sessionStorage.clear()
-					localStorage.clear()
-					this.saveTokenToLocalStorage(response.data.token)
-					this.mutateUserInfo({ property: 'email', with: this.email })
-					this.mutateUserInfo({ property: 'firstName', with: response.data.firstName })
-					this.mutateUserInfo({ property: 'lastName', with: response.data.lastName })
-					this.mutateUserInfo({ property: 'admin', with: response.data.admin })
-					this.mutateUserInfo({ property: 'superAdmin', with: response.data.superAdmin })
-					this.mutateUserInfo({ property: 'hasSeenNewChanges', with: response.data.hasSeenNewChanges })
-					this.mutate({ property: 'jwtExp', with: response.data.jwtExp })
+					const userInfo = await axios({
+						method: 'get',
+						url: `${process.env.VUE_APP_API_URL}/api/v1/auth/me`,
+						withCredentials: true
+					})
+
+					this.mutate({ property: 'userInfo', with: userInfo.data.data })
 					this.$router.push('/')
 				}
 			} catch (err) {
@@ -73,10 +70,6 @@ export default {
 				}, 2000)
 			}
 		},
-		saveTokenToLocalStorage: function (value) {
-			const parsed = JSON.stringify(value)
-			localStorage.setItem('jwt', parsed)
-		}
 	}
 }
 </script>
