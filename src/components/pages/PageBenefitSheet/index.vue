@@ -24,8 +24,6 @@
 					<li @click="deleteBenefitSheet"><i class="fas fa-trash"></i>Delete Benefit Sheet</li>
 					<li @click="deleteAll"><i class="fas fa-trash"></i>Delete All</li>
 					<li @click="openTaxModal"><i class="fas fa-percent"></i>Tax</li>
-					<!-- <li><i class="fas fa-file-download"></i>Save Simple</li> -->
-					<!-- <li><i class="fas fa-file-download"></i>Save Detailed</li> -->
 				</ul>
 			</div>
 		</div>
@@ -43,8 +41,6 @@
 <script>
 import { mapActions, createNamespacedHelpers } from 'vuex'
 
-import jwtExpCheck from '@/mixins/jwtExpCheck'
-
 import LayoutSidebar from '@/components/layout/LayoutSidebar'
 import SectionBenefits from './SectionBenefits'
 import SectionOldBills from './SectionOldBills'
@@ -57,7 +53,6 @@ const { mapMutations, mapState } = createNamespacedHelpers('benefitSheet')
 
 export default {
 	name: 'PageBenefitSheet',
-	mixins: [jwtExpCheck],
 	components: { LayoutSidebar, SectionBenefits, SectionOldBills, SectionBillBreakdown, SectionAccordionNotes, SectionCosts, PrintModal, TaxModal },
 	data: function () {
 		return {
