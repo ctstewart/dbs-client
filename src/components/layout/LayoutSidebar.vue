@@ -40,7 +40,7 @@ DEALINGS IN THE SOFTWARE.
 		<router-link v-else-if="$store.state.optionsType.optionOne === 'business'" to="/options/business/optionOne"><i class="fas fa-dice-one"></i>Option 1</router-link>
 		<router-link v-if="$store.state.optionsType.optionTwo === 'consumer'" to="/options/consumer/optionTwo"><i class="fas fa-dice-two"></i>Option 2</router-link>
 		<router-link v-else-if="$store.state.optionsType.optionTwo === 'business'" to="/options/business/optionTwo"><i class="fas fa-dice-two"></i>Option 2</router-link>
-		<router-link to="/admin" v-if="$store.state.userInfo.admin"><i class="fas fa-users-cog"></i>Admin Panel</router-link>
+		<a href="/admin" v-if="$store.state.userInfo.role === 'admin' || $store.state.userInfo.role === 'superadmin'"><i class="fas fa-users-cog"></i>Admin Panel</a>
 		<router-link to="/changelog">
 			<span class="navbar-link"><i class="fas fa-clipboard"></i>Changelog</span>
 			<span v-if="!$store.state.userInfo.hasSeenNewChanges" class="new-changes">
