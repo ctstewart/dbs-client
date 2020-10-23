@@ -5,12 +5,9 @@ const state = () => {
 			email: "",
 			firstName: "",
 			lastName: "",
-			admin: false,
-			superAdmin: false,
-			hasSeenNewChanges: true
+			role: ""
+			// hasSeenNewChanges: true
 		},
-		userEmail: "",
-		jwtExp: null,
 		optionsType: {
 			optionOne: "consumer",
 			optionTwo: "consumer"
