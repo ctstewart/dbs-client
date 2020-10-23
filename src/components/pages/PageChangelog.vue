@@ -32,14 +32,15 @@ export default {
 			loading: true
 		}
 	},
-	created () {
-		this.mutateUserInfo({ property: 'hasSeenNewChanges', with: true })
-		axios.get('CHANGELOG.md')
-			.then(response => {
-				this.changelog = marked(response.data)
-				this.loading = false
-			})
-			.catch(error => console.log(error))
+	async created () {
+		// this.mutateUserInfo({ property: 'hasSeenNewChanges', with: true })
+		try {
+			const response = await axios.get('CHANGELOG.md')
+			this.changelog = marked(response.data)
+			this.loading = false
+		} catch (err) {
+			console.error(err)
+		}
 	},
 	methods: {
 		logout () {
