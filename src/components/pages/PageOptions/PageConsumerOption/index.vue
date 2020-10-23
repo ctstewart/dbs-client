@@ -30,8 +30,6 @@
 <script>
 import { mapState, mapMutations } from 'vuex'
 
-import jwtExpCheck from '@/mixins/jwtExpCheck'
-
 import LayoutSidebar from '@/components/layout/LayoutSidebar'
 import SectionPlan from './SectionPlan'
 import SectionPullthru from './SectionPullthru'
@@ -39,7 +37,6 @@ import SectionDpp from './SectionDpp'
 
 export default {
 	name: 'LayoutOption',
-	mixins: [jwtExpCheck],
 	components: { LayoutSidebar, SectionPlan, SectionPullthru, SectionDpp },
 	data () {
 		return {
@@ -77,7 +74,6 @@ export default {
 				return commit(`business/${this.$route.params.vuexModule}/resetState`)
 			}
 		}),
-		// I STILL NEED TO ADD THIS FUNCTIONALITY. DO NOT FORGET FUTURE ME.
 		...mapMutations([
 			'copyModuleOptionOneToOptionTwo'
 		]),
