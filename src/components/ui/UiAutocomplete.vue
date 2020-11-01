@@ -29,12 +29,9 @@
 </template>
 
 <script>
-import { mapActions, createNamespacedHelpers } from "vuex";
-const { mapState } = createNamespacedHelpers("benefitSheet");
-
 export default {
 	name: "autocomplete",
-	props: ["benefit"],
+	props: ["benefit", "items"],
 
 	data: function() {
 		return {
@@ -43,42 +40,12 @@ export default {
 			isOpen: false,
 			focus: false,
 			arrowCounter: -1,
-			items: [
-				"Protection from Damage, Loss, Theft",
-				"Advanced Setup",
-				"Better Battery",
-				"Better Camera",
-				"Bigger Screen",
-				"Higher Resolution",
-				"Wireless Charging",
-				"Vehicle Safety Service",
-				"Vehicle Diagnostics",
-				"Emergency Car Service",
-				"Fantastic Customer Service",
-				"Best Network Performance (RootMetrics)",
-				"Most Reliable Network (RootMetrics)",
-				"Unlimited Talk",
-				"Unlimited Text",
-				"Unlimited Data",
-				"15GB High Speed Hotspot",
-				"20GB High Speed Hotspot",
-				"Keep Your Same Phone Number",
-				"International Calling",
-				"Block Robocalls",
-				"Wifi Security",
-				"VPN",
-				"Overnight Shipping",
-				"Same-day Repair",
-				"$29 Screen Repair",
-				"$10 Screen Protector Replacements",
-				"Consistent Bill"
-			]
 		};
 	},
 
 	methods: {
 		filterResults() {
-			this.results = this.autocompleteOptions.filter(
+			this.results = this.items.filter(
 				item =>
 					item.toLowerCase().indexOf(this.search.toLowerCase()) > -1
 			);
@@ -128,11 +95,6 @@ export default {
 				this.arrowCounter = -1;
 			}
 		}
-	},
-	computed: {
-		...mapState([
-			'autocompleteOptions'
-		])
 	},
 	mounted() {
 		document.addEventListener("click", this.handleClickOutside);
