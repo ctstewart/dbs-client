@@ -1,101 +1,197 @@
 <template>
 <div class="main dpp">
-    <div class="dppColumn">
-        <div>
-            <span>DPP</span>
-            <input v-for="(i, index) in existingDPPValues" type="tel" pattern="[0-9]*" step="0.01"  :key="index" placeholder="Existing DPP" :value="parseFloat(i.value / 100)" @change="mutateExistingDpp({index, value: parseFloat($event.target.value) * 100})"/>
-        </div>
-        <div>
-            <span>Monthly Credits</span>
-            <input v-for="(i, index) in existingCreditValues" type="tel" pattern="[0-9]*" step="0.01"  :key="index" placeholder="Existing Credits" :value="parseFloat(i.value / 100)" @change="mutateExistingCredits({index, value: parseFloat($event.target.value) * 100})"/>
-        </div>
-    </div>
-    <div class="dppColumn">Coming Soon: Pricing and Ordering Sheet</div>
+	<div v-if="loading === false" class="dppColumn">
+		<div class="dppRow" v-for="(i, index) in dppValues" :key="i.id">
+			<div class="dropdown">
+				<ui-autocomplete :benefit="i.deviceName" :items="items" :autocompleteInputStyleObject="autocompleteInputStyleObject" :autocompleteResultsStyleObject="autocompleteResultsStyleObject" v-on:changeBenefit="updateDppValues(index, $event)"/>
+			</div>
+			<input v-if="i.deviceName === 'Manual' || i.deviceName === ''" :value="(i.dpp / 100).toFixed(2)"  @change="mutateDpp({index, value: parseFloat($event.target.value) * 100})" />
+			<div v-else class="dppAmount">{{ (i.dpp / 100).toFixed(2) }}</div>
+			<input class="creditAmount" :value="(i.credits / 100).toFixed(2)" @change="mutateCredits({index, value: parseFloat($event.target.value) * 100})" />
+			<i class="fas fa-minus-circle" @click="removeDppValue(index)"></i>
+			<div class="dppLabels">Device Name</div>
+			<div class="dppLabels">DPP</div>
+			<div class="dppLabels">Credits</div>
+		</div>
+		<div class="addDpp"><i class="fas fa-plus-circle" @click="addDppValue"></i></div>
+	</div>
+	<div class="dppColumn"></div>
 </div>
 </template>
 
 <script>
+import axios from 'axios'
+
 import { mapState, mapMutations } from 'vuex'
+
+import UiAutocomplete from '@/components/ui/UiAutocomplete'
 
 export default {
 	name: 'SectionDpp',
+	components: { UiAutocomplete },
+	data() {
+		return {
+			loading: true,
+			items: [
+				'Manual'
+			],
+			devices: [],
+			componentKey: 0,
+            autocompleteInputStyleObject: {
+                'width': '100%',
+				'height': '100%',
+                'border-bottom': '1px solid white',
+                'background-color': '#387A77',
+                'font-size': '12px',
+                'color': 'white'
+            },
+            autocompleteResultsStyleObject: {
+				'font-size': '14px',
+				'color': 'black',
+                'width': '100%'
+            }
+		}
+	},
+	async mounted() {
+		try {
+			const response = await axios({
+				method: 'get',
+				url: `${process.env.VUE_APP_API_URL}/api/v1/devices`,
+				withCredentials: true
+			})
+
+			this.devices = response.data.data
+
+			response.data.data.forEach(i => {
+				this.items.push(i.name)
+			})
+
+			console.log(this.items)
+
+			this.loading = false
+		} catch (err) {
+			console.error(err)
+		}
+	},
 	computed: {
 		...mapState({
-			existingDPPValues (state) {
-				return state['consumer'][this.$route.params.vuexModule].existingDPPValues
+			dppValues (state) {
+				return state['consumer'][this.$route.params.vuexModule].dppValues
 			},
-			existingCreditValues (state) {
-				return state['consumer'][this.$route.params.vuexModule].existingCreditValues
-			}
 		})
 	},
 	methods: {
 		...mapMutations({
-			mutateExistingDpp (commit, payload) {
-				return commit(`consumer/${this.$route.params.vuexModule}/mutateExistingDpp`, payload)
+			mutateDeviceName (commit, payload) {
+				return commit(`consumer/${this.$route.params.vuexModule}/mutateDeviceName`, payload)
 			},
-			mutateExistingCredits (commit, payload) {
-				return commit(`consumer/${this.$route.params.vuexModule}/mutateExistingCredits`, payload)
+			mutateDpp (commit, payload) {
+				return commit(`consumer/${this.$route.params.vuexModule}/mutateDpp`, payload)
+			},
+			mutateCredits (commit, payload) {
+				return commit(`consumer/${this.$route.params.vuexModule}/mutateCredits`, payload)
+			},
+			addDppValue (commit) {
+				return commit(`consumer/${this.$route.params.vuexModule}/addDppValue`)
+			},
+			removeDppValue (commit, payload) {
+				this.componentKey += 1
+				return commit(`consumer/${this.$route.params.vuexModule}/removeDppValue`, payload)
 			}
-		})
+		}),
+		updateDppValues(index, deviceName) {
+			this.mutateDeviceName({ index, value: deviceName })
+
+			const device = this.devices.find(i => {
+				return i.name == deviceName
+			})
+
+			if (!device) {
+				this.mutateDpp({ index, value: 0 })
+			} else {
+				this.mutateDpp({ index, value: device.fullRetail / 24 })
+			}
+		}
 	}
 }
 </script>
 
 <style scoped>
 .main {
-    background-color: #387A77;
-    margin: 0 1% 1% 1%;
-    border-radius: 0 5px 5px 5px;
-    text-align: center;
-    color: white;
-    padding: 3%;
+	background-color: #387A77;
+	margin: 0 1% 1% 1%;
+	border-radius: 0 5px 5px 5px;
+	text-align: center;
+	color: white;
+	padding: 3%;
 }
 
 .dpp {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
 }
 
 .dppColumn {
-    display: grid;
-    border: 1px solid white;
-    margin: 0px 10px;
-    padding: 10px;
-    border-radius: 5%;
+	margin: 0px 10px;
+	padding: 10px;
+	border: 1px solid white;
+	border-radius: 5%;
+	display: grid;
+	display: -ms-grid;
+	grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 }
 
-.dppColumn {
-    grid-template-columns: 1fr 1fr;
+.dppRow {
+	display: grid;
+	display: -ms-grid;
+	grid-template-columns: 2fr 1fr 1fr 1fr;
+	grid-template-rows: 80% 20%;
+	-ms-grid-row-align: center;
+	-ms-grid-column-align: center;
+	place-items: center;
+	align-items: center;
+	justify-items: center;
 }
 
-.dppColumn div {
-    margin: 0 5px;
-    display: -ms-grid;
-    display: grid;
-    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-    -ms-grid-row-align: center;
-    -ms-grid-column-align: center;
-    place-items: center;
-    align-items: center;
-    justify-items: center;
+.dppAmount {
+	width: 100%;
 }
 
-.dpp input, select {
-    -webkit-appearance: none;  /* for webkit (safari, chrome) compatibility */
-    -moz-appearance: none; /* for firefox compatibility */
-    appearance: none;
-    background-color: rgba(255,255,255,0.8);
-    width: 90%;
-    height: 80%;
-    border-radius: 5px;
-    padding: 0;
-    text-align: center;
-    text-align-last: center;
-    font-size: 16px;
+.dpp input {
+	font-family: inherit;
+	font-size: 16px;
+	padding: 0;
+	width: 100%;
+	border: none;
+	border-bottom: 1px solid white;
+	background-color: #387A77;
+	color: white;
+	-webkit-appearance: none;
+	border-radius: 0;
+	text-align: center;
 }
 
-.dpp input::placeholder {
-    font-size: 14px;
+.dpp input:focus {
+	outline: none;
+}
+
+.dppAmount, .creditAmount {
+	border-bottom: 1px solid white;
+}
+
+.dppLabels {
+	font-size: 10px;
+}
+
+i:hover {
+	cursor: pointer;
+}
+
+.addDpp {
+	height: 100%;
+	width: 100%;
+	display: grid;
+	align-content: center;
+	justify-content: center;
 }
 </style>
