@@ -1,5 +1,3 @@
-// import * as plans from './planData/plans'
-
 const defaultState = () => {
 	return {
 		chosenPlan: "Unlimited",
@@ -209,10 +207,9 @@ const defaultState = () => {
 		numberOfNewDevices: 0,
 		tmp: 0,
 		otherCost: 0,
-		existingDPPValues: Array.from({ length: 9 }, () => ({ value: 0 })),
-		existingCreditValues: Array.from({ length: 9 }, () => ({ value: 0 })),
-		newDPPValues: Array.from({ length: 9 }, () => ({ value: 0 })),
-		newCreditValues: Array.from({ length: 9 }, () => ({ value: 0 }))
+		dppValues: [
+			{ id: 'device-0', deviceName: '', dpp: 0, credits: 0 }
+		],
 	};
 };
 
