@@ -28,12 +28,28 @@ const decrementConnectedDevice = (state, id) => {
 	}
 }
 
-const mutateExistingDpp = (state, payload) => {
-	state.existingDPPValues[payload.index].value = payload.value
+const mutateDeviceName = (state, payload) => {
+	state.dppValues[payload.index].deviceName = payload.value
 }
 
-const mutateExistingCredits = (state, payload) => {
-	state.existingCreditValues[payload.index].value = payload.value
+const mutateDpp = (state, payload) => {
+	state.dppValues[payload.index].dpp = payload.value
+}
+
+const mutateCredits = (state, payload) => {
+	state.dppValues[payload.index].credits = payload.value
+}
+
+const addDppValue = (state) => {
+	const index = state.dppValues.length
+	state.dppValues.push({ id: `device-${index}`, deviceName: '', dpp: 0, credits: 0 })
+}
+
+const removeDppValue = (state, index) => {
+	state.dppValues.splice(index, 1)
+	state.dppValues.forEach((i, index) => {
+		i.id = `device-${index}`
+	})
 }
 
 const resetState = (state) => {
@@ -46,8 +62,11 @@ const mutations = {
 	setMixAndMatchPlans,
 	incrementConnectedDevice,
 	decrementConnectedDevice,
-	mutateExistingDpp,
-	mutateExistingCredits,
+	mutateDeviceName,
+	mutateDpp,
+	mutateCredits,
+	addDppValue,
+	removeDppValue,
 	resetState
 }
 
