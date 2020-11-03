@@ -1,7 +1,7 @@
 <template>
 <div class="benefits">
     <p class="benefitsTitle">New Plan Benefits</p>
-    <ui-autocomplete v-for="(i, index) in benefits" :key="index" :benefit="i" v-on:changeBenefit="mutateBenefits({index, value: $event})"/>
+    <ui-autocomplete v-for="(i, index) in benefits" :key="index" :benefit="i" :items="items" v-on:changeBenefit="mutateBenefits({index, value: $event})" :autocompleteInputStyleObject="autocompleteInputStyleObject" :autocompleteResultsStyleObject="autocompleteResultsStyleObject"/>
 </div>
 </template>
 
@@ -13,7 +13,53 @@ const { mapState, mapMutations } = createNamespacedHelpers('benefitSheet')
 
 export default {
 	name: 'SectionBenefits',
-	components: { UiAutocomplete },
+    components: { UiAutocomplete },
+    data() {
+        return {
+			items: [
+                'Protection from Damage, Loss, Theft',
+                'Advanced Setup',
+                'Better Battery',
+                'Better Camera',
+                'Bigger Screen',
+                'Higher Resolution',
+                'Wireless Charging',
+                'Vehicle Safety Service',
+                'Vehicle Diagnostics',
+                'Emergency Car Service',
+                'Fantastic Customer Service',
+                'Best Network Performance (RootMetrics)',
+                'Most Reliable Network (RootMetrics)',
+                'Unlimited Talk',
+                'Unlimited Text',
+                'Unlimited Data',
+                '15GB High Speed Hotspot',
+                '20GB High Speed Hotspot',
+                'Keep Your Same Phone Number',
+                'International Calling',
+                'Disney+, Hulu, ESPN+',
+                "Block Robocalls",
+                "Wifi Security",
+                "VPN",
+                "Overnight Shipping",
+                "Same-day Repair",
+                "$29 Screen Repair",
+                "$10 Screen Protector Replacements",
+                "Consistent Bill"
+            ],
+            autocompleteInputStyleObject: {
+                'width': '80%',
+                'border-bottom': '1px solid black',
+                'background-color': 'silver',
+                'font-size': '16px',
+                'color': 'black'
+            },
+            autocompleteResultsStyleObject: {
+                'left': '10%',
+                'width': '80%'
+            }
+        }
+    },
 	computed: {
 		...mapState([
 			'benefits'
