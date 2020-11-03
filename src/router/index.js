@@ -8,7 +8,6 @@ import PageBenefitSheet from '../components/pages/PageBenefitSheet'
 import PageOptions from '../components/pages/PageOptions'
 import PageConsumerOption from '../components/pages/PageOptions/PageConsumerOption'
 import PageBusinessOption from '../components/pages/PageOptions/PageBusinessOption'
-import PageAdmin from '../components/pages/PageAdmin'
 import PageChangelog from '../components/pages/PageChangelog'
 import PageLogin from '../components/pages/PageLogin'
 import PageResetPassword from '../components/pages/PageResetPassword'
@@ -31,21 +30,15 @@ const routes = [
 				path: 'consumer/:vuexModule',
 				name: 'PageConsumerOption',
 				component: PageConsumerOption,
-				// meta: { requiresAuth: true }
+				meta: { requiresAuth: true },
 			},
 			{
 				path: 'business/:vuexModule',
 				name: 'PageBusinessOption',
 				component: PageBusinessOption,
-				// meta: { requiresAuth: true }
+				meta: { requiresAuth: true },
 			}
 		]
-	},
-	{
-		path: '/admin',
-		name: 'PageAdmin',
-		component: PageAdmin,
-		meta: { requiresAuth: true }
 	},
 	{
 		path: '/changelog',
