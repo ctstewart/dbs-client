@@ -21,7 +21,7 @@ import { mapMutations } from 'vuex'
 import InputField from '@/components/ui/InputField'
 
 export default {
-	name: 'LoginForm',
+	name: 'PageResetPassword',
 	components: { InputField },
 	data: function () {
 		return {
