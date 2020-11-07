@@ -11,6 +11,7 @@ import PageBusinessOption from '../components/pages/PageOptions/PageBusinessOpti
 import PageChangelog from '../components/pages/PageChangelog'
 import PageLogin from '../components/pages/PageLogin'
 import PageResetPassword from '../components/pages/PageResetPassword'
+import PageUpdatePassword from '../components/pages/PageUpdatePassword'
 
 Vue.use(VueRouter)
 
@@ -47,6 +48,12 @@ const routes = [
 		meta: { requiresAuth: true }
 	},
 	{
+		path: '/updatePassword',
+		name: 'PageUpdatePassword',
+		component: PageUpdatePassword,
+		meta: { requiresAuth: true }
+	},
+	{
 		path: '/login',
 		name: 'PageLogin',
 		component: PageLogin,
@@ -57,7 +64,7 @@ const routes = [
 		name: 'PageResetPassword',
 		component: PageResetPassword,
 		meta: { requiresAuth: false },
-	}
+	},
 ]
 
 const router = new VueRouter({
