@@ -52,12 +52,15 @@ export default {
             }
 		}
 	},
-	async mounted() {
+	async created() {
 		try {
 			const response = await axios({
 				method: 'get',
 				url: `${process.env.VUE_APP_API_URL}/api/v1/devices`,
-				withCredentials: true
+				withCredentials: true,
+				params: {
+					limit: 1000
+				}
 			})
 
 			this.devices = response.data.data
@@ -65,8 +68,6 @@ export default {
 			response.data.data.forEach(i => {
 				this.items.push(i.name)
 			})
-
-			console.log(this.items)
 
 			this.loading = false
 		} catch (err) {
