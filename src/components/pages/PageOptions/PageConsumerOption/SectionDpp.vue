@@ -15,7 +15,7 @@
 		</div>
 		<div class="addDpp"><i class="fas fa-plus-circle" @click="addDppValue"></i></div>
 	</div>
-	<div class="dppColumn"></div>
+	<div class="dppColumn">WIP</div>
 </div>
 </template>
 
