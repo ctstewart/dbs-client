@@ -1,16 +1,16 @@
 <template>
 <div class="main pullthru">
 	<div class="pullthruColumn">
-		<div v-for="(i, index) in connectedDevices.slice(0,5)" :key="i.id">
-			<p id="textAlignRight">{{i.id}}:</p>
+		<div v-for="(i, index) in connectedDevices.slice(0,6)" :key="i.id">
+			<p id="textAlignRight">{{i.name}}:</p>
 			<i class="fa fa-minus-circle fa-lg" aria-hidden="true" @click="decrementConnectedDevice(index)"></i>
 			<p>{{i.numberOfDevices}}</p>
 			<i class="fa fa-plus-circle fa-lg" aria-hidden="true" @click="incrementConnectedDevice(index)"></i>
 		</div>
 	</div>
 	<div class="pullthruColumn">
-		<div v-for="(i, index) in connectedDevices.slice(5,9)" :key="i.id">
-			<p id="textAlignRight">{{i.id}}:</p>
+		<div v-for="(i, index) in connectedDevices.slice(6,11)" :key="i.id">
+			<p id="textAlignRight">{{i.name}}:</p>
 			<i class="fa fa-minus-circle fa-lg" aria-hidden="true" @click="decrementConnectedDevice(index + 5)"></i>
 			<p>{{i.numberOfDevices}}</p>
 			<i class="fa fa-plus-circle fa-lg" aria-hidden="true" @click="incrementConnectedDevice(index + 5)"></i>
@@ -62,7 +62,7 @@ export default {
 	margin: 0px 10px;
 	padding: 10px;
 	border-radius: 5%;
-	grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+	grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
 	align-items: center;
 
 	div {

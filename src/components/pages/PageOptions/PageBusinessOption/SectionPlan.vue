@@ -11,12 +11,13 @@
     <div class="group-container two-column-width">
         <p class="group-container-label">Number of Phones</p>
         <div class="group-container-main four-columns">
-            <input-dropdown v-for="(plan, index) in plans" :key="plan.id" v-bind="{inputType: 'numberInput', label: plan.id, value: plan.numberOfPhones}" v-on:value-changed="setPlans({index, value: parseInt($event)})"/>
+            <input-dropdown v-for="(plan, index) in plans" :key="plan.id" v-bind="{inputType: 'numberInput', label: plan.name, value: plan.numberOfPhones}" v-on:value-changed="setPlans({index, value: parseInt($event)})"/>
         </div>
     </div>
     <div class="group-container">
         <p class="group-container-label">Discount</p>
-        <div class="group-container-main one-column">
+        <div class="group-container-main two-columns">
+            <input-switch v-bind="{label: 'Autopay', value: autopay}" v-on:toggle="mutate({ property: 'autopay', with: !autopay })"/>
             <input-switch v-bind="{label: 'Military Discount', value: militaryDiscount.isActive}" v-on:toggle="toggleMilitaryDiscount"/>
         </div>
     </div>
@@ -49,7 +50,10 @@ export default {
 		...mapState({
 			plans (state) {
 				return state['business'][this.$route.params.vuexModule].plans
-			},
+            },
+            autopay (state) {
+				return state['business'][this.$route.params.vuexModule].autopay
+            },
 			militaryDiscount (state) {
 				return state['business'][this.$route.params.vuexModule].militaryDiscount
 			},
@@ -97,7 +101,7 @@ export default {
     padding: 3%;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 10% 1fr 1fr 1fr;
+    grid-template-rows: 10% 2fr 1fr 1fr;
 
     .group-container {
         display: flex;
