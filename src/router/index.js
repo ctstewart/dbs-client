@@ -73,28 +73,41 @@ const router = new VueRouter({
 
 router.beforeEach(async (to, from, next) => {
 	if (to.meta.requiresAuth) {
-		try {
-			const response = await axios({
-				method: 'get',
-				url: `${process.env.VUE_APP_API_URL}/api/v1/auth/me`,
-				withCredentials: true,
-			})
+		let userInfoExists = true
 
-			if (!response || !response.data.success) {
-				if (from.path === '/login') {
-					next(false)
-				} else {
-					router.push('/login')
-					next()
-				}
+		for (let key in store.state.userInfo) {
+			if (store.state.userInfo[key] === "") {
+				userInfoExists = false
+				break
 			}
+		}
 
-			store.commit('mutate', { property: 'userInfo', with: response.data.data })
+		if (!userInfoExists) {
+			try {
+				const response = await axios({
+					method: 'get',
+					url: `${process.env.VUE_APP_API_URL}/api/v1/auth/me`,
+					withCredentials: true,
+				})
 
-			next()
-		} catch (err) {
-			console.error(err)
-			router.push('/login')
+				if (!response || !response.data.success) {
+					if (from.path === '/login') {
+						next(false)
+					} else {
+						router.push('/login')
+						next()
+					}
+				}
+
+				store.commit('mutate', { property: 'userInfo', with: response.data.data })
+
+				next()
+			} catch (err) {
+				console.error(err)
+				router.push('/login')
+				next()
+			}
+		} else {
 			next()
 		}
 	} else {
