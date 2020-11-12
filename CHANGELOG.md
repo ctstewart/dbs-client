@@ -4,6 +4,29 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.0.1] - 2020-11-12
+### Fixed
+- Pull thru devices on Business plans weren't editing the correct values
+
+## [3.0.0] - 2020-11-10
+### Added
+- Added devices to the database
+	- There is now a dropdown list of devices to the DPP section
+	- When you choose a device, it populates the DPP with the full retail divided by 24 months
+	- You can still add DPP manually, either by leaving the device input blank, or choosing the "Manual" option
+	- **Admins can edit devices from the admin panel. I am unable to stay on top of any changes by myself, so please make sure to update whenever changes are made to the Pricing and Ordering Sheet**
+
+### Changed
+- Changed servers
+	- Benefits
+		- Better scalability
+		- Better security
+		- More adaptable to future needs
+		- More control
+	- Please let me know if you notice any performance issues
+- The admin panel is now an entirely separate app
+	- This will help with performance, as well as help me maintain the project
+
 ## [2.8.0] - 2020-10-02
 ### Added
 - Added the option to pull last month's usage csv in the admin panel
