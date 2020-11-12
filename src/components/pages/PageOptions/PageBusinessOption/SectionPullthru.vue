@@ -11,9 +11,9 @@
 	<div class="pullthruColumn">
 		<div v-for="(i, index) in connectedDevices.slice(6,11)" :key="i.id">
 			<p id="textAlignRight">{{i.name}}:</p>
-			<i class="fa fa-minus-circle fa-lg" aria-hidden="true" @click="decrementConnectedDevice(index + 5)"></i>
+			<i class="fa fa-minus-circle fa-lg" aria-hidden="true" @click="decrementConnectedDevice(index + 6)"></i>
 			<p>{{i.numberOfDevices}}</p>
-			<i class="fa fa-plus-circle fa-lg" aria-hidden="true" @click="incrementConnectedDevice(index + 5)"></i>
+			<i class="fa fa-plus-circle fa-lg" aria-hidden="true" @click="incrementConnectedDevice(index + 6)"></i>
 		</div>
 	</div>
 </div>
