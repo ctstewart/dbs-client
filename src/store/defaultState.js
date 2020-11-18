@@ -5,8 +5,7 @@ const state = () => {
 			email: "",
 			firstName: "",
 			lastName: "",
-			role: ""
-			// hasSeenNewChanges: true
+			role: "",
 		},
 		optionsType: {
 			optionOne: "consumer",
