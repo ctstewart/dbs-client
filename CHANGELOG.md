@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.0.3] - [TBD]
+### Fixed
+- It seems that many of the upgrades that were done broke compatibility for older browsers. **I am working on a fix.** For now, if a browser seems to not be working, please try to use a different browser (Chrome and newer versions of Edge usually work the best).
+
+## [3.0.2] - 2020-11-18
+### Fixed
+- Many users were running into traffic-related issues
+	- To fix this, instead of updating devices every time a user navigates to the DPP page, the site will now save the list of devices in the state
+	- The benefit is that users will be ***far*** less likely to run into traffic-related issues
+	- The downside is that **users will now need to logout and login in order to see updated device pricing**
+	- Users are forced to log in at least once a day, so this shouldn't be much of an issue
+
 ## [3.0.1] - 2020-11-12
 ### Fixed
 - Pull thru devices on Business plans weren't editing the correct values
