@@ -35,7 +35,6 @@ export default {
 			items: [
 				'Manual'
 			],
-			devices: [],
 			componentKey: 0,
             autocompleteInputStyleObject: {
                 'width': '100%',
@@ -53,28 +52,37 @@ export default {
 		}
 	},
 	async created() {
-		try {
-			const response = await axios({
-				method: 'get',
-				url: `${process.env.VUE_APP_API_URL}/api/v1/devices`,
-				withCredentials: true,
-				params: {
-					limit: 1000
+		console.log(this.devices.length);
+		if (this.devices.length == 0) {
+			try {
+				const response = await axios({
+					method: 'get',
+					url: `${process.env.VUE_APP_API_URL}/api/v1/devices`,
+					withCredentials: true,
+					params: {
+						limit: 1000
+					}
+				})
+
+				this.mutateDevices(response.data.data)
+
+				response.data.data.forEach(i => {
+					this.items.push(i.name)
+				})
+
+				this.loading = false
+			} catch (err) {
+				console.error(err)
+				if (err.response.status === 401) {
+					this.$router.push('/login')
 				}
-			})
-
-			this.devices = response.data.data
-
-			response.data.data.forEach(i => {
+			}
+		} else {
+			this.devices.forEach(i => {
 				this.items.push(i.name)
 			})
 
 			this.loading = false
-		} catch (err) {
-			console.error(err)
-			if (err.response.status === 401) {
-				this.$router.push('/login')
-			}
 		}
 	},
 	computed: {
@@ -82,6 +90,9 @@ export default {
 			dppValues (state) {
 				return state['consumer'][this.$route.params.vuexModule].dppValues
 			},
+			devices (state) {
+				return state.devices
+			}
 		})
 	},
 	methods: {
@@ -101,6 +112,9 @@ export default {
 			removeDppValue (commit, payload) {
 				this.componentKey += 1
 				return commit(`consumer/${this.$route.params.vuexModule}/removeDppValue`, payload)
+			},
+			mutateDevices (commit, devices) {
+				return commit('mutate', { property: 'devices', with: devices })
 			}
 		}),
 		updateDppValues(index, deviceName) {

@@ -10,7 +10,8 @@ const state = () => {
 		optionsType: {
 			optionOne: "consumer",
 			optionTwo: "consumer"
-		}
+		},
+		devices: []
 	};
 };
 
