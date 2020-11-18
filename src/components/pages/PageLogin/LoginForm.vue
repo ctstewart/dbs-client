@@ -37,7 +37,7 @@ export default {
 		]),
 		async loginUser () {
 			try {
-				const response = await axios({
+				await axios({
 					method: "post",
 					url: `${process.env.VUE_APP_API_URL}/api/v1/auth/login`,
 					withCredentials: true,
@@ -47,24 +47,26 @@ export default {
 					},
 				})
 
-				if (response.data.forceNewPassword) {
+				const response = await axios({
+					method: 'get',
+					url: `${process.env.VUE_APP_API_URL}/api/v1/auth/me`,
+					withCredentials: true
+				})
+
+				const userInfo = response.data.data
+
+				if (userInfo.forceNewPassword) {
 					this.errorText = 'Please create a new password'
 					setTimeout(() => {
 						this.errorText = ''
-						this.$router.push(`/resetPassword/${response.data.token}`)
+						this.$router.push(`/updatePassword`)
 					}, 3000)
 				} else {
-					const userInfo = await axios({
-						method: 'get',
-						url: `${process.env.VUE_APP_API_URL}/api/v1/auth/me`,
-						withCredentials: true
-					})
-
-					this.mutate({ property: 'userInfo', with: userInfo.data.data })
+					this.mutate({ property: 'userInfo', with: userInfo })
 					this.$router.push('/')
 				}
 			} catch (err) {
-				this.errorText = 'Incorrect username or password'
+				this.errorText = err.response.data.error
 				setTimeout(() => {
 					this.errorText = ''
 				}, 2000)
