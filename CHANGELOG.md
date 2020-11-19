@@ -6,7 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [3.0.3] - [TBD]
 ### Fixed
-- It seems that many of the upgrades that were done broke compatibility for older browsers. **I am working on a fix.** For now, if a browser seems to not be working, please try to use a different browser (Chrome and newer versions of Edge usually work the best).
+- It turns out that many users were putting in their emails with capital letters. This was causing the site to reject the credentials. This has now been fixed by converting the entire email to lowercase before authenticating the user
+- The military discount on Business accounts has giving twice the correct amount. This is now fixed
 
 ## [3.0.2] - 2020-11-18
 ### Fixed
