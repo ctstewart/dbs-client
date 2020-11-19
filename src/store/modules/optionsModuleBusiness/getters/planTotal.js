@@ -25,8 +25,6 @@ const planTotal = (state, getters) => {
 
 
 	state.plans.forEach(plan => {
-		totalNumberOfPhones += plan.numberOfPhones
-
 		if (plan.id === 'start2020' || plan.id === 'plus2020' || plan.id === 'pro2020') {
 			if (totalNumberOfPhonesOn2020Unlimited > 0) {
 				if (state.autopay) {
