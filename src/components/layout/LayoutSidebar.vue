@@ -43,7 +43,7 @@ DEALINGS IN THE SOFTWARE.
 		<a href="/admin" v-if="$store.state.userInfo.role === 'admin' || $store.state.userInfo.role === 'superadmin'"><i class="fas fa-users-cog"></i>Admin Panel</a>
 		<router-link to="/changelog">
 			<span class="navbar-link"><i class="fas fa-clipboard"></i>Changelog</span>
-			<span v-if="!$store.state.userInfo.hasSeenNewChanges" class="new-changes">
+			<span v-if="newChangesAlert" class="new-changes">
 				<i class="fas fa-exclamation-triangle"></i>
 				<span class="new-changes-text">New Changes!</span>
 			</span>
@@ -61,10 +61,25 @@ import { mapState, mapActions } from 'vuex'
 
 export default {
 	name: 'LayoutSidebar',
+	data () {
+		return {
+			newChangesAlert: true
+		}
+	},
+	created() {
+		const newChangesDate = new Date(this.newChangesDate)
+		const today = new Date()
+
+		const timeApart = today.getTime() - newChangesDate.getTime()
+		const daysApart = timeApart / (1000 * 3600 * 24)
+
+		if (daysApart > 3) this.newChangesAlert = false
+	},
 	computed: {
 		...mapState([
 			'userInfo',
-			'webappVersion'
+			'webappVersion',
+			'newChangesDate'
 		])
 	},
 	methods: {
