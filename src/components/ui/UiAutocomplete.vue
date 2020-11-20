@@ -132,7 +132,7 @@ export default {
 
 		@media print {
 			font-size: 18px;
-			background-color: lightgray;
+			background-color: lightgray !important;
 		}
 
 		&:focus {
