@@ -11,7 +11,8 @@
 		>
 			<option value="Unlimited">Unlimited</option>
 			<option v-for="i in plans5GB10GB" :key="i.id" :value="i.id">{{i.name}}</option>
-			<option value="Loyalty 55+">Loyalty 55+</option>
+			<option value="loyalty55MixAndMatch2020">Loyalty 55+ Mix and Match</option>
+			<option value="Loyalty 55+">Loyalty 55+ (Old)</option>
 			<option value="Loyalty Go">Loyalty Go</option>
 			<option v-for="i in oldUnlimitedPlans" :key="i.id" :value="i.id">{{i.id}}</option>
 			<option v-for="i in tieredPlans" :key="i.id" :value="i.id">{{i.id}}</option>

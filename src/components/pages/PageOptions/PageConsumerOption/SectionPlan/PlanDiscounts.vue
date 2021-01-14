@@ -5,13 +5,13 @@
 		<input-switch v-bind="{label: 'Military Discount (after 8/5/19)', value: militaryNew}" v-on:toggle="toggle('militaryNew')"/>
 		<input-switch v-bind="{label: 'Military Discount (before 8/5/19)', value: militaryOld}" v-on:toggle="toggle('militaryOld')"/>
 	</div>
-	<input-switch v-else-if="!ifLoyalty55OrLoyaltyGo" v-bind="{label: 'Military Discount', value: militaryNew}" v-on:toggle="toggle('militaryNew')"/>
+	<input-switch v-else-if="!ifLoyalty55OrLoyaltyGo && !ifLoyalty55MixAndMatch2020" v-bind="{label: 'Military Discount', value: militaryNew}" v-on:toggle="toggle('militaryNew')"/>
 	<div v-if="isUnlimited" class="two-rows">
 		<input-switch v-bind="{label: 'First Responder Discount (after 8/5/19)', value: responderNew}" v-on:toggle="toggle('responderNew')"/>
 		<input-switch v-bind="{label: 'First Responder Discount (before 8/5/19)', value: responderOld}" v-on:toggle="toggle('responderOld')"/>
 	</div>
-	<input-switch v-else-if="!ifLoyalty55OrLoyaltyGo && !if110UnlimitedOr65Unlimited" v-bind="{label: 'First Responder Discount', value: responderNew}" v-on:toggle="toggle('responderNew')"/>
-	<input-dropdown v-if="!ifLoyalty55OrLoyaltyGo" v-bind="{inputType: 'numberDropdown', label: 'Other Discount %', value: discount, range: 31}" v-on:value-changed="mutate({property: 'discount', with: $event})"/>
+	<input-switch v-else-if="!ifLoyalty55OrLoyaltyGo && !if110UnlimitedOr65Unlimited && !ifLoyalty55MixAndMatch2020" v-bind="{label: 'First Responder Discount', value: responderNew}" v-on:toggle="toggle('responderNew')"/>
+	<input-dropdown v-if="!ifLoyalty55OrLoyaltyGo && !ifLoyalty55MixAndMatch2020" v-bind="{inputType: 'numberDropdown', label: 'Other Discount %', value: discount, range: 31}" v-on:value-changed="mutate({property: 'discount', with: $event})"/>
 </div>
 </template>
 
@@ -51,6 +51,9 @@ export default {
 				return getters[`consumer/${this.$route.params.vuexModule}/isUnlimited`]
 			}
 		}),
+		ifLoyalty55MixAndMatch2020 () {
+			return this.chosenPlan === 'loyalty55MixAndMatch2020'
+		},
 		ifLoyalty55OrLoyaltyGo () {
 			return (this.chosenPlan === 'Loyalty 55+' || this.chosenPlan === 'Loyalty Go')
 		},

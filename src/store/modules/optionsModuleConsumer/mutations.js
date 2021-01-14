@@ -12,6 +12,10 @@ const setMixAndMatchPlans = (state, payload) => {
 	state.mixAndMatchPlans.plans[payload.index].numberOfPhones = payload.value
 }
 
+const setLoyalty55MixAndMatch2020Plans = (state, payload) => {
+	state.loyalty55MixAndMatch2020.plans[payload.index].numberOfPhones = payload.value
+}
+
 const incrementConnectedDevice = (state, id) => {
 	const findId = (i) => i.id === id
 	const index = state.connectedDevices.findIndex(findId)
@@ -60,6 +64,7 @@ const mutations = {
 	mutate,
 	toggle,
 	setMixAndMatchPlans,
+	setLoyalty55MixAndMatch2020Plans,
 	incrementConnectedDevice,
 	decrementConnectedDevice,
 	mutateDeviceName,

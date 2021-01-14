@@ -2,6 +2,7 @@ const connectedDeviceMath = ({
 	chosenPlan,
 	isUnlimited,
 	mixAndMatchPlansArray,
+	loyalty55MixAndMatchplansArray,
 	connectedDevicesArray,
 	oldUnlimitedPlansArray,
 	tieredPlansArray,
@@ -98,6 +99,62 @@ const connectedDeviceMath = ({
 		if (militaryNew || militaryOld) {
 			localTotal = localTotal * 0.85
 		}
+	}
+
+	if (chosenPlan === 'loyalty55MixAndMatch2020') {
+		let cdArray = JSON.parse(JSON.stringify(connectedDevicesArray))
+
+		function compare(a, b) {
+			const x = a.unlimited
+			const y = b.unlimited
+
+			let comparison = 0
+			if (x > y) {
+				comparison = -1
+			} else if (x < y) {
+				comparison = 1
+			}
+			return comparison
+		}
+
+		cdArray.sort(compare)
+
+		numberOfDoMoreAndGetMorePhones = 0
+		loyalty55MixAndMatchplansArray.forEach((mixAndMatchPlan) => {
+			if (mixAndMatchPlan.id === 'Do More' || mixAndMatchPlan.id === 'Get More') {
+				numberOfDoMoreAndGetMorePhones += mixAndMatchPlan.numberOfPhones
+			}
+		})
+
+		// console.log(`Number of Do More and Get More phones is ${numberOfDoMoreAndGetMorePhones}`)
+
+		cdArray.forEach(i => {
+			if (i.halfOffEligible3 === true && numberOfDoMoreAndGetMorePhones > 0 && i.value > 0) {
+				let numberOfDevices = i.value
+				if (numberOfDoMoreAndGetMorePhones > i.value) {
+					// console.log(`This is taking ${i.value * i.unlimited * 0.5} off of a ${i.id}`)
+					halfOffTotal += i.value * i.unlimited * 0.5
+					i.value = 0
+					numberOfDoMoreAndGetMorePhones -= numberOfDevices
+				} else if (numberOfDoMoreAndGetMorePhones <= i.value) {
+					// console.log(`This is taking ${numberOfDoMoreAndGetMorePhones * i.unlimited * 0.5} off of a ${i.id}`)
+					halfOffTotal += numberOfDoMoreAndGetMorePhones * i.unlimited * 0.5
+					i.value -= numberOfDoMoreAndGetMorePhones
+					numberOfDoMoreAndGetMorePhones -= numberOfDevices
+				}
+				// console.log(`The number of discounts left is ${numberOfDoMoreAndGetMorePhones}`)
+			}
+		})
+
+		localTotal -= halfOffTotal
+
+		// console.log('-----------------------------------------------------')
+
+		// Multiplies the number of connected devices by the plan cost and adds it to the localTotal variable
+		connectedDevicesArray.forEach((connectedDevice) => {
+			localTotal = localTotal + (connectedDevice.unlimited * connectedDevice.value)
+		})
+
 	}
 
 	if (chosenPlan === 'Loyalty 55+' || chosenPlan === 'Loyalty Go') {

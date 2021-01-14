@@ -7,6 +7,14 @@
 			v-on:value-changed="setMixAndMatchPlans({index, value: parseInt($event)})"
 		/>
 	</div>
+	<div v-else-if="chosenPlan === 'loyalty55MixAndMatch2020'" class='number-of-phones-loyalty-2020-unlimited'>
+		<input-dropdown
+			v-for="(plan, index) in loyalty55MixAndMatch2020NumberOfPhonesAndId"
+			:key="plan.id"
+			v-bind="{inputType: 'numberDropdown', label: plan.id, value: plan.numberOfPhones, range: 11}"
+			v-on:value-changed="setLoyalty55MixAndMatch2020Plans({index, value: parseInt($event)})"
+		/>
+	</div>
 	<div v-else-if="chosenPlan === 'Loyalty 55+'" class="number-of-phones-not-unlimited">
 		<input-dropdown
 			v-bind="{inputType: 'numberDropdown', label: 'Number of Phones', value: numberOfPhonesTieredAndOldUnlimited, range: 5}"
@@ -57,6 +65,11 @@ export default {
 				return getters[
 					`consumer/${this.$route.params.vuexModule}/mixAndMatchNumberOfPhonesAndId`
 				];
+			},
+			loyalty55MixAndMatch2020NumberOfPhonesAndId(state, getters) {
+				return getters[
+					`consumer/${this.$route.params.vuexModule}/loyalty55MixAndMatch2020NumberOfPhonesAndId`
+				];
 			}
 		})
 	},
@@ -66,13 +79,19 @@ export default {
 				return commit(
 					`consumer/${this.$route.params.vuexModule}/mutate`,
 					payload
-				);
+				)
 			},
 			setMixAndMatchPlans(commit, payload) {
 				return commit(
 					`consumer/${this.$route.params.vuexModule}/setMixAndMatchPlans`,
 					payload
-				);
+				)
+			},
+			setLoyalty55MixAndMatch2020Plans(commit, payload) {
+				return commit(
+					`consumer/${this.$route.params.vuexModule}/setLoyalty55MixAndMatch2020Plans`,
+					payload
+				)
 			}
 		})
 	}
@@ -81,7 +100,8 @@ export default {
 
 <style lang="less" scoped>
 .number-of-phones-unlimited,
-.number-of-phones-not-unlimited {
+.number-of-phones-not-unlimited,
+.number-of-phones-loyalty-2020-unlimited {
 	border: 1px solid white;
 	border-radius: 10px;
 	display: grid;
@@ -95,6 +115,11 @@ export default {
 	div:nth-child(7n) {
 		grid-row-end: span 2;
 	}
+}
+
+.number-of-phones-loyalty-2020-unlimited {
+	grid-template-columns: repeat(4, 1fr);
+	font-size: 14px;
 }
 
 .number-of-phones-not-unlimited {
