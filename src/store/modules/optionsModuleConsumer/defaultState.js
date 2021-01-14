@@ -245,7 +245,8 @@ const defaultState = () => {
 			{ id: "HumX", tiered: 15, unlimited: 20, value: 0, halfOffEligible3: true, halfOffEligible2: false },
 			{ id: "Homephone", tiered: 20, unlimited: 20, value: 0, halfOffEligible3: false, halfOffEligible2: false },
 			{ id: "Gizmo (grandfathered)", tiered: 5, unlimited: 5, value: 0, halfOffEligible3: false, halfOffEligible2: false },
-			{ id: "Smartwatch/Gizmo", tiered: 10, unlimited: 10, value: 0, halfOffEligible3: true, halfOffEligible2: false },
+			{ id: "Smartwatch", tiered: 10, unlimited: 10, value: 0, halfOffEligible3: true, halfOffEligible2: false },
+			{ id: "Gizmo", tiered: 10, unlimited: 10, value: 0, halfOffEligible3: false, halfOffEligible2: false },
 			{ id: "Arlo", tiered: 10, unlimited: 20, value: 0, halfOffEligible3: false, halfOffEligible2: false }
 		],
 		autopay: false,
