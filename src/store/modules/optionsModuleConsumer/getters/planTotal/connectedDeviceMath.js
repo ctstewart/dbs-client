@@ -2,7 +2,7 @@ const connectedDeviceMath = ({
 	chosenPlan,
 	isUnlimited,
 	mixAndMatchPlansArray,
-	loyalty55MixAndMatchplansArray,
+	loyalty55MixAndMatch2020PlansArray,
 	connectedDevicesArray,
 	oldUnlimitedPlansArray,
 	tieredPlansArray,
@@ -119,8 +119,8 @@ const connectedDeviceMath = ({
 
 		cdArray.sort(compare)
 
-		numberOfDoMoreAndGetMorePhones = 0
-		loyalty55MixAndMatchplansArray.forEach((mixAndMatchPlan) => {
+		let numberOfDoMoreAndGetMorePhones = 0
+		loyalty55MixAndMatch2020PlansArray.forEach((mixAndMatchPlan) => {
 			if (mixAndMatchPlan.id === 'Do More' || mixAndMatchPlan.id === 'Get More') {
 				numberOfDoMoreAndGetMorePhones += mixAndMatchPlan.numberOfPhones
 			}
@@ -128,6 +128,7 @@ const connectedDeviceMath = ({
 
 		// console.log(`Number of Do More and Get More phones is ${numberOfDoMoreAndGetMorePhones}`)
 
+		let halfOffTotal = 0
 		cdArray.forEach(i => {
 			if (i.halfOffEligible3 === true && numberOfDoMoreAndGetMorePhones > 0 && i.value > 0) {
 				let numberOfDevices = i.value

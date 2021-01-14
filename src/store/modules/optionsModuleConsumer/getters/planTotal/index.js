@@ -3,7 +3,7 @@ import plans5GB10GBMath from './plans5GB10GBMath'
 import oldUnlimitedAndTieredPlanMath from './oldUnlimitedAndTieredPlanMath'
 import loyalty55PlanMath from './loyalty55PlanMath'
 import loyaltyGoPlanMath from './loyaltyGoPlanMath'
-import loyalty55MixAndMatch2020 from './loyalty55MixAndMatch2020PlanMath'
+import loyalty55MixAndMatch2020PlanMath from './loyalty55MixAndMatch2020PlanMath'
 import connectedDeviceMath from './connectedDeviceMath'
 
 const planTotal = (state, getters) => {
@@ -31,7 +31,7 @@ const planTotal = (state, getters) => {
 			'discount': state.loyalty55MixAndMatch2020.discount
 		}
 
-		localTotal += loyalty55MixAndMatch2020(objectForMethod)
+		localTotal += loyalty55MixAndMatch2020PlanMath(objectForMethod)
 
 	} else if (state.chosenPlan === '5GB' || state.chosenPlan === '10GB') {
 		const objectForMethod = {
@@ -93,7 +93,7 @@ const planTotal = (state, getters) => {
 		'chosenPlan': state.chosenPlan,
 		'isUnlimited': getters.isUnlimited,
 		'mixAndMatchPlansArray': state.mixAndMatchPlans.plans,
-		'loyalty55MixAndMatchPlansArray': state.loyalty55MixAndMatch2020.plans,
+		'loyalty55MixAndMatch2020PlansArray': state.loyalty55MixAndMatch2020.plans,
 		'connectedDevicesArray': state.connectedDevices,
 		'oldUnlimitedPlansArray': state.oldUnlimitedPlans,
 		'tieredPlansArray': state.tieredPlans,
