@@ -6,6 +6,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build --mode production",
     "build:dev": "vue-cli-service build --mode development",
+		"cp-to-prod": "cp .env.production.local dist ../prod-client -r",
     "lint": "vue-cli-service lint --fix",
     "test:unit": "vue-cli-service test:unit"
   },
