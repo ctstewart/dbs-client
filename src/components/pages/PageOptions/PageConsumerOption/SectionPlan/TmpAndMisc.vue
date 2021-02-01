@@ -5,6 +5,7 @@
 	<input-dropdown v-bind="{inputType: 'numberDropdown', label: '$30 Basic Phones', value: basic, range: 11}" v-on:value-changed="mutate({property: 'basic', with: $event})"/>
 	<input-dropdown v-bind="{inputType: 'numberDropdown', label: 'Number of Activation Fees', value: numberOfNewDevices, range: 11}" v-on:value-changed="mutate({property: 'numberOfNewDevices', with: $event})"/>
 	<input-dropdown v-bind="{inputType: 'numberInput', label: 'Other', value: otherCost}" v-on:value-changed="mutate({property: 'otherCost', with: $event})"/>
+	<input-switch v-bind="{label: 'LTE Home Internet', value: lteHomeInternet}" v-on:toggle="toggle('lteHomeInternet')"/>
 </div>
 </template>
 
@@ -12,10 +13,11 @@
 import { mapState, mapMutations } from 'vuex'
 
 import InputDropdown from '@/components/input/InputDropdown'
+import InputSwitch from '@/components/input/InputSwitch'
 
 export default {
 	name: 'TmpAndMisc',
-	components: { InputDropdown },
+	components: { InputDropdown, InputSwitch },
 	computed: {
 		...mapState({
 			tmp (state) {
@@ -32,13 +34,19 @@ export default {
 			},
 			otherCost (state) {
 				return state['consumer'][this.$route.params.vuexModule].otherCost
-			}
+			},
+			lteHomeInternet (state) {
+				return state['consumer'][this.$route.params.vuexModule].lteHomeInternet
+			},
 		})
 	},
 	methods: {
 		...mapMutations({
 			mutate (commit, payload) {
 				return commit(`consumer/${this.$route.params.vuexModule}/mutate`, payload)
+			},
+			toggle (commit, property) {
+				return commit(`consumer/${this.$route.params.vuexModule}/toggle`, property)
 			}
 		})
 	}
@@ -50,7 +58,7 @@ export default {
 	border: 1px solid white;
 	border-radius: 10px;
 	display: grid;
-	grid-template-columns: repeat(5, 1fr);
+	grid-template-columns: repeat(6, 1fr);
 	align-items: center;
 	justify-items: end;
 

@@ -254,6 +254,7 @@ const defaultState = () => {
 		militaryOld: false,
 		responderNew: false,
 		responderOld: false,
+		lteHomeInternet: false,
 		discount: 0,
 		numberOfPhonesTieredAndOldUnlimited: 0,
 		numberOfNewDevices: 0,

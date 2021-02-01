@@ -79,6 +79,14 @@ const planTotal = (state, getters) => {
 		localTotal += oldUnlimitedAndTieredPlanMath(objectForMethod)
 	}
 
+	if (state.lteHomeInternet) {
+		if (state.autopay) {
+			localTotal += 40
+		} else {
+			localTotal += 50
+		}
+	}
+
 	localTotal += state.twoyear * 20
 
 	if (state.militaryNew || state.militaryOld) {
