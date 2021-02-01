@@ -66,8 +66,9 @@ const defaultState = () => {
 			cost: 25
 		},
 		connectedDevices: [
-			{ id: 'tabletStart2020', name: 'Tablet Start', cost: 40, numberOfDevices: 0, qualifiesFor2020Discount: true },
-			{ id: 'tabletPro2020', name: 'Tablet Pro', cost: 60, numberOfDevices: 0, qualifiesFor2020Discount: true },
+			{ id: 'tabletStart2021', name: 'Tablet Start', cost: 40, numberOfDevices: 0, qualifiesFor2020Discount: false },
+			{ id: 'tabletPro2020', name: 'Tablet Pro', cost: 40, numberOfDevices: 0, qualifiesFor2020Discount: true },
+			{ id: 'tabletStart2020', name: 'Tablet Start (Old $40)', cost: 40, numberOfDevices: 0, qualifiesFor2020Discount: true },
 			{ id: 'tabletEssentialsPre2020', name: 'Tablet Essentials (Old)', cost: 30, numberOfDevices: 0 },
 			{ id: 'tabletPre2020', name: 'Tablet (Old)', cost: 45, numberOfDevices: 0 },
 			{ id: 'jetpack', name: 'Jetpack', cost: 45, numberOfDevices: 0 },

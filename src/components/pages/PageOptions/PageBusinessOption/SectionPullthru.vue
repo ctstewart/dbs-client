@@ -9,7 +9,7 @@
 		</div>
 	</div>
 	<div class="pullthruColumn">
-		<div v-for="(i, index) in connectedDevices.slice(6,11)" :key="i.id">
+		<div v-for="(i, index) in connectedDevices.slice(6,12)" :key="i.id">
 			<p id="textAlignRight">{{i.name}}:</p>
 			<i class="fa fa-minus-circle fa-lg" aria-hidden="true" @click="decrementConnectedDevice(index + 6)"></i>
 			<p>{{i.numberOfDevices}}</p>
