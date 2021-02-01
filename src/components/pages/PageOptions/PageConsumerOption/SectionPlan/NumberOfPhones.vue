@@ -11,7 +11,7 @@
 		<input-dropdown
 			v-for="(plan, index) in loyalty55MixAndMatch2020NumberOfPhonesAndId"
 			:key="plan.id"
-			v-bind="{inputType: 'numberDropdown', label: plan.id, value: plan.numberOfPhones, range: 11}"
+			v-bind="{inputType: 'numberDropdown', label: plan.id, value: plan.numberOfPhones, range: 7}"
 			v-on:value-changed="setLoyalty55MixAndMatch2020Plans({index, value: parseInt($event)})"
 		/>
 	</div>
