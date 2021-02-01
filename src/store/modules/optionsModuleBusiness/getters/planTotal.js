@@ -57,7 +57,6 @@ const planTotal = (state, getters) => {
 		}
 	})
 
-	console.log(localTotal);
 	if (totalNumberOfProPhones >= totalNumberOfProTablets2020) {
 		localTotal -= totalNumberOfProTablets2020 * 30
 		totalNumberOfProPhones -= totalNumberOfProTablets2020
@@ -66,7 +65,6 @@ const planTotal = (state, getters) => {
 		totalNumberOfProPhones = 0
 	}
 
-	console.log(localTotal);
 	if (totalNumberOfProPhones >= totalNumberOfStartTablets2020) {
 		localTotal -= totalNumberOfStartTablets2020 * 20
 		totalNumberOfProPhones -= totalNumberOfStartTablets2020
@@ -74,7 +72,6 @@ const planTotal = (state, getters) => {
 		localTotal -= totalNumberOfProPhones * 20
 		totalNumberOfProPhones = 0
 	}
-	console.log(localTotal);
 
 	return localTotal
 }
