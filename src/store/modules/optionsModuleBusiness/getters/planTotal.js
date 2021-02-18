@@ -3,8 +3,7 @@ const planTotal = (state, getters) => {
 	let totalNumberOfPhones = 0
 	let totalNumberOfPhonesOn2020Unlimited = 0
 	let totalNumberOfProPhones = 0
-	let totalNumberOfStartTablets2020 = 0
-	let totalNumberOfProTablets2020 = 0
+	let totalNumberOfProTablets2021 = 0
 
 	state.plans.forEach(plan => {
 		totalNumberOfPhones += plan.numberOfPhones
@@ -14,7 +13,7 @@ const planTotal = (state, getters) => {
 		}
 
 		if (plan.id === 'pro2020') {
-			totalNumberOfProPhones += plan.numberOfPhones
+			totalNumberOfProPhones = plan.numberOfPhones
 		}
 	})
 
@@ -48,26 +47,19 @@ const planTotal = (state, getters) => {
 	state.connectedDevices.forEach(cd => {
 		localTotal += cd.numberOfDevices * cd.cost
 
-		if (cd.id === 'tabletStart2020') {
-			totalNumberOfStartTablets2020 += cd.numberOfDevices
-		}
+		console.log(cd);
 
-		if (cd.id === 'tabletPro2020') {
-			totalNumberOfProTablets2020 += cd.numberOfDevices
+		if (cd.id === 'tabletPro2021') {
+			totalNumberOfProTablets2021 += cd.numberOfDevices
 		}
 	})
 
-	if (totalNumberOfProPhones >= totalNumberOfProTablets2020) {
-		localTotal -= totalNumberOfProTablets2020 * 30
-		totalNumberOfProPhones -= totalNumberOfProTablets2020
-	} else {
-		localTotal -= totalNumberOfProPhones * 30
-		totalNumberOfProPhones = 0
-	}
+	console.log(totalNumberOfProPhones);
+	console.log(totalNumberOfProTablets2021);
 
-	if (totalNumberOfProPhones >= totalNumberOfStartTablets2020) {
-		localTotal -= totalNumberOfStartTablets2020 * 20
-		totalNumberOfProPhones -= totalNumberOfStartTablets2020
+	if (totalNumberOfProPhones >= totalNumberOfProTablets2021) {
+		localTotal -= totalNumberOfProTablets2021 * 20
+		totalNumberOfProPhones -= totalNumberOfProTablets2021
 	} else {
 		localTotal -= totalNumberOfProPhones * 20
 		totalNumberOfProPhones = 0
