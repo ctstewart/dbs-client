@@ -11,6 +11,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - The Business DPP Section now matches the consumer side
 
+### Fixed
+- Password reset should now be fixed
+
 ## [3.2.0] - 2020-02-01
 ### Added
 - Added the new Loyalty Mix and Match plans
