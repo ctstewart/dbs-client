@@ -81,8 +81,9 @@ const defaultState = () => {
 		numberOfNewDevices: 0,
 		tmp: 0,
 		autopay: false,
-		existingDPPValues: [],
-		existingCreditValues: []
+		dppValues: [
+			{ id: 'device-0', deviceName: '', dpp: 0, credits: 0 }
+		],
 	}
 }
 

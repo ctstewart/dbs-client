@@ -1,165 +1,215 @@
 <template>
-<div class="dpp">
-    <div class="dppColumn">
-        <span>DPP</span>
-        <div class="new-value">
-            <i class="fas fa-dollar-sign"></i>
-            <input v-model="addDpp" v-on:keyup.enter="addExistingDpp(+(addDpp * 100))">
-            <i class="fas fa-arrow-right" @click="addExistingDpp(+(addDpp * 100))"></i>
-        </div>
-        <div class="values">
-            <div v-for="(i, index) in existingDPPValues" :key="index" class="existing-values">
-                <div>{{index + 1}}: ${{ parseFloat(i / 100).toFixed(2) }}</div>
-                <i class="fas fa-minus-circle" @click="removeExistingDpp(index)"></i>
-            </div>
-        </div>
-    </div>
-    <div class="dppColumn">
-        <span>Monthly Credits</span>
-        <div class="new-value">
-            <i class="fas fa-dollar-sign"></i>
-            <input v-model="addCredit" v-on:keyup.enter="addExistingCredit(addCredit * 100)">
-            <i class="fas fa-arrow-right" @click="addExistingCredit(addCredit * 100)"></i>
-        </div>
-        <div class="values">
-            <div v-for="(i, index) in existingCreditValues" :key="index" class="existing-values">
-                <div>{{index + 1}}: ${{ parseFloat(i / 100).toFixed(2) }}</div>
-                <i class="fas fa-minus-circle" @click="removeExistingCredit(index)"></i>
-            </div>
-        </div>
-    </div>
+<div class="main dpp">
+	<div v-if="loading === false" class="dppColumn">
+		<div class="dppRow" v-for="(i, index) in dppValues" :key="i.id">
+			<div class="dropdown">
+				<ui-autocomplete :benefit="i.deviceName" :items="items" :autocompleteInputStyleObject="autocompleteInputStyleObject" :autocompleteResultsStyleObject="autocompleteResultsStyleObject" v-on:changeBenefit="updateDppValues(index, $event)"/>
+			</div>
+			<input v-if="i.deviceName === 'Manual' || i.deviceName === ''" :value="(i.dpp / 100).toFixed(2)"  @change="mutateDpp({index, value: parseFloat($event.target.value) * 100})" />
+			<div v-else class="dppAmount">{{ (i.dpp / 100).toFixed(2) }}</div>
+			<input class="creditAmount" :value="(i.credits / 100).toFixed(2)" @change="mutateCredits({index, value: parseFloat($event.target.value) * 100})" />
+			<i class="fas fa-minus-circle" @click="removeDppValue(index)"></i>
+			<div class="dppLabels">Device Name</div>
+			<div class="dppLabels">DPP</div>
+			<div class="dppLabels">Credits</div>
+		</div>
+		<div class="addDpp"><i class="fas fa-plus-circle" @click="addDppValue"></i></div>
+	</div>
+	<div class="dppColumn">WIP</div>
 </div>
 </template>
 
 <script>
+import axios from 'axios'
+
 import { mapState, mapMutations } from 'vuex'
+
+import UiAutocomplete from '@/components/ui/UiAutocomplete'
 
 export default {
 	name: 'SectionDpp',
-	data () {
+	components: { UiAutocomplete },
+	data() {
 		return {
-			addDpp: 0,
-			addCredit: 0
+			loading: true,
+			items: [
+				'Manual'
+			],
+			componentKey: 0,
+            autocompleteInputStyleObject: {
+                'width': '100%',
+				'height': '100%',
+                'border-bottom': '1px solid white',
+                'background-color': '#387A77',
+                'font-size': '12px',
+                'color': 'white'
+            },
+            autocompleteResultsStyleObject: {
+				'font-size': '14px',
+				'color': 'black',
+                'width': '100%'
+            }
+		}
+	},
+	async created() {
+		console.log(this.devices.length);
+		if (this.devices.length == 0) {
+			try {
+				const response = await axios({
+					method: 'get',
+					url: `${process.env.VUE_APP_API_URL}/api/v1/devices`,
+					withCredentials: true,
+					params: {
+						limit: 1000
+					}
+				})
+
+				this.mutateDevices(response.data.data)
+
+				response.data.data.forEach(i => {
+					this.items.push(i.name)
+				})
+
+				this.loading = false
+			} catch (err) {
+				console.error(err)
+				if (err.response.status === 401) {
+					this.$router.push('/login')
+				}
+			}
+		} else {
+			this.devices.forEach(i => {
+				this.items.push(i.name)
+			})
+
+			this.loading = false
 		}
 	},
 	computed: {
 		...mapState({
-			existingDPPValues (state) {
-				return state['business'][this.$route.params.vuexModule].existingDPPValues
+			dppValues (state) {
+				return state['business'][this.$route.params.vuexModule].dppValues
 			},
-			existingCreditValues (state) {
-				return state['business'][this.$route.params.vuexModule].existingCreditValues
+			devices (state) {
+				return state.devices
 			}
 		})
 	},
 	methods: {
 		...mapMutations({
-			addExistingDpp (commit, payload) {
-				this.addDpp = 0
-				return commit(`business/${this.$route.params.vuexModule}/addExistingDpp`, payload)
+			mutateDeviceName (commit, payload) {
+				return commit(`business/${this.$route.params.vuexModule}/mutateDeviceName`, payload)
 			},
-			removeExistingDpp (commit, payload) {
-				return commit(`business/${this.$route.params.vuexModule}/removeExistingDpp`, payload)
+			mutateDpp (commit, payload) {
+				return commit(`business/${this.$route.params.vuexModule}/mutateDpp`, payload)
 			},
-			addExistingCredit (commit, payload) {
-				this.addCredit = 0
-				return commit(`business/${this.$route.params.vuexModule}/addExistingCredit`, payload)
+			mutateCredits (commit, payload) {
+				return commit(`business/${this.$route.params.vuexModule}/mutateCredits`, payload)
 			},
-			removeExistingCredit (commit, payload) {
-				return commit(`business/${this.$route.params.vuexModule}/removeExistingCredit`, payload)
+			addDppValue (commit) {
+				return commit(`business/${this.$route.params.vuexModule}/addDppValue`)
+			},
+			removeDppValue (commit, payload) {
+				this.componentKey += 1
+				return commit(`business/${this.$route.params.vuexModule}/removeDppValue`, payload)
+			},
+			mutateDevices (commit, devices) {
+				return commit('mutate', { property: 'devices', with: devices })
 			}
-		})
+		}),
+		updateDppValues(index, deviceName) {
+			this.mutateDeviceName({ index, value: deviceName })
+
+			const device = this.devices.find(i => {
+				return i.name == deviceName
+			})
+
+			if (!device) {
+				this.mutateDpp({ index, value: 0 })
+			} else {
+				this.mutateDpp({ index, value: device.fullRetail / 24 })
+			}
+		}
 	}
 }
 </script>
 
-<style lang="less" scoped>
-.dpp {
-    background-color: #387A77;
-    margin: 0 1% 1% 1%;
-    border-radius: 0 5px 5px 5px;
-    text-align: center;
-    color: white;
-    padding: 3%;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-
-    .dppColumn {
-        display: flex;
-        flex-direction: column;
-        border: 1px solid white;
-        margin: 0px 10px;
-        padding: 10px;
-        border-radius: 5%;
-
-        > span {
-            text-decoration: underline;
-        }
-
-        > .new-value {
-            margin: .5rem 0 .75rem;
-            border: 1px solid white;
-            border-radius: 5px;
-            height: 2rem;
-            width: 12rem;
-            align-self: center;
-            position: relative;
-
-            > input {
-                // visibility: hidden;
-                background: none;
-                border: 0;
-                height: 1.5rem;
-                position: absolute;
-                left: 0;
-                margin: .25rem 1.5rem 0;
-                width: 8.5rem;
-                color: white;
-                font-size: 1rem;
-
-                &:focus {
-                    outline: none;
-                }
-            }
-
-            > i {
-                height: 1.5rem;
-                width: 1rem;
-                position: absolute;
-
-            }
-
-            > i.fa-arrow-right {
-                right: 0;
-                margin: .5rem .25rem 0 0;
-                cursor: pointer;
-            }
-
-            > i.fa-dollar-sign {
-                left: 0;
-                margin: .5rem 0 0 .25rem;
-            }
-        }
-
-        .values {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            // grid-auto-flow: column;
-
-            .existing-values {
-                margin: .5rem;
-                display: flex;
-
-                > div {
-                    margin-right: .5rem;
-                }
-
-                > i {
-                    cursor: pointer;
-                }
-            }
-        }
-    }
+<style scoped>
+.main {
+	background-color: #387A77;
+	margin: 0 1% 1% 1%;
+	border-radius: 0 5px 5px 5px;
+	text-align: center;
+	color: white;
+	padding: 3%;
 }
 
+.dpp {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+}
+
+.dppColumn {
+	margin: 0px 10px;
+	padding: 10px;
+	border: 1px solid white;
+	border-radius: 5%;
+	display: grid;
+	display: -ms-grid;
+	grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.dppRow {
+	display: grid;
+	display: -ms-grid;
+	grid-template-columns: 2fr 1fr 1fr 1fr;
+	grid-template-rows: 80% 20%;
+	-ms-grid-row-align: center;
+	-ms-grid-column-align: center;
+	place-items: center;
+	align-items: center;
+	justify-items: center;
+}
+
+.dppAmount {
+	width: 100%;
+}
+
+.dpp input {
+	font-family: inherit;
+	font-size: 16px;
+	padding: 0;
+	width: 100%;
+	border: none;
+	border-bottom: 1px solid white;
+	background-color: #387A77;
+	color: white;
+	-webkit-appearance: none;
+	border-radius: 0;
+	text-align: center;
+}
+
+.dpp input:focus {
+	outline: none;
+}
+
+.dppAmount, .creditAmount {
+	border-bottom: 1px solid white;
+}
+
+.dppLabels {
+	font-size: 10px;
+}
+
+i:hover {
+	cursor: pointer;
+}
+
+.addDpp {
+	height: 100%;
+	width: 100%;
+	display: grid;
+	align-content: center;
+	justify-content: center;
+}
 </style>

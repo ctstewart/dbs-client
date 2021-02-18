@@ -28,24 +28,28 @@ const decrementConnectedDevice = (state, index) => {
 	}
 }
 
-const addExistingDpp = (state, payload) => {
-	// payload is a new value
-	state.existingDPPValues.push(payload)
+const mutateDeviceName = (state, payload) => {
+	state.dppValues[payload.index].deviceName = payload.value
 }
 
-const removeExistingDpp = (state, payload) => {
-	// payload is an index
-	state.existingDPPValues.splice(payload, 1)
+const mutateDpp = (state, payload) => {
+	state.dppValues[payload.index].dpp = payload.value
 }
 
-const addExistingCredit = (state, payload) => {
-	// payload is a new value
-	state.existingCreditValues.push(payload)
+const mutateCredits = (state, payload) => {
+	state.dppValues[payload.index].credits = payload.value
 }
 
-const removeExistingCredit = (state, payload) => {
-	// payload is an index
-	state.existingCreditValues.splice(payload, 1)
+const addDppValue = (state) => {
+	const index = state.dppValues.length
+	state.dppValues.push({ id: `device-${index}`, deviceName: '', dpp: 0, credits: 0 })
+}
+
+const removeDppValue = (state, index) => {
+	state.dppValues.splice(index, 1)
+	state.dppValues.forEach((i, index) => {
+		i.id = `device-${index}`
+	})
 }
 
 const resetState = (state) => {
@@ -59,10 +63,11 @@ const mutations = {
 	setPlans,
 	incrementConnectedDevice,
 	decrementConnectedDevice,
-	addExistingDpp,
-	removeExistingDpp,
-	addExistingCredit,
-	removeExistingCredit,
+	mutateDeviceName,
+	mutateDpp,
+	mutateCredits,
+	addDppValue,
+	removeDppValue,
 	resetState
 }
 
