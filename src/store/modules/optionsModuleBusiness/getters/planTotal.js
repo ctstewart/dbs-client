@@ -47,15 +47,10 @@ const planTotal = (state, getters) => {
 	state.connectedDevices.forEach(cd => {
 		localTotal += cd.numberOfDevices * cd.cost
 
-		console.log(cd);
-
 		if (cd.id === 'tabletPro2021') {
 			totalNumberOfProTablets2021 += cd.numberOfDevices
 		}
 	})
-
-	console.log(totalNumberOfProPhones);
-	console.log(totalNumberOfProTablets2021);
 
 	if (totalNumberOfProPhones >= totalNumberOfProTablets2021) {
 		localTotal -= totalNumberOfProTablets2021 * 20
