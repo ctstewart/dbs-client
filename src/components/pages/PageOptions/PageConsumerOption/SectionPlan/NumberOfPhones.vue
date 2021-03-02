@@ -109,12 +109,9 @@ export default {
 }
 
 .number-of-phones-unlimited {
-	grid-template-columns: repeat(7, 1fr);
+	grid-template-columns: repeat(5, 1fr);
 	font-size: 14px;
-
-	div:nth-child(7n) {
-		grid-row-end: span 2;
-	}
+	padding: 1rem;
 }
 
 .number-of-phones-loyalty-2020-unlimited {

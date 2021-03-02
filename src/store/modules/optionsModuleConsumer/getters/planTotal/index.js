@@ -18,6 +18,8 @@ const planTotal = (state, getters) => {
 			'militaryOld': state.militaryOld,
 			'responderNew': state.responderNew,
 			'responderOld': state.responderOld,
+			'nurse': state.nurse,
+			'teacher': state.teacher,
 			'militaryResponderDiscountAmountNew': state.mixAndMatchPlans.militaryResponderDiscountAmountNew,
 			'militaryResponderDiscountAmountOld': state.mixAndMatchPlans.militaryResponderDiscountAmountOld
 		}
@@ -88,6 +90,10 @@ const planTotal = (state, getters) => {
 	}
 
 	localTotal += state.twoyear * 20
+
+	if (state.visaCard) {
+		localTotal -= 4.17
+	}
 
 	if (state.militaryNew || state.militaryOld) {
 		localTotal += state.basic * 30 * 0.85

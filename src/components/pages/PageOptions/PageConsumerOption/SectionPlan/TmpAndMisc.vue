@@ -58,7 +58,7 @@ export default {
 	border: 1px solid white;
 	border-radius: 10px;
 	display: grid;
-	grid-template-columns: repeat(6, 1fr);
+	grid-template-columns: repeat(3, 1fr);
 	align-items: center;
 	justify-items: end;
 

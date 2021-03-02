@@ -8,6 +8,23 @@ const toggle = (state, property) => {
 	state[property] = !state[property]
 }
 
+const setCommonDiscountsToFalse = (state) => {
+	state.militaryNew = false
+	state.militaryOld = false
+	state.responderNew = false
+	state.responderOld = false
+	state.nurse = false
+	state.teacher = false
+}
+
+const setCommonDiscount = (state, property) => {
+	setCommonDiscountsToFalse(state)
+
+	if (property) {
+		state[property] = true
+	}
+}
+
 const setMixAndMatchPlans = (state, payload) => {
 	state.mixAndMatchPlans.plans[payload.index].numberOfPhones = payload.value
 }
@@ -63,6 +80,8 @@ const resetState = (state) => {
 const mutations = {
 	mutate,
 	toggle,
+	setCommonDiscountsToFalse,
+	setCommonDiscount,
 	setMixAndMatchPlans,
 	setLoyalty55MixAndMatch2020Plans,
 	incrementConnectedDevice,

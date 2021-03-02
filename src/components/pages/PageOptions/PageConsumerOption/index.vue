@@ -32,20 +32,22 @@ import { mapState, mapMutations } from 'vuex'
 
 import LayoutSidebar from '@/components/layout/LayoutSidebar'
 import SectionPlan from './SectionPlan'
+import SectionDiscounts from './SectionDiscounts'
 import SectionPullthru from './SectionPullthru'
 import SectionDpp from './SectionDpp'
 
 export default {
 	name: 'LayoutOption',
-	components: { LayoutSidebar, SectionPlan, SectionPullthru, SectionDpp },
+	components: { LayoutSidebar, SectionPlan, SectionDiscounts, SectionPullthru, SectionDpp },
 	data () {
 		return {
 			currentTab: 'SectionPlan',
 			whichOption: '',
 			tabs: [
 				{ id: 'SectionPlan', label: 'Plan', active: true },
+				{ id: 'SectionDiscounts', label: 'Discounts', active: false },
 				{ id: 'SectionPullthru', label: 'Pull Thru', active: false },
-				{ id: 'SectionDpp', label: 'DPP', active: false }
+				{ id: 'SectionDpp', label: 'DPP', active: false },
 			]
 		}
 	},
@@ -156,7 +158,7 @@ export default {
 
 		.navBar {
 			display: grid;
-			grid-template-columns: 1fr 1fr 1fr 5fr;
+			grid-template-columns: 1fr 1fr 1fr 1fr 6fr;
 			margin-left: 1%;
 			color: @oldSectionGreen;
 
@@ -180,7 +182,7 @@ export default {
 					border-top-left-radius: 10px;
 				}
 
-				&:nth-child(3) {
+				&:nth-child(4) {
 					border-top-right-radius: 10px;
 				}
 

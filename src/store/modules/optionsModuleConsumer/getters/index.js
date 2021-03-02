@@ -6,6 +6,7 @@ import dppTotal from "./dppTotal";
 import tmpTotal from "./tmpTotal";
 import total from "./total";
 import chosenPlanAndDevices from "./chosenPlanAndDevices";
+import noCommonDiscount from "./noCommonDiscount";
 
 const getters = {
 	mixAndMatchNumberOfPhonesAndId,
@@ -15,7 +16,8 @@ const getters = {
 	dppTotal,
 	tmpTotal,
 	total,
-	chosenPlanAndDevices
+	chosenPlanAndDevices,
+	noCommonDiscount,
 };
 
 export default getters;

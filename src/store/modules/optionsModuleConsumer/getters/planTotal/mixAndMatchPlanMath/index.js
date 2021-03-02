@@ -15,13 +15,13 @@ import returnNumberOfPhones from './returnNumberOfPhones'
 import returnTotalPhoneCost from './returnTotalPhoneCost'
 import returnMilitaryResponderDiscount from './returnMilitaryResponderDiscount'
 
-const mixAndMatchPlanMath = ({ plansArray, autopay, militaryNew, militaryOld, responderNew, responderOld, militaryResponderDiscountAmountNew, militaryResponderDiscountAmountOld }) => {
+const mixAndMatchPlanMath = ({ plansArray, autopay, militaryNew, militaryOld, responderNew, responderOld, nurse, teacher, militaryResponderDiscountAmountNew, militaryResponderDiscountAmountOld }) => {
 	const numberOfPhones = returnNumberOfPhones(plansArray)
 	if (numberOfPhones === 0) { return 0 }
 
 	var localTotal = 0
 	localTotal += returnTotalPhoneCost(plansArray, numberOfPhones, autopay)
-	localTotal -= returnMilitaryResponderDiscount(militaryNew, responderNew, militaryOld, responderOld, militaryResponderDiscountAmountNew, militaryResponderDiscountAmountOld, numberOfPhones)
+	localTotal -= returnMilitaryResponderDiscount(militaryNew, responderNew, militaryOld, responderOld, nurse, teacher, militaryResponderDiscountAmountNew, militaryResponderDiscountAmountOld, numberOfPhones)
 
 	return localTotal
 }

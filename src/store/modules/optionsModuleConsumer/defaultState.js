@@ -40,6 +40,15 @@ const defaultState = () => {
 					5: { lines: 5, autopay: 50, noAutopay: 60 }
 				},
 				{
+					id: "Just Kids (New)",
+					numberOfPhones: 0,
+					1: { lines: 1, autopay: 0, noAutopay: 0 },
+					2: { lines: 2, autopay: 50, noAutopay: 60 },
+					3: { lines: 3, autopay: 40, noAutopay: 50 },
+					4: { lines: 4, autopay: 35, noAutopay: 45 },
+					5: { lines: 5, autopay: 25, noAutopay: 35 }
+				},
+				{
 					id: "Start",
 					numberOfPhones: 0,
 					1: { lines: 1, autopay: 70, noAutopay: 80 },
@@ -74,15 +83,6 @@ const defaultState = () => {
 					3: { lines: 3, autopay: 65, noAutopay: 75 },
 					4: { lines: 4, autopay: 55, noAutopay: 65 },
 					5: { lines: 5, autopay: 50, noAutopay: 60 }
-				},
-				{
-					id: "Just Kids (New)",
-					numberOfPhones: 0,
-					1: { lines: 1, autopay: 0, noAutopay: 0 },
-					2: { lines: 2, autopay: 50, noAutopay: 60 },
-					3: { lines: 3, autopay: 40, noAutopay: 50 },
-					4: { lines: 4, autopay: 35, noAutopay: 45 },
-					5: { lines: 5, autopay: 25, noAutopay: 35 }
 				},
 				{
 					id: "Go",
@@ -254,6 +254,9 @@ const defaultState = () => {
 		militaryOld: false,
 		responderNew: false,
 		responderOld: false,
+		nurse: false,
+		teacher: false,
+		visaCard: false,
 		lteHomeInternet: false,
 		discount: 0,
 		numberOfPhonesTieredAndOldUnlimited: 0,
