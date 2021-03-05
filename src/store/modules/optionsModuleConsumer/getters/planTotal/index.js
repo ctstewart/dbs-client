@@ -20,8 +20,10 @@ const planTotal = (state, getters) => {
 			'responderOld': state.responderOld,
 			'nurse': state.nurse,
 			'teacher': state.teacher,
+			'student': state.student,
 			'militaryResponderDiscountAmountNew': state.mixAndMatchPlans.militaryResponderDiscountAmountNew,
-			'militaryResponderDiscountAmountOld': state.mixAndMatchPlans.militaryResponderDiscountAmountOld
+			'militaryResponderDiscountAmountOld': state.mixAndMatchPlans.militaryResponderDiscountAmountOld,
+			'studentDiscount': state.mixAndMatchPlans.studentDiscount,
 		}
 
 		localTotal += mixAndMatchPlanMath(objectForMethod)

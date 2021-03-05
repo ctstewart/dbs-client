@@ -15,6 +15,7 @@ const setCommonDiscountsToFalse = (state) => {
 	state.responderOld = false
 	state.nurse = false
 	state.teacher = false
+	state.student = false
 }
 
 const setCommonDiscount = (state, property) => {

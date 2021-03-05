@@ -136,6 +136,14 @@ const defaultState = () => {
 				3: 40,
 				4: 40,
 				5: 40
+			},
+
+			studentDiscount: {
+				1: 10,
+				2: 25,
+				3: 0,
+				4: 0,
+				5: 0
 			}
 		},
 		loyalty55MixAndMatch2020: {
@@ -256,6 +264,7 @@ const defaultState = () => {
 		responderOld: false,
 		nurse: false,
 		teacher: false,
+		student: false,
 		visaCard: false,
 		lteHomeInternet: false,
 		discount: 0,

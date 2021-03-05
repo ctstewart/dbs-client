@@ -35,6 +35,10 @@
 			<input type="radio" name="commonDiscounts" id="teacher" :checked="teacher">
 			<label for="teacher">Teacher Discount</label>
 		</div>
+		<div v-if="isUnlimited" @click="setCommonDiscount('student')">
+			<input type="radio" name="commonDiscounts" id="student" :checked="student">
+			<label for="student">Student Discount</label>
+		</div>
 		<div v-if="!isUnlimited && !ifLoyalty55OrLoyaltyGo && !ifLoyalty55MixAndMatch2020" @click="setCommonDiscount('responderNew')">
 			<input type="radio" name="commonDiscounts" id="militaryNew" :checked="militaryNew">
 			<label for="militaryNew">Military Discount</label>
@@ -84,6 +88,9 @@ export default {
 			},
 			teacher (state) {
 				return state['consumer'][this.$route.params.vuexModule].teacher
+			},
+			student (state) {
+				return state['consumer'][this.$route.params.vuexModule].student
 			},
 			visaCard (state) {
 				return state['consumer'][this.$route.params.vuexModule].visaCard
