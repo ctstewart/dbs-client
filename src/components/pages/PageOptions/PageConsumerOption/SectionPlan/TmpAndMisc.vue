@@ -61,6 +61,7 @@ export default {
 	grid-template-columns: repeat(3, 1fr);
 	align-items: center;
 	justify-items: end;
+	padding: .5rem;
 
 	> div {
 		font-size: 14px;

@@ -111,7 +111,7 @@ export default {
 .number-of-phones-unlimited {
 	grid-template-columns: repeat(5, 1fr);
 	font-size: 14px;
-	padding: 1rem;
+	padding: .5rem;
 }
 
 .number-of-phones-loyalty-2020-unlimited {
