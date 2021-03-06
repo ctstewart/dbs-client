@@ -12,7 +12,7 @@ const planTotal = (state, getters) => {
 	// If Mix and Match Plan
 	if (getters.isUnlimited) {
 		const objectForMethod = {
-			'plansArray': state.mixAndMatchPlans.plans,
+			'plansObject': state.mixAndMatchPlans,
 			'autopay': state.autopay,
 			'militaryNew': state.militaryNew,
 			'militaryOld': state.militaryOld,
@@ -108,7 +108,7 @@ const planTotal = (state, getters) => {
 	const objectForConnectedDeviceMath = {
 		'chosenPlan': state.chosenPlan,
 		'isUnlimited': getters.isUnlimited,
-		'mixAndMatchPlansArray': state.mixAndMatchPlans.plans,
+		'mixAndMatchPlans': state.mixAndMatchPlans,
 		'loyalty55MixAndMatch2020PlansArray': state.loyalty55MixAndMatch2020.plans,
 		'connectedDevicesArray': state.connectedDevices,
 		'oldUnlimitedPlansArray': state.oldUnlimitedPlans,

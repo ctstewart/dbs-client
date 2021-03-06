@@ -1,4 +1,6 @@
-import mixAndMatchNumberOfPhonesAndId from "./mixAndMatchNumberOfPhonesAndId";
+import mixAndMatch3NumberOfPhonesAndId from "./mixAndMatch3NumberOfPhonesAndId"
+import mixAndMatch2NumberOfPhonesAndId from "./mixAndMatch2NumberOfPhonesAndId"
+import mixAndMatch1NumberOfPhonesAndId from "./mixAndMatch1NumberOfPhonesAndId"
 import loyalty55MixAndMatch2020NumberOfPhonesAndId from './loyaltyMixAndMatch2020NumberOfPhonesAndId'
 import isUnlimited from "./isUnlimited";
 import planTotal from "./planTotal";
@@ -9,7 +11,9 @@ import chosenPlanAndDevices from "./chosenPlanAndDevices";
 import noCommonDiscount from "./noCommonDiscount";
 
 const getters = {
-	mixAndMatchNumberOfPhonesAndId,
+	mixAndMatch3NumberOfPhonesAndId,
+	mixAndMatch2NumberOfPhonesAndId,
+	mixAndMatch1NumberOfPhonesAndId,
 	loyalty55MixAndMatch2020NumberOfPhonesAndId,
 	isUnlimited,
 	planTotal,

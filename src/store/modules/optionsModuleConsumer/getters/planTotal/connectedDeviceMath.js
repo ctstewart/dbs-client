@@ -1,7 +1,7 @@
 const connectedDeviceMath = ({
 	chosenPlan,
 	isUnlimited,
-	mixAndMatchPlansArray,
+	mixAndMatchPlans,
 	loyalty55MixAndMatch2020PlansArray,
 	connectedDevicesArray,
 	oldUnlimitedPlansArray,
@@ -32,7 +32,7 @@ const connectedDeviceMath = ({
 		cdArray.sort(compare)
 
 		let numberOfDoMoreAndGetMorePhones = 0
-		mixAndMatchPlansArray.forEach((mixAndMatchPlan) => {
+		mixAndMatchPlans.mixAndMatch2.forEach((mixAndMatchPlan) => {
 			if (mixAndMatchPlan.id === 'Do More' || mixAndMatchPlan.id === 'Get More') {
 				numberOfDoMoreAndGetMorePhones += mixAndMatchPlan.numberOfPhones
 			}
@@ -61,7 +61,7 @@ const connectedDeviceMath = ({
 		})
 
 		numberOfDoMoreAndGetMorePhones = 0
-		mixAndMatchPlansArray.forEach((mixAndMatchPlan) => {
+		mixAndMatchPlans.mixAndMatch3.forEach((mixAndMatchPlan) => {
 			if (mixAndMatchPlan.id === 'Do More 3.0' || mixAndMatchPlan.id === 'Get More 3.0') {
 				numberOfDoMoreAndGetMorePhones += mixAndMatchPlan.numberOfPhones
 			}

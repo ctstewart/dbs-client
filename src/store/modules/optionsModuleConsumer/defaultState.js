@@ -2,7 +2,7 @@ const defaultState = () => {
 	return {
 		chosenPlan: "Unlimited",
 		mixAndMatchPlans: {
-			plans: [
+			mixAndMatch3: [
 				{
 					id: "Start 3.0",
 					numberOfPhones: 0,
@@ -48,6 +48,8 @@ const defaultState = () => {
 					4: { lines: 4, autopay: 35, noAutopay: 45 },
 					5: { lines: 5, autopay: 25, noAutopay: 35 }
 				},
+			],
+			mixAndMatch2: [
 				{
 					id: "Start",
 					numberOfPhones: 0,
@@ -84,6 +86,8 @@ const defaultState = () => {
 					4: { lines: 4, autopay: 55, noAutopay: 65 },
 					5: { lines: 5, autopay: 50, noAutopay: 60 }
 				},
+			],
+			mixAndMatch1: [
 				{
 					id: "Go",
 					numberOfPhones: 0,

@@ -1,11 +1,31 @@
 <template>
 	<div v-if="isUnlimited" class="number-of-phones-unlimited">
-		<input-dropdown
-			v-for="(plan, index) in mixAndMatchNumberOfPhonesAndId"
-			:key="plan.id"
-			v-bind="{inputType: 'numberDropdown', label: plan.id, value: plan.numberOfPhones, range: 11}"
-			v-on:value-changed="setMixAndMatchPlans({index, value: parseInt($event)})"
-		/>
+		<div class="row">
+			<input-dropdown
+				v-for="(plan, index) in mixAndMatch3NumberOfPhonesAndId"
+				:key="plan.id"
+				v-bind="{inputType: 'numberDropdown', label: plan.id, value: plan.numberOfPhones, range: 11}"
+				v-on:value-changed="setMixAndMatch3({index, value: parseInt($event)})"
+			/>
+		</div>
+		<div class="divider"></div>
+		<div class="row">
+			<input-dropdown
+				v-for="(plan, index) in mixAndMatch2NumberOfPhonesAndId"
+				:key="plan.id"
+				v-bind="{inputType: 'numberDropdown', label: plan.id, value: plan.numberOfPhones, range: 11}"
+				v-on:value-changed="setMixAndMatch2({index, value: parseInt($event)})"
+			/>
+		</div>
+		<div class="divider"></div>
+		<div class="row">
+			<input-dropdown
+				v-for="(plan, index) in mixAndMatch1NumberOfPhonesAndId"
+				:key="plan.id"
+				v-bind="{inputType: 'numberDropdown', label: plan.id, value: plan.numberOfPhones, range: 11}"
+				v-on:value-changed="setMixAndMatch1({index, value: parseInt($event)})"
+			/>
+		</div>
 	</div>
 	<div v-else-if="chosenPlan === 'loyalty55MixAndMatch2020'" class='number-of-phones-loyalty-2020-unlimited'>
 		<input-dropdown
@@ -61,9 +81,19 @@ export default {
 			isUnlimited(state, getters) {
 				return getters[`consumer/${this.$route.params.vuexModule}/isUnlimited`];
 			},
-			mixAndMatchNumberOfPhonesAndId(state, getters) {
+			mixAndMatch3NumberOfPhonesAndId(state, getters) {
 				return getters[
-					`consumer/${this.$route.params.vuexModule}/mixAndMatchNumberOfPhonesAndId`
+					`consumer/${this.$route.params.vuexModule}/mixAndMatch3NumberOfPhonesAndId`
+				];
+			},
+			mixAndMatch2NumberOfPhonesAndId(state, getters) {
+				return getters[
+					`consumer/${this.$route.params.vuexModule}/mixAndMatch2NumberOfPhonesAndId`
+				];
+			},
+			mixAndMatch1NumberOfPhonesAndId(state, getters) {
+				return getters[
+					`consumer/${this.$route.params.vuexModule}/mixAndMatch1NumberOfPhonesAndId`
 				];
 			},
 			loyalty55MixAndMatch2020NumberOfPhonesAndId(state, getters) {
@@ -81,9 +111,21 @@ export default {
 					payload
 				)
 			},
-			setMixAndMatchPlans(commit, payload) {
+			setMixAndMatch3(commit, payload) {
 				return commit(
-					`consumer/${this.$route.params.vuexModule}/setMixAndMatchPlans`,
+					`consumer/${this.$route.params.vuexModule}/setMixAndMatch3`,
+					payload
+				)
+			},
+			setMixAndMatch2(commit, payload) {
+				return commit(
+					`consumer/${this.$route.params.vuexModule}/setMixAndMatch2`,
+					payload
+				)
+			},
+			setMixAndMatch1(commit, payload) {
+				return commit(
+					`consumer/${this.$route.params.vuexModule}/setMixAndMatch1`,
 					payload
 				)
 			},
@@ -109,9 +151,17 @@ export default {
 }
 
 .number-of-phones-unlimited {
-	grid-template-columns: repeat(5, 1fr);
-	font-size: 14px;
-	padding: .5rem;
+	> .row {
+		display: grid;
+		grid-template-columns: repeat(5, 1fr);
+		font-size: 14px;
+		padding: .5rem;
+		// border-bottom: 1px solid white;
+	}
+
+	> .divider {
+		border-bottom: 1px solid white;
+	}
 }
 
 .number-of-phones-loyalty-2020-unlimited {

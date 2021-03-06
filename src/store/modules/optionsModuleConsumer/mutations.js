@@ -26,8 +26,16 @@ const setCommonDiscount = (state, property) => {
 	}
 }
 
-const setMixAndMatchPlans = (state, payload) => {
-	state.mixAndMatchPlans.plans[payload.index].numberOfPhones = payload.value
+const setMixAndMatch3 = (state, payload) => {
+	state.mixAndMatchPlans.mixAndMatch3[payload.index].numberOfPhones = payload.value
+}
+
+const setMixAndMatch2 = (state, payload) => {
+	state.mixAndMatchPlans.mixAndMatch2[payload.index].numberOfPhones = payload.value
+}
+
+const setMixAndMatch1 = (state, payload) => {
+	state.mixAndMatchPlans.mixAndMatch1[payload.index].numberOfPhones = payload.value
 }
 
 const setLoyalty55MixAndMatch2020Plans = (state, payload) => {
@@ -83,7 +91,9 @@ const mutations = {
 	toggle,
 	setCommonDiscountsToFalse,
 	setCommonDiscount,
-	setMixAndMatchPlans,
+	setMixAndMatch3,
+	setMixAndMatch2,
+	setMixAndMatch1,
 	setLoyalty55MixAndMatch2020Plans,
 	incrementConnectedDevice,
 	decrementConnectedDevice,
