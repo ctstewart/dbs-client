@@ -368,6 +368,7 @@ export default {
 	> label {
 		border: 1px solid grey;
 		padding: .5em 1em;
+		cursor: pointer;
 	}
 
 	> .text-active {
