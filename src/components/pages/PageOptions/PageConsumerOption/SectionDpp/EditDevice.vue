@@ -331,6 +331,7 @@ export default {
 
 .buttons {
 	> button {
+		cursor: pointer;
 		padding: .5rem 1rem;
 		margin-right: 1rem;
 		border-radius: 5px;

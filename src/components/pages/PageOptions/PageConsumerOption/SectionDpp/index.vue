@@ -78,6 +78,7 @@ export default {
 	width: 14em;
 
 	> i {
+		cursor: pointer;
 		font-size: 20px;
 	}
 }
