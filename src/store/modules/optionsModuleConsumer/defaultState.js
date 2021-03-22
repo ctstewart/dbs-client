@@ -277,7 +277,7 @@ const defaultState = () => {
 		tmp: 0,
 		otherCost: 0,
 		dppValues: [
-			{ id: 'device-0', deviceName: '', dpp: 0, credits: 0 }
+			// { id: 'device-0', deviceName: '', dpp: 0, credits: 0, editing: false }
 		],
 	};
 };

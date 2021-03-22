@@ -72,7 +72,7 @@ const mutateCredits = (state, payload) => {
 
 const addDppValue = (state) => {
 	const index = state.dppValues.length
-	state.dppValues.push({ id: `device-${index}`, deviceName: '', dpp: 0, credits: 0 })
+	state.dppValues.push({ id: `device-${index}`, deviceName: '', dpp: 0, credits: 0, editing: true })
 }
 
 const removeDppValue = (state, index) => {
@@ -80,6 +80,15 @@ const removeDppValue = (state, index) => {
 	state.dppValues.forEach((i, index) => {
 		i.id = `device-${index}`
 	})
+}
+
+const editDpp = (state, index) => {
+	state.dppValues.forEach(i => i.editing = false)
+	state.dppValues[index].editing = true
+}
+
+const closeEditDpp = (state, index) => {
+	state.dppValues.forEach(i => i.editing = false)
 }
 
 const resetState = (state) => {
@@ -102,6 +111,8 @@ const mutations = {
 	mutateCredits,
 	addDppValue,
 	removeDppValue,
+	editDpp,
+	closeEditDpp,
 	resetState
 }
 
