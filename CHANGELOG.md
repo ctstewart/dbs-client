@@ -4,14 +4,27 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [3.4.0] - TBD
+## [4.0.0] - 2021-03-30
 ### Added
 - Logs
+- Student discount
+- DPP Full Retail
+- Credits Total
+- Visa Card
 
 ### Changed
 - Cookies should now expire at midnight. This will prevent "sessions" from continuing to the next day.
+- Rearranged the Mix and Match plans to display from highest cost to lowest cost
+- Visually separated Mix and Match 3.0, 2.0, and 1.0
+- Moved discounts to its own tab
+- "Common discounts" such as Military, First Responder, Nurse, etc., now can be selected using radio buttons
+	- This helps clarify that only one can be selected, and makes it easier to add/remove discounts going forward
+- Added a new format for the DPP page
+	- This new format takes up less space, so you can add more device payments
+	- The new "popup" allows more space for the added "Total" option for both dpp and credits, as well as "Manual" mode
+	- This should also be easier for someone new to learn
 
-## [3.3.0] - 2020-02-18
+## [3.3.0] - 2021-02-18
 ### Added
 - Added Business tablet plan updates
 - Added LTE Home Internet
@@ -22,7 +35,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Password reset should now be fixed
 
-## [3.2.0] - 2020-02-01
+## [3.2.0] - 2021-02-01
 ### Added
 - Added the new Loyalty Mix and Match plans
 
