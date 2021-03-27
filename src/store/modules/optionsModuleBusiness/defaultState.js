@@ -3,14 +3,14 @@ const defaultState = () => {
 		chosenPlan: 'Business Unlimited',
 		plans: [
 			{
-				id: 'start2020',
-				name: 'Start',
+				id: 'pro2020',
+				name: 'Pro',
 				numberOfPhones: 0,
-				1: { lines: 1, autopay: 70, noAutopay: 75 },
-				2: { lines: 2, autopay: 60, noAutopay: 65 },
-				3: { lines: 3, autopay: 45, noAutopay: 50 },
-				4: { lines: 4, autopay: 35, noAutopay: 40 },
-				5: { lines: 5, autopay: 30, noAutopay: 35 },
+				1: { lines: 1, autopay: 95, noAutopay: 100 },
+				2: { lines: 2, autopay: 80, noAutopay: 85 },
+				3: { lines: 3, autopay: 70, noAutopay: 75 },
+				4: { lines: 4, autopay: 60, noAutopay: 65 },
+				5: { lines: 5, autopay: 50, noAutopay: 55 },
 			},
 			{
 				id: 'plus2020',
@@ -23,14 +23,14 @@ const defaultState = () => {
 				5: { lines: 5, autopay: 40, noAutopay: 45 },
 			},
 			{
-				id: 'pro2020',
-				name: 'Pro',
+				id: 'start2020',
+				name: 'Start',
 				numberOfPhones: 0,
-				1: { lines: 1, autopay: 95, noAutopay: 100 },
-				2: { lines: 2, autopay: 80, noAutopay: 85 },
-				3: { lines: 3, autopay: 70, noAutopay: 75 },
-				4: { lines: 4, autopay: 60, noAutopay: 65 },
-				5: { lines: 5, autopay: 50, noAutopay: 55 },
+				1: { lines: 1, autopay: 70, noAutopay: 75 },
+				2: { lines: 2, autopay: 60, noAutopay: 65 },
+				3: { lines: 3, autopay: 45, noAutopay: 50 },
+				4: { lines: 4, autopay: 35, noAutopay: 40 },
+				5: { lines: 5, autopay: 30, noAutopay: 35 },
 			},
 			{
 				id: 'Unlimited Basic Phone',
@@ -82,7 +82,7 @@ const defaultState = () => {
 		tmp: 0,
 		autopay: false,
 		dppValues: [
-			{ id: 'device-0', deviceName: '', dpp: 0, credits: 0 }
+			// { id: 'device-0', deviceName: '', dpp: 0, credits: 0, editing: false }
 		],
 	}
 }
