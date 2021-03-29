@@ -136,14 +136,22 @@ export default {
 	font-size: 12px;
 	display: flex;
 	flex-direction: column;
-	row-gap: 4em;
+
+	> * + * {
+		margin-top: 4em;
+	}
+	// row-gap: 4em;
 }
 
 .input-group {
 	display: flex;
 	flex-direction: column;
 	width: 100%;
-	row-gap: 1em;
+
+	> * + * {
+		margin-top: 1em;
+	}
+	// row-gap: 1em;
 
 	> input {
 		border: none;
