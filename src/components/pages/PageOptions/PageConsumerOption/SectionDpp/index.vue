@@ -62,11 +62,15 @@ export default {
 }
 
 .main-row {
-	display: flex;
-	justify-content: start;
-	flex-wrap: wrap;
-	row-gap: 1rem;
-	column-gap: 2rem;
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+	grid-column-gap: 1rem;
+	grid-row-gap: 1rem;
+	// display: flex;
+	// justify-content: start;
+	// flex-wrap: wrap;
+	// row-gap: 1rem;
+	// column-gap: 2rem;
 }
 
 .addDpp {
