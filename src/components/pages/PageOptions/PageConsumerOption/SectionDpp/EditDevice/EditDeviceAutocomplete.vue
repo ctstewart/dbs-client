@@ -112,6 +112,9 @@ export default {
 			mutateDevices (commit, devices) {
 				return commit('mutate', { property: 'devices', with: devices })
 			},
+			mutateDppLengthOptions (commit, payload) {
+				return commit(`consumer/${this.$route.params.vuexModule}/mutateDppLengthOptions`, payload)
+			},
 		}),
 		updateDppValues(index, deviceName) {
 			this.mutateDeviceName({ index, value: deviceName })
@@ -123,7 +126,8 @@ export default {
 			if (!device) {
 				this.mutateDpp({ index, value: 0 })
 			} else {
-				this.mutateDpp({ index, value: device.fullRetail / 24 })
+				this.mutateDpp({ index, value: device.fullRetail })
+				this.mutateDppLengthOptions({ index, value: device.dppLength })
 			}
 		},
 		filterResults() {

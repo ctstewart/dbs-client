@@ -1,7 +1,7 @@
 <template>
 <div class="device-static">
 	<div class="device-name"><span>{{ dppObject.deviceName }}</span></div>
-	<div class="device-monthly-total"><span>${{ ((dppObject.dpp - dppObject.credits) / 100).toFixed(2) }} a month</span></div>
+	<div class="device-monthly-total"><span>${{ ((dppObject.fullRetail - dppObject.totalCredits) / dppObject.dppLength / 100).toFixed(2) }} a month</span></div>
 	<div class="device-edit" @click="editDpp(dppIndex)"><span>EDIT</span></div>
 	<div class="device-delete" @click="removeDppValue(dppIndex)"><span>DELETE</span></div>
 </div>

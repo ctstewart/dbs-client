@@ -1,8 +1,7 @@
 const dppTotal = (state) => {
 	var localTotal = 0
 	state.dppValues.forEach((i) => {
-		localTotal += parseFloat(i.dpp)
-		localTotal -= parseFloat(i.credits)
+		localTotal += parseFloat((i.fullRetail - i.totalCredits) / i.dppLength)
 	})
 	return parseFloat(localTotal) / 100
 }

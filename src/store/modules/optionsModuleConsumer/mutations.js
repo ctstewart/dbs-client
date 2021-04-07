@@ -63,16 +63,24 @@ const mutateDeviceName = (state, payload) => {
 }
 
 const mutateDpp = (state, payload) => {
-	state.dppValues[payload.index].dpp = payload.value
+	state.dppValues[payload.index].fullRetail = payload.value
 }
 
 const mutateCredits = (state, payload) => {
-	state.dppValues[payload.index].credits = payload.value
+	state.dppValues[payload.index].totalCredits = payload.value
+}
+
+const mutateDppLengthOptions = (state, payload) => {
+	state.dppValues[payload.index].dppLengthOptions = payload.value
+}
+
+const mutateDppLength = (state, payload) => {
+	state.dppValues[payload.index].dppLength = payload.value
 }
 
 const addDppValue = (state) => {
 	const index = state.dppValues.length
-	state.dppValues.push({ id: `device-${index}`, deviceName: '', dpp: 0, credits: 0, editing: true })
+	state.dppValues.push({ id: `device-${index}`, deviceName: '', fullRetail: 0, totalCredits: 0, dppLength: 24, dppLengthOptions: [24, 30], editing: true })
 }
 
 const removeDppValue = (state, index) => {
@@ -109,6 +117,8 @@ const mutations = {
 	mutateDeviceName,
 	mutateDpp,
 	mutateCredits,
+	mutateDppLengthOptions,
+	mutateDppLength,
 	addDppValue,
 	removeDppValue,
 	editDpp,

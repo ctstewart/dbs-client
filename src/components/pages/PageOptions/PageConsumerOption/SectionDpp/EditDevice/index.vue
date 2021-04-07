@@ -1,20 +1,30 @@
 <template>
 <div class="fullscreen-container">
 	<div class="device-edit">
-		<div class="dpp-total">Total: <span>${{ (dppObject.dpp / 100 - dppObject.credits / 100).toFixed(2) }} a month</span></div>
+		<div class="dpp-total">Total: <span>${{ (dppObject.fullRetail / dppObject.dppLength / 100 - dppObject.totalCredits / dppObject.dppLength / 100).toFixed(2) }} a month</span></div>
 		<div class="input-group">
 			<label for="deviceName">Device Name</label>
 			<div class="toggle">
 				<input type="radio" id="auto" name="deviceNameManual" value="false" v-model="deviceNameManual">
-				<label :class="[ deviceNameManual ? 'text-inactive' : 'text-active' ]" for="auto" @click="deviceNameManual = false; updateDppValues(dppIndex, ''); search=''">Auto</label>
+				<label :class="[ deviceNameManual ? 'text-inactive' : 'text-active' ]" for="auto" @click="deviceNameManual = false; toggleManualMode(dppIndex)">Auto</label>
 				<input type="radio" id="manual" name="deviceNameManual" value="true" v-model="deviceNameManual">
-				<label :class="[ deviceNameManual ? 'text-active' : 'text-inactive' ]" for="manual" @click="deviceNameManual = true; updateDppValues(dppIndex, ''); search=''">Manual</label>
+				<label :class="[ deviceNameManual ? 'text-active' : 'text-inactive' ]" for="manual" @click="deviceNameManual = true; toggleManualMode(dppIndex)">Manual</label>
 			</div>
 			<edit-device-autocomplete
 				:deviceName="dppObject.deviceName"
 				:deviceNameManual="deviceNameManual"
 				:dppIndex="dppIndex"
+				v-on:device-changed="dppLengthOptions='$event'"
 			/>
+		</div>
+		<div class="input-group" v-if="dppObject.dppLengthOptions.length > 1">
+			<label for="deviceName">DPP Length</label>
+			<div class="toggle">
+				<div class="toggle" v-for="(i, index) in dppObject.dppLengthOptions" :key="index">
+					<input type="radio" :id="'dppLength' + i" name="dppLength" :value="i">
+					<label :class="[ i === dppObject.dppLength ? 'text-active' : 'text-inactive' ]" :for="'dppLength' + i" @click="mutateDppLength({ index: dppIndex, value: i })">{{ i }} Month</label>
+				</div>
+			</div>
 		</div>
 		<div class="input-group">
 			<label for="deviceName">DPP</label>
@@ -28,15 +38,15 @@
 				v-if="!dppTotalMode"
 				type="number"
 				class="input--short"
-				:value="(dppObject.dpp / 100).toFixed(2)"
-				@change="mutateDpp({ index: dppIndex, value: $event.target.value * 100 })"
+				:value="(dppObject.fullRetail / dppObject.dppLength / 100).toFixed(2)"
+				@change="mutateDpp({ index: dppIndex, value: $event.target.value * dppObject.dppLength * 100 })"
 				:disabled="deviceNameManual === false">
 			<input
 				v-else
 				type="number"
 				class="input--short"
-				:value="(dppObject.dpp / 100 * 24).toFixed(2)"
-				@change="mutateDpp({ index: dppIndex, value: $event.target.value / 24 * 100 })"
+				:value="(dppObject.fullRetail / 100).toFixed(2)"
+				@change="mutateDpp({ index: dppIndex, value: $event.target.value * 100 })"
 				:disabled="deviceNameManual === false">
 		</div>
 		<div class="input-group">
@@ -51,15 +61,15 @@
 				v-if="!creditsTotalMode"
 				type="number"
 				class="input--short"
-				:value="(dppObject.credits / 100).toFixed(2)"
-				@change="mutateCredits({ index: dppIndex, value: $event.target.value * 100 })"
+				:value="(dppObject.totalCredits / dppObject.dppLength / 100).toFixed(2)"
+				@change="mutateCredits({ index: dppIndex, value: $event.target.value * dppObject.dppLength * 100 })"
 			>
 			<input
 				v-else
 				type="number"
 				class="input--short"
-				:value="(dppObject.credits / 100 * 24).toFixed(2)"
-				@change="mutateCredits({ index: dppIndex, value: $event.target.value / 24 * 100 })"
+				:value="(dppObject.totalCredits / 100).toFixed(2)"
+				@change="mutateCredits({ index: dppIndex, value: $event.target.value * 100 })"
 			>
 		</div>
 		<div class="buttons">
@@ -88,11 +98,20 @@ export default {
 	},
 	methods: {
 		...mapMutations({
+			mutateDeviceName (commit, payload) {
+				return commit(`consumer/${this.$route.params.vuexModule}/mutateDeviceName`, payload)
+			},
 			mutateDpp (commit, payload) {
 				return commit(`consumer/${this.$route.params.vuexModule}/mutateDpp`, payload)
 			},
 			mutateCredits (commit, payload) {
 				return commit(`consumer/${this.$route.params.vuexModule}/mutateCredits`, payload)
+			},
+			mutateDppLengthOptions (commit, payload) {
+				return commit(`consumer/${this.$route.params.vuexModule}/mutateDppLengthOptions`, payload)
+			},
+			mutateDppLength (commit, payload) {
+				return commit(`consumer/${this.$route.params.vuexModule}/mutateDppLength`, payload)
 			},
 			removeDppValue (commit, payload) {
 				this.componentKey += 1
@@ -103,6 +122,16 @@ export default {
 			},
 		}),
 	},
+	toggleManualMode(index) {
+		this.mutateDeviceName({ index, value: '' })
+		this.mutateDpp({ index, value: 0 })
+		this.mutateCredits({ index, value: 0 })
+		this.mutateDppLengthOptions({ index, value: [24, 30] })
+		this.mutateDppLength({ index, value: 24 })
+	},
+	created() {
+		console.log(this.dppObject)
+	}
 }
 </script>
 
