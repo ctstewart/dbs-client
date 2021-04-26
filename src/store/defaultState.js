@@ -1,12 +1,11 @@
 const state = () => {
 	return {
-		webappVersion: "4.0.0",
-		newChangesDate: '11/19/2020',
+		webappVersion: "4.1.0",
 		userInfo: {
 			email: "",
 			firstName: "",
 			lastName: "",
-			role: "",
+			role: ""
 		},
 		optionsType: {
 			optionOne: "consumer",
