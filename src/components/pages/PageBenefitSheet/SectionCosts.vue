@@ -1,59 +1,69 @@
 <template>
-<div class="costs">
-	<div v-for="i in costsArray" :key="i.id">
-		<input placeholder="$0.00" type="tel" pattern="[0-9]*" step="0.01" :value="parseFloat(i.value)" @change="mutate({property: i.mutate, with: $event.target.value})"/>
-		<p>${{ i.differenceMonthly.toFixed(2) }}</p>
-		<p>${{ i.fees * 40 }}</p>
-		<p>Cost today</p>
-		<p>Diff. monthly</p>
-		<p>One-time fees</p>
+	<div class="costs">
+		<div v-for="i in costsArray" :key="i.id">
+			<input
+				placeholder="$0.00"
+				type="tel"
+				pattern="[0-9]*"
+				step="0.01"
+				:value="parseFloat(i.value)"
+				@change="
+					mutate({ property: i.mutate, with: $event.target.value })
+				"
+			/>
+			<p>${{ i.differenceMonthly.toFixed(2) }}</p>
+			<p>${{ i.fees * 35 }}</p>
+			<p>Cost today</p>
+			<p>Diff. monthly</p>
+			<p>One-time fees</p>
+		</div>
 	</div>
-</div>
 </template>
 
 <script>
-import { createNamespacedHelpers } from 'vuex'
-const { mapState, mapGetters, mapMutations } = createNamespacedHelpers('benefitSheet')
+import { createNamespacedHelpers } from "vuex";
+const { mapState, mapGetters, mapMutations } = createNamespacedHelpers(
+	"benefitSheet"
+);
 
 export default {
-	name: 'SectionCosts',
+	name: "SectionCosts",
 	computed: {
-		...mapState([
-			'optionOneTodayCost',
-			'optionTwoTodayCost'
-		]),
+		...mapState(["optionOneTodayCost", "optionTwoTodayCost"]),
 		...mapGetters([
-			'optionOneDifferenceMonthly',
-			'optionTwoDifferenceMonthly'
+			"optionOneDifferenceMonthly",
+			"optionTwoDifferenceMonthly"
 		]),
-		optionsType (state) {
-			return this.$store.state.optionsType
+		optionsType(state) {
+			return this.$store.state.optionsType;
 		},
-		costsArray () {
+		costsArray() {
 			return [
 				{
-					id: 'Option 1',
+					id: "Option 1",
 					value: this.optionOneTodayCost,
-					mutate: 'optionOneTodayCost',
+					mutate: "optionOneTodayCost",
 					differenceMonthly: this.optionOneDifferenceMonthly,
-					fees: this.$store.state[this.optionsType.optionOne]['optionOne'].numberOfNewDevices
+					fees: this.$store.state[this.optionsType.optionOne][
+						"optionOne"
+					].numberOfNewDevices
 				},
 				{
-					id: 'Option 2',
+					id: "Option 2",
 					value: this.optionTwoTodayCost,
-					mutate: 'optionTwoTodayCost',
+					mutate: "optionTwoTodayCost",
 					differenceMonthly: this.optionTwoDifferenceMonthly,
-					fees: this.$store.state[this.optionsType.optionTwo]['optionTwo'].numberOfNewDevices
+					fees: this.$store.state[this.optionsType.optionTwo][
+						"optionTwo"
+					].numberOfNewDevices
 				}
-			]
+			];
 		}
 	},
 	methods: {
-		...mapMutations([
-			'mutate'
-		])
+		...mapMutations(["mutate"])
 	}
-}
+};
 </script>
 
 <style>
@@ -78,11 +88,11 @@ export default {
 	margin: 0;
 }
 
-.costs > div > p:nth-child(n+4) {
-	font-size: .7rem;
+.costs > div > p:nth-child(n + 4) {
+	font-size: 0.7rem;
 	align-self: start;
 	margin: 0;
-	margin-top: .1rem;
+	margin-top: 0.1rem;
 	font-weight: normal;
 	text-align: center;
 }
