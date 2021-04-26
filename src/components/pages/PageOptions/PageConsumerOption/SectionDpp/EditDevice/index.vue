@@ -6,9 +6,9 @@
 			<label for="deviceName">Device Name</label>
 			<div class="toggle">
 				<input type="radio" id="auto" name="deviceNameManual" value="false" v-model="deviceNameManual">
-				<label :class="[ deviceNameManual ? 'text-inactive' : 'text-active' ]" for="auto" @click="deviceNameManual = false; toggleManualMode(dppIndex)">Auto</label>
+				<label :class="[ deviceNameManual ? 'text-inactive' : 'text-active' ]" for="auto" @click="toggleManualMode(dppIndex, false, [24])">Auto</label>
 				<input type="radio" id="manual" name="deviceNameManual" value="true" v-model="deviceNameManual">
-				<label :class="[ deviceNameManual ? 'text-active' : 'text-inactive' ]" for="manual" @click="deviceNameManual = true; toggleManualMode(dppIndex)">Manual</label>
+				<label :class="[ deviceNameManual ? 'text-active' : 'text-inactive' ]" for="manual" @click="toggleManualMode(dppIndex, true, [24, 30])">Manual</label>
 			</div>
 			<edit-device-autocomplete
 				:deviceName="dppObject.deviceName"
@@ -121,17 +121,15 @@ export default {
 				return commit(`consumer/${this.$route.params.vuexModule}/closeEditDpp`, index)
 			},
 		}),
+		toggleManualMode (index, deviceNameManual, lengthOptions) {
+			this.deviceNameManual = deviceNameManual
+			this.mutateDeviceName({ index, value: '' })
+			this.mutateDpp({ index, value: 0 })
+			this.mutateCredits({ index, value: 0 })
+			this.mutateDppLengthOptions({ index, value: lengthOptions })
+			this.mutateDppLength({ index, value: 24 })
+		},
 	},
-	toggleManualMode(index) {
-		this.mutateDeviceName({ index, value: '' })
-		this.mutateDpp({ index, value: 0 })
-		this.mutateCredits({ index, value: 0 })
-		this.mutateDppLengthOptions({ index, value: [24, 30] })
-		this.mutateDppLength({ index, value: 24 })
-	},
-	created() {
-		console.log(this.dppObject)
-	}
 }
 </script>
 

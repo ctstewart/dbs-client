@@ -80,7 +80,7 @@ const mutateDppLength = (state, payload) => {
 
 const addDppValue = (state) => {
 	const index = state.dppValues.length
-	state.dppValues.push({ id: `device-${index}`, deviceName: '', fullRetail: 0, totalCredits: 0, dppLength: 24, dppLengthOptions: [24, 30], editing: true })
+	state.dppValues.push({ id: `device-${index}`, deviceName: '', fullRetail: 0, totalCredits: 0, dppLength: 24, dppLengthOptions: [24], editing: true })
 }
 
 const removeDppValue = (state, index) => {
