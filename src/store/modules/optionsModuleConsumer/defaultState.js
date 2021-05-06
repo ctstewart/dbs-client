@@ -47,7 +47,7 @@ const defaultState = () => {
 					3: { lines: 3, autopay: 40, noAutopay: 50 },
 					4: { lines: 4, autopay: 35, noAutopay: 45 },
 					5: { lines: 5, autopay: 25, noAutopay: 35 }
-				},
+				}
 			],
 			mixAndMatch2: [
 				{
@@ -85,7 +85,7 @@ const defaultState = () => {
 					3: { lines: 3, autopay: 45, noAutopay: 55 },
 					4: { lines: 4, autopay: 35, noAutopay: 45 },
 					5: { lines: 5, autopay: 30, noAutopay: 40 }
-				},
+				}
 			],
 			mixAndMatch1: [
 				{
@@ -190,15 +190,15 @@ const defaultState = () => {
 					2: { lines: 2, autopay: 60, noAutopay: 70 },
 					3: { lines: 3, autopay: 45, noAutopay: 55 },
 					4: { lines: 4, autopay: 35, noAutopay: 45 },
-					5: { lines: 5, autopay: 30, noAutopay: 40 },
-				},
+					5: { lines: 5, autopay: 30, noAutopay: 40 }
+				}
 			],
 			discount: {
 				1: 10,
 				2: 40,
 				3: 25,
 				4: 20,
-				5: 20,
+				5: 20
 			}
 		},
 		loyalty55Plans: {
@@ -226,7 +226,8 @@ const defaultState = () => {
 				accountCost: 30,
 				lineAccessAutopay: 25,
 				lineAccessNoAutopay: 35,
-				eligibleForDiscounts: false
+				eligibleForCommonDiscounts: true,
+				eligibleForOtherDiscounts: false
 			},
 			{
 				id: "10GB",
@@ -234,7 +235,8 @@ const defaultState = () => {
 				accountCost: 40,
 				lineAccessAutopay: 25,
 				lineAccessNoAutopay: 35,
-				eligibleForDiscounts: true
+				eligibleForCommonDiscounts: true,
+				eligibleForOtherDiscounts: true
 			}
 		],
 		tieredPlans: [
@@ -249,17 +251,94 @@ const defaultState = () => {
 		twoyear: 0,
 		basic: 0,
 		connectedDevices: [
-			{ id: "Tablet", tiered: 10, unlimited: 20, value: 0, halfOffEligible3: true, halfOffEligible2: true },
-			{ id: "Tablet Unlimited Plus", tiered: 10, unlimited: 30, value: 0, halfOffEligible3: true, halfOffEligible2: true },
-			{ id: "Jetpack", tiered: 10, unlimited: 20, value: 0, halfOffEligible3: true, halfOffEligible2: true },
-			{ id: "Jetpack Unlimited Plus", tiered: 10, unlimited: 30, value: 0, halfOffEligible3: true, halfOffEligible2: true },
-			{ id: "Hum+", tiered: 10, unlimited: 10, value: 0, halfOffEligible3: false, halfOffEligible2: false },
-			{ id: "HumX", tiered: 15, unlimited: 20, value: 0, halfOffEligible3: true, halfOffEligible2: false },
-			{ id: "Homephone", tiered: 20, unlimited: 20, value: 0, halfOffEligible3: false, halfOffEligible2: false },
-			{ id: "Gizmo (grandfathered)", tiered: 5, unlimited: 5, value: 0, halfOffEligible3: false, halfOffEligible2: false },
-			{ id: "Smartwatch", tiered: 10, unlimited: 10, value: 0, halfOffEligible3: true, halfOffEligible2: false },
-			{ id: "Gizmo", tiered: 10, unlimited: 10, value: 0, halfOffEligible3: false, halfOffEligible2: false },
-			{ id: "Arlo", tiered: 10, unlimited: 20, value: 0, halfOffEligible3: false, halfOffEligible2: false }
+			{
+				id: "Tablet",
+				tiered: 10,
+				unlimited: 20,
+				value: 0,
+				halfOffEligible3: true,
+				halfOffEligible2: true
+			},
+			{
+				id: "Tablet Unlimited Plus",
+				tiered: 10,
+				unlimited: 30,
+				value: 0,
+				halfOffEligible3: true,
+				halfOffEligible2: true
+			},
+			{
+				id: "Jetpack",
+				tiered: 10,
+				unlimited: 20,
+				value: 0,
+				halfOffEligible3: true,
+				halfOffEligible2: true
+			},
+			{
+				id: "Jetpack Unlimited Plus",
+				tiered: 10,
+				unlimited: 30,
+				value: 0,
+				halfOffEligible3: true,
+				halfOffEligible2: true
+			},
+			{
+				id: "Hum+",
+				tiered: 10,
+				unlimited: 10,
+				value: 0,
+				halfOffEligible3: false,
+				halfOffEligible2: false
+			},
+			{
+				id: "HumX",
+				tiered: 15,
+				unlimited: 20,
+				value: 0,
+				halfOffEligible3: true,
+				halfOffEligible2: false
+			},
+			{
+				id: "Homephone",
+				tiered: 20,
+				unlimited: 20,
+				value: 0,
+				halfOffEligible3: false,
+				halfOffEligible2: false
+			},
+			{
+				id: "Gizmo (grandfathered)",
+				tiered: 5,
+				unlimited: 5,
+				value: 0,
+				halfOffEligible3: false,
+				halfOffEligible2: false
+			},
+			{
+				id: "Smartwatch",
+				tiered: 10,
+				unlimited: 10,
+				value: 0,
+				halfOffEligible3: true,
+				halfOffEligible2: false
+			},
+			{
+				id: "Gizmo",
+				tiered: 10,
+				unlimited: 10,
+				value: 0,
+				halfOffEligible3: false,
+				halfOffEligible2: false
+			},
+			{
+				id: "Arlo",
+				tiered: 10,
+				unlimited: 20,
+				value: 0,
+				halfOffEligible3: false,
+				halfOffEligible2: false
+			}
 		],
 		autopay: false,
 		militaryNew: false,
@@ -278,7 +357,7 @@ const defaultState = () => {
 		otherCost: 0,
 		dppValues: [
 			// { id: 'device-0', deviceName: '', fullRetail: 0, totalCredits: 0, dppLength: 24, dppLengthOptions: [24], editing: false }
-		],
+		]
 	};
 };
 

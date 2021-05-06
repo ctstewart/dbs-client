@@ -1,28 +1,40 @@
-const plans5GB10GBMath = ({ numberOfPhones, plansArray, chosenPlan, autopay, militaryNew, responderNew, discount }) => {
-	if (numberOfPhones <= 0) { return 0 }
+const plans5GB10GBMath = ({
+	numberOfPhones,
+	plansArray,
+	chosenPlan,
+	autopay,
+	militaryNew,
+	responderNew,
+	discount
+}) => {
+	if (numberOfPhones <= 0) {
+		return 0;
+	}
 
-	var localTotal = 0
-	plansArray.forEach((plan) => {
+	var localTotal = 0;
+	plansArray.forEach(plan => {
 		if (chosenPlan === plan.id) {
-			localTotal += plan.accountCost
+			localTotal += plan.accountCost;
 
-			if (plan.eligibleForDiscounts) {
-				if (militaryNew || responderNew) {
-					localTotal *= .85
-				} else if (parseInt(discount) > 0) {
-					localTotal *= (0.01 * (100 - parseInt(discount)))
+			if (militaryNew || responderNew) {
+				if (plan.eligibleForCommonDiscounts) {
+					localTotal *= 0.85;
+				}
+			} else if (parseInt(discount) > 0) {
+				if (plan.eligibleForOtherDiscounts) {
+					localTotal *= 0.01 * (100 - parseInt(discount));
 				}
 			}
 
 			if (autopay) {
-				localTotal += plan.lineAccessAutopay * numberOfPhones
+				localTotal += plan.lineAccessAutopay * numberOfPhones;
 			} else {
-				localTotal += plan.lineAccessNoAutopay * numberOfPhones
+				localTotal += plan.lineAccessNoAutopay * numberOfPhones;
 			}
 		}
-	})
+	});
 
-	return localTotal
-}
+	return localTotal;
+};
 
-export default plans5GB10GBMath
+export default plans5GB10GBMath;

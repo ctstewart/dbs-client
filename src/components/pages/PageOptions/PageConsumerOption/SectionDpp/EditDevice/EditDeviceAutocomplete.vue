@@ -1,194 +1,215 @@
 <template>
-<div class="autocomplete" :class="{ positionRelative: focus === true }">
-	<input
-		type="text"
-		v-model="search"
-		@input="onChange($event)"
-		@keydown.down="onArrowDown"
-		@keydown.up="onArrowUp"
-		@keydown.enter="onEnter"
-		@keydown.esc="onEsc"
-		@focus="
-			focus = true;
-			onChange($event);
-		"
-	/>
-	<ul v-if="!deviceNameManual" class="autocompleteResults" v-show="isOpen">
-		<li
-			class="autocompleteResult"
-			v-for="(result, i) in results"
-			:key="i"
-			@click="setresult($event, result)"
-			:class="{ 'is-active': i === arrowCounter }"
-			@mouseover="handleMouseOver"
+	<div class="autocomplete" :class="{ positionRelative: focus === true }">
+		<input
+			type="text"
+			v-model="search"
+			@input="onChange($event)"
+			@keydown.down="onArrowDown"
+			@keydown.up="onArrowUp"
+			@keydown.enter="onEnter"
+			@keydown.esc="onEsc"
+			@focus="
+				focus = true;
+				onChange($event);
+			"
+		/>
+		<ul
+			v-if="!deviceNameManual"
+			class="autocompleteResults"
+			v-show="isOpen"
 		>
-			{{ result }}
-		</li>
-	</ul>
-</div>
+			<li
+				class="autocompleteResult"
+				v-for="(result, i) in results"
+				:key="i"
+				@click="setresult($event, result)"
+				:class="{ 'is-active': i === arrowCounter }"
+				@mouseover="handleMouseOver"
+			>
+				{{ result }}
+			</li>
+		</ul>
+	</div>
 </template>
 
 <script>
-import axios from 'axios'
+import axios from "axios";
 
-import { mapState, mapMutations } from 'vuex'
+import { mapState, mapMutations } from "vuex";
 
-import EditDeviceAutocomplete from './EditDeviceAutocomplete'
+import EditDeviceAutocomplete from "./EditDeviceAutocomplete";
 
 export default {
-	name: 'EditDeviceAutocomplete',
+	name: "EditDeviceAutocomplete",
 	props: ["deviceName", "deviceNameManual", "dppIndex"],
 	components: { EditDeviceAutocomplete },
 
 	watch: {
-		deviceName (newValue) {
-			this.search = newValue
+		deviceName(newValue) {
+			this.search = newValue;
 		}
 	},
 
 	data() {
 		return {
 			items: [],
-			search: '',
+			search: "",
 			results: [],
 			isOpen: false,
 			focus: false,
-			arrowCounter: -1,
-		}
+			arrowCounter: -1
+		};
 	},
 	async created() {
-		this.search = this.deviceName
+		this.search = this.deviceName;
 
 		if (this.devices.length == 0) {
 			try {
 				const response = await axios({
-					method: 'get',
+					method: "get",
 					url: `${process.env.VUE_APP_API_URL}/api/v1/devices`,
 					withCredentials: true,
 					params: {
 						limit: 1000
 					}
-				})
+				});
 
-				this.mutateDevices(response.data.data)
+				this.mutateDevices(response.data.data);
 
 				response.data.data.forEach(i => {
-					this.items.push(i.name)
-				})
+					this.items.push(i.name);
+				});
 
-				this.loading = false
+				this.loading = false;
 			} catch (err) {
-				console.error(err)
+				console.error(err);
 				if (err.response.status === 401) {
-					this.$router.push('/login')
+					this.$router.push("/login");
 				}
 			}
 		} else {
 			this.devices.forEach(i => {
-				this.items.push(i.name)
-			})
+				this.items.push(i.name);
+			});
 
-			this.loading = false
+			this.loading = false;
 		}
 	},
 	computed: {
 		...mapState({
-			dppValues (state) {
-				return state['consumer'][this.$route.params.vuexModule].dppValues
+			dppValues(state) {
+				return state["consumer"][this.$route.params.vuexModule]
+					.dppValues;
 			},
-			devices (state) {
-				return state.devices
+			devices(state) {
+				return state.devices;
 			}
 		})
 	},
 	methods: {
 		...mapMutations({
-			mutateDeviceName (commit, payload) {
-				return commit(`consumer/${this.$route.params.vuexModule}/mutateDeviceName`, payload)
+			mutateDeviceName(commit, payload) {
+				return commit(
+					`consumer/${
+						this.$route.params.vuexModule
+					}/mutateDeviceName`,
+					payload
+				);
 			},
-			mutateDpp (commit, payload) {
-				return commit(`consumer/${this.$route.params.vuexModule}/mutateDpp`, payload)
+			mutateDpp(commit, payload) {
+				return commit(
+					`consumer/${this.$route.params.vuexModule}/mutateDpp`,
+					payload
+				);
 			},
-			mutateDevices (commit, devices) {
-				return commit('mutate', { property: 'devices', with: devices })
-			},
-			mutateDppLengthOptions (commit, payload) {
-				return commit(`consumer/${this.$route.params.vuexModule}/mutateDppLengthOptions`, payload)
-			},
+			mutateDevices(commit, devices) {
+				return commit("mutate", { property: "devices", with: devices });
+			}
+			// mutateDppLengthOptions(commit, payload) {
+			// 	return commit(
+			// 		`consumer/${
+			// 			this.$route.params.vuexModule
+			// 		}/mutateDppLengthOptions`,
+			// 		payload
+			// 	);
+			// }
 		}),
 		updateDppValues(index, deviceName) {
-			this.mutateDeviceName({ index, value: deviceName })
+			this.mutateDeviceName({ index, value: deviceName });
 
 			const device = this.devices.find(i => {
-				return i.name == deviceName
-			})
+				return i.name == deviceName;
+			});
 
 			if (!device) {
-				this.mutateDpp({ index, value: 0 })
+				this.mutateDpp({ index, value: 0 });
 			} else {
-				this.mutateDpp({ index, value: device.fullRetail })
-				this.mutateDppLengthOptions({ index, value: device.dppLength })
+				this.mutateDpp({ index, value: device.fullRetail });
+				// this.mutateDppLengthOptions({ index, value: device.dppLength })
 			}
 		},
 		filterResults() {
 			this.results = this.items.filter(
 				item =>
 					item.toLowerCase().indexOf(this.search.toLowerCase()) > -1
-			)
+			);
 		},
 		onChange(event) {
 			this.filterResults();
 			if (this.results.length === 0) {
-				this.isOpen = false
+				this.isOpen = false;
 			} else if (this.results.length > 0) {
-				this.isOpen = true
+				this.isOpen = true;
 			}
-			this.updateDppValues(this.dppIndex, this.search)
+			this.updateDppValues(this.dppIndex, this.search);
 		},
 		setresult(event, result) {
-			this.isOpen = false
-			this.search = result
-			this.updateDppValues(this.dppIndex, result)
+			this.isOpen = false;
+			this.search = result;
+			this.updateDppValues(this.dppIndex, result);
 		},
 		onArrowDown() {
 			if (this.arrowCounter < this.results.length) {
-				this.arrowCounter = this.arrowCounter + 1
+				this.arrowCounter = this.arrowCounter + 1;
 			}
 		},
 		onArrowUp() {
 			if (this.arrowCounter > -1) {
-				this.arrowCounter = this.arrowCounter - 1
+				this.arrowCounter = this.arrowCounter - 1;
 			}
 		},
 		onEnter() {
-			this.search = this.results[this.arrowCounter]
-			this.updateDppValues(this.dppIndex, this.results[this.arrowCounter])
-			this.isOpen = false
-			this.arrowCounter = -1
+			this.search = this.results[this.arrowCounter];
+			this.updateDppValues(
+				this.dppIndex,
+				this.results[this.arrowCounter]
+			);
+			this.isOpen = false;
+			this.arrowCounter = -1;
 		},
 		onEsc() {
-			this.isOpen = false
-			this.arrowCounter = -1
+			this.isOpen = false;
+			this.arrowCounter = -1;
 		},
 		handleClickOutside(evt) {
 			if (!this.$el.contains(evt.target)) {
-				this.isOpen = false
-				this.arrowCounter = -1
+				this.isOpen = false;
+				this.arrowCounter = -1;
 			}
 		},
 		handleMouseOver() {
 			if (this.arrowCounter > -1) {
-				this.arrowCounter = -1
+				this.arrowCounter = -1;
 			}
 		}
 	},
 	mounted() {
-		document.addEventListener("click", this.handleClickOutside)
+		document.addEventListener("click", this.handleClickOutside);
 	},
 	destroyed() {
-		document.removeEventListener("click", this.handleClickOutside)
+		document.removeEventListener("click", this.handleClickOutside);
 	}
-}
+};
 </script>
 
 <style lang="less" scoped>
@@ -202,7 +223,7 @@ export default {
 		@toggle-font-size: 14px;
 		font-size: @toggle-font-size;
 		height: 2.25em;
-		text-indent: .5em;
+		text-indent: 0.5em;
 	}
 
 	.autocompleteResults {

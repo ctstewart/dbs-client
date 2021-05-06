@@ -129,7 +129,11 @@
 		</div>
 		<div class="percentDiscount">
 			<input-dropdown
-				v-if="!ifLoyalty55OrLoyaltyGo && !ifLoyalty55MixAndMatch2020"
+				v-if="
+					!ifLoyalty55OrLoyaltyGo &&
+						!ifLoyalty55MixAndMatch2020 &&
+						!if110UnlimitedOr65Unlimited
+				"
 				v-bind="{
 					inputType: 'numberDropdown',
 					label: 'Other Discount %',
