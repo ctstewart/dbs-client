@@ -1,6 +1,7 @@
 FROM node:14 as build-stage
 WORKDIR /usr/src/client
-ENV VUE_APP_API_URL=http://localhost:3000
+ARG VUE_APP_API_URL
+ENV VUE_APP_API_URL=${VUE_APP_API_URL}
 COPY package*.json ./
 RUN npm i
 COPY . .
