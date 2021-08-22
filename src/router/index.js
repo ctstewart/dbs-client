@@ -4,6 +4,8 @@ import axios from 'axios'
 
 import { store } from '../store'
 
+import { authGuard } from '../auth/authGuard'
+
 import PageBenefitSheet from '../components/pages/PageBenefitSheet'
 import PageOptions from '../components/pages/PageOptions'
 import PageConsumerOption from '../components/pages/PageOptions/PageConsumerOption'
@@ -20,7 +22,7 @@ const routes = [
 		path: '/',
 		name: 'PageBenefitSheet',
 		component: PageBenefitSheet,
-		meta: { requiresAuth: true }
+		beforeEnter: authGuard,
 	},
 	{
 		path: '/options',
@@ -38,20 +40,20 @@ const routes = [
 				name: 'PageBusinessOption',
 				component: PageBusinessOption,
 				meta: { requiresAuth: true },
-			}
-		]
+			},
+		],
 	},
 	{
 		path: '/changelog',
 		name: 'PageChangelog',
 		component: PageChangelog,
-		meta: { requiresAuth: true }
+		meta: { requiresAuth: true },
 	},
 	{
 		path: '/updatePassword',
 		name: 'PageUpdatePassword',
 		component: PageUpdatePassword,
-		meta: { requiresAuth: true }
+		meta: { requiresAuth: true },
 	},
 	{
 		path: '/login',
@@ -68,51 +70,7 @@ const routes = [
 ]
 
 const router = new VueRouter({
-	routes
-})
-
-router.beforeEach(async (to, from, next) => {
-	if (to.meta.requiresAuth) {
-		let userInfoExists = true
-
-		for (let key in store.state.userInfo) {
-			if (store.state.userInfo[key] === "") {
-				userInfoExists = false
-				break
-			}
-		}
-
-		if (!userInfoExists) {
-			try {
-				const response = await axios({
-					method: 'get',
-					url: `${process.env.VUE_APP_API_URL}/api/v1/auth/me`,
-					withCredentials: true,
-				})
-
-				if (!response || !response.data.success) {
-					if (from.path === '/login') {
-						next(false)
-					} else {
-						router.push('/login')
-						next()
-					}
-				}
-
-				store.commit('mutate', { property: 'userInfo', with: response.data.data })
-
-				next()
-			} catch (err) {
-				console.error(err)
-				router.push('/login')
-				next()
-			}
-		} else {
-			next()
-		}
-	} else {
-		next()
-	}
+	routes,
 })
 
 export default router
