@@ -7,7 +7,7 @@ import { store } from './store'
 import VueCurrencyInput from 'vue-currency-input'
 
 // Import the Auth0 configuration
-import { domain, clientId } from '../auth_config.json'
+import { domain, clientId, audience } from '../auth_config.json'
 
 // Import the plugin here
 import { Auth0Plugin } from './auth'
@@ -16,6 +16,7 @@ import { Auth0Plugin } from './auth'
 Vue.use(Auth0Plugin, {
 	domain,
 	clientId,
+	audience,
 	onRedirectCallback: appState => {
 		router.push(
 			appState && appState.targetUrl

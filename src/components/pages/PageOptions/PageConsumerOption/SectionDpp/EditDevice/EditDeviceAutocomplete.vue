@@ -9,8 +9,8 @@
 			@keydown.enter="onEnter"
 			@keydown.esc="onEsc"
 			@focus="
-				focus = true;
-				onChange($event);
+				focus = true
+				onChange($event)
 			"
 		/>
 		<ul
@@ -33,78 +33,81 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from 'axios'
 
-import { mapState, mapMutations } from "vuex";
+import { mapState, mapMutations } from 'vuex'
 
-import EditDeviceAutocomplete from "./EditDeviceAutocomplete";
+import EditDeviceAutocomplete from './EditDeviceAutocomplete'
 
 export default {
-	name: "EditDeviceAutocomplete",
-	props: ["deviceName", "deviceNameManual", "dppIndex"],
+	name: 'EditDeviceAutocomplete',
+	props: ['deviceName', 'deviceNameManual', 'dppIndex'],
 	components: { EditDeviceAutocomplete },
 
 	watch: {
 		deviceName(newValue) {
-			this.search = newValue;
-		}
+			this.search = newValue
+		},
 	},
 
 	data() {
 		return {
 			items: [],
-			search: "",
+			search: '',
 			results: [],
 			isOpen: false,
 			focus: false,
-			arrowCounter: -1
-		};
+			arrowCounter: -1,
+		}
 	},
 	async created() {
-		this.search = this.deviceName;
+		this.search = this.deviceName
 
 		if (this.devices.length == 0) {
 			try {
+				const token = await this.$auth.getTokenSilently()
+
 				const response = await axios({
-					method: "get",
+					method: 'get',
 					url: `${process.env.VUE_APP_API_URL}/api/v1/devices`,
+					headers: { Authorization: `Bearer ${token}` },
 					withCredentials: true,
 					params: {
-						limit: 1000
-					}
-				});
+						limit: 1000,
+					},
+				})
 
-				this.mutateDevices(response.data.data);
+				this.mutateDevices(response.data.data)
 
 				response.data.data.forEach(i => {
-					this.items.push(i.name);
-				});
+					this.items.push(i.name)
+				})
 
-				this.loading = false;
+				this.loading = false
 			} catch (err) {
-				console.error(err);
+				console.error(err)
 				if (err.response.status === 401) {
-					this.$router.push("/login");
+					this.$router.push('/login')
 				}
 			}
 		} else {
 			this.devices.forEach(i => {
-				this.items.push(i.name);
-			});
+				this.items.push(i.name)
+			})
 
-			this.loading = false;
+			this.loading = false
 		}
 	},
 	computed: {
 		...mapState({
 			dppValues(state) {
-				return state["consumer"][this.$route.params.vuexModule]
-					.dppValues;
+				return state['consumer'][this.$route.params.vuexModule]
+					.dppValues
 			},
 			devices(state) {
-				return state.devices;
-			}
-		})
+				return state.devices
+			},
+		}),
 	},
 	methods: {
 		...mapMutations({
@@ -114,17 +117,17 @@ export default {
 						this.$route.params.vuexModule
 					}/mutateDeviceName`,
 					payload
-				);
+				)
 			},
 			mutateDpp(commit, payload) {
 				return commit(
 					`consumer/${this.$route.params.vuexModule}/mutateDpp`,
 					payload
-				);
+				)
 			},
 			mutateDevices(commit, devices) {
-				return commit("mutate", { property: "devices", with: devices });
-			}
+				return commit('mutate', { property: 'devices', with: devices })
+			},
 			// mutateDppLengthOptions(commit, payload) {
 			// 	return commit(
 			// 		`consumer/${
@@ -135,16 +138,16 @@ export default {
 			// }
 		}),
 		updateDppValues(index, deviceName) {
-			this.mutateDeviceName({ index, value: deviceName });
+			this.mutateDeviceName({ index, value: deviceName })
 
 			const device = this.devices.find(i => {
-				return i.name == deviceName;
-			});
+				return i.name == deviceName
+			})
 
 			if (!device) {
-				this.mutateDpp({ index, value: 0 });
+				this.mutateDpp({ index, value: 0 })
 			} else {
-				this.mutateDpp({ index, value: device.fullRetail });
+				this.mutateDpp({ index, value: device.fullRetail })
 				// this.mutateDppLengthOptions({ index, value: device.dppLength })
 			}
 		},
@@ -152,64 +155,61 @@ export default {
 			this.results = this.items.filter(
 				item =>
 					item.toLowerCase().indexOf(this.search.toLowerCase()) > -1
-			);
+			)
 		},
 		onChange(event) {
-			this.filterResults();
+			this.filterResults()
 			if (this.results.length === 0) {
-				this.isOpen = false;
+				this.isOpen = false
 			} else if (this.results.length > 0) {
-				this.isOpen = true;
+				this.isOpen = true
 			}
-			this.updateDppValues(this.dppIndex, this.search);
+			this.updateDppValues(this.dppIndex, this.search)
 		},
 		setresult(event, result) {
-			this.isOpen = false;
-			this.search = result;
-			this.updateDppValues(this.dppIndex, result);
+			this.isOpen = false
+			this.search = result
+			this.updateDppValues(this.dppIndex, result)
 		},
 		onArrowDown() {
 			if (this.arrowCounter < this.results.length) {
-				this.arrowCounter = this.arrowCounter + 1;
+				this.arrowCounter = this.arrowCounter + 1
 			}
 		},
 		onArrowUp() {
 			if (this.arrowCounter > -1) {
-				this.arrowCounter = this.arrowCounter - 1;
+				this.arrowCounter = this.arrowCounter - 1
 			}
 		},
 		onEnter() {
-			this.search = this.results[this.arrowCounter];
-			this.updateDppValues(
-				this.dppIndex,
-				this.results[this.arrowCounter]
-			);
-			this.isOpen = false;
-			this.arrowCounter = -1;
+			this.search = this.results[this.arrowCounter]
+			this.updateDppValues(this.dppIndex, this.results[this.arrowCounter])
+			this.isOpen = false
+			this.arrowCounter = -1
 		},
 		onEsc() {
-			this.isOpen = false;
-			this.arrowCounter = -1;
+			this.isOpen = false
+			this.arrowCounter = -1
 		},
 		handleClickOutside(evt) {
 			if (!this.$el.contains(evt.target)) {
-				this.isOpen = false;
-				this.arrowCounter = -1;
+				this.isOpen = false
+				this.arrowCounter = -1
 			}
 		},
 		handleMouseOver() {
 			if (this.arrowCounter > -1) {
-				this.arrowCounter = -1;
+				this.arrowCounter = -1
 			}
-		}
+		},
 	},
 	mounted() {
-		document.addEventListener("click", this.handleClickOutside);
+		document.addEventListener('click', this.handleClickOutside)
 	},
 	destroyed() {
-		document.removeEventListener("click", this.handleClickOutside);
-	}
-};
+		document.removeEventListener('click', this.handleClickOutside)
+	},
+}
 </script>
 
 <style lang="less" scoped>

@@ -27,33 +27,63 @@ DEALINGS IN THE SOFTWARE.
 -->
 
 <template>
-<div class="sidebar">
-	<div class="username">
-		<div class="userInitials">
-			<span>{{userInfo.email.slice(0,2).toUpperCase()}}</span>
+	<div class="sidebar">
+		<div class="username">
+			<div class="userInitials">
+				<!-- <span>{{ userInfo.email.slice(0, 2).toUpperCase() }}</span> -->
+				<span>{{ userInitials }}</span>
+			</div>
+			{{ $auth.user.email }}
 		</div>
-		{{userInfo.email}}
+		<div class="sidebar-links">
+			<router-link to="/"
+				><i class="fas fa-home"></i>Benefit Sheet</router-link
+			>
+			<router-link
+				v-if="$store.state.optionsType.optionOne === 'consumer'"
+				to="/options/consumer/optionOne"
+				><i class="fas fa-dice-one"></i>Option 1</router-link
+			>
+			<router-link
+				v-else-if="$store.state.optionsType.optionOne === 'business'"
+				to="/options/business/optionOne"
+				><i class="fas fa-dice-one"></i>Option 1</router-link
+			>
+			<router-link
+				v-if="$store.state.optionsType.optionTwo === 'consumer'"
+				to="/options/consumer/optionTwo"
+				><i class="fas fa-dice-two"></i>Option 2</router-link
+			>
+			<router-link
+				v-else-if="$store.state.optionsType.optionTwo === 'business'"
+				to="/options/business/optionTwo"
+				><i class="fas fa-dice-two"></i>Option 2</router-link
+			>
+			<a
+				href="/admin"
+				v-if="
+					$store.state.userInfo.role === 'admin' ||
+						$store.state.userInfo.role === 'superadmin'
+				"
+				><i class="fas fa-users-cog"></i>Admin Panel</a
+			>
+			<router-link to="/changelog">
+				<span class="navbar-link"
+					><i class="fas fa-clipboard"></i>Changelog</span
+				>
+				<span v-if="newChangesAlert" class="new-changes">
+					<i class="fas fa-exclamation-triangle"></i>
+					<span class="new-changes-text">New Changes!</span>
+				</span>
+			</router-link>
+		</div>
+		<div class="footer">
+			<a @click="logout">Logout</a>
+			<router-link to="/changelog"
+				>Verison: {{ $store.state.webappVersion }}</router-link
+			>
+		</div>
 	</div>
-	<div class="sidebar-links">
-		<router-link to="/"><i class="fas fa-home"></i>Benefit Sheet</router-link>
-		<router-link v-if="$store.state.optionsType.optionOne === 'consumer'" to="/options/consumer/optionOne"><i class="fas fa-dice-one"></i>Option 1</router-link>
-		<router-link v-else-if="$store.state.optionsType.optionOne === 'business'" to="/options/business/optionOne"><i class="fas fa-dice-one"></i>Option 1</router-link>
-		<router-link v-if="$store.state.optionsType.optionTwo === 'consumer'" to="/options/consumer/optionTwo"><i class="fas fa-dice-two"></i>Option 2</router-link>
-		<router-link v-else-if="$store.state.optionsType.optionTwo === 'business'" to="/options/business/optionTwo"><i class="fas fa-dice-two"></i>Option 2</router-link>
-		<a href="/admin" v-if="$store.state.userInfo.role === 'admin' || $store.state.userInfo.role === 'superadmin'"><i class="fas fa-users-cog"></i>Admin Panel</a>
-		<router-link to="/changelog">
-			<span class="navbar-link"><i class="fas fa-clipboard"></i>Changelog</span>
-			<span v-if="newChangesAlert" class="new-changes">
-				<i class="fas fa-exclamation-triangle"></i>
-				<span class="new-changes-text">New Changes!</span>
-			</span>
-		</router-link>
-	</div>
-	<div class="footer">
-		<a @click="logout">Logout</a>
-		<router-link to="/changelog">Verison: {{ $store.state.webappVersion }}</router-link>
-	</div>
-</div>
 </template>
 
 <script>
@@ -61,9 +91,9 @@ import { mapState, mapActions } from 'vuex'
 
 export default {
 	name: 'LayoutSidebar',
-	data () {
+	data() {
 		return {
-			newChangesAlert: true
+			newChangesAlert: true,
 		}
 	},
 	created() {
@@ -74,25 +104,26 @@ export default {
 		const daysApart = timeApart / (1000 * 3600 * 24)
 
 		if (daysApart > 3) this.newChangesAlert = false
+
+		console.log(this.$auth.user)
 	},
 	computed: {
-		...mapState([
-			'userInfo',
-			'webappVersion',
-			'newChangesDate'
-		])
+		...mapState(['userInfo', 'webappVersion', 'newChangesDate']),
+		userInitials() {
+			return (
+				this.$auth.user.given_name[0] + this.$auth.user.family_name[0]
+			)
+		},
 	},
 	methods: {
-		...mapActions([
-			'resetAll'
-		]),
-		logout: async function () {
+		...mapActions(['resetAll']),
+		logout: async function() {
 			await this.resetAll()
-			sessionStorage.clear()
-			localStorage.clear()
-			this.$router.push('/login')
-		}
-	}
+			this.$auth.logout({
+				returnTo: window.location.origin,
+			})
+		},
+	},
 }
 </script>
 
@@ -112,7 +143,7 @@ export default {
 .sidebar {
 	width: 100%;
 	height: 100%;
-	background: rgba(0,0,0,.4);
+	background: rgba(0, 0, 0, 0.4);
 	padding: 30px 0px;
 	position: relative;
 
@@ -133,8 +164,8 @@ export default {
 		text-align: center;
 		align-self: center;
 		padding-bottom: 3%;
-		margin-bottom: .5rem;
-		font-size: .9rem;
+		margin-bottom: 0.5rem;
+		font-size: 0.9rem;
 
 		.userInitials {
 			display: grid;
@@ -143,8 +174,8 @@ export default {
 			color: white;
 			border: 1px solid white;
 			border-radius: 5px;
-			padding: .5rem;
-			margin-bottom: .75rem;
+			padding: 0.5rem;
+			margin-bottom: 0.75rem;
 
 			span {
 				align-self: center;
@@ -164,23 +195,24 @@ export default {
 			color: white;
 			padding: 15px;
 			border-bottom: 1px solid #bdb8d7;
-			border-bottom: 1px solid rgba(0,0,0,0.05);
-			border-top: 1px solid rgba(255,255,255,0.05);
+			border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+			border-top: 1px solid rgba(255, 255, 255, 0.05);
 			cursor: pointer;
 
 			.fas {
 				width: 2rem;
 			}
 
-			&:hover, &.router-link-exact-active {
-				background-color: rgba(0,0,0,.2);
+			&:hover,
+			&.router-link-exact-active {
+				background-color: rgba(0, 0, 0, 0.2);
 			}
 		}
 
 		.new-changes {
 			color: yellow;
 			font-size: 12px;
-			margin-left: .5rem;
+			margin-left: 0.5rem;
 
 			i {
 				width: 1.25rem;
@@ -198,8 +230,8 @@ export default {
 		position: absolute;
 		display: flex;
 		justify-content: space-between;
-		bottom: .4rem;
-		padding: 0 .65rem;
+		bottom: 0.4rem;
+		padding: 0 0.65rem;
 		width: 100%;
 		font-size: 1rem;
 
