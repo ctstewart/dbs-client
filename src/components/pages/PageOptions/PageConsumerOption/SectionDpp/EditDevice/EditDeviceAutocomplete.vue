@@ -86,9 +86,9 @@ export default {
 				this.loading = false
 			} catch (err) {
 				console.error(err)
-				if (err.response.status === 401) {
-					this.$router.push('/login')
-				}
+				// if (err.response.status === 401) {
+				// 	this.$router.push('/login')
+				// }
 			}
 		} else {
 			this.devices.forEach(i => {

@@ -59,14 +59,7 @@ DEALINGS IN THE SOFTWARE.
 				to="/options/business/optionTwo"
 				><i class="fas fa-dice-two"></i>Option 2</router-link
 			>
-			<a
-				href="/admin"
-				v-if="
-					$store.state.userInfo.role === 'admin' ||
-						$store.state.userInfo.role === 'superadmin'
-				"
-				><i class="fas fa-users-cog"></i>Admin Panel</a
-			>
+			<a href="/admin"><i class="fas fa-users-cog"></i>Admin Panel</a>
 			<router-link to="/changelog">
 				<span class="navbar-link"
 					><i class="fas fa-clipboard"></i>Changelog</span
@@ -97,14 +90,6 @@ export default {
 		}
 	},
 	created() {
-		const newChangesDate = new Date(this.newChangesDate)
-		const today = new Date()
-
-		const timeApart = today.getTime() - newChangesDate.getTime()
-		const daysApart = timeApart / (1000 * 3600 * 24)
-
-		if (daysApart > 3) this.newChangesAlert = false
-
 		console.log(this.$auth.user)
 	},
 	computed: {
