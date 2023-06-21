@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import { authGuard } from '../auth/authGuard'
+// import { authGuard } from '../auth/authGuard'
 
 import PageBenefitSheet from '../components/pages/PageBenefitSheet'
 import PageOptions from '../components/pages/PageOptions'
@@ -16,24 +16,24 @@ const routes = [
 		path: '/',
 		name: 'PageBenefitSheet',
 		component: PageBenefitSheet,
-		beforeEnter: authGuard,
+		// beforeEnter: authGuard,
 	},
 	{
 		path: '/options',
 		component: PageOptions,
-		beforeEnter: authGuard,
+		// beforeEnter: authGuard,
 		children: [
 			{
 				path: 'consumer/:vuexModule',
 				name: 'PageConsumerOption',
 				component: PageConsumerOption,
-				beforeEnter: authGuard,
+				// beforeEnter: authGuard,
 			},
 			{
 				path: 'business/:vuexModule',
 				name: 'PageBusinessOption',
 				component: PageBusinessOption,
-				beforeEnter: authGuard,
+				// beforeEnter: authGuard,
 			},
 		],
 	},
@@ -41,7 +41,7 @@ const routes = [
 		path: '/changelog',
 		name: 'PageChangelog',
 		component: PageChangelog,
-		beforeEnter: authGuard,
+		// beforeEnter: authGuard,
 	},
 ]
 
