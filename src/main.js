@@ -7,24 +7,24 @@ import { store } from './store'
 import VueCurrencyInput from 'vue-currency-input'
 
 // Import the Auth0 configuration
-import { domain, clientId, audience } from '../auth_config.json'
+// import { domain, clientId, audience } from '../auth_config.json'
 
 // Import the plugin here
-import { Auth0Plugin } from './auth'
+// import { Auth0Plugin } from './auth'
 
 // Install the authentication plugin here
-Vue.use(Auth0Plugin, {
-	domain,
-	clientId,
-	audience,
-	onRedirectCallback: appState => {
-		router.push(
-			appState && appState.targetUrl
-				? appState.targetUrl
-				: window.location.pathname
-		)
-	},
-})
+// Vue.use(Auth0Plugin, {
+// 	domain,
+// 	clientId,
+// 	audience,
+// 	onRedirectCallback: appState => {
+// 		router.push(
+// 			appState && appState.targetUrl
+// 				? appState.targetUrl
+// 				: window.location.pathname
+// 		)
+// 	},
+// })
 
 const pluginOptions = {
 	globalOptions: { currency: 'USD', locale: 'en', autoDecimalMode: true },
