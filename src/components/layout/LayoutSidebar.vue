@@ -60,19 +60,19 @@ DEALINGS IN THE SOFTWARE.
 				to="/options/business/optionTwo"
 				><i class="fas fa-dice-two"></i>Option 2</router-link
 			>
-			<a href="/admin"><i class="fas fa-users-cog"></i>Admin Panel</a>
+			<!-- <a href="/admin"><i class="fas fa-users-cog"></i>Admin Panel</a> -->
 			<router-link to="/changelog">
 				<span class="navbar-link"
 					><i class="fas fa-clipboard"></i>Changelog</span
 				>
-				<span v-if="newChangesAlert" class="new-changes">
+				<!-- <span v-if="newChangesAlert" class="new-changes">
 					<i class="fas fa-exclamation-triangle"></i>
 					<span class="new-changes-text">New Changes!</span>
-				</span>
+				</span> -->
 			</router-link>
 		</div>
 		<div class="footer">
-			<a @click="logout">Logout</a>
+			<!-- <a @click="logout">Logout</a> -->
 			<router-link to="/changelog"
 				>Verison: {{ $store.state.webappVersion }}</router-link
 			>
@@ -91,7 +91,7 @@ export default {
 		}
 	},
 	created() {
-		console.log(this.$auth.user)
+		// console.log(this.$auth.user)
 	},
 	computed: {
 		...mapState(['userInfo', 'webappVersion', 'newChangesDate']),
