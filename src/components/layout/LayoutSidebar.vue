@@ -31,9 +31,10 @@ DEALINGS IN THE SOFTWARE.
 		<div class="username">
 			<div class="userInitials">
 				<!-- <span>{{ userInfo.email.slice(0, 2).toUpperCase() }}</span> -->
-				<span>{{ userInitials }}</span>
+				<!-- <span>{{ userInitials }}</span> -->
+				<span>CS</span>
 			</div>
-			{{ $auth.user.email }}
+			<!-- {{ $auth.user.email }} -->
 		</div>
 		<div class="sidebar-links">
 			<router-link to="/"
@@ -94,11 +95,11 @@ export default {
 	},
 	computed: {
 		...mapState(['userInfo', 'webappVersion', 'newChangesDate']),
-		userInitials() {
-			return (
-				this.$auth.user.given_name[0] + this.$auth.user.family_name[0]
-			)
-		},
+		// userInitials() {
+		// 	return (
+		// 		this.$auth.user.given_name[0] + this.$auth.user.family_name[0]
+		// 	)
+		// },
 	},
 	methods: {
 		...mapActions(['resetAll']),
